@@ -1,0 +1,146 @@
+.projects {
+  padding: 100px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.header {
+  margin-bottom: 5rem;
+}
+
+.header h2 {
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.projectItem {
+  display: flex;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.projectItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(0, 209, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.projectImageWrapper {
+  width: 40%;
+  min-height: 300px;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.projectItem:hover .projectImage {
+  transform: scale(1.05);
+}
+
+.projectInfo {
+  padding: 3rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.category {
+  color: var(--accent-cyan);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.desc {
+  color: #aaa;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
+  margin-top: auto;
+}
+
+.tag {
+  background: rgba(0, 209, 255, 0.1);
+  color: var(--accent-cyan);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.linkIcon {
+  color: #888;
+  transition: color 0.3s ease;
+}
+
+.linkIcon:hover {
+  color: var(--accent-cyan);
+}
+
+@media (max-width: 1024px) {
+  .projectItem {
+    flex-direction: column;
+  }
+  .projectImageWrapper {
+    width: 100%;
+    height: 250px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+@media (max-width: 768px) {
+  .projectInfo {
+    padding: 2rem;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+}
