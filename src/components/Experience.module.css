@@ -1,0 +1,127 @@
+.experience {
+  padding: 100px 0;
+  background: rgba(10, 10, 10, 0.3);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.header {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.header h2 {
+  font-size: 2rem;
+  letter-spacing: 5px;
+  margin-bottom: 1rem;
+}
+
+.line {
+  width: 60px;
+  height: 4px;
+  background: var(--accent-cyan);
+  margin: 0 auto;
+}
+
+.expList {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.expCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 3rem;
+  transition: all 0.3s ease;
+}
+
+.expCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 209, 255, 0.2);
+}
+
+.cardHeader {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.icon {
+  color: var(--accent-cyan);
+  filter: drop-shadow(0 0 5px var(--accent-cyan));
+}
+
+.company {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.roleTitle {
+  font-size: 1rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.period {
+  color: #666;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.projectName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+}
+
+.details {
+  list-style: none;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.details li {
+  font-size: 0.95rem;
+  color: #aaa;
+  position: relative;
+  line-height: 1.6;
+}
+
+.details li::before {
+  content: "•";
+  position: absolute;
+  left: -1rem;
+  color: var(--accent-cyan);
+}
+
+@media (max-width: 768px) {
+  .expCard {
+    padding: 2rem;
+  }
+  .company {
+    font-size: 1.25rem;
+  }
+  .projectName {
+    font-size: 1rem;
+  }
+}

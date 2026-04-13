@@ -1,0 +1,46 @@
+.philosophy {
+  padding: 100px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.content h2 {
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  margin-bottom: 3rem;
+}
+
+.textBlock {
+  font-size: 1.25rem;
+  color: #aaa;
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.textBlock strong {
+  color: var(--accent-cyan);
+}
+
+.textBlock em {
+  color: var(--accent-purple);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .textBlock {
+    font-size: 1.1rem;
+  }
+}
