@@ -26,10 +26,9 @@ const Philosophy = () => {
               and the legal compliance of <strong>ERC-3643</strong> in RWA tokenization.
             </p>
             <p>
-              My journey is driven by a simple question: 
-              <em>"How can we continuously learn and apply new technologies to build digital trust in real-world systems?"</em>
-            </p>
-          </div>
+              My journey is driven by a simple question:
+              <em>"保持對於最新科技的好奇與探索為方向"</em>
+            </p>          </div>
         </motion.div>
       </div>
     </section>
