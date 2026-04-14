@@ -20,8 +20,8 @@ const Hero = () => {
             <span className="glow-text">朱廷翊</span> zuemen
           </h1>
           <p className={styles.tagline}>
-            <strong>National Chengchi University | MIS & AI Interdisciplinary Micro-Program</strong><br/>
-            Researching Smart Contract Security, Quantum Computing (AI+QC), and Self-Sovereign Identity (SSI/DID).
+            <strong>National Chengchi University | Management Information Systems</strong><br/>
+            Exploring Smart Contract Security, Quantum Computing (Quantum Finance & QML), and Self-Sovereign Identity (SSI/DID).
           </p>
           
           <div className={styles.ctaGroup}>

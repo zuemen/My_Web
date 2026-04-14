@@ -6,27 +6,27 @@ import styles from './Skills.module.css';
 
 const skillData = [
   {
-    title: "Quantum Finance",
+    title: "Quantum Finance & QML",
     icon: <Atom />,
-    description: "Expertise in Qiskit & PennyLane. Specialized in Quantum Amplitude Estimation (QAE) for risk modeling.",
+    description: "Actively exploring Qiskit & PennyLane. Focusing on Quantum Finance and Quantum Machine Learning (QML) applications.",
     color: "var(--accent-cyan)"
   },
   {
     title: "Blockchain & RWA",
     icon: <Shield />,
-    description: "Researching Real World Asset (RWA) tokenization using ERC-3643 (T-REX) protocols for civic crowdfunding.",
+    description: "Researching Real World Asset (RWA) tokenization and smart contract ecosystems for modern financial systems.",
     color: "var(--accent-purple)"
   },
   {
     title: "Agentic AI",
     icon: <Brain />,
-    description: "Implementing AI agents in financial sectors. Top performer (99/A+) in Agentic AI applications.",
+    description: "Completed advanced coursework in AI applications. Passionate about researching OpenClaw and its impact on financial intelligence.",
     color: "var(--accent-blue)"
   },
   {
     title: "Digital Innovation",
     icon: <Award />,
-    description: "Winner of the Civic Tech Taiwan award by moda. Specialized in SSI and Verifiable Credentials.",
+    description: "Merit Award winner in the competition hosted by the Ministry of Digital Affairs, Taiwan. Exploring SSI and VC standards.",
     color: "#ffcc00"
   }
 ];

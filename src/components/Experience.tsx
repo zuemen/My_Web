@@ -8,20 +8,20 @@ const expData = [
   {
     company: "National Chengchi University (NCCU)",
     role: "Research Assistant",
-    period: "Sep 2023 - Present",
+    period: "",
     projects: [
       {
         name: "Smart Contract Security and Auditing Mechanism Research",
         details: [
-          "Conducting comprehensive literature reviews on smart contract security and auditing frameworks.",
-          "Assisting with administrative support and research coordination for the research initiative."
+          "Assisting with administrative tasks and project coordination within the research group.",
+          "Building foundational knowledge in blockchain technology and smart contract principles."
         ]
       },
       {
         name: "AI + Quantum Computing (AI+QC) Research and Development Program",
         details: [
-          "Assisting with literature review and research support for quantum-classical hybrid systems.",
-          "Supporting system development and documentation for the research initiative."
+          "Assisting with literature review and research support, with a focus on applications in quantum finance and quantum machine learning.",
+          "Supporting the documentation and administrative aspects of quantum-classical hybrid systems research."
         ]
       }
     ]
@@ -55,7 +55,7 @@ const Experience = () => {
                 <Briefcase className={styles.icon} size={24} />
                 <div>
                   <h3 className={styles.company}>{exp.company}</h3>
-                  <p className={styles.roleTitle}>{exp.role} <span className={styles.period}>| {exp.period}</span></p>
+                  <p className={styles.roleTitle}>{exp.role}</p>
                 </div>
               </div>
               
