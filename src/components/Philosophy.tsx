@@ -26,8 +26,8 @@ const Philosophy = () => {
               and the legal compliance of <strong>ERC-3643</strong> in RWA tokenization.
             </p>
             <p>
-              My journey is driven by a simple question:
-              <em>"保持對於最新科技的好奇與探索為方向"</em>
+              My journey is driven by a simple mission:
+              <em>"Driven by a relentless curiosity to explore emerging technologies."</em>
             </p>          </div>
         </motion.div>
       </div>
