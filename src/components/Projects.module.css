@@ -131,7 +131,7 @@
   }
   .projectImageWrapper {
     width: 100%;
-    height: 400px;
+    height: 500px;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
@@ -139,7 +139,7 @@
 
 @media (max-width: 768px) {
   .projectImageWrapper {
-    height: 350px;
+    height: 550px;
   }
   .projectInfo {
     padding: 2rem;
