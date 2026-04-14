@@ -1,20 +1,20 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, ExternalLink } from 'lucide-react';
+import { Mail, Globe, Link as LinkIcon, ExternalLink } from 'lucide-react';
 import styles from './Contact.module.css';
 
 const Contact = () => {
   const contactLinks = [
     {
       name: "GitHub",
-      icon: <Github size={24} />,
+      icon: <Globe size={24} />,
       url: "https://github.com/zuemen",
       label: "@zuemen"
     },
     {
       name: "LinkedIn",
-      icon: <Linkedin size={24} />,
+      icon: <LinkIcon size={24} />,
       url: "https://www.linkedin.com/in/%E5%BB%B7%E7%BF%8A-%E6%9C%B1-95838538a/",
       label: "廷翊 (Andy) 朱"
     },
