@@ -6,32 +6,26 @@ import styles from './Projects.module.css';
 
 const projectData = [
   {
+    title: "Digital Credential Scenario Innovation Challenge",
+    category: "Award-winning Project (Merit Award)",
+    description: "Led a team in a national competition hosted by the Ministry of Digital Affairs, Taiwan (數位發展部). Architected a decentralized identity (SSI) framework using VC and DID standards, specifically designed for FHIR-based medical data exchange. Ensured secure and seamless interoperability for patient-centric health records.",
+    tags: ["SSI", "FHIR", "Medical Data", "VC/DID", "System Architecture"],
+    image: "/digital_credential_new.jpg",
+    link: "https://github.com/zuemen/pepelab_v2"
+  },
+  {
     title: "Real World Asset (RWA) Real Estate Tokenization",
     category: "Blockchain Implementation",
-    description: "Developed a decentralized platform for real estate fractional ownership. Implemented PropertyToken for asset digitization and RentalDistributor for automated yield distribution. Integrated an IdentityRegistry to ensure regulatory compliance and whitelisting for investors.",
+    description: "Developed a decentralized platform for real estate fractional ownership. Implemented PropertyToken for asset digitization and RentalDistributor for automated yield distribution. Integrated an IdentityRegistry to ensure regulatory compliance.",
     tags: ["Solidity", "RWA", "Fractional Ownership", "DeFi"],
     link: "https://github.com/zuemen/rwa-demo"
   },
   {
-    title: "Digital Credential Scenario Innovation Challenge",
-    category: "Award-winning Project (Merit Award)",
-    description: "Led a team in a national competition hosted by the Ministry of Digital Affairs. Architected the overall system framework for a decentralized identity (SSI) platform, overseeing the integration of VC and DID standards. Managed backend development and coordinated frontend synchronization to ensure a cohesive and secure user experience.",
-    tags: ["SSI", "Verifiable Credentials", "DID", "System Architecture", "Leadership"],
-    image: "/award_ceremony.jpg",
-    link: "https://github.com/zuemen/pepelab_v2"
-  },
-  {
-    title: "Quantum Computing & AI Research (AI+QC)",
-    category: "Research Assistant @ NCCU",
-    description: "Contributing to the AI + Quantum Computing Research and Development Program. Assisting with research support, literature review for quantum-classical hybrid systems, and providing technical/administrative assistance in project implementation and documentation.",
-    tags: ["Quantum Algorithms", "Qiskit", "Research", "AI+QC"],
-    image: "/working.jpg"
-  },
-  {
-    title: "Smart Contract Security & Auditing Research",
-    category: "Research Assistant @ NCCU",
-    description: "Conducting in-depth research on smart contract security and auditing mechanisms. Supported system development, maintenance, and documentation for secure decentralized auditing frameworks.",
-    tags: ["Solidity", "Blockchain Security", "Smart Contracts", "Auditing"]
+    title: "Quantum Machine Learning (QML) Simulation",
+    category: "Quantum Research",
+    description: "Explored hybrid quantum-classical algorithms for pattern recognition and financial data analysis. Implemented simulations using Qiskit to evaluate the potential of quantum speedup in machine learning tasks.",
+    tags: ["QML", "Qiskit", "Python", "Simulation"],
+    link: "https://github.com/zuemen/qc_ML"
   }
 ];
 
@@ -46,7 +40,7 @@ const Projects = () => {
           viewport={{ once: true }}
         >
           <h2 className="glow-text">RESEARCH & COMPETITIONS</h2>
-          <p className={styles.subtitle}>Bringing technical specifications into cross-institution interoperability.</p>
+          <p className={styles.subtitle}>Bridging emerging technologies with institutional needs.</p>
         </motion.div>
 
         <div className={styles.list}>

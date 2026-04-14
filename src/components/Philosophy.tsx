@@ -16,18 +16,18 @@ const Philosophy = () => {
           <h2 className="glow-text">ABOUT ME & RESEARCH PHILOSOPHY</h2>
           <div className={styles.textBlock}>
             <p>
-              I am a <strong>Management Information Systems</strong> student at National Chengchi University (NCCU) with a profound interest in 
-              <strong> Artificial Intelligence</strong>, <strong>Quantum Computing</strong>, and <strong>Blockchain Technology</strong>.
+              I am a <strong>Management Information Systems</strong> student at National Chengchi University (NCCU) with a passion for 
+              <strong> Artificial Intelligence</strong>, <strong>Secure Digital Identity</strong>, and <strong>Quantum Computing</strong>.
             </p>
             <p>
-              My research and practical interests are focused on specific frontiers: 
-              <strong> AI Agents</strong> within the realm of Artificial Intelligence, 
-              <strong> Quantum Finance</strong> and <strong>Quantum Machine Learning (QML)</strong> in the quantum domain, 
-              and the intersection of <strong>Smart Contracts</strong> and <strong>Real World Assets (RWA)</strong> in blockchain ecosystems.
+              Experienced in backend development and system integration, I focus on bridging the gap between 
+              social institutional needs and hard tech. My current research explores 
+              <strong> Smart Contract Security</strong>, <strong>Quantum-Classical Hybrid Systems</strong>, 
+              and the legal compliance of <strong>ERC-3643</strong> in RWA tokenization.
             </p>
             <p>
               My journey is driven by a simple question: 
-              <em>"How can we integrate these emerging technologies to redefine digital trust and efficiency in modern systems?"</em>
+              <em>"How can we continuously learn and apply new technologies to build digital trust in real-world systems?"</em>
             </p>
           </div>
         </motion.div>

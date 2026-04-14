@@ -6,9 +6,9 @@ import styles from './News.module.css';
 
 const newsData = [
   {
-    date: "2026.04",
+    date: "2026.01",
     title: "Joined AI + Quantum Computing (AI+QC) Program",
-    description: "Appointed as a Research Assistant focusing on Quantum Algorithm implementation.",
+    description: "Appointed as a Research Assistant focusing on Quantum Finance and Quantum Machine Learning.",
     icon: <Zap size={18} />
   },
   {

@@ -14,7 +14,7 @@ const Navbar = () => {
     >
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <span className="glow-text">ANDY</span>.CHUI
+          <span className="glow-text">ZUEMEN</span>.CHU
         </Link>
         <ul className={styles.navLinks}>
           <li><Link href="#about">About</Link></li>
