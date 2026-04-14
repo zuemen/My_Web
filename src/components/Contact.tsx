@@ -16,12 +16,12 @@ const Contact = () => {
       name: "LinkedIn",
       icon: <LinkIcon size={24} />,
       url: "https://www.linkedin.com/in/%E5%BB%B7%E7%BF%8A-%E6%9C%B1-95838538a/",
-      label: "廷翊 (Andy) 朱"
+      label: "廷翊 朱"
     },
     {
       name: "Email",
       icon: <Mail size={24} />,
-      url: "mailto:112306007@g.nccu.edu.tw",
+      url: "https://mail.google.com/mail/?view=cm&fs=1&to=112306007@g.nccu.edu.tw",
       label: "112306007@g.nccu.edu.tw"
     }
   ];
