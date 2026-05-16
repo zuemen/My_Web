@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# zuemen.net — Zuemen Chu's Personal Website
 
-## Getting Started
+Personal website of **Zuemen Chu (朱廷翊)**, Research Assistant at NCCU MIS, exploring Quantum Finance, Smart Contract Security, and Self-Sovereign Identity.
 
-First, run the development server:
+**Live:** [https://zuemen.net](https://zuemen.net)
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19 + TypeScript 5 |
+| Styling | CSS Modules + Tailwind v4 |
+| Animation | Framer Motion 12 |
+| Icons | Lucide React |
+| Fonts | Inter · Newsreader · JetBrains Mono (next/font) |
+| Deployment | Vercel |
+
+## Local Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server (Turbopack)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# → http://localhost:3000
+
+# Type check
+npx tsc --noEmit
+
+# Lint
+npm run lint
+
+# Production build
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Folder Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout (Navbar, Footer, metadata, fonts)
+│   ├── page.tsx            # Home: Hero + News + Skills + Contact
+│   ├── research/page.tsx   # Research philosophy & areas
+│   ├── projects/page.tsx   # Full project list
+│   ├── cv/page.tsx         # Experience + CV download
+│   ├── notes/page.tsx      # Short writings (WIP)
+│   ├── robots.ts           # Robots meta
+│   ├── sitemap.ts          # XML sitemap
+│   └── globals.css         # Design tokens + global styles
+└── components/
+    ├── Navbar.tsx / .module.css
+    ├── Footer.tsx / .module.css
+    ├── Hero.tsx / .module.css
+    ├── News.tsx / .module.css
+    ├── Skills.tsx / .module.css
+    ├── Projects.tsx / .module.css
+    ├── Experience.tsx / .module.css
+    ├── Philosophy.tsx / .module.css
+    └── Contact.tsx / .module.css
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+Deployed to Vercel via GitHub integration. Every push to `main` triggers a production deploy.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
