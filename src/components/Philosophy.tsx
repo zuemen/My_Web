@@ -1,34 +1,41 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import styles from './Philosophy.module.css';
+import { motion } from "framer-motion";
+import styles from "./Philosophy.module.css";
 
 const Philosophy = () => {
   return (
     <section id="about" className={styles.philosophy}>
       <div className={styles.container}>
-        <motion.div 
+        <motion.div
           className={styles.content}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="glow-text">ABOUT ME & RESEARCH PHILOSOPHY</h2>
+          <h2 className={styles.heading}>About Me &amp; Research Philosophy</h2>
           <div className={styles.textBlock}>
             <p>
-              I am a <strong>Management Information Systems</strong> student at National Chengchi University (NCCU) with a passion for 
-              <strong> Artificial Intelligence</strong>, <strong>Secure Digital Identity</strong>, and <strong>Quantum Computing</strong>.
+              I am a <strong>Management Information Systems</strong> student at
+              National Chengchi University (NCCU) with a deep interest in
+              <strong> Artificial Intelligence</strong>,{" "}
+              <strong>Secure Digital Identity</strong>, and{" "}
+              <strong>Quantum Computing</strong>.
             </p>
             <p>
-              Experienced in backend development and system integration, I focus on bridging the gap between 
-              social institutional needs and hard tech. My current research explores 
-              <strong> Smart Contract Security</strong>, <strong>Quantum-Classical Hybrid Systems</strong>, 
-              and the legal compliance of <strong>ERC-3643</strong> in RWA tokenization.
+              My work bridges the gap between social institutional needs and
+              hard tech. Current research spans{" "}
+              <strong>Smart Contract Security</strong>,{" "}
+              <strong>Quantum-Classical Hybrid Systems</strong>, and the legal
+              compliance of <strong>ERC-3643</strong> in RWA tokenization.
             </p>
             <p>
-              My journey is driven by a simple mission:
-              <em>"Driven by a relentless curiosity to explore emerging technologies."</em>
-            </p>          </div>
+              I approach research with the belief that emerging technology
+              becomes transformative only when it intersects with real
+              institutional constraints &mdash; regulatory frameworks,
+              interoperability standards, and human-centered design.
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -1,96 +1,97 @@
 .news {
-  padding: 80px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: var(--space-16) 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--space-8);
 }
 
 .header {
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-8);
 }
 
-.header h2 {
+.heading {
   font-size: 1.5rem;
-  letter-spacing: 5px;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
 }
 
 .line {
   width: 40px;
-  height: 2px;
-  background: var(--accent-cyan);
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
 }
 
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-4);
 }
 
 .newsItem {
   display: flex;
   align-items: flex-start;
-  gap: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+  gap: var(--space-8);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .newsItem:last-child {
   border-bottom: none;
+  padding-bottom: 0;
 }
 
 .dateIcon {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 100px;
+  min-width: 80px;
+  gap: var(--space-2);
 }
 
 .iconWrapper {
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 209, 255, 0.1);
-  border: 1px solid rgba(0, 209, 255, 0.3);
+  width: 36px;
+  height: 36px;
+  background: var(--color-accent-soft);
+  border: 1px solid rgba(79, 158, 255, 0.25);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--accent-cyan);
-  margin-bottom: 0.5rem;
+  color: var(--color-accent);
 }
 
 .date {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #666;
-  font-family: var(--font-roboto-mono), monospace;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-text-tertiary);
 }
 
 .content h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+  color: var(--color-text-primary);
 }
 
 .content p {
-  font-size: 0.9rem;
-  color: #888;
-  line-height: 1.5;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .newsItem {
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-3);
   }
   .dateIcon {
     flex-direction: row;
-    gap: 1rem;
     min-width: auto;
   }
 }

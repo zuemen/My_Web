@@ -1,127 +1,129 @@
 .experience {
-  padding: 100px 0;
-  background: rgba(10, 10, 10, 0.3);
+  padding: var(--space-24) 0;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--space-8);
 }
 
 .header {
-  margin-bottom: 4rem;
+  margin-bottom: var(--space-12);
   text-align: center;
 }
 
-.header h2 {
+.heading {
   font-size: 2rem;
-  letter-spacing: 5px;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
 }
 
 .line {
-  width: 60px;
-  height: 4px;
-  background: var(--accent-cyan);
+  width: 40px;
+  height: 3px;
+  background: var(--color-accent);
   margin: 0 auto;
+  border-radius: 2px;
 }
 
 .expList {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: var(--space-8);
 }
 
 .expCard {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 3rem;
-  transition: all 0.3s ease;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: border-color 0.3s ease;
 }
 
 .expCard:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(0, 209, 255, 0.2);
+  border-color: rgba(79, 158, 255, 0.3);
 }
 
 .cardHeader {
   display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  margin-bottom: 2.5rem;
+  gap: var(--space-4);
+  align-items: flex-start;
+  margin-bottom: var(--space-8);
 }
 
 .icon {
-  color: var(--accent-cyan);
-  filter: drop-shadow(0 0 5px var(--accent-cyan));
+  color: var(--color-accent);
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .company {
-  font-size: 1.5rem;
-  font-weight: 800;
-  margin-bottom: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
 }
 
 .roleTitle {
-  font-size: 1rem;
-  color: var(--accent-cyan);
-  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  font-weight: 600;
 }
 
 .period {
-  color: #666;
+  color: var(--color-text-tertiary);
   font-weight: 400;
-  margin-left: 0.5rem;
 }
 
 .projectList {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--space-6);
+}
+
+.projectItem {
+  border-left: 2px solid var(--color-border);
+  padding-left: var(--space-4);
 }
 
 .projectName {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: var(--space-3);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #fff;
+  gap: var(--space-1);
+  color: var(--color-text-primary);
+}
+
+.projectName svg {
+  color: var(--color-accent);
+  flex-shrink: 0;
 }
 
 .details {
-  list-style: none;
-  padding-left: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .details li {
-  font-size: 0.95rem;
-  color: #aaa;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  padding-left: var(--space-4);
   position: relative;
-  line-height: 1.6;
 }
 
 .details li::before {
-  content: "•";
+  content: "–";
   position: absolute;
-  left: -1rem;
-  color: var(--accent-cyan);
+  left: 0;
+  color: var(--color-text-tertiary);
 }
 
 @media (max-width: 768px) {
   .expCard {
-    padding: 2rem;
-  }
-  .company {
-    font-size: 1.25rem;
-  }
-  .projectName {
-    font-size: 1rem;
+    padding: var(--space-6);
   }
 }
