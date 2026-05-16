@@ -6,9 +6,16 @@
 }
 
 .container {
-  max-width: 800px;
+  max-width: 640px;
   margin: 0 auto;
   padding: var(--space-24) var(--space-8);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-4);
 }
 
 .title {
@@ -18,21 +25,22 @@
 }
 
 .subtitle {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--color-text-secondary);
+  line-height: 1.75;
   margin-bottom: var(--space-8);
-  line-height: 1.6;
 }
 
-.placeholder {
-  padding: var(--space-8);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-}
-
-.mono {
-  font-family: var(--font-mono);
+.rss {
   font-size: 0.875rem;
-  color: var(--color-text-tertiary);
+}
+
+.rssLink {
+  color: var(--color-accent);
+  border-bottom: 1px solid rgba(79, 158, 255, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.rssLink:hover {
+  border-color: var(--color-accent);
 }

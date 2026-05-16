@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./Footer.module.css";
 
-const footerLinks = [
+const externalLinks = [
   { href: "https://github.com/zuemen", label: "GitHub" },
   {
     href: "https://www.linkedin.com/in/%E5%BB%B7%E7%BF%8A-%E6%9C%B1-95838538a/",
@@ -15,7 +15,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.links}>
-          {footerLinks.map((link) => (
+          {externalLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
@@ -28,6 +28,9 @@ const Footer = () => {
               {link.label}
             </a>
           ))}
+          <Link href="/notes" className={styles.link}>
+            Notes
+          </Link>
         </div>
         <p className={styles.copy}>
           © 2026 Zuemen Chu 朱廷翊 &mdash; Last updated: 2026-05-16

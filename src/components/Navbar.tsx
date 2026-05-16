@@ -9,7 +9,6 @@ const navLinks = [
   { href: "/research", label: "Research" },
   { href: "/projects", label: "Projects" },
   { href: "/cv", label: "CV" },
-  { href: "/notes", label: "Notes" },
 ];
 
 const Navbar = () => {
