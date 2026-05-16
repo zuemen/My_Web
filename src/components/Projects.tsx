@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Code } from "lucide-react";
+import { Code, Award } from "lucide-react";
 import styles from "./Projects.module.css";
 
 interface Project {
@@ -12,7 +12,7 @@ interface Project {
   tags: string[];
   image?: string;
   link?: string;
-  awardLink?: string;
+  certificateUrl?: string;
 }
 
 const projectData: Project[] = [
@@ -24,6 +24,7 @@ const projectData: Project[] = [
     tags: ["SSI", "FHIR", "Medical Data", "VC/DID", "System Architecture"],
     image: "/digital_credential_new.jpg",
     link: "https://github.com/zuemen/pepelab_v2",
+    certificateUrl: "/awards/moda-digital-credential-2025-certificate.pdf",
   },
   {
     title: "Real World Asset (RWA) Real Estate Tokenization",
@@ -102,6 +103,17 @@ const Projects = () => {
                       aria-label={`View source code for ${project.title}`}
                     >
                       <Code size={20} />
+                    </a>
+                  )}
+                  {project.certificateUrl && (
+                    <a
+                      href={project.certificateUrl}
+                      className={styles.linkIcon}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View Award Certificate (PDF)"
+                    >
+                      <Award size={20} />
                     </a>
                   )}
                 </div>

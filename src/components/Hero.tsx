@@ -37,18 +37,10 @@ const Hero = () => {
             ))}
           </div>
           <div className={styles.ctaGroup}>
-            <a
-              href="/Zuemen-Chu-CV.pdf"
-              download
-              className={styles.primaryBtn}
-              aria-label="Download Zuemen Chu CV PDF"
-            >
-              Download CV
-            </a>
-            <Link href="/research" className={styles.secondaryBtn}>
+            <Link href="/research" className={styles.primaryBtn}>
               See Research
             </Link>
-            <Link href="/#contact" className={styles.tertiaryBtn}>
+            <Link href="/#contact" className={styles.secondaryBtn}>
               Contact
             </Link>
           </div>
