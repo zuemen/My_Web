@@ -1,62 +1,76 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { Atom, Shield, Brain, Award } from 'lucide-react';
-import styles from './Skills.module.css';
+import { motion } from "framer-motion";
+import { Atom, Shield, Brain, Award } from "lucide-react";
+import styles from "./Skills.module.css";
 
-const skillData = [
+interface SkillCard {
+  title: string;
+  icon: React.ReactNode;
+  description: string;
+  accentColor: string;
+}
+
+const skillData: SkillCard[] = [
   {
     title: "Quantum Finance & QML",
     icon: <Atom />,
-    description: "Actively exploring Qiskit & PennyLane. Focusing on Quantum Finance and Quantum Machine Learning (QML) applications.",
-    color: "var(--accent-cyan)"
+    description:
+      "Implemented QML simulations using Qiskit, exploring VQE and QAOA for financial optimization. Focused on quantum speedup potential for ML tasks in the finance domain.",
+    accentColor: "var(--color-accent)",
   },
   {
     title: "Blockchain & RWA",
     icon: <Shield />,
-    description: "Researching Real World Asset (RWA) tokenization and smart contract ecosystems for modern financial systems.",
-    color: "var(--accent-purple)"
+    description:
+      "Developed RWA tokenization contracts in Solidity, integrating ERC-3643 for identity-gated ownership. Researched smart contract auditing with Slither and manual review.",
+    accentColor: "#7c4dff",
   },
   {
     title: "Agentic AI",
     icon: <Brain />,
-    description: "Completed advanced coursework in AI applications. Passionate about researching OpenClaw and its impact on financial intelligence.",
-    color: "var(--accent-blue)"
+    description:
+      "Completed AI interdisciplinary micro-program at NCCU. Researching multi-agent system architectures and their applications in financial intelligence workflows.",
+    accentColor: "#3ecf8e",
   },
   {
     title: "Digital Innovation",
     icon: <Award />,
-    description: "Merit Award winner in the competition hosted by the Ministry of Digital Affairs, Taiwan. Exploring SSI and VC standards.",
-    color: "#ffcc00"
-  }
+    description:
+      "Merit Award winner at the Digital Credential Innovation Challenge 2025, hosted by the Ministry of Digital Affairs, Taiwan. Architected an SSI + FHIR medical data framework.",
+    accentColor: "#f5a623",
+  },
 ];
 
 const Skills = () => {
   return (
     <section id="skills" className={styles.skills}>
       <div className={styles.container}>
-        <motion.div 
+        <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="glow-text">RESEARCH MATRIX</h2>
-          <div className={styles.line}></div>
+          <h2 className={styles.heading}>Research Areas</h2>
+          <div className={styles.line} />
         </motion.div>
 
         <div className={styles.grid}>
           {skillData.map((skill, index) => (
-            <motion.div 
-              key={index}
-              className={`${styles.card} glass-card`}
+            <motion.div
+              key={skill.title}
+              className={styles.card}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10, borderColor: skill.color }}
+              transition={{ delay: index * 0.08 }}
+              whileHover={{ y: -6 }}
             >
-              <div className={styles.iconWrapper} style={{ color: skill.color }}>
+              <div
+                className={styles.iconWrapper}
+                style={{ color: skill.accentColor }}
+              >
                 {skill.icon}
               </div>
               <h3 className={styles.cardTitle}>{skill.title}</h3>

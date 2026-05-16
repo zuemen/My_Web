@@ -1,26 +1,54 @@
 "use client";
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import styles from './Navbar.module.css';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import styles from "./Navbar.module.css";
+
+const navLinks = [
+  { href: "/research", label: "Research" },
+  { href: "/projects", label: "Projects" },
+  { href: "/cv", label: "CV" },
+  { href: "/notes", label: "Notes" },
+];
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   return (
-    <motion.nav 
+    <motion.nav
       className={styles.navbar}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.4 }}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className={styles.container}>
-        <Link href="/" className={styles.logo}>
-          <span className="glow-text">ZUEMEN</span>.CHU
+        <Link href="/" className={styles.logo} aria-label="Zuemen Chu — Home">
+          <span className={styles.logoAccent}>ZUEMEN</span>.CHU
         </Link>
         <ul className={styles.navLinks}>
-          <li><Link href="#about">About</Link></li>
-          <li><Link href="#skills">Skills</Link></li>
-          <li><Link href="#projects">Projects</Link></li>
-          <li><Link href="#contact" className={styles.contactBtn}>Contact</Link></li>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={`${styles.navLink} ${pathname === link.href ? styles.active : ""}`}
+                aria-current={pathname === link.href ? "page" : undefined}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link
+              href="/#contact"
+              className={styles.contactBtn}
+              aria-label="Jump to Contact section"
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
       </div>
     </motion.nav>
