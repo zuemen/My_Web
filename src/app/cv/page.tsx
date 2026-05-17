@@ -14,14 +14,6 @@ export default function CVPage() {
       <div className={styles.header}>
         <div className={styles.headerInner}>
           <h1 className={styles.title}>Curriculum Vitae</h1>
-          <a
-            href="/Zuemen-Chu-CV.pdf"
-            download
-            className={styles.downloadBtn}
-            aria-label="Download Zuemen Chu CV as PDF"
-          >
-            Download PDF
-          </a>
         </div>
       </div>
       <Experience />
