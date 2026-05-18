@@ -28,19 +28,11 @@
   font-size: 1.05rem;
   color: var(--color-text-secondary);
   line-height: 1.75;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
 }
 
-.rss {
-  font-size: 0.875rem;
-}
-
-.rssLink {
-  color: var(--color-accent);
-  border-bottom: 1px solid rgba(79, 158, 255, 0.3);
-  transition: border-color 0.2s ease;
-}
-
-.rssLink:hover {
-  border-color: var(--color-accent);
+.rssNote {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-tertiary);
 }
