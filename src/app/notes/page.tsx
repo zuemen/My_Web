@@ -17,14 +17,8 @@ export default function NotesPage() {
           這裡會放關於 Quantum Finance 與 Smart Contract Security
           的閱讀筆記與短文。第一篇預計 2026-Q3 上線。
         </p>
-        <p className={styles.rss}>
-          <a
-            href="/notes/feed.xml"
-            className={styles.rssLink}
-            aria-label="Subscribe via RSS (feed coming soon)"
-          >
-            Subscribe via RSS
-          </a>
+        <p className={styles.rssNote}>
+          RSS feed will be available when the first post publishes.
         </p>
       </div>
     </main>
