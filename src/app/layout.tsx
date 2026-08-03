@@ -57,14 +57,8 @@ export const metadata: Metadata = {
     description:
       "Research Assistant at NCCU MIS. Working on Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, and RWA Tokenization.",
     siteName: "zuemen.net",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
-      },
-    ],
+    // Image comes from app/opengraph-image.tsx (file-based metadata). Listing
+    // it here too would just reintroduce a hardcoded path to keep in sync.
     locale: "en_US",
   },
   twitter: {
@@ -72,7 +66,7 @@ export const metadata: Metadata = {
     title: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
     description:
       "Research Assistant at NCCU MIS. Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization.",
-    images: ["/og.png"],
+    // No twitter:image — Twitter/X falls back to og:image, which is generated.
   },
   alternates: { canonical: "https://zuemen.net" },
 };
