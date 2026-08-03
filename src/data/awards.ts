@@ -16,7 +16,7 @@ export const awards: Award[] = [
     title: "Cross-Platform Innovation Awards",
     issuer: "Nurie AI",
     date: "2026-05",
-    // TODO(zuemen): add the certificate PDF to /public/awards and link it here.
+    certificateUrl: "/awards/nurie-ai-2026-certificate.pdf",
   },
   {
     slug: "moda-digital-credential-2025",
