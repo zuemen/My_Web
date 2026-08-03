@@ -132,6 +132,35 @@ ul {
   }
 }
 
+/* No scripting.
+   framer-motion writes its `initial` state into the server-rendered markup as
+   inline styles and only clears it once hydration runs. With scripting off,
+   the hero copy and every scroll-revealed section would stay invisible, so the
+   page would render essentially blank. Inline styles need !important to beat. */
+@media (scripting: none) {
+  nav,
+  main *,
+  footer * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Print — chrome off, ink on paper. Page-level rules live in cv/page.module.css. */
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  nav,
+  footer,
+  .skip-link {
+    display: none !important;
+  }
+}
+
 /* Page shell — full-height main that clears the fixed 64px navbar.
    dvh keeps mobile browser chrome from cropping the viewport. */
 .page-shell {
