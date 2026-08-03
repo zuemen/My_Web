@@ -27,6 +27,11 @@
   --space-16: 4rem;
   --space-24: 6rem;
 
+  /* Layout — one container width and one prose measure for the whole site.
+     68ch keeps long-form text inside the 60–75 character comfortable range. */
+  --container: 1120px;
+  --measure: 68ch;
+
   /* Radius */
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -186,7 +191,15 @@ ul {
   box-shadow: 0 0 20px rgba(79, 158, 255, 0.15);
 }
 
-/* Glow — only used on the Hero name (1 instance) */
-.glow-text {
-  text-shadow: var(--neon-glow);
+/* Shared section wrapper — replaces the per-component .container copies. */
+.section-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+}
+
+@media (max-width: 768px) {
+  .section-container {
+    padding: 0 var(--space-6);
+  }
 }

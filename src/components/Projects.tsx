@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Code, Award, ArrowRight } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 import styles from "./Projects.module.css";
 
 interface Project {
@@ -62,18 +63,13 @@ const projectData: Project[] = [
 const Projects = () => {
   return (
     <section id="projects" className={styles.projects}>
-      <div className={styles.container}>
-        <motion.div
-          className={styles.header}
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className={styles.heading}>Research &amp; Projects</h2>
-          <p className={styles.subtitle}>
-            Bridging emerging technologies with institutional needs.
-          </p>
-        </motion.div>
+      <div className="section-container">
+        <SectionHeading
+          eyebrow="Selected work"
+          title="Research & Projects"
+          subtitle="Bridging emerging technologies with institutional needs."
+          as="h1"
+        />
 
         <div className={styles.list}>
           {projectData.map((project) => (
@@ -99,7 +95,7 @@ const Projects = () => {
               )}
               <div className={styles.projectInfo}>
                 <span className={styles.category}>{project.category}</span>
-                <h3 className={styles.title}>{project.title}</h3>
+                <h2 className={styles.title}>{project.title}</h2>
                 <p className={styles.desc}>{project.description}</p>
                 <div className={styles.outcome}>
                   <span className={styles.outcomeLabel}>Outcome</span>

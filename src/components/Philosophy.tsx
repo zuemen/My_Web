@@ -13,7 +13,9 @@ const Philosophy = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className={styles.heading}>About Me &amp; Research Philosophy</h2>
+          {/* h1: this is the top-level heading of /research, the only page
+              that renders Philosophy. */}
+          <h1 className={styles.heading}>About Me &amp; Research Philosophy</h1>
           <div className={styles.textBlock}>
             <p>
               I am a <strong>Management Information Systems</strong> student at
