@@ -42,7 +42,8 @@ const Footer = () => {
           </Link>
         </div>
         <p className={styles.copy}>
-          © {copyrightYear} Zuemen Chu 朱廷翊 &mdash; Last updated:{" "}
+          © {copyrightYear} Zuemen Chu <span lang="zh-Hant">朱廷翊</span>{" "}
+          &mdash; Last updated:{" "}
           <time dateTime={lastUpdated}>{lastUpdated}</time>
         </p>
         <p className={styles.source}>

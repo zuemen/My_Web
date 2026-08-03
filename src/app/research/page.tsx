@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ResearchPage() {
   return (
-    <main className={styles.main}>
+    <main id="main-content" className={styles.main}>
       <Philosophy />
       <section className={styles.areas}>
         <div className={styles.container}>

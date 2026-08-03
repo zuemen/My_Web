@@ -3,6 +3,7 @@ import { Inter, Newsreader, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -123,9 +124,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Navbar />
-        {children}
-        <Footer />
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        <MotionProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

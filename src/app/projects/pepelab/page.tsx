@@ -28,7 +28,7 @@ const techStack = ["SSI", "VC", "DID", "FastAPI", "Python"];
 
 export default function PepeLabPage() {
   return (
-    <main className={styles.main}>
+    <main id="main-content" className={styles.main}>
       <article className={styles.container}>
         <Link href="/projects" className={styles.backLink}>
           <ArrowLeft size={14} /> Back to Projects
@@ -106,7 +106,7 @@ export default function PepeLabPage() {
           <h2 className={styles.sectionTitle}>Recognition</h2>
           <div className={styles.recognition}>
             <p className={styles.recognitionTitle}>
-              Merit Award (學生組優選)
+              Merit Award (<span lang="zh-Hant">學生組優選</span>)
             </p>
             <p className={styles.recognitionMeta}>
               Digital Credential Scenario Innovation Challenge, hosted by the

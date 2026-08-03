@@ -15,7 +15,7 @@ interface ExpEntry {
   role?: string;
   period: string;
   location?: string;
-  advisor?: string;
+  advisor?: { name: string; nameZh?: string };
   projects?: ExpDetail[];
   notes?: string[];
 }
@@ -36,7 +36,7 @@ const expData: ExpEntry[] = [
     company: "National Chengchi University, MIS",
     role: "Research Assistant",
     period: "May 2025 – Feb 2026",
-    advisor: "Prof. Feng-Yuan Chuang (莊豐源)",
+    advisor: { name: "Prof. Feng-Yuan Chuang", nameZh: "莊豐源" },
     projects: [
       { name: "Smart Contract Security and Auditing Mechanism Research" },
       { name: "AI + Quantum Computing (AI+QC) Research and Development Program" },
@@ -96,7 +96,16 @@ const Experience = () => {
                     )}
                     <p className={styles.roleTitle}>{meta}</p>
                     {exp.advisor && (
-                      <p className={styles.advisor}>Advisor: {exp.advisor}</p>
+                      <p className={styles.advisor}>
+                        Advisor: {exp.advisor.name}
+                        {exp.advisor.nameZh && (
+                          <>
+                            {" ("}
+                            <span lang="zh-Hant">{exp.advisor.nameZh}</span>
+                            {")"}
+                          </>
+                        )}
+                      </p>
                     )}
                   </div>
                 </div>
