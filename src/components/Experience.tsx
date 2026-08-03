@@ -1,16 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, ChevronRight } from "lucide-react";
+import { Briefcase, ChevronRight, ExternalLink } from "lucide-react";
 import styles from "./Experience.module.css";
 
 interface ExpDetail {
   name: string;
   details?: string[];
+  /** Public page a reader can verify the work against. */
+  link?: { href: string; label: string };
 }
 
 interface ExpEntry {
   company: string;
+  companyZh?: string;
   division?: string;
   role?: string;
   period: string;
@@ -46,16 +49,26 @@ const expData: ExpEntry[] = [
     ],
   },
   {
-    company: "Taiwan Blockchain Enthusiasts Association",
+    // TABEI is the association's own English name; "Taiwan Blockchain
+    // Enthusiasts Association" is a back-translation of the Chinese and is not
+    // what the organisation publishes under. The hackathon below is a TABEI
+    // event (主辦單位), so it belongs inside this entry rather than standing
+    // alone as a separate employer.
+    company: "Taiwan Association for Blockchain Ecosystem Innovation (TABEI)",
+    companyZh: "臺灣區塊鏈愛好者協會",
     role: "Intern",
     period: "2026",
     location: "Taipei",
-  },
-  {
-    company: "Hackathon Organizer",
-    division: "USD 12,000 prize pool",
-    period: "Aug 29–31, 2026",
-    notes: ["Led planning and operations"],
+    projects: [
+      {
+        name: "Trustworthy AI Hackathon 2026 — Organizing Team",
+        details: [
+          "Led planning and operations for the three-day event (Aug 29–31, 2026) at N24 Taipei Ark, with a USD 12,000+ prize pool across six industry challenge tracks.",
+          "Built and shipped the official event website.",
+        ],
+        link: { href: "https://hackathon.chain.tw/", label: "hackathon.chain.tw" },
+      },
+    ],
   },
 ];
 
@@ -90,7 +103,14 @@ const Experience = () => {
                 <div className={styles.cardHeader}>
                   <Briefcase className={styles.icon} size={24} />
                   <div>
-                    <h3 className={styles.company}>{exp.company}</h3>
+                    <h3 className={styles.company}>
+                      {exp.company}
+                      {exp.companyZh && (
+                        <span className={styles.companyZh} lang="zh-Hant">
+                          {exp.companyZh}
+                        </span>
+                      )}
+                    </h3>
                     {exp.division && (
                       <p className={styles.division}>{exp.division}</p>
                     )}
@@ -123,6 +143,17 @@ const Experience = () => {
                               <li key={detail}>{detail}</li>
                             ))}
                           </ul>
+                        )}
+                        {proj.link && (
+                          <a
+                            href={proj.link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.projectLink}
+                          >
+                            {proj.link.label}
+                            <ExternalLink size={12} />
+                          </a>
                         )}
                       </div>
                     ))}
