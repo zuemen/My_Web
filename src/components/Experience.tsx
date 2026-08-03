@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, ChevronRight, ExternalLink } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 import styles from "./Experience.module.css";
 
 interface ExpDetail {
@@ -75,16 +76,12 @@ const expData: ExpEntry[] = [
 const Experience = () => {
   return (
     <section id="experience" className={styles.experience}>
-      <div className={styles.container}>
-        <motion.div
-          className={styles.header}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className={styles.heading}>Professional Experience</h2>
-          <div className={styles.line} />
-        </motion.div>
+      <div className="section-container">
+        <SectionHeading
+          eyebrow="Where I've worked"
+          title="Professional Experience"
+          as="h1"
+        />
 
         <div className={styles.expList}>
           {expData.map((exp) => {
@@ -103,14 +100,14 @@ const Experience = () => {
                 <div className={styles.cardHeader}>
                   <Briefcase className={styles.icon} size={24} />
                   <div>
-                    <h3 className={styles.company}>
+                    <h2 className={styles.company}>
                       {exp.company}
                       {exp.companyZh && (
                         <span className={styles.companyZh} lang="zh-Hant">
                           {exp.companyZh}
                         </span>
                       )}
-                    </h3>
+                    </h2>
                     {exp.division && (
                       <p className={styles.division}>{exp.division}</p>
                     )}
@@ -134,9 +131,9 @@ const Experience = () => {
                   <div className={styles.projectList}>
                     {exp.projects.map((proj) => (
                       <div key={proj.name} className={styles.projectItem}>
-                        <h4 className={styles.projectName}>
+                        <h3 className={styles.projectName}>
                           <ChevronRight size={16} /> {proj.name}
-                        </h4>
+                        </h3>
                         {proj.details && proj.details.length > 0 && (
                           <ul className={styles.details}>
                             {proj.details.map((detail) => (

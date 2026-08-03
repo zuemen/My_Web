@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, GitFork, LinkIcon } from "lucide-react";
+import { Mail, GitFork, LinkIcon, ArrowUpRight } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 import styles from "./Contact.module.css";
 
 interface ContactLink {
@@ -38,19 +39,12 @@ const contactLinks: ContactLink[] = [
 const Contact = () => {
   return (
     <section id="contact" className={styles.contact}>
-      <div className={styles.container}>
-        <motion.div
-          className={styles.header}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className={styles.heading}>Get in Touch</h2>
-          <div className={styles.line} />
-          <p className={styles.subtitle}>
-            Open for research collaborations and technical discussions.
-          </p>
-        </motion.div>
+      <div className="section-container">
+        <SectionHeading
+          eyebrow="Contact"
+          title="Get in Touch"
+          subtitle="Open for research collaborations and technical discussions."
+        />
 
         <div className={styles.grid}>
           {contactLinks.map((link, idx) => (
@@ -64,19 +58,18 @@ const Contact = () => {
                   : "noopener noreferrer"
               }
               className={styles.contactItem}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
               aria-label={`Contact via ${link.name}: ${link.label}`}
             >
-              <div className={styles.iconWrapper}>{link.icon}</div>
-              <div className={styles.info}>
-                <span className={styles.name}>{link.name}</span>
-                <span className={styles.label} lang={link.labelLang}>
-                  {link.label}
-                </span>
-              </div>
+              <span className={styles.iconWrapper}>{link.icon}</span>
+              <span className={styles.name}>{link.name}</span>
+              <span className={styles.label} lang={link.labelLang}>
+                {link.label}
+              </span>
+              <ArrowUpRight className={styles.arrow} size={16} />
             </motion.a>
           ))}
         </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Award, Zap, BookOpen, Briefcase, Trophy, BadgeCheck } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 import styles from "./News.module.css";
 
 interface NewsItem {
@@ -59,16 +60,8 @@ const newsData: NewsItem[] = [
 const News = () => {
   return (
     <section className={styles.news}>
-      <div className={styles.container}>
-        <motion.div
-          className={styles.header}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <h2 className={styles.heading}>Recent Updates</h2>
-          <div className={styles.line} />
-        </motion.div>
+      <div className="section-container">
+        <SectionHeading eyebrow="Latest" title="Recent Updates" />
 
         <div className={styles.timeline}>
           {newsData.map((item) => (

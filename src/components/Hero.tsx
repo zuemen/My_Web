@@ -26,11 +26,16 @@ const Hero = () => {
             Research Assistant · National Chengchi University MIS
           </p>
           <h1 className={styles.name}>
-            <span className="glow-text">Zuemen Chu</span>
+            <span>Zuemen Chu</span>
             <span className={styles.nameChinese} lang="zh-Hant">
               朱廷翊
             </span>
           </h1>
+          <p className={styles.intro}>
+            I work on the infrastructure that lets a credential be trusted
+            without trusting whoever hands it to you &mdash; self-sovereign
+            identity, and the contract security underneath it.
+          </p>
           <div className={styles.tags} aria-label="Research areas">
             {researchTags.map((tag) => (
               <span key={tag} className={styles.tag}>
@@ -65,7 +70,6 @@ const Hero = () => {
               className={styles.profileImage}
               style={{ objectFit: "cover", objectPosition: "top center" }}
             />
-            <div className={styles.orbit} aria-hidden="true" />
           </div>
         </motion.div>
       </div>

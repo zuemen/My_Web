@@ -4,41 +4,64 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--space-8);
-  display: flex;
-  justify-content: center;
 }
 
 .content {
-  max-width: 800px;
-  text-align: center;
+  max-width: var(--measure);
 }
 
 .heading {
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   margin-bottom: var(--space-8);
 }
 
 .textBlock {
-  font-size: 1.1rem;
+  font-size: 1.0625rem;
   color: var(--color-text-secondary);
-  line-height: 1.85;
+  line-height: 1.8;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  text-align: left;
+}
+
+/* First paragraph reads as a standfirst, the way an article opens. */
+.textBlock p:first-child {
+  font-size: 1.25rem;
+  line-height: 1.65;
+  color: var(--color-text-primary);
 }
 
 .textBlock strong {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
   font-weight: 600;
 }
 
+.textBlock p:first-child strong {
+  color: var(--color-accent);
+}
+
 @media (max-width: 768px) {
+  .philosophy {
+    padding: var(--space-16) 0;
+    padding-top: calc(var(--space-16) + 64px);
+  }
+
+  .container {
+    padding: 0 var(--space-6);
+  }
+
   .textBlock {
     font-size: 1rem;
+  }
+
+  .textBlock p:first-child {
+    font-size: 1.125rem;
   }
 }
