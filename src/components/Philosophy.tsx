@@ -17,17 +17,21 @@ const Philosophy = () => {
           <div className={styles.textBlock}>
             <p>
               I am a <strong>Management Information Systems</strong> student at
-              National Chengchi University (NCCU) with a deep interest in
-              <strong> Artificial Intelligence</strong>,{" "}
-              <strong>Secure Digital Identity</strong>, and{" "}
-              <strong>Quantum Computing</strong>.
+              National Chengchi University (NCCU) working on{" "}
+              <strong>blockchain trust infrastructure</strong> &mdash;{" "}
+              <strong>Self-Sovereign Identity</strong>,{" "}
+              <strong>Smart Contract Security</strong>, and their application
+              in fintech.
             </p>
             <p>
               My work bridges the gap between social institutional needs and
-              hard tech. Current research spans{" "}
-              <strong>Smart Contract Security</strong>,{" "}
-              <strong>Quantum-Classical Hybrid Systems</strong>, and the legal
-              compliance of <strong>ERC-3643</strong> in RWA tokenization.
+              hard tech. Current research spans decentralized identity
+              standards (<strong>W3C DID</strong> and{" "}
+              <strong>Verifiable Credentials</strong>), auditing methodologies
+              for Solidity contracts, and the legal compliance of{" "}
+              <strong>ERC-3643</strong> in RWA tokenization. I also keep an
+              adjacent interest in <strong>quantum finance and QML</strong>,
+              explored through coursework and my lab&rsquo;s AI+QC program.
             </p>
             <p>
               I approach research with the belief that emerging technology

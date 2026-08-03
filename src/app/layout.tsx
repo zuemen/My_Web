@@ -27,22 +27,23 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://zuemen.net"),
   title: {
-    default: "Zuemen Chu (朱廷翊) — Quantum Finance & Blockchain Researcher",
+    default: "Zuemen Chu (朱廷翊) — Blockchain & Digital Trust Infrastructure",
     template: "%s · Zuemen Chu",
   },
   description:
-    "Zuemen Chu (朱廷翊) is a Research Assistant at National Chengchi University MIS, exploring Quantum Finance, QML, Smart Contract Security, RWA Tokenization, and Self-Sovereign Identity.",
+    "Zuemen Chu (朱廷翊) is a Research Assistant at NCCU MIS, working on blockchain trust infrastructure — Self-Sovereign Identity (SSI/VC/DID), smart contract security, and RWA tokenization, with applications in fintech.",
   keywords: [
-    "Quantum Finance",
-    "QML",
-    "Quantum Machine Learning",
+    "Blockchain",
+    "SSI",
+    "DID",
+    "VC",
     "Smart Contract Security",
     "RWA Tokenization",
     "ERC-3643",
-    "SSI",
-    "DID",
+    "Fintech",
     "NCCU MIS",
-    "Blockchain",
+    "Quantum Finance",
+    "QML",
     "Zuemen Chu",
     "朱廷翊",
   ],
@@ -51,25 +52,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: "https://zuemen.net",
-    title: "Zuemen Chu (朱廷翊) — Quantum & Blockchain Researcher",
+    title: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
     description:
-      "Research Assistant at NCCU MIS. Working on Quantum Finance, Smart Contract Security, and Self-Sovereign Identity.",
+      "Research Assistant at NCCU MIS. Working on Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, and RWA Tokenization.",
     siteName: "zuemen.net",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Zuemen Chu — Quantum Finance & Blockchain Researcher",
+        alt: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
       },
     ],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zuemen Chu — Quantum & Blockchain Researcher",
+    title: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
     description:
-      "Research Assistant at NCCU MIS. Quantum Finance, Smart Contract Security, SSI/DID.",
+      "Research Assistant at NCCU MIS. Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization.",
     images: ["/og.png"],
   },
   alternates: { canonical: "https://zuemen.net" },
@@ -93,13 +94,16 @@ const jsonLd = {
     department: "Management Information Systems",
   },
   knowsAbout: [
-    "Quantum Finance",
-    "Quantum Machine Learning",
-    "Smart Contract Security",
+    "Blockchain",
     "Self-Sovereign Identity",
+    "Decentralized Identifiers",
+    "Verifiable Credentials",
+    "Smart Contract Security",
     "RWA Tokenization",
     "ERC-3643",
-    "Blockchain",
+    "Fintech",
+    "Quantum Finance",
+    "Quantum Machine Learning",
   ],
 };
 

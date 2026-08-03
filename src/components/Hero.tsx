@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import styles from "./Hero.module.css";
 
 const researchTags = [
-  "Quantum ML",
-  "Smart Contract Security",
   "Self-Sovereign Identity",
+  "Smart Contract Security",
+  "Blockchain & Fintech",
 ];
 
 const Hero = () => {

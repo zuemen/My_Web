@@ -94,6 +94,29 @@
   margin-bottom: var(--space-6);
 }
 
+.outcome {
+  border-left: 2px solid var(--color-accent);
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.outcomeLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-1);
+}
+
+.outcomeText {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -115,6 +138,22 @@
 .links {
   display: flex;
   gap: var(--space-4);
+  align-items: center;
+}
+
+.caseStudyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-right: var(--space-2);
+  transition: opacity 0.2s ease;
+}
+
+.caseStudyLink:hover {
+  opacity: 0.75;
 }
 
 .linkIcon {

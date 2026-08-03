@@ -6,37 +6,56 @@ import styles from "./Experience.module.css";
 
 interface ExpDetail {
   name: string;
-  details: string[];
+  details?: string[];
 }
 
 interface ExpEntry {
   company: string;
-  role: string;
+  division?: string;
+  role?: string;
   period: string;
-  projects: ExpDetail[];
+  location?: string;
+  advisor?: string;
+  projects?: ExpDetail[];
+  notes?: string[];
 }
 
 const expData: ExpEntry[] = [
   {
-    company: "National Chengchi University (NCCU)",
+    // Confidentiality: list the unit, project name and period only.
+    // Do not add scope, architecture or any internal detail to this entry.
+    company: "Cathay Financial Holdings",
+    division:
+      "Blockchain Technology Development Division, Digital Architecture Development Department",
+    role: "Blockchain Intern",
+    period: "Sep 2026 – Jun 2027",
+    location: "Taipei",
+    projects: [{ name: "Hot Wallet Research Project" }],
+  },
+  {
+    company: "National Chengchi University, MIS",
     role: "Research Assistant",
-    period: "2026 – Present",
+    period: "May 2025 – Feb 2026",
+    advisor: "Prof. Feng-Yuan Chuang (莊豐源)",
     projects: [
-      {
-        name: "Smart Contract Security and Auditing Mechanism Research",
-        details: [
-          "Maintained research notes and managed reading lists for the smart contract security group, covering auditing techniques including Slither static analysis and manual code review.",
-          "Studied Solidity contract architecture and ERC-3643 compliance patterns for identity-gated RWA tokenization systems.",
-        ],
-      },
-      {
-        name: "AI + Quantum Computing (AI+QC) Research and Development Program",
-        details: [
-          "Reviewed literature on quantum finance and QML, focusing on VQE and QAOA algorithms implemented with Qiskit and PennyLane.",
-          "Documented quantum-classical hybrid system architectures and assisted with experiment logging for ongoing research programs.",
-        ],
-      },
+      { name: "Smart Contract Security and Auditing Mechanism Research" },
+      { name: "AI + Quantum Computing (AI+QC) Research and Development Program" },
     ],
+    notes: [
+      "Literature review, research analysis, system development, technical documentation",
+    ],
+  },
+  {
+    company: "Taiwan Blockchain Enthusiasts Association",
+    role: "Intern",
+    period: "2026",
+    location: "Taipei",
+  },
+  {
+    company: "Hackathon Organizer",
+    division: "USD 12,000 prize pool",
+    period: "Aug 29–31, 2026",
+    notes: ["Led planning and operations"],
   },
 ];
 
@@ -55,43 +74,62 @@ const Experience = () => {
         </motion.div>
 
         <div className={styles.expList}>
-          {expData.map((exp) => (
-            <motion.div
-              key={`${exp.company}-${exp.role}`}
-              className={styles.expCard}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className={styles.cardHeader}>
-                <Briefcase className={styles.icon} size={24} />
-                <div>
-                  <h3 className={styles.company}>{exp.company}</h3>
-                  <p className={styles.roleTitle}>
-                    {exp.role}
-                    {exp.period && (
-                      <span className={styles.period}> · {exp.period}</span>
-                    )}
-                  </p>
-                </div>
-              </div>
+          {expData.map((exp) => {
+            const meta = [exp.role, exp.period, exp.location]
+              .filter(Boolean)
+              .join(" · ");
 
-              <div className={styles.projectList}>
-                {exp.projects.map((proj) => (
-                  <div key={proj.name} className={styles.projectItem}>
-                    <h4 className={styles.projectName}>
-                      <ChevronRight size={16} /> {proj.name}
-                    </h4>
-                    <ul className={styles.details}>
-                      {proj.details.map((detail) => (
-                        <li key={detail}>{detail}</li>
-                      ))}
-                    </ul>
+            return (
+              <motion.div
+                key={`${exp.company}-${exp.period}`}
+                className={styles.expCard}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className={styles.cardHeader}>
+                  <Briefcase className={styles.icon} size={24} />
+                  <div>
+                    <h3 className={styles.company}>{exp.company}</h3>
+                    {exp.division && (
+                      <p className={styles.division}>{exp.division}</p>
+                    )}
+                    <p className={styles.roleTitle}>{meta}</p>
+                    {exp.advisor && (
+                      <p className={styles.advisor}>Advisor: {exp.advisor}</p>
+                    )}
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                </div>
+
+                {exp.projects && exp.projects.length > 0 && (
+                  <div className={styles.projectList}>
+                    {exp.projects.map((proj) => (
+                      <div key={proj.name} className={styles.projectItem}>
+                        <h4 className={styles.projectName}>
+                          <ChevronRight size={16} /> {proj.name}
+                        </h4>
+                        {proj.details && proj.details.length > 0 && (
+                          <ul className={styles.details}>
+                            {proj.details.map((detail) => (
+                              <li key={detail}>{detail}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {exp.notes && exp.notes.length > 0 && (
+                  <ul className={`${styles.details} ${styles.notes}`}>
+                    {exp.notes.map((note) => (
+                      <li key={note}>{note}</li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
