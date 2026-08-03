@@ -4,7 +4,7 @@ import Projects from "@/components/Projects";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Zuemen Chu's research projects: SSI medical data framework, RWA tokenization, and quantum ML simulations.",
+    "Zuemen Chu's research projects: decentralized credential verification (SSI/VC/DID), RWA tokenization, and quantum ML simulations.",
 };
 
 export default function ProjectsPage() {

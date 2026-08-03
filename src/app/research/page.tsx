@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Research",
   description:
-    "Zuemen Chu's research areas: Quantum Finance, QML, Smart Contract Security, RWA Tokenization, and Self-Sovereign Identity.",
+    "Zuemen Chu's research areas: Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization, and Quantum Finance.",
 };
 
 export default function ResearchPage() {
@@ -18,8 +18,8 @@ export default function ResearchPage() {
           <div className={styles.grid}>
             {[
               {
-                area: "Quantum Finance & QML",
-                desc: "Exploring variational quantum algorithms (VQE, QAOA) for financial optimization. Investigating quantum speedup potential in machine learning tasks using Qiskit and PennyLane.",
+                area: "Self-Sovereign Identity (SSI/DID)",
+                desc: "Researching decentralized identity standards (W3C DID, Verifiable Credentials) and their application to cross-institution credential verification, where citizens today must repeatedly re-submit the same credentials to different agencies.",
               },
               {
                 area: "Smart Contract Security",
@@ -30,8 +30,8 @@ export default function ResearchPage() {
                 desc: "Investigating regulatory-compliant tokenization of real-world assets. Focus on identity-gated ownership structures and legal compliance frameworks for institutional DeFi.",
               },
               {
-                area: "Self-Sovereign Identity (SSI/DID)",
-                desc: "Researching decentralized identity standards (W3C DID, Verifiable Credentials) and their application in healthcare data interoperability (FHIR) and compliance systems.",
+                area: "Quantum Finance & QML",
+                desc: "Exploring variational quantum algorithms (VQE, QAOA) for financial optimization. Investigating quantum speedup potential in machine learning tasks using Qiskit and PennyLane.",
               },
             ].map((item) => (
               <div key={item.area} className={styles.areaCard}>

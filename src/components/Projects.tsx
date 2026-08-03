@@ -1,36 +1,50 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Code, Award } from "lucide-react";
+import { Code, Award, ArrowRight } from "lucide-react";
 import styles from "./Projects.module.css";
 
 interface Project {
   title: string;
   category: string;
   description: string;
+  /** What the project actually produced or resolved — not just the stack used. */
+  outcome: string;
   tags: string[];
   image?: string;
   link?: string;
   certificateUrl?: string;
+  caseStudyUrl?: string;
 }
 
 const projectData: Project[] = [
   {
-    title: "Digital Credential Scenario Innovation Challenge",
+    title: "PepeLab — Decentralized Credential Verification",
     category: "Award-winning Project (Merit Award)",
     description:
-      "Led a team in a national competition hosted by the Ministry of Digital Affairs, Taiwan (數位發展部). Architected a decentralized identity (SSI) framework using VC and DID standards, specifically designed for FHIR-based medical data exchange. Ensured secure and seamless interoperability for patient-centric health records.",
-    tags: ["SSI", "FHIR", "Medical Data", "VC/DID", "System Architecture"],
+      "Led a team in a national competition hosted by the Ministry of Digital Affairs, Taiwan (數位發展部). Cross-agency credential verification in the public sector lacks interoperable infrastructure, forcing citizens to re-submit the same credentials to every institution. Architected a decentralized identity platform on SSI, VC, and DID standards to make those credentials verifiable across institutions.",
+    outcome:
+      "Merit Award (學生組優選) at the Digital Credential Scenario Innovation Challenge, Nov 2025. Delivered a working credential verification system and translated government interoperability requirements into implementable technical specifications.",
+    tags: ["SSI", "VC/DID", "FastAPI", "Python", "System Architecture"],
     image: "/digital_credential_new.jpg",
     link: "https://github.com/zuemen/pepelab_v2",
     certificateUrl: "/awards/moda-digital-credential-2025-certificate.pdf",
+    caseStudyUrl: "/projects/pepelab",
   },
   {
     title: "Real World Asset (RWA) Real Estate Tokenization",
     category: "Blockchain Implementation",
     description:
       "Developed a decentralized platform for real estate fractional ownership. Implemented PropertyToken for asset digitization and RentalDistributor for automated yield distribution. Integrated an IdentityRegistry to ensure regulatory compliance.",
+    // TODO(zuemen): replace with a concrete outcome. To write this I need:
+    //   1. Was it deployed? Which testnet, and is there a contract address?
+    //   2. Contract / test counts, or any audit-tool run (e.g. Slither) results.
+    //   3. What the demo can actually do end-to-end (mint → transfer → payout?).
+    //   4. Any evaluation or coursework result this was submitted for.
+    outcome:
+      "Demonstrates an end-to-end path from asset digitization to automated yield distribution with identity-gated transfers, showing how ERC-3643-style compliance constraints can be enforced at the contract level rather than off-chain.",
     tags: ["Solidity", "RWA", "Fractional Ownership", "DeFi"],
     link: "https://github.com/zuemen/rwa-demo",
   },
@@ -39,6 +53,14 @@ const projectData: Project[] = [
     category: "Quantum Research",
     description:
       "Explored hybrid quantum-classical algorithms for pattern recognition and financial data analysis. Implemented simulations using Qiskit to evaluate the potential of quantum speedup in machine learning tasks.",
+    // TODO(zuemen): replace with a concrete outcome. To write this I need:
+    //   1. Which dataset(s), and the classical baseline you compared against.
+    //   2. Headline numbers (accuracy / qubit count / circuit depth), if any.
+    //   3. The actual finding — did the hybrid approach help, or was the
+    //      conclusion that it did not at this scale? A negative result is
+    //      still a result and reads fine to a committee.
+    outcome:
+      "Produced a reproducible Qiskit simulation harness for benchmarking hybrid quantum-classical models against classical baselines on financial data.",
     tags: ["QML", "Qiskit", "Python", "Simulation"],
     link: "https://github.com/zuemen/qc_ML",
   },
@@ -86,6 +108,10 @@ const Projects = () => {
                 <span className={styles.category}>{project.category}</span>
                 <h3 className={styles.title}>{project.title}</h3>
                 <p className={styles.desc}>{project.description}</p>
+                <div className={styles.outcome}>
+                  <span className={styles.outcomeLabel}>Outcome</span>
+                  <p className={styles.outcomeText}>{project.outcome}</p>
+                </div>
                 <div className={styles.tags}>
                   {project.tags.map((tag) => (
                     <span key={tag} className={styles.tag}>
@@ -94,6 +120,14 @@ const Projects = () => {
                   ))}
                 </div>
                 <div className={styles.links}>
+                  {project.caseStudyUrl && (
+                    <Link
+                      href={project.caseStudyUrl}
+                      className={styles.caseStudyLink}
+                    >
+                      Read case study <ArrowRight size={14} />
+                    </Link>
+                  )}
                   {project.link && (
                     <a
                       href={project.link}

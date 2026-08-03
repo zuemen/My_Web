@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Atom, Shield, Brain, Award } from "lucide-react";
+import { BadgeCheck, ShieldCheck, Atom, Brain } from "lucide-react";
 import styles from "./Skills.module.css";
 
 interface SkillCard {
@@ -13,31 +13,31 @@ interface SkillCard {
 
 const skillData: SkillCard[] = [
   {
+    title: "Blockchain & Digital Identity",
+    icon: <BadgeCheck />,
+    description:
+      "Building trust infrastructure on Self-Sovereign Identity standards (W3C DID, Verifiable Credentials), and extending it to identity-gated asset ownership through ERC-3643 RWA tokenization.",
+    accentColor: "var(--color-accent)",
+  },
+  {
+    title: "Smart Contract Security",
+    icon: <ShieldCheck />,
+    description:
+      "Studying auditing methodologies for Solidity contracts — static analysis with Slither, manual review patterns, and formal verification approaches for on-chain financial systems.",
+    accentColor: "#7c4dff",
+  },
+  {
     title: "Quantum Finance & QML",
     icon: <Atom />,
     description:
       "Implemented QML simulations using Qiskit, exploring VQE and QAOA for financial optimization. Focused on quantum speedup potential for ML tasks in the finance domain.",
-    accentColor: "var(--color-accent)",
-  },
-  {
-    title: "Blockchain & RWA",
-    icon: <Shield />,
-    description:
-      "Developed RWA tokenization contracts in Solidity, integrating ERC-3643 for identity-gated ownership. Researched smart contract auditing with Slither and manual review.",
-    accentColor: "#7c4dff",
+    accentColor: "#3ecf8e",
   },
   {
     title: "Agentic AI",
     icon: <Brain />,
     description:
       "Completed AI interdisciplinary micro-program at NCCU. Researching multi-agent system architectures and their applications in financial intelligence workflows.",
-    accentColor: "#3ecf8e",
-  },
-  {
-    title: "Digital Innovation",
-    icon: <Award />,
-    description:
-      "Merit Award winner at the Digital Credential Innovation Challenge 2025, hosted by the Ministry of Digital Affairs, Taiwan. Architected an SSI + FHIR medical data framework.",
     accentColor: "#f5a623",
   },
 ];

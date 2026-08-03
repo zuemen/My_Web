@@ -64,10 +64,23 @@
   margin-bottom: var(--space-1);
 }
 
+.division {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-2);
+}
+
 .roleTitle {
   font-size: 0.9rem;
   color: var(--color-accent);
   font-weight: 600;
+}
+
+.advisor {
+  font-size: 0.85rem;
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
 }
 
 .period {
@@ -120,6 +133,15 @@
   position: absolute;
   left: 0;
   color: var(--color-text-tertiary);
+}
+
+/* Entry-level bullets that sit outside any single project. */
+.notes {
+  margin-top: var(--space-4);
+}
+
+.projectList + .notes {
+  margin-top: var(--space-6);
 }
 
 @media (max-width: 768px) {

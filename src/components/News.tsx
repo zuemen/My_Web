@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Zap, BookOpen } from "lucide-react";
+import { Award, Zap, BookOpen, Briefcase, Trophy, BadgeCheck } from "lucide-react";
 import styles from "./News.module.css";
 
 interface NewsItem {
@@ -12,6 +12,27 @@ interface NewsItem {
 }
 
 const newsData: NewsItem[] = [
+  {
+    date: "2026.07",
+    title: "Selected for Cathay Financial Holdings Internship",
+    description:
+      "Joining the Blockchain Technology Development Division, Digital Architecture Development Department — Hot Wallet Research Project (Sep 2026 – Jun 2027).",
+    icon: <Briefcase size={18} />,
+  },
+  {
+    date: "2026.07",
+    title: "SWIFT Hackathon 2026 — Proposal Shortlisted",
+    description:
+      "Proposal selected by the judging panel to advance to the full solution phase.",
+    icon: <Trophy size={18} />,
+  },
+  {
+    date: "2026.05",
+    title: "Nurie AI 2026 Cross-Platform Innovation Awards",
+    description:
+      "Certified for engineering a cross-platform application using the VaultSage server-side API.",
+    icon: <BadgeCheck size={18} />,
+  },
   {
     date: "2026.01",
     title: "Joined AI + Quantum Computing (AI+QC) Program",

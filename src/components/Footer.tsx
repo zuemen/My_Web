@@ -10,6 +10,15 @@ const externalLinks = [
   { href: "mailto:112306007@g.nccu.edu.tw", label: "Email" },
 ];
 
+// Evaluated at build time (server component), so each deploy refreshes the date.
+// en-CA gives YYYY-MM-DD; the explicit timeZone keeps a late-night build from
+// rolling back a day on a UTC build machine.
+const buildDate = new Date();
+const lastUpdated = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Taipei",
+}).format(buildDate);
+const copyrightYear = lastUpdated.slice(0, 4);
+
 const Footer = () => {
   return (
     <footer className={styles.footer}>
@@ -33,7 +42,8 @@ const Footer = () => {
           </Link>
         </div>
         <p className={styles.copy}>
-          © 2026 Zuemen Chu 朱廷翊 &mdash; Last updated: 2026-05-16
+          © {copyrightYear} Zuemen Chu 朱廷翊 &mdash; Last updated:{" "}
+          <time dateTime={lastUpdated}>{lastUpdated}</time>
         </p>
         <p className={styles.source}>
           <Link
