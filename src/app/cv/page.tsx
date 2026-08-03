@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
+import { awards } from "@/data/awards";
 import styles from "./page.module.css";
+
+/** "2025-11" -> "Nov 2025" */
+const formatAwardDate = (date: string) => {
+  const [year, month] = date.split("-");
+  const label = new Date(Number(year), Number(month) - 1).toLocaleString("en-US", {
+    month: "short",
+  });
+  return `${label} ${year}`;
+};
 
 export const metadata: Metadata = {
   title: "CV",
@@ -90,16 +100,40 @@ export default function CVPage() {
           </p>
         </section>
 
-        {/* ── Experience ── */}
+        {/* ── Experience ──
+            Mirrors /experience — keep the two in step when either changes.
+            Confidentiality: the Cathay entry carries unit, project name and
+            dates only. Do not add scope or any technical detail. */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Experience</h2>
+
           <div className={styles.entryHeader}>
-            <span className={styles.entryTitle}>Research Assistant</span>
+            <span className={styles.entryTitle}>
+              Cathay Financial Holdings &mdash; Blockchain Intern
+            </span>
+            <span className={styles.entryPeriod}>Sep 2026 – Jun 2027</span>
           </div>
-          <p className={styles.entrySubtitle}>Research Projects</p>
+          <p className={styles.entrySubtitle}>
+            Blockchain Technology Development Division, Digital Architecture
+            Development Department | Taipei
+          </p>
           <ul className={styles.projectList}>
-            <li>AI + Quantum Computing (AI+QC) Research and Development Program</li>
+            <li>Hot Wallet Research Project</li>
+          </ul>
+
+          <div className={`${styles.entryHeader} ${styles.entrySpaced}`}>
+            <span className={styles.entryTitle}>
+              National Chengchi University, MIS &mdash; Research Assistant
+            </span>
+            <span className={styles.entryPeriod}>May 2025 – Feb 2026</span>
+          </div>
+          <p className={styles.entrySubtitle}>
+            Advisor: Prof. Feng-Yuan Chuang (
+            <span lang="zh-Hant">莊豐源</span>)
+          </p>
+          <ul className={styles.projectList}>
             <li>Smart Contract Security and Auditing Mechanism Research</li>
+            <li>AI + Quantum Computing (AI+QC) Research and Development Program</li>
           </ul>
           <ul className={styles.bulletList}>
             <li>
@@ -108,12 +142,41 @@ export default function CVPage() {
               research.
             </li>
             <li>
-              Assisted with AI + Quantum Computing (AI+QC) project
-              implementation, technical coordination, and research support.
-            </li>
-            <li>
               Contributed to system development, testing, maintenance, and
               technical documentation.
+            </li>
+          </ul>
+
+          <div className={`${styles.entryHeader} ${styles.entrySpaced}`}>
+            <span className={styles.entryTitle}>
+              Taiwan Association for Blockchain Ecosystem Innovation (TABEI)
+              &mdash; Intern
+            </span>
+            <span className={styles.entryPeriod}>2026</span>
+          </div>
+          <p className={styles.entrySubtitle}>
+            <span lang="zh-Hant">臺灣區塊鏈愛好者協會</span> | Taipei
+          </p>
+          <ul className={styles.projectList}>
+            <li>Trustworthy AI Hackathon 2026 &mdash; Organizing Team</li>
+          </ul>
+          <ul className={styles.bulletList}>
+            <li>
+              Led planning and operations for the three-day event (Aug 29&ndash;31,
+              2026) at N24 Taipei Ark, with a USD 12,000+ prize pool across six
+              industry challenge tracks.
+            </li>
+            <li>
+              Built and shipped the official event website (
+              <a
+                href="https://hackathon.chain.tw/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.inlineLink}
+              >
+                hackathon.chain.tw
+              </a>
+              ).
             </li>
           </ul>
         </section>
@@ -121,14 +184,41 @@ export default function CVPage() {
         {/* ── Leadership & Awards ── */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Leadership &amp; Awards</h2>
-          <div className={styles.entryHeader}>
+
+          {awards.map((award) => (
+            <div key={award.slug} className={styles.awardRow}>
+              <div className={styles.entryHeader}>
+                <span className={styles.entryTitle}>{award.title}</span>
+                <span className={styles.entryPeriod}>
+                  {formatAwardDate(award.date)}
+                </span>
+              </div>
+              <p className={styles.entrySubtitle}>
+                {award.role ? `${award.role} | ` : ""}
+                {award.issuer}
+                {award.certificateUrl && (
+                  <>
+                    {" | "}
+                    <a
+                      href={award.certificateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.inlineLink}
+                    >
+                      Certificate (PDF)
+                    </a>
+                  </>
+                )}
+              </p>
+            </div>
+          ))}
+
+          <div className={`${styles.entryHeader} ${styles.entrySpaced}`}>
             <span className={styles.entryTitle}>
-              Digital Credential Scenario Innovation Challenge &mdash; Merit Award
+              Digital Credential Scenario Innovation Challenge &mdash; project
+              detail
             </span>
           </div>
-          <p className={styles.entrySubtitle}>
-            Team Leader | Hosted by the Ministry of Digital Affairs, Taiwan
-          </p>
           <ul className={styles.bulletList}>
             <li>
               Led a team to design a practical digital identity scenario with

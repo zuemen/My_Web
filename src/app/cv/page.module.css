@@ -88,6 +88,14 @@
   font-family: var(--font-mono);
 }
 
+.entrySpaced {
+  margin-top: var(--space-6);
+}
+
+.awardRow + .awardRow {
+  margin-top: var(--space-4);
+}
+
 .entrySubtitle {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
@@ -203,6 +211,77 @@
   font-size: 0.875rem;
   color: var(--color-text-secondary);
   line-height: 1.5;
+}
+
+/* ── Print ──
+   The site is dark-themed; printing it as-is wastes ink and reads poorly.
+   Force an ink-on-paper rendering, drop the fixed navbar/footer offsets, and
+   spell out link targets since a printed href is otherwise lost. */
+@media print {
+  .main {
+    min-height: 0;
+    padding: 0;
+  }
+
+  .cv {
+    max-width: none;
+    padding: 0;
+  }
+
+  .name,
+  .entryTitle,
+  .sectionTitle,
+  .skillCat,
+  .bulletList strong {
+    color: #000 !important;
+  }
+
+  .contact,
+  .contact a,
+  .entrySubtitle,
+  .entryPeriod,
+  .body,
+  .projectList li,
+  .bulletList li,
+  .skillVal,
+  .inlineLink {
+    color: #222 !important;
+  }
+
+  .header {
+    border-bottom: 2px solid #000;
+  }
+
+  .sectionTitle {
+    border-bottom: 1px solid #666;
+  }
+
+  .skillRow {
+    border-bottom: 1px dashed #999;
+  }
+
+  .projectList li::before {
+    color: #000;
+  }
+
+  /* A printed link is dead unless the URL is visible. */
+  .contact a[href^="http"]::after,
+  .inlineLink[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    word-break: break-all;
+  }
+
+  /* Don't strand a heading at the foot of a page. */
+  .section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .sectionTitle {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
 }
 
 @media (max-width: 640px) {
