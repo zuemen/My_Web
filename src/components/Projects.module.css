@@ -157,6 +157,13 @@
 }
 
 .linkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 20px glyph on its own is well under the 44px touch minimum. */
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0 calc(var(--space-3) * -1);
   color: var(--color-text-tertiary);
   transition: color 0.2s ease;
 }

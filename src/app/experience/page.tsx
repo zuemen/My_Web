@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ExperiencePage() {
   return (
-    <main style={{ minHeight: "100vh", paddingTop: "64px" }}>
+    <main id="main-content" className="page-shell">
       <Experience />
     </main>
   );

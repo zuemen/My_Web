@@ -24,7 +24,7 @@ const projectData: Project[] = [
     title: "PepeLab — Decentralized Credential Verification",
     category: "Award-winning Project (Merit Award)",
     description:
-      "Led a team in a national competition hosted by the Ministry of Digital Affairs, Taiwan (數位發展部). Cross-agency credential verification in the public sector lacks interoperable infrastructure, forcing citizens to re-submit the same credentials to every institution. Architected a decentralized identity platform on SSI, VC, and DID standards to make those credentials verifiable across institutions.",
+      "Led a team in a national competition hosted by the Ministry of Digital Affairs, Taiwan. Cross-agency credential verification in the public sector lacks interoperable infrastructure, forcing citizens to re-submit the same credentials to every institution. Architected a decentralized identity platform on SSI, VC, and DID standards to make those credentials verifiable across institutions.",
     outcome:
       "Merit Award (學生組優選) at the Digital Credential Scenario Innovation Challenge, Nov 2025. Delivered a working credential verification system and translated government interoperability requirements into implementable technical specifications.",
     tags: ["SSI", "VC/DID", "FastAPI", "Python", "System Architecture"],

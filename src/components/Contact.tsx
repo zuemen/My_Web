@@ -9,6 +9,8 @@ interface ContactLink {
   icon: React.ReactNode;
   url: string;
   label: string;
+  /** Set when the label isn't English, so screen readers switch voice. */
+  labelLang?: string;
 }
 
 const contactLinks: ContactLink[] = [
@@ -23,6 +25,7 @@ const contactLinks: ContactLink[] = [
     icon: <LinkIcon size={24} />,
     url: "https://www.linkedin.com/in/%E5%BB%B7%E7%BF%8A-%E6%9C%B1-95838538a/",
     label: "廷翊 朱",
+    labelLang: "zh-Hant",
   },
   {
     name: "Email",
@@ -70,7 +73,9 @@ const Contact = () => {
               <div className={styles.iconWrapper}>{link.icon}</div>
               <div className={styles.info}>
                 <span className={styles.name}>{link.name}</span>
-                <span className={styles.label}>{link.label}</span>
+                <span className={styles.label} lang={link.labelLang}>
+                  {link.label}
+                </span>
               </div>
             </motion.a>
           ))}

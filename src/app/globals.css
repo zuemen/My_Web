@@ -6,7 +6,10 @@
   --color-border: #222228;
   --color-text-primary: #ededed;
   --color-text-secondary: #9b9ba3;
-  --color-text-tertiary: #6b6b73;
+  /* Was #6b6b73 — only 3.6:1 on --color-surface, below the 4.5:1 AA floor for
+     body text. #8a8a93 lands at 5.6:1 and still reads as the dimmest tier
+     (primary ~15:1 > secondary ~6.9:1 > tertiary ~5.6:1). */
+  --color-text-tertiary: #8a8a93;
 
   /* Color — brand */
   --color-accent: #4f9eff;
@@ -93,6 +96,26 @@ ul {
   background: var(--color-accent);
 }
 
+/* Skip link — visible only on keyboard focus */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 1100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-accent);
+  color: #000;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -101,6 +124,20 @@ ul {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+
+  /* The rules above don't cover programmatic/anchor scrolling. */
+  html,
+  body {
+    scroll-behavior: auto;
+  }
+}
+
+/* Page shell — full-height main that clears the fixed 64px navbar.
+   dvh keeps mobile browser chrome from cropping the viewport. */
+.page-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: 64px;
 }
 
 /* Glass card utility */

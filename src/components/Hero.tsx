@@ -27,7 +27,9 @@ const Hero = () => {
           </p>
           <h1 className={styles.name}>
             <span className="glow-text">Zuemen Chu</span>
-            <span className={styles.nameChinese}>朱廷翊</span>
+            <span className={styles.nameChinese} lang="zh-Hant">
+              朱廷翊
+            </span>
           </h1>
           <div className={styles.tags} aria-label="Research areas">
             {researchTags.map((tag) => (
