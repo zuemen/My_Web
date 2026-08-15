@@ -1,0 +1,123 @@
+.figure {
+  margin: 0;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+/* ── Nodes ── */
+.node rect {
+  fill: var(--color-surface-2);
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.backend rect {
+  fill: transparent;
+  stroke: var(--color-border);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.chip rect {
+  fill: var(--color-surface-2);
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.external rect {
+  fill: var(--color-accent-soft);
+  stroke: rgba(79, 158, 255, 0.35);
+  stroke-width: 1;
+}
+
+/* ── Text ──
+   Sizes are in SVG user units against a 880-wide viewBox, so they scale with
+   the figure rather than tracking the page font size. */
+.nodeLabel {
+  fill: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.nodeSub {
+  fill: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-anchor: middle;
+}
+
+.nodeMeta {
+  fill: var(--color-text-tertiary);
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.backendLabel {
+  fill: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.chipLabel {
+  fill: var(--color-text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.chipMeta {
+  fill: var(--color-text-tertiary);
+  font-size: 11px;
+  text-anchor: middle;
+}
+
+.edgeLabel {
+  fill: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-anchor: middle;
+}
+
+/* ── Edges ── */
+.edge {
+  stroke: var(--color-text-tertiary);
+  stroke-width: 1.5;
+}
+
+.arrowHead {
+  fill: var(--color-text-tertiary);
+}
+
+.caption {
+  margin-top: var(--space-3);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--color-text-tertiary);
+}
+
+/* The diagram stops being legible below roughly 560px, so let it scroll
+   inside its own box rather than shrinking the labels into illegibility. */
+@media (max-width: 640px) {
+  .scroller {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .svg {
+    min-width: 560px;
+  }
+}

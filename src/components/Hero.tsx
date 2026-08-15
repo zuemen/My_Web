@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import styles from "./Hero.module.css";
 
 const researchTags = [
@@ -16,12 +13,7 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.backgroundEffect} aria-hidden="true" />
       <div className={styles.container}>
-        <motion.div
-          className={styles.content}
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-        >
+        <div className={styles.content}>
           <p className={styles.role}>
             Research Assistant · National Chengchi University MIS
           </p>
@@ -51,14 +43,9 @@ const Hero = () => {
               Contact
             </Link>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className={styles.visual}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-        >
+        <div className={styles.visual}>
           <div className={styles.profileWrapper}>
             <Image
               src="/zuemen.jpg"
@@ -71,7 +58,7 @@ const Hero = () => {
               style={{ objectFit: "cover", objectPosition: "top center" }}
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
