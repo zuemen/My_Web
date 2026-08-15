@@ -67,6 +67,23 @@
   line-height: 1.7;
 }
 
+
+.moreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  margin-top: var(--space-8);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  transition: gap 0.2s ease;
+}
+
+.moreLink:hover {
+  gap: var(--space-3);
+}
+
 @media (max-width: 640px) {
   .news {
     padding: var(--space-16) 0;

@@ -39,7 +39,7 @@ const expData: ExpEntry[] = [
   {
     company: "National Chengchi University, MIS",
     role: "Research Assistant",
-    period: "May 2025 – Feb 2026",
+    period: "May 2025 – Dec 2026",
     advisor: { name: "Prof. Feng-Yuan Chuang", nameZh: "莊豐源" },
     projects: [
       { name: "Smart Contract Security and Auditing Mechanism Research" },
