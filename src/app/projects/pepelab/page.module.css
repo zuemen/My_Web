@@ -154,28 +154,22 @@
   opacity: 0.75;
 }
 
-/* Placeholder frames — replaced once the real assets land.
-   See the TODO comments in page.tsx. */
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  min-height: 220px;
-  text-align: center;
-  background: var(--color-surface);
-  border: 1px dashed var(--color-border);
+.demoFigure {
+  margin: 0;
+}
+
+.demoImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-8);
 }
 
-.placeholder svg {
-  color: var(--color-text-tertiary);
-}
-
-.placeholderText {
+.caption {
+  margin-top: var(--space-3);
   font-size: 0.875rem;
+  line-height: 1.7;
   color: var(--color-text-tertiary);
 }
 

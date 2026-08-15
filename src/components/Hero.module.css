@@ -39,6 +39,30 @@
   margin-bottom: var(--space-4);
 }
 
+/* Entrance is CSS, not framer-motion, so the hero copy is present and visible
+   in the server-rendered HTML. The previous version started at opacity 0 and
+   was only revealed on hydration, which left the first screen blank if the JS
+   never arrived. The reduced-motion block in globals.css zeroes these. */
+.content,
+.visual {
+  animation: heroIn 0.6s ease-out both;
+}
+
+.visual {
+  animation-delay: 0.1s;
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .name {
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 5.5vw, 4.25rem);
