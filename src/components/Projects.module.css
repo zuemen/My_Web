@@ -12,9 +12,14 @@
   gap: var(--space-12);
 }
 
+/* Text column is a fixed track so rows with and without an image share the
+   same measure — a percentage-width image made the two look like different
+   layouts. The image is an aside that simply isn't there when absent. */
 .projectItem {
-  display: flex;
-  gap: var(--space-8);
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) 1fr;
+  gap: var(--space-10);
+  align-items: start;
   padding-bottom: var(--space-12);
   border-bottom: 1px solid var(--color-border);
 }
@@ -24,14 +29,16 @@
   padding-bottom: 0;
 }
 
+/* Image sits in the second column, after the text in DOM order. */
 .projectImageWrapper {
-  width: 40%;
-  min-height: 260px;
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 16 / 10;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   overflow: hidden;
-  border-right: 1px solid var(--color-border);
-  flex-shrink: 0;
 }
 
 .projectImage {
@@ -47,7 +54,8 @@
 }
 
 .projectInfo {
-  flex: 1;
+  grid-column: 1;
+  grid-row: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -158,22 +166,33 @@
 }
 
 @media (max-width: 1024px) {
+  /* Single column — the image moves above the text. */
   .projectItem {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
   }
+
+  .projectImageWrapper,
+  .projectInfo {
+    grid-column: 1;
+  }
+
   .projectImageWrapper {
-    width: 100%;
-    height: 240px;
-    border-right: none;
-    border-bottom: 1px solid var(--color-border);
+    grid-row: 1;
+    max-width: none;
+  }
+
+  .projectInfo {
+    grid-row: 2;
   }
 }
 
 @media (max-width: 640px) {
-  .projectInfo {
-    padding: var(--space-6);
+  .projects {
+    padding: var(--space-16) 0;
   }
+
   .title {
-    font-size: 1.25rem;
+    font-size: 1.375rem;
   }
 }
