@@ -1,0 +1,98 @@
+.work {
+  padding: var(--space-24) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Whole row is the link, so the target is generous rather than a small
+   text hit area. */
+.item {
+  display: block;
+  padding: var(--space-8) var(--space-4);
+  margin: 0 calc(var(--space-4) * -1);
+  border-bottom: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
+}
+
+.list li:last-child .item {
+  border-bottom: none;
+}
+
+.item:hover {
+  background: var(--color-surface);
+}
+
+.category {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.arrow {
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.item:hover .arrow {
+  color: var(--color-accent);
+  transform: translate(2px, -2px);
+}
+
+.summary {
+  max-width: var(--measure);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+.moreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  margin-top: var(--space-8);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  transition: gap 0.2s ease;
+}
+
+.moreLink:hover {
+  gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .work {
+    padding: var(--space-16) 0;
+  }
+
+  .item {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+}
