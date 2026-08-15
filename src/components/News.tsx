@@ -1,7 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Award, Zap, BookOpen, Briefcase, Trophy, BadgeCheck } from "lucide-react";
+import {
+  Zap,
+  BookOpen,
+  Briefcase,
+  GraduationCap,
+  ArrowRight,
+} from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import styles from "./News.module.css";
 
@@ -12,6 +19,12 @@ interface NewsItem {
   icon: React.ReactNode;
 }
 
+/**
+ * A running log of milestones. Awards and competitive selections deliberately
+ * live in data/awards.ts and render in the Awards section on /experience —
+ * keeping them out of here stops the same five items appearing twice on the
+ * site, which reads as padding.
+ */
 const newsData: NewsItem[] = [
   {
     date: "2026.07",
@@ -22,31 +35,17 @@ const newsData: NewsItem[] = [
   },
   {
     date: "2026.07",
-    title: "SWIFT Hackathon 2026 — Proposal Shortlisted",
+    title: "Completed IBM Qiskit Global Summer School 2026",
     description:
-      "Proposal selected by the judging panel to advance to the full solution phase.",
-    icon: <Trophy size={18} />,
-  },
-  {
-    date: "2026.05",
-    title: "Nurie AI 2026 Cross-Platform Innovation Awards",
-    description:
-      "Certified for engineering a cross-platform application using the VaultSage server-side API.",
-    icon: <BadgeCheck size={18} />,
+      "Finished the full core curriculum and lab exercises of IBM's Qiskit Global Summer School, covering quantum algorithms and hands-on implementation in Qiskit.",
+    icon: <GraduationCap size={18} />,
   },
   {
     date: "2026.01",
-    title: "Joined AI + Quantum Computing (AI+QC) Program",
+    title: "Added AI + Quantum Computing (AI+QC) as a Second Research Track",
     description:
-      "Appointed as a Research Assistant focusing on Quantum Finance and Quantum Machine Learning.",
+      "Took on Quantum Finance and Quantum Machine Learning as an additional research direction within the existing Research Assistant post at NCCU MIS, alongside the smart contract security work.",
     icon: <Zap size={18} />,
-  },
-  {
-    date: "2025.11",
-    title: "Merit Award @ Digital Credential Innovation Challenge",
-    description:
-      "Led the team to victory in the national competition hosted by the Ministry of Digital Affairs, Taiwan.",
-    icon: <Award size={18} />,
   },
   {
     date: "2025.09",
@@ -83,6 +82,11 @@ const News = () => {
             </motion.div>
           ))}
         </div>
+
+        <Link href="/experience#awards" className={styles.moreLink}>
+          Awards &amp; competitions
+          <ArrowRight size={14} />
+        </Link>
       </div>
     </section>
   );

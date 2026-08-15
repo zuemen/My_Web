@@ -31,8 +31,9 @@ export const metadata: Metadata = {
     default: "Zuemen Chu (朱廷翊) — Blockchain & Digital Trust Infrastructure",
     template: "%s · Zuemen Chu",
   },
+  // Kept under 155 characters so search engines show it without truncating.
   description:
-    "Zuemen Chu (朱廷翊) is a Research Assistant at NCCU MIS, working on blockchain trust infrastructure — Self-Sovereign Identity (SSI/VC/DID), smart contract security, and RWA tokenization, with applications in fintech.",
+    "Zuemen Chu (朱廷翊) — Research Assistant at NCCU MIS, incoming blockchain intern at Cathay Financial Holdings. SSI/VC/DID and smart contract security.",
   keywords: [
     "Blockchain",
     "SSI",
@@ -45,6 +46,8 @@ export const metadata: Metadata = {
     "NCCU MIS",
     "Quantum Finance",
     "QML",
+    "IBM Qiskit",
+    "Quantum Hackathon",
     "Zuemen Chu",
     "朱廷翊",
   ],

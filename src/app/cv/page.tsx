@@ -1,15 +1,6 @@
 import type { Metadata } from "next";
-import { awards } from "@/data/awards";
+import { awards, formatAwardDate } from "@/data/awards";
 import styles from "./page.module.css";
-
-/** "2025-11" -> "Nov 2025" */
-const formatAwardDate = (date: string) => {
-  const [year, month] = date.split("-");
-  const label = new Date(Number(year), Number(month) - 1).toLocaleString("en-US", {
-    month: "short",
-  });
-  return `${label} ${year}`;
-};
 
 export const metadata: Metadata = {
   title: "CV",
@@ -188,7 +179,10 @@ export default function CVPage() {
           {awards.map((award) => (
             <div key={award.slug} className={styles.awardRow}>
               <div className={styles.entryHeader}>
-                <span className={styles.entryTitle}>{award.title}</span>
+                <span className={styles.entryTitle}>
+                  {award.title}
+                  {award.result ? ` — ${award.result}` : ""}
+                </span>
                 <span className={styles.entryPeriod}>
                   {formatAwardDate(award.date)}
                 </span>
