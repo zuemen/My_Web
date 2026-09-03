@@ -8,8 +8,8 @@ import styles from "./Experience.module.css";
 interface ExpDetail {
   name: string;
   details?: string[];
-  /** Public page a reader can verify the work against. */
-  link?: { href: string; label: string };
+  /** Public pages a reader can verify the work against. */
+  links?: { href: string; label: string }[];
 }
 
 interface ExpEntry {
@@ -64,10 +64,20 @@ const expData: ExpEntry[] = [
       {
         name: "Trustworthy AI Hackathon 2026 — Organizing Team",
         details: [
-          "Led planning and operations for the three-day event (Aug 29–31, 2026) at N24 Taipei Ark, with a USD 12,000+ prize pool across six industry challenge tracks.",
+          "Led planning and operations for the three-day event (Aug 29–31, 2026) at N24 Taipei Ark, held under the guidance of the National Development Council as part of its policy research program on trustworthy AI, privacy computing and trust technology.",
+          "Ran the intake and selection pipeline: 50 teams applied, 20 advanced to the final round through written review, competing for a USD 12,000+ prize pool across six industry challenge tracks.",
+          "Translated one closed-door expert roundtable (June) and two industry roundtables (July) into the six challenge tracks — carbon footprint and DPP data-flow control, suspicious activity detection under payment privacy constraints, cross-sector health insurance data collaboration, fragmented government service credentials, migrant worker digital trust and financial inclusion, and RBA supply chain compliance credentials.",
+          "Coordinated two pre-event workshops (Aug 15 online technical, Aug 22 on-site industry), team matchmaking, the participant handbook, and submission and judging rules for a panel of nine judges scoring on industry fit (35%), technical feasibility (25%), demo (25%) and insight (15%).",
           "Built and shipped the official event website.",
+          "Outcome: Human ID took first place (USD 5,000); GLEIF co-presented a Trustworthy AI Governance Innovation Award. Selected work will be presented at the 11th Blockchain Enthusiasts Annual Conference in November and included in the annual policy white paper.",
         ],
-        link: { href: "https://hackathon.chain.tw/", label: "hackathon.chain.tw" },
+        links: [
+          { href: "https://hackathon.chain.tw/", label: "hackathon.chain.tw" },
+          {
+            href: "https://abmedia.io/https-abmedia-io-trustworthy-ai-hackathon-winners",
+            label: "Coverage — ABMedia",
+          },
+        ],
       },
     ],
   },
@@ -141,16 +151,21 @@ const Experience = () => {
                             ))}
                           </ul>
                         )}
-                        {proj.link && (
-                          <a
-                            href={proj.link.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.projectLink}
-                          >
-                            {proj.link.label}
-                            <ExternalLink size={12} />
-                          </a>
+                        {proj.links && proj.links.length > 0 && (
+                          <div className={styles.projectLinks}>
+                            {proj.links.map((l) => (
+                              <a
+                                key={l.href}
+                                href={l.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.projectLink}
+                              >
+                                {l.label}
+                                <ExternalLink size={12} />
+                              </a>
+                            ))}
+                          </div>
                         )}
                       </div>
                     ))}

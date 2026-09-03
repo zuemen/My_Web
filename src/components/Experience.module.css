@@ -49,6 +49,12 @@
   margin-top: 2px;
 }
 
+.projectLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
 .projectLink {
   display: inline-flex;
   align-items: center;

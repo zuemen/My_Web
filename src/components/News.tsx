@@ -7,6 +7,7 @@ import {
   BookOpen,
   Briefcase,
   GraduationCap,
+  Trophy,
   ArrowRight,
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
@@ -26,6 +27,13 @@ interface NewsItem {
  * site, which reads as padding.
  */
 const newsData: NewsItem[] = [
+  {
+    date: "2026.09",
+    title: "Trustworthy AI Hackathon 2026 Concluded",
+    description:
+      "Closed out the three-day hackathon and Demo Day at N24 Taipei Ark as part of the TABEI organizing team — 50 teams applied, 20 reached the finals, and Human ID took first place. Selected work continues to a policy white paper in November.",
+    icon: <Trophy size={18} />,
+  },
   {
     date: "2026.07",
     title: "Selected for Cathay Financial Holdings Internship",
