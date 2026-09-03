@@ -89,6 +89,10 @@ export default function CVPage() {
           <p className={styles.entrySubtitle}>
             Artificial Intelligence Interdisciplinary Micro-Program
           </p>
+          <p className={styles.entrySubtitle}>
+            FinTech Specialization Program &mdash; admitted Fall 2026 (115-1);
+            competitive admission, cohort expanded due to application volume
+          </p>
         </section>
 
         {/* ── Experience ──
@@ -116,7 +120,7 @@ export default function CVPage() {
             <span className={styles.entryTitle}>
               National Chengchi University, MIS &mdash; Research Assistant
             </span>
-            <span className={styles.entryPeriod}>May 2025 – Feb 2026</span>
+            <span className={styles.entryPeriod}>May 2025 – Dec 2026</span>
           </div>
           <p className={styles.entrySubtitle}>
             Advisor: Prof. Feng-Yuan Chuang (
@@ -154,8 +158,20 @@ export default function CVPage() {
           <ul className={styles.bulletList}>
             <li>
               Led planning and operations for the three-day event (Aug 29&ndash;31,
-              2026) at N24 Taipei Ark, with a USD 12,000+ prize pool across six
-              industry challenge tracks.
+              2026) at N24 Taipei Ark, held under the guidance of the National
+              Development Council as part of its policy research program on
+              trustworthy AI, privacy computing and trust technology.
+            </li>
+            <li>
+              Ran the intake and selection pipeline: 50 teams applied, 20
+              advanced to the final round through written review, competing for
+              a USD 12,000+ prize pool across six industry challenge tracks
+              derived from one expert and two industry roundtables.
+            </li>
+            <li>
+              Coordinated two pre-event workshops, team matchmaking, the
+              participant handbook, and submission and judging rules for a panel
+              of nine judges.
             </li>
             <li>
               Built and shipped the official event website (
@@ -166,6 +182,21 @@ export default function CVPage() {
                 className={styles.inlineLink}
               >
                 hackathon.chain.tw
+              </a>
+              ).
+            </li>
+            <li>
+              <strong>Outcome:</strong> Human ID took first place (USD 5,000);
+              GLEIF co-presented a Trustworthy AI Governance Innovation Award.
+              Selected work continues to the 11th Blockchain Enthusiasts Annual
+              Conference and the annual policy white paper (
+              <a
+                href="https://abmedia.io/https-abmedia-io-trustworthy-ai-hackathon-winners"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.inlineLink}
+              >
+                coverage
               </a>
               ).
             </li>
