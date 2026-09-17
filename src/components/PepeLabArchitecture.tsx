@@ -1,3 +1,6 @@
+"use client";
+
+import { useLang } from "@/i18n/LanguageProvider";
 import styles from "./PepeLabArchitecture.module.css";
 
 /**
@@ -10,6 +13,8 @@ import styles from "./PepeLabArchitecture.module.css";
  * the theme tokens, and carries no extra network request.
  */
 const PepeLabArchitecture = () => {
+  const { lang } = useLang();
+
   return (
     <figure className={styles.figure}>
       <div className={styles.scroller}>
@@ -162,9 +167,9 @@ const PepeLabArchitecture = () => {
       </div>
 
       <figcaption className={styles.caption}>
-        Three scopes are defined — medication pickup, research authorisation and
-        insurance application — each mapped to its own verification template and
-        a minimum identity assurance level.
+        {lang === "en"
+          ? "Three scopes are defined — medication pickup, research authorisation and insurance application — each mapped to its own verification template and a minimum identity assurance level."
+          : "系統定義三種範圍——領藥、研究授權與保險申請——各自對應獨立的驗證範本與最低身分保證等級。"}
       </figcaption>
     </figure>
   );

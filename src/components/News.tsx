@@ -8,72 +8,128 @@ import {
   Briefcase,
   GraduationCap,
   Trophy,
+  Users,
+  CalendarDays,
   ArrowRight,
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import { useLang } from "@/i18n/LanguageProvider";
+import { dict } from "@/i18n/dictionary";
+import { l, pick, type L } from "@/i18n/config";
 import styles from "./News.module.css";
 
 interface NewsItem {
   date: string;
-  title: string;
-  description: string;
+  title: L;
+  description: L;
   icon: React.ReactNode;
 }
 
 /**
  * A running log of milestones. Awards and competitive selections deliberately
  * live in data/awards.ts and render in the Awards section on /experience —
- * keeping them out of here stops the same five items appearing twice on the
- * site, which reads as padding.
+ * keeping them out of here stops the same items appearing twice on the site.
  */
 const newsData: NewsItem[] = [
   {
     date: "2026.09",
-    title: "Trustworthy AI Hackathon 2026 Concluded",
-    description:
+    title: l(
+      "Joined Cathay Financial Holdings — TBA Program",
+      "加入國泰金控 TBA 實習計畫",
+    ),
+    description: l(
+      "Started as a project management intern in the Blockchain Technology Development Section, Digital Architecture Development Department (Sep 2026 – Jun 2027).",
+      "9 月起擔任數位架構發展部 區塊鏈技術發展科 專案管理實習生（2026/09 – 2027/06）。",
+    ),
+    icon: <Briefcase size={18} />,
+  },
+  {
+    date: "2026.09",
+    title: l("ETHTaipei 2026 — Event Staff", "ETHTaipei 2026 活動工作人員"),
+    description: l(
+      "Worked the conference on behalf of TABEI, Sep 13–14 in Taipei — the first edition to add a Financial Institution Day.",
+      "9/13–14 以 TABEI 身分於台北擔任活動工作人員；本屆首度增設金融機構日。",
+    ),
+    icon: <CalendarDays size={18} />,
+  },
+  {
+    date: "2026.09",
+    title: l(
+      "Trustworthy AI Hackathon 2026 Concluded",
+      "2026 可信 AI 黑客松圓滿落幕",
+    ),
+    description: l(
       "Closed out the three-day hackathon and Demo Day at N24 Taipei Ark as part of the TABEI organizing team — 50 teams applied, 20 reached the finals, and Human ID took first place. Selected work continues to a policy white paper in November.",
+      "以 TABEI 籌辦團隊身分完成於 N24 台北方舟舉行的三天黑客松與 Demo Day——50 隊報名、20 隊進入決賽，由 Human ID 奪冠。精選作品將收錄於 11 月的政策白皮書。",
+    ),
     icon: <Trophy size={18} />,
   },
   {
     date: "2026.07",
-    title: "Selected for Cathay Financial Holdings Internship",
-    description:
-      "Joining the Blockchain Technology Development Division, Digital Architecture Development Department — Hot Wallet Research Project (Sep 2026 – Jun 2027).",
-    icon: <Briefcase size={18} />,
-  },
-  {
-    date: "2026.07",
-    title: "Completed IBM Qiskit Global Summer School 2026",
-    description:
+    title: l(
+      "Completed IBM Qiskit Global Summer School 2026",
+      "完成 IBM Qiskit Global Summer School 2026",
+    ),
+    description: l(
       "Finished the full core curriculum and lab exercises of IBM's Qiskit Global Summer School, covering quantum algorithms and hands-on implementation in Qiskit.",
+      "完成 IBM Qiskit 全球暑期學校全部核心課程與 lab 實作，內容涵蓋量子演算法與 Qiskit 實務。",
+    ),
     icon: <GraduationCap size={18} />,
   },
   {
+    date: "2026.06",
+    title: l(
+      "Joined TABEI and the NCCU FinTech Innovation Lab",
+      "加入 TABEI 與政大金融科技創新實驗室",
+    ),
+    description: l(
+      "Started as an intern at the Taiwan Association for Blockchain Ecosystem Innovation, and was selected as an inaugural officer of the NCCU FinTech Innovation Lab.",
+      "於臺灣區塊鏈愛好者協會開始實習，並獲選為政大金融科技創新實驗室第一屆幹部。",
+    ),
+    icon: <Users size={18} />,
+  },
+  {
     date: "2026.01",
-    title: "Added AI + Quantum Computing (AI+QC) as a Second Research Track",
-    description:
+    title: l(
+      "Added AI + Quantum Computing (AI+QC) as a Second Research Track",
+      "新增 AI + 量子計算（AI+QC）研究方向",
+    ),
+    description: l(
       "Took on Quantum Finance and Quantum Machine Learning as an additional research direction within the existing Research Assistant post at NCCU MIS, alongside the smart contract security work.",
+      "在既有的政大資管研究助理職位下，於智慧合約安全之外，新增量子金融與量子機器學習研究方向。",
+    ),
     icon: <Zap size={18} />,
   },
   {
     date: "2025.09",
-    title: "Completed AI Interdisciplinary Micro-Program",
-    description:
+    title: l(
+      "Completed AI Interdisciplinary Micro-Program",
+      "修畢人工智慧跨域微學程",
+    ),
+    description: l(
       "Certified by the Interdisciplinary Artificial Intelligence Center, NCCU.",
+      "由政大人工智慧跨域研究中心核發修業證明。",
+    ),
     icon: <BookOpen size={18} />,
   },
 ];
 
 const News = () => {
+  const { lang } = useLang();
+  const t = (v: L) => pick(v, lang);
+
   return (
     <section className={styles.news}>
       <div className="section-container">
-        <SectionHeading eyebrow="Latest" title="Recent Updates" />
+        <SectionHeading
+          eyebrow={t(dict.sections.latestEyebrow)}
+          title={t(dict.sections.recentUpdates)}
+        />
 
         <div className={styles.timeline}>
           {newsData.map((item) => (
             <motion.div
-              key={`${item.date}-${item.title}`}
+              key={`${item.date}-${item.title.en}`}
               className={styles.newsItem}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -84,15 +140,15 @@ const News = () => {
                 <span className={styles.date}>{item.date}</span>
               </div>
               <div className={styles.content}>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
+                <h3>{t(item.title)}</h3>
+                <p>{t(item.description)}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
         <Link href="/experience#awards" className={styles.moreLink}>
-          Awards &amp; competitions
+          {t(dict.sections.awardsLink)}
           <ArrowRight size={14} />
         </Link>
       </div>

@@ -1,107 +1,40 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Briefcase, ChevronRight, ExternalLink } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import { useLang } from "@/i18n/LanguageProvider";
+import { dict } from "@/i18n/dictionary";
+import { pick, type L } from "@/i18n/config";
+import { experience } from "@/data/experience";
 import styles from "./Experience.module.css";
 
-interface ExpDetail {
-  name: string;
-  details?: string[];
-  /** Public pages a reader can verify the work against. */
-  links?: { href: string; label: string }[];
-}
-
-interface ExpEntry {
-  company: string;
-  companyZh?: string;
-  division?: string;
-  role?: string;
-  period: string;
-  location?: string;
-  advisor?: { name: string; nameZh?: string };
-  projects?: ExpDetail[];
-  notes?: string[];
-}
-
-const expData: ExpEntry[] = [
-  {
-    // Confidentiality: list the unit, project name and period only.
-    // Do not add scope, architecture or any internal detail to this entry.
-    company: "Cathay Financial Holdings",
-    division:
-      "Blockchain Technology Development Division, Digital Architecture Development Department",
-    role: "Blockchain Intern",
-    period: "Sep 2026 – Jun 2027",
-    location: "Taipei",
-    projects: [{ name: "Hot Wallet Research Project" }],
-  },
-  {
-    company: "National Chengchi University, MIS",
-    role: "Research Assistant",
-    period: "May 2025 – Dec 2026",
-    advisor: { name: "Prof. Feng-Yuan Chuang", nameZh: "莊豐源" },
-    projects: [
-      { name: "Smart Contract Security and Auditing Mechanism Research" },
-      { name: "AI + Quantum Computing (AI+QC) Research and Development Program" },
-    ],
-    notes: [
-      "Literature review, research analysis, system development, technical documentation",
-    ],
-  },
-  {
-    // TABEI is the association's own English name; "Taiwan Blockchain
-    // Enthusiasts Association" is a back-translation of the Chinese and is not
-    // what the organisation publishes under. The hackathon below is a TABEI
-    // event (主辦單位), so it belongs inside this entry rather than standing
-    // alone as a separate employer.
-    company: "Taiwan Association for Blockchain Ecosystem Innovation (TABEI)",
-    companyZh: "臺灣區塊鏈愛好者協會",
-    role: "Intern",
-    period: "2026",
-    location: "Taipei",
-    projects: [
-      {
-        name: "Trustworthy AI Hackathon 2026 — Organizing Team",
-        details: [
-          "Led planning and operations for the three-day event (Aug 29–31, 2026) at N24 Taipei Ark, held under the guidance of the National Development Council as part of its policy research program on trustworthy AI, privacy computing and trust technology.",
-          "Ran the intake and selection pipeline: 50 teams applied, 20 advanced to the final round through written review, competing for a USD 12,000+ prize pool across six industry challenge tracks.",
-          "Translated one closed-door expert roundtable (June) and two industry roundtables (July) into the six challenge tracks — carbon footprint and DPP data-flow control, suspicious activity detection under payment privacy constraints, cross-sector health insurance data collaboration, fragmented government service credentials, migrant worker digital trust and financial inclusion, and RBA supply chain compliance credentials.",
-          "Coordinated two pre-event workshops (Aug 15 online technical, Aug 22 on-site industry), team matchmaking, the participant handbook, and submission and judging rules for a panel of nine judges scoring on industry fit (35%), technical feasibility (25%), demo (25%) and insight (15%).",
-          "Built and shipped the official event website.",
-          "Outcome: Human ID took first place (USD 5,000); GLEIF co-presented a Trustworthy AI Governance Innovation Award. Selected work will be presented at the 11th Blockchain Enthusiasts Annual Conference in November and included in the annual policy white paper.",
-        ],
-        links: [
-          { href: "https://hackathon.chain.tw/", label: "hackathon.chain.tw" },
-          {
-            href: "https://abmedia.io/https-abmedia-io-trustworthy-ai-hackathon-winners",
-            label: "Coverage — ABMedia",
-          },
-        ],
-      },
-    ],
-  },
-];
-
 const Experience = () => {
+  const { lang } = useLang();
+  const t = (v: L) => pick(v, lang);
+  // The other language's name sits under the heading as a secondary line.
+  const other = lang === "en" ? "zh" : "en";
+
   return (
     <section id="experience" className={styles.experience}>
       <div className="section-container">
         <SectionHeading
-          eyebrow="Where I've worked"
-          title="Professional Experience"
+          eyebrow={t(dict.sections.experienceEyebrow)}
+          title={t(dict.sections.experience)}
           as="h1"
         />
 
         <div className={styles.expList}>
-          {expData.map((exp) => {
+          {experience.map((exp) => {
             const meta = [exp.role, exp.period, exp.location]
-              .filter(Boolean)
+              .filter((v): v is L => Boolean(v))
+              .map(t)
               .join(" · ");
 
             return (
               <motion.div
-                key={`${exp.company}-${exp.period}`}
+                key={exp.id}
                 className={styles.expCard}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -111,27 +44,21 @@ const Experience = () => {
                   <Briefcase className={styles.icon} size={24} />
                   <div>
                     <h2 className={styles.company}>
-                      {exp.company}
-                      {exp.companyZh && (
-                        <span className={styles.companyZh} lang="zh-Hant">
-                          {exp.companyZh}
-                        </span>
-                      )}
+                      {t(exp.company)}
+                      <span
+                        className={styles.companyZh}
+                        lang={other === "zh" ? "zh-Hant" : "en"}
+                      >
+                        {exp.company[other]}
+                      </span>
                     </h2>
                     {exp.division && (
-                      <p className={styles.division}>{exp.division}</p>
+                      <p className={styles.division}>{t(exp.division)}</p>
                     )}
                     <p className={styles.roleTitle}>{meta}</p>
                     {exp.advisor && (
                       <p className={styles.advisor}>
-                        Advisor: {exp.advisor.name}
-                        {exp.advisor.nameZh && (
-                          <>
-                            {" ("}
-                            <span lang="zh-Hant">{exp.advisor.nameZh}</span>
-                            {")"}
-                          </>
-                        )}
+                        {t(dict.labels.advisor)}: {t(exp.advisor)}
                       </p>
                     )}
                   </div>
@@ -140,32 +67,49 @@ const Experience = () => {
                 {exp.projects && exp.projects.length > 0 && (
                   <div className={styles.projectList}>
                     {exp.projects.map((proj) => (
-                      <div key={proj.name} className={styles.projectItem}>
-                        <h3 className={styles.projectName}>
-                          <ChevronRight size={16} /> {proj.name}
-                        </h3>
-                        {proj.details && proj.details.length > 0 && (
-                          <ul className={styles.details}>
-                            {proj.details.map((detail) => (
-                              <li key={detail}>{detail}</li>
-                            ))}
-                          </ul>
-                        )}
-                        {proj.links && proj.links.length > 0 && (
-                          <div className={styles.projectLinks}>
-                            {proj.links.map((l) => (
-                              <a
-                                key={l.href}
-                                href={l.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={styles.projectLink}
-                              >
-                                {l.label}
-                                <ExternalLink size={12} />
-                              </a>
-                            ))}
-                          </div>
+                      <div
+                        key={proj.name.en}
+                        className={`${styles.projectItem} ${proj.photo ? styles.withPhoto : ""}`}
+                      >
+                        <div className={styles.projectBody}>
+                          <h3 className={styles.projectName}>
+                            <ChevronRight size={16} /> {t(proj.name)}
+                          </h3>
+                          {proj.details && proj.details.length > 0 && (
+                            <ul className={styles.details}>
+                              {proj.details.map((detail) => (
+                                <li key={detail.en}>{t(detail)}</li>
+                              ))}
+                            </ul>
+                          )}
+                          {proj.links && proj.links.length > 0 && (
+                            <div className={styles.projectLinks}>
+                              {proj.links.map((link) => (
+                                <a
+                                  key={link.href}
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={styles.projectLink}
+                                >
+                                  {t(link.label)}
+                                  <ExternalLink size={12} />
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        {proj.photo && (
+                          <figure className={styles.photo}>
+                            <Image
+                              src={proj.photo.src}
+                              alt={t(proj.photo.alt)}
+                              width={proj.photo.width}
+                              height={proj.photo.height}
+                              sizes="(max-width: 768px) 100vw, 280px"
+                              className={styles.photoImg}
+                            />
+                          </figure>
                         )}
                       </div>
                     ))}
@@ -175,7 +119,7 @@ const Experience = () => {
                 {exp.notes && exp.notes.length > 0 && (
                   <ul className={`${styles.details} ${styles.notes}`}>
                     {exp.notes.map((note) => (
-                      <li key={note}>{note}</li>
+                      <li key={note.en}>{t(note)}</li>
                     ))}
                   </ul>
                 )}

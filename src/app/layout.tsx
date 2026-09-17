@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Newsreader, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, Newsreader, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
+import LanguageProvider from "@/i18n/LanguageProvider";
+import SkipLink from "@/components/SkipLink";
 import "./globals.css";
 
-const inter = Inter({
+// Inter was the body face. It is the default of every scaffolded site and
+// carries no voice of its own; Plex has the technical heritage this content
+// wants and still sits comfortably under Newsreader.
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-sans",
   display: "swap",
 });
 
@@ -33,7 +39,7 @@ export const metadata: Metadata = {
   },
   // Kept under 155 characters so search engines show it without truncating.
   description:
-    "Zuemen Chu (朱廷翊) — Research Assistant at NCCU MIS, incoming blockchain intern at Cathay Financial Holdings. SSI/VC/DID and smart contract security.",
+    "Zuemen Chu (朱廷翊) — NCCU MIS research assistant and project management intern on Cathay Financial Holdings' blockchain team. SSI and contract security.",
   keywords: [
     "Blockchain",
     "SSI",
@@ -74,6 +80,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://zuemen.net" },
 };
 
+// Evaluated at build time — layout is a server component — so each deploy
+// refreshes the footer date. en-CA gives YYYY-MM-DD; the explicit timeZone keeps
+// a late-night build on a UTC machine from rolling back a day.
+const lastUpdated = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Taipei",
+}).format(new Date());
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -113,7 +126,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}
+      className={`${plexSans.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <Script
@@ -121,14 +134,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
-        <MotionProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </MotionProvider>
+        <LanguageProvider>
+          <SkipLink />
+          <MotionProvider>
+            <Navbar />
+            {children}
+            <Footer lastUpdated={lastUpdated} />
+          </MotionProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

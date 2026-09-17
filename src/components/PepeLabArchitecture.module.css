@@ -34,7 +34,7 @@
 
 .external rect {
   fill: var(--color-accent-soft);
-  stroke: rgba(79, 158, 255, 0.35);
+  stroke: rgb(var(--color-accent-rgb) / 0.35);
   stroke-width: 1;
 }
 

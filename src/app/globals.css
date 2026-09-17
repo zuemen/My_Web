@@ -11,10 +11,18 @@
      (primary ~15:1 > secondary ~6.9:1 > tertiary ~5.6:1). */
   --color-text-tertiary: #8a8a93;
 
-  /* Color — brand */
-  --color-accent: #4f9eff;
-  --color-accent-soft: #1e2a44;
-  --color-accent-fg: #ffffff;
+  /* Color — brand
+     Was #4f9eff. That blue is the default accent of practically every
+     generated dark-theme site; the amber reads warmer and more editorial and
+     is far less common in this context. 8.9:1 on --color-bg, 8.5:1 on
+     --color-surface, so it clears AA comfortably as text. */
+  --color-accent: #e0a253;
+  --color-accent-soft: #2a2113;
+  --color-accent-fg: #0a0a0b;
+  /* Channels only, so translucent tints derive from the accent instead of
+     being retyped as literals. Thirteen hardcoded copies of the old blue had
+     to be found by hand when the accent changed. */
+  --color-accent-rgb: 224 162 83;
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -32,25 +40,20 @@
   --container: 1120px;
   --measure: 68ch;
 
-  /* Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 20px;
+  /* Radius
+     Tightened from 4/8/12/20. One soft radius applied uniformly to cards,
+     buttons, chips and images is a template tell; near-square corners read as
+     print rather than as a UI kit. --radius-xl is no longer a pill. */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
 
   /* Typography */
-  --font-sans: var(--font-inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  --font-sans: var(--font-plex-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
   --font-display: var(--font-newsreader, Georgia, serif);
   --font-mono: var(--font-jetbrains-mono, 'JetBrains Mono', Menlo, monospace);
 
-  /* Legacy aliases — used by existing CSS modules */
-  --background: var(--color-bg);
-  --foreground: var(--color-text-primary);
-  --accent-cyan: var(--color-accent);
-  --accent-purple: #7c4dff;
-  --accent-blue: var(--color-accent);
-  --glass-bg: rgba(17, 17, 20, 0.8);
-  --neon-glow: 0 0 8px rgba(79, 158, 255, 0.5), 0 0 16px rgba(79, 158, 255, 0.3);
 }
 
 *,
@@ -174,22 +177,7 @@ ul {
   padding-top: 64px;
 }
 
-/* Glass card utility */
-.glass-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-}
 
-/* Accent border utility */
-.neon-border {
-  border: 1px solid rgba(79, 158, 255, 0.25);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.neon-border:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 20px rgba(79, 158, 255, 0.15);
-}
 
 /* Shared section wrapper — replaces the per-component .container copies. */
 .section-container {

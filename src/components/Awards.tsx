@@ -1,8 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink, FileText } from "lucide-react";
 import { awards, formatAwardDate } from "@/data/awards";
+import { useLang } from "@/i18n/LanguageProvider";
+import { dict } from "@/i18n/dictionary";
+import { pick, type L } from "@/i18n/config";
 import SectionHeading from "./SectionHeading";
 import styles from "./Awards.module.css";
 
@@ -12,10 +16,16 @@ import styles from "./Awards.module.css";
  * Data comes from data/awards.ts, shared with the awards block on /cv.
  */
 const Awards = () => {
+  const { lang } = useLang();
+  const t = (v: L) => pick(v, lang);
+
   return (
     <section id="awards" className={styles.awards}>
       <div className="section-container">
-        <SectionHeading eyebrow="Recognition" title="Awards & Competitions" />
+        <SectionHeading
+          eyebrow={t(dict.sections.recognitionEyebrow)}
+          title={t(dict.sections.awards)}
+        />
 
         <ul className={styles.list}>
           {awards.map((award, index) => (
@@ -27,22 +37,44 @@ const Awards = () => {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <span className={styles.date}>{formatAwardDate(award.date)}</span>
+              <span className={styles.date}>
+                {formatAwardDate(award.date, lang)}
+              </span>
 
               <div className={styles.body}>
                 <h3 className={styles.title}>
-                  {award.title}
+                  {t(award.title)}
                   {award.result && (
-                    <span className={styles.result}>{award.result}</span>
+                    <span className={styles.result}>{t(award.result)}</span>
                   )}
                 </h3>
 
                 <p className={styles.issuer}>
-                  {award.issuer}
-                  {award.role && ` · ${award.role}`}
+                  {t(award.issuer)}
+                  {award.role && ` · ${t(award.role)}`}
                 </p>
 
-                {award.detail && <p className={styles.detail}>{award.detail}</p>}
+                {award.detail && (
+                  <p className={styles.detail}>{t(award.detail)}</p>
+                )}
+
+                {award.image && (
+                  <a
+                    href={award.image.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.evidence}
+                  >
+                    <Image
+                      src={award.image.src}
+                      alt={t(award.image.alt)}
+                      width={award.image.width}
+                      height={award.image.height}
+                      sizes="320px"
+                      className={styles.evidenceImg}
+                    />
+                  </a>
+                )}
 
                 {(award.link || award.certificateUrl) && (
                   <div className={styles.links}>
@@ -53,7 +85,7 @@ const Awards = () => {
                         rel="noopener noreferrer"
                         className={styles.link}
                       >
-                        Event page
+                        {t(dict.labels.eventPage)}
                         <ExternalLink size={12} />
                       </a>
                     )}
@@ -65,7 +97,7 @@ const Awards = () => {
                         className={styles.link}
                       >
                         <FileText size={12} />
-                        Certificate
+                        {t(dict.labels.certificate)}
                       </a>
                     )}
                   </div>

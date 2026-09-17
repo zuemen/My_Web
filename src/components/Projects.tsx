@@ -3,19 +3,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Code, Award, ArrowRight } from "lucide-react";
+import { Code, Award, ArrowRight, ExternalLink } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { projects } from "@/data/projects";
+import { useLang } from "@/i18n/LanguageProvider";
+import { dict } from "@/i18n/dictionary";
+import { pick, type L } from "@/i18n/config";
 import styles from "./Projects.module.css";
 
 const Projects = () => {
+  const { lang } = useLang();
+  const t = (v: L) => pick(v, lang);
+
   return (
     <section id="projects" className={styles.projects}>
       <div className="section-container">
         <SectionHeading
-          eyebrow="Selected work"
-          title="Research & Projects"
-          subtitle="Bridging emerging technologies with institutional needs."
+          eyebrow={t(dict.sections.selectedWorkEyebrow)}
+          title={t(dict.sections.projectsTitle)}
+          subtitle={t(dict.sections.projectsSubtitle)}
           as="h1"
         />
 
@@ -32,7 +38,7 @@ const Projects = () => {
                 <div className={styles.projectImageWrapper}>
                   <Image
                     src={project.image}
-                    alt={`Screenshot of ${project.title}`}
+                    alt={t(project.title)}
                     width={480}
                     height={270}
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -42,12 +48,12 @@ const Projects = () => {
                 </div>
               )}
               <div className={styles.projectInfo}>
-                <span className={styles.category}>{project.category}</span>
-                <h2 className={styles.title}>{project.title}</h2>
-                <p className={styles.desc}>{project.description}</p>
+                <span className={styles.category}>{t(project.category)}</span>
+                <h2 className={styles.title}>{t(project.title)}</h2>
+                <p className={styles.desc}>{t(project.description)}</p>
                 <div className={styles.outcome}>
-                  <span className={styles.outcomeLabel}>Outcome</span>
-                  <p className={styles.outcomeText}>{project.outcome}</p>
+                  <span className={styles.outcomeLabel}>{t(dict.labels.outcome)}</span>
+                  <p className={styles.outcomeText}>{t(project.outcome)}</p>
                 </div>
                 <div className={styles.tags}>
                   {project.tags.map((tag) => (
@@ -62,8 +68,18 @@ const Projects = () => {
                       href={project.caseStudyUrl}
                       className={styles.caseStudyLink}
                     >
-                      Read case study <ArrowRight size={14} />
+                      {t(dict.labels.readCaseStudy)} <ArrowRight size={14} />
                     </Link>
+                  )}
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.caseStudyLink}
+                    >
+                      {t(dict.labels.liveDemo)} <ExternalLink size={14} />
+                    </a>
                   )}
                   {project.link && (
                     <a
@@ -71,7 +87,7 @@ const Projects = () => {
                       className={styles.linkIcon}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`View source code for ${project.title}`}
+                      aria-label={`${t(dict.labels.viewSource)} ${t(project.title)}`}
                     >
                       <Code size={20} />
                     </a>
@@ -82,7 +98,7 @@ const Projects = () => {
                       className={styles.linkIcon}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="View Award Certificate (PDF)"
+                      aria-label={t(dict.labels.certificatePdf)}
                     >
                       <Award size={20} />
                     </a>

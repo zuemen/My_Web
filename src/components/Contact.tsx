@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { Mail, GitFork, LinkIcon, ArrowUpRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import { useLang } from "@/i18n/LanguageProvider";
+import { dict } from "@/i18n/dictionary";
+import { pick, type L } from "@/i18n/config";
 import styles from "./Contact.module.css";
 
 interface ContactLink {
@@ -37,13 +40,16 @@ const contactLinks: ContactLink[] = [
 ];
 
 const Contact = () => {
+  const { lang } = useLang();
+  const t = (v: L) => pick(v, lang);
+
   return (
     <section id="contact" className={styles.contact}>
       <div className="section-container">
         <SectionHeading
-          eyebrow="Contact"
-          title="Get in Touch"
-          subtitle="Open for research collaborations and technical discussions."
+          eyebrow={t(dict.sections.contactEyebrow)}
+          title={t(dict.sections.getInTouch)}
+          subtitle={t(dict.sections.contactSubtitle)}
         />
 
         <div className={styles.grid}>

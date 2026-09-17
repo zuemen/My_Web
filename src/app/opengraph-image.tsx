@@ -17,7 +17,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const BG = "#0a0a0b";
-const ACCENT = "#4f9eff";
+const ACCENT = "#e0a253";
 const TEXT = "#ededed";
 const MUTED = "#9b9ba3";
 
