@@ -22,8 +22,8 @@ const education: { title: L; lines: L[]; period: L } = {
       "人工智慧跨域微學程",
     ),
     l(
-      "FinTech Specialization Program — admitted Fall 2026 (115-1); competitive admission, cohort expanded due to application volume",
-      "金融科技專長學程——115-1 學期錄取；採甄選制，因申請踴躍擴大招收",
+      "FinTech Specialization Program — admitted 2026; competitive admission, cohort expanded due to application volume",
+      "金融科技專長學程——2026 年錄取；採甄選制，因申請踴躍擴大招收",
     ),
   ],
 };

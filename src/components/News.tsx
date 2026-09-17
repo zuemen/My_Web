@@ -79,12 +79,12 @@ const newsData: NewsItem[] = [
   {
     date: "2026.06",
     title: l(
-      "Joined TABEI and the NCCU FinTech Innovation Lab",
-      "加入 TABEI 與政大金融科技創新實驗室",
+      "Joined TABEI and the NCCU FinTech Club",
+      "加入 TABEI 與政大金融科技社",
     ),
     description: l(
-      "Started as an intern at the Taiwan Association for Blockchain Ecosystem Innovation, and was selected as an inaugural officer of the NCCU FinTech Innovation Lab.",
-      "於臺灣區塊鏈愛好者協會開始實習，並獲選為政大金融科技創新實驗室第一屆幹部。",
+      "Started as an intern at the Taiwan Association for Blockchain Ecosystem Innovation, and was selected as an inaugural officer of the NCCU FinTech Club.",
+      "於臺灣區塊鏈愛好者協會開始實習，並獲選為政大金融科技社第一屆幹部。",
     ),
     icon: <Users size={18} />,
   },
