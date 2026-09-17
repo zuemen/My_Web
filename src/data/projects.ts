@@ -60,6 +60,31 @@ export const projects: Project[] = [
     demoUrl: "https://chain-lens-beta.vercel.app",
   },
   {
+    slug: "evidence-at-source",
+    featured: true,
+    title: l(
+      "Evidence at Source — Worker-Held Credentials for AI Agents",
+      "Evidence at Source 證據前置 — 讓 AI Agent 問得到答案、拿不到資料",
+    ),
+    shortTitle: l("Evidence at Source", "Evidence at Source 證據前置"),
+    category: l("GLEIF Appreciation Award", "GLEIF 感謝獎"),
+    summary: l(
+      "Facts about a migrant worker are signed by both parties when they happen and held by the worker, so a bank's or brand's AI agent can get an answer without ever getting the data.",
+      "關於移工的事實在發生當下由雙方簽章封存、由勞工本人持有，讓銀行或品牌的 AI Agent 拿得到答案，卻拿不到原始資料。",
+    ),
+    description: l(
+      "A dual-signed credential wallet held by the worker, queried by verification agents that each represent an institution. Every query passes a three-layer policy gate and returns only a boolean and a reason code, never the underlying record. Agents prove whom they act for through GLEIF vLEI credential chains that are re-verified on every query, and an agent never makes the final decision: it produces a recommendation for a named human reviewer whose revocable role credential is sealed into an independently re-verifiable audit trail.",
+      "由勞工持有的雙簽憑證錢包，接受代表不同機構的查驗 Agent 查詢。每次查詢都要通過三層政策閘門，只回傳布林值與原因碼，絕不回傳原始紀錄。Agent 透過 GLEIF vLEI 憑證鏈證明自己代表哪個機構，且每次查詢都重新驗證全鏈；Agent 也從不做最終決定——它只產生建議，交由具名的人類覆核者裁定，覆核者可撤銷的職務憑證會封存在可獨立重驗的稽核軌跡中。",
+    ),
+    outcome: l(
+      "Received the GLEIF Appreciation Award as a three-person team, with a public demo and an executable test suite behind each technical claim.",
+      "以三人團隊獲 GLEIF 感謝獎；提供公開 demo，每項技術主張都有可執行的測試佐證。",
+    ),
+    tags: ["vLEI", "Verifiable Credentials", "Selective Disclosure", "AI Agents", "TypeScript"],
+    link: "https://github.com/zuemen/evidence-at-source",
+    demoUrl: "https://zuemen.github.io/evidence-at-source/",
+  },
+  {
     slug: "pepelab",
     featured: true,
     title: l(

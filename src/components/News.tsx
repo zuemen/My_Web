@@ -34,12 +34,12 @@ const newsData: NewsItem[] = [
   {
     date: "2026.09",
     title: l(
-      "Joined Cathay Financial Holdings — TBA Program",
-      "加入國泰金控 TBA 實習計畫",
+      "Joined Cathay Financial Holdings as a Project Management Intern",
+      "加入國泰金控擔任專案管理實習生",
     ),
     description: l(
-      "Started as a project management intern in the Blockchain Technology Development Section, Digital Architecture Development Department (Sep 2026 – Jun 2027).",
-      "9 月起擔任數位架構發展部 區塊鏈技術發展科 專案管理實習生（2026/09 – 2027/06）。",
+      "Digital Data & Technology Development Center — Digital Architecture Development Department / Blockchain Technology Development Section (Sep 2026 – Jun 2027).",
+      "數位數據暨科技發展中心 數位架構發展部／區塊鏈技術發展科（2026/09 – 2027/06）。",
     ),
     icon: <Briefcase size={18} />,
   },
