@@ -1,124 +1,106 @@
 .experience {
-  padding: var(--space-16) 0 var(--space-24);
+  padding: var(--space-16) 0 var(--space-20);
 }
 
 .expList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
+  border-top: 1px solid var(--color-rule);
 }
 
+/* Entries are ruled rows now, matching Awards and Projects; the bordered
+   cards and briefcase icons were the last boxed layout on the site. */
 .expCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8);
-  transition: border-color 0.3s ease;
-}
-
-.expCard:hover {
-  border-color: rgb(var(--color-accent-rgb) / 0.3);
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .cardHeader {
-  display: flex;
-  gap: var(--space-4);
-  align-items: flex-start;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-5);
 }
 
 .icon {
-  color: var(--color-accent);
-  flex-shrink: 0;
-  margin-top: 2px;
+  display: none;
 }
 
 .company {
   font-family: var(--font-display);
-  font-size: 1.375rem;
+  font-size: 1.6rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
-  margin-bottom: var(--space-1);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--color-text-primary);
 }
 
 .companyZh {
   display: block;
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: var(--color-text-tertiary);
-  margin-top: 2px;
-}
-
-.projectLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-5);
-}
-
-.projectLink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  min-height: 44px;
   margin-top: var(--space-1);
+  font-family: var(--font-sans);
   font-size: 0.85rem;
-  font-family: var(--font-mono);
-  color: var(--color-accent);
-  transition: opacity 0.2s ease;
-}
-
-.projectLink:hover {
-  opacity: 0.75;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--color-text-tertiary);
 }
 
 .division {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  margin-top: var(--space-2);
+  font-size: 0.975rem;
+  font-style: italic;
   line-height: 1.5;
-  margin-bottom: var(--space-2);
+  color: var(--color-text-secondary);
 }
 
 .roleTitle {
-  font-size: 0.9rem;
-  color: var(--color-accent);
+  margin-top: var(--space-3);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
   font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
 }
 
 .advisor {
-  font-size: 0.85rem;
-  color: var(--color-text-tertiary);
-  margin-top: var(--space-1);
-}
-
-.period {
-  color: var(--color-text-tertiary);
-  font-weight: 400;
+  margin-top: var(--space-2);
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
 }
 
 .projectList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-8);
 }
 
 .projectItem {
-  border-left: 2px solid var(--color-border);
-  padding-left: var(--space-4);
+  padding-left: var(--space-5);
+  border-left: 1px solid var(--color-border);
+}
+
+.withPhoto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.projectBody {
+  min-width: 0;
+  max-width: var(--measure);
 }
 
 .projectName {
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: var(--space-3);
   display: flex;
-  align-items: center;
-  gap: var(--space-1);
+  align-items: baseline;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.35;
   color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
 }
 
 .projectName svg {
-  color: var(--color-accent);
-  flex-shrink: 0;
+  display: none;
 }
 
 .details {
@@ -128,47 +110,45 @@
 }
 
 .details li {
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  line-height: 1.65;
-  padding-left: var(--space-4);
   position: relative;
+  padding-left: var(--space-4);
+  font-size: 0.975rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
 }
 
 .details li::before {
-  content: "–";
+  content: "—";
   position: absolute;
   left: 0;
   color: var(--color-text-tertiary);
 }
 
-/* Entry-level bullets that sit outside any single project. */
 .notes {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
 }
 
-.projectList + .notes {
-  margin-top: var(--space-6);
+.projectLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-top: var(--space-3);
 }
 
-@media (max-width: 768px) {
-  .expCard {
-    padding: var(--space-6);
-  }
+.projectLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 40px;
+  font-family: var(--font-sans);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--color-accent);
 }
 
-/* ── Project with a photo ──
-   Text keeps its measure on the left; the photo is a fixed-width aside, so a
-   portrait and a landscape shot sit at the same column width. */
-.withPhoto {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: var(--space-8);
-  align-items: start;
-}
-
-.projectBody {
-  min-width: 0;
+.projectLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .photo {
@@ -179,19 +159,27 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 420px;
+  max-height: 300px;
   object-fit: cover;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-rule);
+  filter: saturate(0.85);
 }
 
 @media (max-width: 768px) {
+  .experience {
+    padding: var(--space-10) 0 var(--space-12);
+  }
+
   .withPhoto {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-4);
   }
 
-  .photoImg {
-    max-height: 360px;
+  .photo {
+    max-width: 260px;
+  }
+
+  .company {
+    font-size: 1.35rem;
   }
 }

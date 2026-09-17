@@ -1,52 +1,36 @@
 .news {
-  padding: var(--space-24) 0;
+  padding: var(--space-20) 0;
   border-top: 1px solid var(--color-border);
 }
 
 .timeline {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+  border-top: 1px solid var(--color-rule);
 }
 
 .newsItem {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-8);
-  padding-bottom: var(--space-4);
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
   border-bottom: 1px solid var(--color-border);
 }
 
-.newsItem:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+/* The icon badges went: a dated log reads better with the date alone. */
+.iconWrapper {
+  display: none;
 }
 
 .dateIcon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 80px;
-  gap: var(--space-2);
-}
-
-.iconWrapper {
-  width: 36px;
-  height: 36px;
-  background: var(--color-accent-soft);
-  border: 1px solid rgb(var(--color-accent-rgb) / 0.25);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-accent);
+  padding-top: 0.2rem;
 }
 
 .date {
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
 }
 
 .content {
@@ -55,46 +39,48 @@
 
 .content h3 {
   font-family: var(--font-display);
-  font-size: 1.1875rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  margin-bottom: var(--space-2);
+  line-height: 1.3;
   color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
 }
 
 .content p {
-  font-size: 0.9375rem;
+  font-size: 0.975rem;
+  line-height: 1.6;
   color: var(--color-text-secondary);
-  line-height: 1.7;
 }
 
-
 .moreLink {
+  /* A grid item stretches to the column; keep the underline to the text. */
+  justify-self: start;
+  width: fit-content;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
   margin-top: var(--space-8);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--color-accent);
-  transition: gap 0.2s ease;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-text-primary);
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .moreLink:hover {
-  gap: var(--space-3);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 @media (max-width: 640px) {
   .news {
-    padding: var(--space-16) 0;
+    padding: var(--space-12) 0;
   }
 
   .newsItem {
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-  .dateIcon {
-    flex-direction: row;
-    min-width: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
   }
 }

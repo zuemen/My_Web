@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+
 import { Briefcase, ChevronRight, ExternalLink } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { useLang } from "@/i18n/LanguageProvider";
@@ -33,12 +33,9 @@ const Experience = () => {
               .join(" · ");
 
             return (
-              <motion.div
+              <div
                 key={exp.id}
                 className={styles.expCard}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
               >
                 <div className={styles.cardHeader}>
                   <Briefcase className={styles.icon} size={24} />
@@ -123,7 +120,7 @@ const Experience = () => {
                     ))}
                   </ul>
                 )}
-              </motion.div>
+              </div>
             );
           })}
         </div>

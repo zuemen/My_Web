@@ -40,20 +40,20 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className={styles.visual}>
+        <figure className={styles.visual}>
           <div className={styles.profileWrapper}>
             <Image
               src="/zuemen.jpg"
               alt={t(dict.hero.photoAlt)}
               width={300}
-              height={450}
+              height={400}
               priority
-              sizes="(max-width: 640px) 250px, 300px"
+              sizes="(max-width: 720px) 150px, 300px"
               className={styles.profileImage}
-              style={{ objectFit: "cover", objectPosition: "top center" }}
+              style={{ objectFit: "cover", objectPosition: "center 20%" }}
             />
           </div>
-        </div>
+        </figure>
       </div>
     </section>
   );

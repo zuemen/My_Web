@@ -44,7 +44,8 @@
 }
 
 .textBlock p:first-child strong {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

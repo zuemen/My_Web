@@ -14,7 +14,6 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <main id="main-content" className={styles.main}>
-      <div className={styles.gridPattern} aria-hidden="true" />
       <Hero />
       <Skills />
       <SelectedWork />

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+
 import {
   Zap,
   BookOpen,
@@ -128,12 +128,9 @@ const News = () => {
 
         <div className={styles.timeline}>
           {newsData.map((item) => (
-            <motion.div
+            <div
               key={`${item.date}-${item.title.en}`}
               className={styles.newsItem}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
             >
               <div className={styles.dateIcon}>
                 <div className={styles.iconWrapper}>{item.icon}</div>
@@ -143,7 +140,7 @@ const News = () => {
                 <h3>{t(item.title)}</h3>
                 <p>{t(item.description)}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 

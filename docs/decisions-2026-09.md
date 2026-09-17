@@ -19,7 +19,7 @@
 | 照片 | ETHTaipei、黑客松單人照、SWIFT 通知截圖 | 皆無第三方入鏡；EXIF 已清除 |
 | 資料單一來源 | `src/data/{experience,awards,projects}.ts`；CV 頁讀同一份 | 曾發生兩頁不同步 |
 | i18n | 字典 + `useSyncExternalStore` 讀 localStorage；SSR 固定英文 | 爬蟲與無 JS 訪客拿到英文 |
-| 設計 | IBM Plex Sans 取代 Inter；accent #e0a253；圓角 2–4px | 去模板感 |
+| 設計（9/18 改版） | 淺色期刊風：紙色底 #f5f2ea、墨黑字、酒紅 accent #8a2b1d；內文 Newsreader、介面 IBM Plex Sans；區塊左欄標題右欄內容；移除卡片、icon 與捲動淡入 | 深色＋琥珀金讀起來像加密貨幣模板；前幾輪改版未實際截圖驗證，本輪以 Playwright 截圖逐頁確認 |
 
 ## 可信 AI 黑客松（本人已決定，2026-09-17）
 - 不提名次與主辦／參賽雙重身分。

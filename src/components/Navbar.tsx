@@ -61,7 +61,7 @@ const Navbar = () => {
     >
       <div className={styles.container}>
         <Link href="/" className={styles.logo} aria-label={t(dict.nav.home)}>
-          <span className={styles.logoAccent}>ZUEMEN</span>.CHU
+          Zuemen Chu<span className={styles.logoAccent} lang="zh-Hant">朱廷翊</span>
         </Link>
 
         <ul className={styles.navLinks}>
@@ -91,7 +91,11 @@ const Navbar = () => {
               onClick={() => setLang(lang === "en" ? "zh" : "en")}
               aria-label={t(dict.nav.switchTo)}
             >
-              {lang === "en" ? "中" : "EN"}
+              <span className={lang === "en" ? styles.langOn : styles.langOff}>EN</span>
+              <span aria-hidden="true">·</span>
+              <span className={lang === "zh" ? styles.langOn : styles.langOff} lang="zh-Hant">
+                中
+              </span>
             </button>
           </li>
         </ul>

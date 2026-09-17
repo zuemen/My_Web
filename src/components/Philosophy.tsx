@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useLang } from "@/i18n/LanguageProvider";
 import styles from "./Philosophy.module.css";
 
@@ -10,11 +9,8 @@ const Philosophy = () => {
   return (
     <section id="about" className={styles.philosophy}>
       <div className={styles.container}>
-        <motion.div
+        <div
           className={styles.content}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
         >
           {/* h1: this is the top-level heading of /research, the only page
               that renders Philosophy. */}
@@ -72,7 +68,7 @@ const Philosophy = () => {
               </>
             )}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
