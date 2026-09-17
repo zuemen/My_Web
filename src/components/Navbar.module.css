@@ -80,7 +80,7 @@
   min-height: 44px;
   background: var(--color-accent-soft);
   color: var(--color-accent);
-  border: 1px solid rgba(79, 158, 255, 0.3);
+  border: 1px solid rgb(var(--color-accent-rgb) / 0.3);
   padding: 0.5rem 1rem;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
@@ -89,8 +89,43 @@
 }
 
 .contactBtn:hover {
-  background: rgba(79, 158, 255, 0.15);
+  background: rgb(var(--color-accent-rgb) / 0.15);
   border-color: var(--color-accent);
+}
+
+/* Language toggle — reads as a control, not another nav destination. */
+.langToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.langToggle:hover {
+  color: var(--color-accent);
+  border-color: rgb(var(--color-accent-rgb) / 0.4);
+}
+
+.mobileLangToggle {
+  width: 100%;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
 }
 
 /* Hamburger — hidden on desktop, shown when the inline links collapse. */

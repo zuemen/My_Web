@@ -5,17 +5,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useLang } from "@/i18n/LanguageProvider";
+import { dict } from "@/i18n/dictionary";
+import { pick } from "@/i18n/config";
 import styles from "./Navbar.module.css";
 
 const navLinks = [
-  { href: "/research", label: "Research" },
-  { href: "/experience", label: "Experience" },
-  { href: "/projects", label: "Projects" },
-  { href: "/cv", label: "CV" },
-];
+  { href: "/research", key: "research" },
+  { href: "/experience", key: "experience" },
+  { href: "/projects", key: "projects" },
+  { href: "/cv", key: "cv" },
+] as const;
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { lang, setLang } = useLang();
+  const t = (v: { en: string; zh: string }) => pick(v, lang);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -55,7 +60,7 @@ const Navbar = () => {
       aria-label="Main navigation"
     >
       <div className={styles.container}>
-        <Link href="/" className={styles.logo} aria-label="Zuemen Chu — Home">
+        <Link href="/" className={styles.logo} aria-label={t(dict.nav.home)}>
           <span className={styles.logoAccent}>ZUEMEN</span>.CHU
         </Link>
 
@@ -67,7 +72,7 @@ const Navbar = () => {
                 className={`${styles.navLink} ${isActive(link.href) ? styles.active : ""}`}
                 aria-current={isActive(link.href) ? "page" : undefined}
               >
-                {link.label}
+                {t(dict.nav[link.key])}
               </Link>
             </li>
           ))}
@@ -75,10 +80,19 @@ const Navbar = () => {
             <Link
               href="/#contact"
               className={styles.contactBtn}
-              aria-label="Jump to Contact section"
             >
-              Contact
+              {t(dict.nav.contact)}
             </Link>
+          </li>
+          <li>
+            <button
+              type="button"
+              className={styles.langToggle}
+              onClick={() => setLang(lang === "en" ? "zh" : "en")}
+              aria-label={t(dict.nav.switchTo)}
+            >
+              {lang === "en" ? "中" : "EN"}
+            </button>
           </li>
         </ul>
 
@@ -89,7 +103,7 @@ const Navbar = () => {
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label={menuOpen ? t(dict.nav.closeMenu) : t(dict.nav.openMenu)}
         >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -113,14 +127,23 @@ const Navbar = () => {
                     className={`${styles.mobileLink} ${isActive(link.href) ? styles.active : ""}`}
                     aria-current={isActive(link.href) ? "page" : undefined}
                   >
-                    {link.label}
+                    {t(dict.nav[link.key])}
                   </Link>
                 </li>
               ))}
               <li>
                 <Link href="/#contact" className={styles.mobileLink}>
-                  Contact
+                  {t(dict.nav.contact)}
                 </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  className={`${styles.mobileLink} ${styles.mobileLangToggle}`}
+                  onClick={() => setLang(lang === "en" ? "zh" : "en")}
+                >
+                  {lang === "en" ? "切換至中文" : "Switch to English"}
+                </button>
               </li>
             </ul>
           </motion.div>

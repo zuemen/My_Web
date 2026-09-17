@@ -17,7 +17,7 @@
 }
 
 .expCard:hover {
-  border-color: rgba(79, 158, 255, 0.3);
+  border-color: rgb(var(--color-accent-rgb) / 0.3);
 }
 
 .cardHeader {
@@ -154,5 +154,44 @@
 @media (max-width: 768px) {
   .expCard {
     padding: var(--space-6);
+  }
+}
+
+/* ── Project with a photo ──
+   Text keeps its measure on the left; the photo is a fixed-width aside, so a
+   portrait and a landscape shot sit at the same column width. */
+.withPhoto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.projectBody {
+  min-width: 0;
+}
+
+.photo {
+  margin: 0;
+}
+
+.photoImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 768px) {
+  .withPhoto {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .photoImg {
+    max-height: 360px;
   }
 }
