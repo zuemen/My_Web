@@ -12,7 +12,7 @@
 | 國泰內容 | 只寫單位／職稱／專案名／期間 | 保密 |
 | TABEI | Intern，2026/06 起 | 6/17 報到 |
 | ETHTaipei 2026 | Event Staff，9/13–14 | 官網標題；本人口述身分 |
-| 政大金科實驗室 | 第一屆幹部，2026/06 起 | 6/28 錄取信 |
+| 政大金融科技社 | NCCU FinTech Club 第一屆幹部，2026/06 起（信件原名「金融科技創新實驗室」，本人指定改稱金融科技社；英文名查無官方寫法） | 6/28 錄取信 |
 | 台北金融科技獎 | 金融創新獎校園組 入圍決審（ChainLens） | 9/17 入圍通知；10/7 公告結果後更新 `awards.ts` |
 | 新增作品 | ChainLens、PepeFi On-Chain CFD | 可驗證（demo 200、公開 repo） |
 | 暫不加入 | ChainTrust（前端掛）、E1/2LQNN（需教授同意）、Qiskit J1-J2（無公開成果）、Global TrustDrive（深度較淺） | |
@@ -28,3 +28,6 @@
 
 ## 本機明文金鑰（僅回報，未處理）
 - `C:\Users\sanketsu\Global_TrustDriv\.env`：VAULTSAGE_API_KEY、DEPLOYER_PRIVATE_KEY（已 gitignore，未上 GitHub）
+
+## 學程時間
+- 金融科技專長學程只寫「2026 錄取」，不寫學期代碼（本人指定）。

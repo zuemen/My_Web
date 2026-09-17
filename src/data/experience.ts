@@ -160,7 +160,7 @@ export const experience: ExpEntry[] = [
   },
   {
     id: "nccu-ftl",
-    company: l("NCCU FinTech Innovation Lab", "國立政治大學 金融科技創新實驗室"),
+    company: l("NCCU FinTech Club", "政大金融科技社"),
     role: l("Inaugural Officer", "第一屆幹部"),
     period: l("Jun 2026 – Present", "2026/06 – 至今"),
     location: l("Taipei", "台北"),
