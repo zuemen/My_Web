@@ -77,8 +77,8 @@ export const projects: Project[] = [
       "由勞工持有的雙簽憑證錢包，接受代表不同機構的查驗 Agent 查詢。每次查詢都要通過三層政策閘門，只回傳布林值與原因碼，絕不回傳原始紀錄。Agent 透過 GLEIF vLEI 憑證鏈證明自己代表哪個機構，且每次查詢都重新驗證全鏈；Agent 也從不做最終決定——它只產生建議，交由具名的人類覆核者裁定，覆核者可撤銷的職務憑證會封存在可獨立重驗的稽核軌跡中。",
     ),
     outcome: l(
-      "Received the GLEIF Appreciation Award as a three-person team, with a public demo and an executable test suite behind each technical claim.",
-      "以三人團隊獲 GLEIF 感謝獎；提供公開 demo，每項技術主張都有可執行的測試佐證。",
+      "The project also received the GLEIF Appreciation Award. Built by a three-person team, with a public demo and an executable test suite behind each technical claim.",
+      "本專案同時獲得 GLEIF 感謝獎。由三人團隊開發，提供公開 demo，每項技術主張都有可執行的測試佐證。",
     ),
     tags: ["vLEI", "Verifiable Credentials", "Selective Disclosure", "AI Agents", "TypeScript"],
     link: "https://github.com/zuemen/evidence-at-source",

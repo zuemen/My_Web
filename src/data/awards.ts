@@ -49,8 +49,8 @@ export const awards: Award[] = [
     ),
     date: "2026-08",
     detail: l(
-      "Awarded to Evidence at Source, a worker-held credential wallet whose verification agents prove their institutional authority through GLEIF vLEI credential chains.",
-      "獲獎作品為 Evidence at Source——勞工自持的憑證錢包，其查驗 Agent 透過 GLEIF vLEI 憑證鏈證明所代表機構的授權。",
+      "Evidence at Source, a worker-held credential wallet whose verification agents prove their institutional authority through GLEIF vLEI credential chains, also received this award.",
+      "Evidence at Source 同時獲得此獎——勞工自持的憑證錢包，其查驗 Agent 透過 GLEIF vLEI 憑證鏈證明所代表機構的授權。",
     ),
     link: "https://zuemen.github.io/evidence-at-source/",
   },
