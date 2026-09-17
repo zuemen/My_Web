@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+
 import { Code, Award, ArrowRight, ExternalLink } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { projects } from "@/data/projects";
@@ -27,12 +27,9 @@ const Projects = () => {
 
         <div className={styles.list}>
           {projects.map((project) => (
-            <motion.div
+            <div
               key={project.slug}
               className={styles.projectItem}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
             >
               {project.image && (
                 <div className={styles.projectImageWrapper}>
@@ -105,7 +102,7 @@ const Projects = () => {
                   )}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

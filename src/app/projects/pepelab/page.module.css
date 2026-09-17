@@ -11,7 +11,9 @@
 }
 
 .backLink {
-  display: inline-flex;
+  font-family: var(--font-sans);
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: var(--space-1);
   font-size: 0.85rem;
@@ -25,8 +27,8 @@
 }
 
 .category {
-  display: inline-block;
-  font-family: var(--font-mono);
+  display: block;
+  font-family: var(--font-sans);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -54,7 +56,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -126,7 +128,7 @@
 }
 
 .tag {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
   color: var(--color-text-secondary);
   background: var(--color-surface-2);

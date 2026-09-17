@@ -1,53 +1,52 @@
 :root {
-  /* Color — neutral */
-  --color-bg: #0a0a0b;
-  --color-surface: #111114;
-  --color-surface-2: #17171c;
-  --color-border: #222228;
-  --color-text-primary: #ededed;
-  --color-text-secondary: #9b9ba3;
-  /* Was #6b6b73 — only 3.6:1 on --color-surface, below the 4.5:1 AA floor for
-     body text. #8a8a93 lands at 5.6:1 and still reads as the dimmest tier
-     (primary ~15:1 > secondary ~6.9:1 > tertiary ~5.6:1). */
-  --color-text-tertiary: #8a8a93;
+  /* Color — paper and ink.
+     The site moved off a near-black ground with a gold accent: that pairing
+     reads as a crypto exchange template, which is the wrong register for an
+     admissions reader. Warm paper, ink-black text and one deep oxblood accent
+     read as print — a journal or an academic CV. */
+  --color-bg: #f5f2ea;
+  --color-surface: #efebe1;
+  --color-surface-2: #e7e2d6;
+  --color-border: #d6cfc0;
+  --color-rule: #1b1a17;
+  --color-text-primary: #1b1a17;
+  /* 8.6:1 and 5.1:1 on --color-bg, so both clear AA as body text. */
+  --color-text-secondary: #46433c;
+  --color-text-tertiary: #69655b;
 
-  /* Color — brand
-     Was #4f9eff. That blue is the default accent of practically every
-     generated dark-theme site; the amber reads warmer and more editorial and
-     is far less common in this context. 8.9:1 on --color-bg, 8.5:1 on
-     --color-surface, so it clears AA comfortably as text. */
-  --color-accent: #e0a253;
-  --color-accent-soft: #2a2113;
-  --color-accent-fg: #0a0a0b;
+  /* Color — accent. 10:1 on --color-bg. Used sparingly: labels, links, marks. */
+  --color-accent: #8a2b1d;
+  --color-accent-soft: #eee0d6;
+  --color-accent-fg: #f5f2ea;
   /* Channels only, so translucent tints derive from the accent instead of
-     being retyped as literals. Thirteen hardcoded copies of the old blue had
-     to be found by hand when the accent changed. */
-  --color-accent-rgb: 224 162 83;
+     being retyped as literals. */
+  --color-accent-rgb: 138 43 29;
 
-  /* Spacing */
+  /* Spacing — 5, 10 and 20 were referenced by several modules but never
+     defined, which silently collapsed those gaps to zero. */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
   --space-24: 6rem;
 
   /* Layout — one container width and one prose measure for the whole site.
      68ch keeps long-form text inside the 60–75 character comfortable range. */
-  --container: 1120px;
+  --container: 1180px;
   --measure: 68ch;
 
-  /* Radius
-     Tightened from 4/8/12/20. One soft radius applied uniformly to cards,
-     buttons, chips and images is a template tell; near-square corners read as
-     print rather than as a UI kit. --radius-xl is no longer a pill. */
-  --radius-sm: 2px;
-  --radius-md: 3px;
-  --radius-lg: 4px;
-  --radius-xl: 4px;
+  /* Radius — effectively square. Print does not round its corners. */
+  --radius-sm: 0px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
 
   /* Typography */
   --font-sans: var(--font-plex-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
@@ -68,7 +67,13 @@ html,
 body {
   background-color: var(--color-bg);
   color: var(--color-text-primary);
-  font-family: var(--font-sans);
+  /* Newsreader is a text face built for long reading; prose sets in it and
+     interface chrome (nav, labels, buttons) opts into the sans explicitly. */
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -112,7 +117,7 @@ ul {
   z-index: 1100;
   padding: var(--space-3) var(--space-4);
   background: var(--color-accent);
-  color: #000;
+  color: var(--color-accent-fg);
   font-size: 0.875rem;
   font-weight: 600;
   border-radius: var(--radius-md);
@@ -179,15 +184,43 @@ ul {
 
 
 
-/* Shared section wrapper — replaces the per-component .container copies. */
+::selection {
+  background: rgb(var(--color-accent-rgb) / 0.18);
+}
+
+/* Shared section wrapper.
+   On wide screens every section is a two-column spread: the heading sits in a
+   narrow left rail and stays put while its content scrolls past on the right —
+   the layout of a journal article or an academic CV rather than a landing
+   page. Every component that uses this class leads with a SectionHeading. */
 .section-container {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--space-8);
 }
 
+@media (min-width: 1024px) {
+  .section-container {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    column-gap: var(--space-16);
+    align-items: start;
+  }
+
+  .section-container > header {
+    grid-column: 1;
+    grid-row: 1 / span 40;
+    position: sticky;
+    top: 96px;
+  }
+
+  .section-container > :not(header) {
+    grid-column: 2;
+  }
+}
+
 @media (max-width: 768px) {
   .section-container {
-    padding: 0 var(--space-6);
+    padding: 0 var(--space-5);
   }
 }

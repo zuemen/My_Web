@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Mail, GitFork, LinkIcon, ArrowUpRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { useLang } from "@/i18n/LanguageProvider";
@@ -53,8 +52,8 @@ const Contact = () => {
         />
 
         <div className={styles.grid}>
-          {contactLinks.map((link, idx) => (
-            <motion.a
+          {contactLinks.map((link) => (
+            <a
               key={link.name}
               href={link.url}
               target={link.url.startsWith("mailto") ? undefined : "_blank"}
@@ -64,10 +63,6 @@ const Contact = () => {
                   : "noopener noreferrer"
               }
               className={styles.contactItem}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
               aria-label={`Contact via ${link.name}: ${link.label}`}
             >
               <span className={styles.iconWrapper}>{link.icon}</span>
@@ -76,7 +71,7 @@ const Contact = () => {
                 {link.label}
               </span>
               <ArrowUpRight className={styles.arrow} size={16} />
-            </motion.a>
+            </a>
           ))}
         </div>
       </div>

@@ -1,162 +1,144 @@
 .projects {
-  padding: var(--space-24) 0;
+  padding: var(--space-16) 0 var(--space-20);
 }
-
-
-
-
 
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
+  border-top: 1px solid var(--color-rule);
 }
 
-/* Text column is a fixed track so rows with and without an image share the
-   same measure — a percentage-width image made the two look like different
-   layouts. The image is an aside that simply isn't there when absent. */
 .projectItem {
   display: grid;
-  grid-template-columns: minmax(0, var(--measure)) 1fr;
+  grid-template-columns: minmax(0, 1fr) 260px;
   gap: var(--space-10);
   align-items: start;
-  padding-bottom: var(--space-12);
+  padding: var(--space-10) 0;
   border-bottom: 1px solid var(--color-border);
-}
-
-.projectItem:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-/* Image sits in the second column, after the text in DOM order. */
-.projectImageWrapper {
-  grid-column: 2;
-  grid-row: 1;
-  width: 100%;
-  max-width: 340px;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  overflow: hidden;
-}
-
-.projectImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  transition: transform 0.4s ease;
-}
-
-.projectItem:hover .projectImage {
-  transform: scale(1.04);
 }
 
 .projectInfo {
   grid-column: 1;
   grid-row: 1;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
+  max-width: var(--measure);
+}
+
+.projectImageWrapper {
+  grid-column: 2;
+  grid-row: 1;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--color-rule);
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85);
 }
 
 .category {
-  color: var(--color-accent);
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   display: block;
-  margin-bottom: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: 1.625rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  margin-bottom: var(--space-3);
+  font-size: 1.9rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
 }
 
 .desc {
+  font-size: 1.02rem;
+  line-height: 1.65;
   color: var(--color-text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
 }
 
 .outcome {
+  margin-bottom: var(--space-5);
+  padding: var(--space-4) 0 var(--space-4) var(--space-5);
   border-left: 2px solid var(--color-accent);
-  padding-left: var(--space-4);
-  margin-bottom: var(--space-6);
 }
 
 .outcomeLabel {
   display: block;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: var(--space-1);
 }
 
 .outcomeText {
-  color: var(--color-text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-6);
-  margin-top: auto;
+  gap: var(--space-1) 0;
+  margin-bottom: var(--space-4);
 }
 
 .tag {
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  padding: 0.3rem 0.75rem;
-  border-radius: var(--radius-xl);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
-  font-family: var(--font-mono);
   font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-text-tertiary);
+}
+
+.tag + .tag::before {
+  content: "·";
+  margin: 0 var(--space-2);
 }
 
 .links {
   display: flex;
-  gap: var(--space-4);
+  flex-wrap: wrap;
   align-items: center;
+  gap: var(--space-5);
 }
 
 .caseStudyLink {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
+  min-height: 44px;
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--color-accent);
-  margin-right: var(--space-2);
-  transition: opacity 0.2s ease;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-text-primary);
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .caseStudyLink:hover {
-  opacity: 0.75;
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .linkIcon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* 20px glyph on its own is well under the 44px touch minimum. */
   min-width: 44px;
   min-height: 44px;
-  margin: 0 calc(var(--space-3) * -1);
   color: var(--color-text-tertiary);
   transition: color 0.2s ease;
 }
@@ -166,20 +148,15 @@
 }
 
 @media (max-width: 1024px) {
-  /* Single column — the image moves above the text. */
   .projectItem {
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-6);
-  }
-
-  .projectImageWrapper,
-  .projectInfo {
-    grid-column: 1;
+    gap: var(--space-5);
   }
 
   .projectImageWrapper {
     grid-row: 1;
-    max-width: none;
+    grid-column: 1;
+    max-width: 360px;
   }
 
   .projectInfo {
@@ -189,10 +166,10 @@
 
 @media (max-width: 640px) {
   .projects {
-    padding: var(--space-16) 0;
+    padding: var(--space-10) 0 var(--space-12);
   }
 
   .title {
-    font-size: 1.375rem;
+    font-size: 1.5rem;
   }
 }

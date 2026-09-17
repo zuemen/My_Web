@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import { useLang } from "@/i18n/LanguageProvider";
@@ -31,17 +31,13 @@ const SelectedWork = () => {
         />
 
         <ul className={styles.list}>
-          {featured.map((project, index) => {
+          {featured.map((project) => {
             // Only PepeLab has a case study; the rest land on the list page.
             const href = project.caseStudyUrl ?? "/projects#projects";
 
             return (
-              <motion.li
+              <li
                 key={project.slug}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
               >
                 <Link href={href} className={styles.item}>
                   <span className={styles.category}>{t(project.category)}</span>
@@ -51,7 +47,7 @@ const SelectedWork = () => {
                   </h3>
                   <p className={styles.summary}>{t(project.summary)}</p>
                 </Link>
-              </motion.li>
+              </li>
             );
           })}
         </ul>

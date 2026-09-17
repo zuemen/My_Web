@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
@@ -57,13 +56,9 @@ const Skills = () => {
 
         <ol className={styles.list}>
           {skillData.map((area, index) => (
-            <motion.li
+            <li
               key={area.title.en}
               className={styles.item}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
             >
               <span className={styles.index} aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
@@ -72,7 +67,7 @@ const Skills = () => {
                 <h3 className={styles.title}>{t(area.title)}</h3>
                 <p className={styles.desc}>{t(area.description)}</p>
               </div>
-            </motion.li>
+            </li>
           ))}
         </ol>
       </div>

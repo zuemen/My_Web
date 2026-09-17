@@ -13,7 +13,7 @@
 }
 
 .label {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   color: var(--color-text-tertiary);
   margin-bottom: var(--space-4);
@@ -34,6 +34,6 @@
 
 .rssNote {
   font-size: 0.8rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   color: var(--color-text-tertiary);
 }

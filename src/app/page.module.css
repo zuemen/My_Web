@@ -1,20 +1,3 @@
 .main {
-  min-height: 100vh;
-  min-height: 100dvh;
   position: relative;
-}
-
-.gridPattern {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.012) 1px,
-    transparent 1px
-  );
-  background-size: 56px 56px;
-  pointer-events: none;
-  z-index: -2;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+
 import { ExternalLink, FileText } from "lucide-react";
 import { awards, formatAwardDate } from "@/data/awards";
 import { useLang } from "@/i18n/LanguageProvider";
@@ -28,14 +28,10 @@ const Awards = () => {
         />
 
         <ul className={styles.list}>
-          {awards.map((award, index) => (
-            <motion.li
+          {awards.map((award) => (
+            <li
               key={award.slug}
               className={styles.item}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
             >
               <span className={styles.date}>
                 {formatAwardDate(award.date, lang)}
@@ -103,7 +99,7 @@ const Awards = () => {
                   </div>
                 )}
               </div>
-            </motion.li>
+            </li>
           ))}
         </ul>
       </div>
