@@ -8,7 +8,7 @@
 ## 已定案
 | 項目 | 決定 | 依據 |
 |---|---|---|
-| 國泰職稱 | Project Management Intern, TBA Program；區塊鏈技術發展科 | 7/22 面試結果、7/30 人資錄取信；技術實習生另一職缺未錄取 |
+| 國泰職稱 | 國泰金控 數位數據暨科技發展中心 數位架構發展部／區塊鏈技術發展科 專案管理實習生（本人指定寫法） | 7/22 面試結果、7/30 人資錄取信；技術實習生另一職缺未錄取 |
 | 國泰內容 | 只寫單位／職稱／專案名／期間 | 保密 |
 | TABEI | Intern，2026/06 起 | 6/17 報到 |
 | ETHTaipei 2026 | Event Staff，9/13–14 | 官網標題；本人口述身分 |
@@ -21,11 +21,10 @@
 | i18n | 字典 + `useSyncExternalStore` 讀 localStorage；SSR 固定英文 | 爬蟲與無 JS 訪客拿到英文 |
 | 設計 | IBM Plex Sans 取代 Inter；accent #e0a253；圓角 2–4px | 去模板感 |
 
-## 待決（不可自行處理）
-### 可信 AI 黑客松：主辦與參賽的利益衝突
-信件證實本人同時是 TABEI 實習生（參與比賽辦法修訂、握有他隊報名附件存取權）與參賽者（季軍 USD 1,000 + GLEIF 感謝狀），信中無迴避聲明。
-- 網站目前仍寫「Ran the intake and selection pipeline」「judging rules」，且未列季軍。
-- 在本人決定揭露方式前：不加入季軍／GLEIF 獎項、不加入 Evidence at Source 作品、不改寫既有籌辦文字。
+## 可信 AI 黑客松（本人已決定，2026-09-17）
+- 不提名次與主辦／參賽雙重身分。
+- 只寫「Evidence at Source 獲 GLEIF 感謝獎」，不連結 GLEIF 證書 PDF（證書內文點名該黑客松）。
+- 籌辦條目的成果句移除 GLEIF 字樣，因該獎實際頒給本人專案。
 
 ## 本機明文金鑰（僅回報，未處理）
 - `C:\Users\sanketsu\Global_TrustDriv\.env`：VAULTSAGE_API_KEY、DEPLOYER_PRIVATE_KEY（已 gitignore，未上 GitHub）

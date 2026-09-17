@@ -41,6 +41,20 @@ export const awards: Award[] = [
     link: "https://chain-lens-beta.vercel.app",
   },
   {
+    slug: "gleif-appreciation-award-2026",
+    title: l("GLEIF Appreciation Award", "GLEIF 感謝獎"),
+    issuer: l(
+      "Sponsored by GLEIF (Global Legal Entity Identifier Foundation)",
+      "GLEIF（全球法人識別編碼基金會）贊助",
+    ),
+    date: "2026-08",
+    detail: l(
+      "Awarded to Evidence at Source, a worker-held credential wallet whose verification agents prove their institutional authority through GLEIF vLEI credential chains.",
+      "獲獎作品為 Evidence at Source——勞工自持的憑證錢包，其查驗 Agent 透過 GLEIF vLEI 憑證鏈證明所代表機構的授權。",
+    ),
+    link: "https://zuemen.github.io/evidence-at-source/",
+  },
+  {
     slug: "ntu-ibm-qiskit-hackathon-2026",
     title: l(
       "NTU–IBM Qiskit Quantum Computing Hackathon Taiwan 2026",

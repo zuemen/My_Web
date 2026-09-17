@@ -42,12 +42,12 @@ export const experience: ExpEntry[] = [
     // separate application that was not offered. Do not reword this as a
     // technical or engineering internship.
     id: "cathay",
-    company: l("Cathay Financial Holdings", "國泰金融控股"),
+    company: l("Cathay Financial Holdings", "國泰金控"),
     division: l(
-      "Blockchain Technology Development Section, Digital Architecture Development Department, Digital Data & Technology Development Center",
-      "數位數據暨科技發展中心 數位架構發展部 區塊鏈技術發展科",
+      "Digital Data & Technology Development Center — Digital Architecture Development Department / Blockchain Technology Development Section",
+      "數位數據暨科技發展中心 數位架構發展部／區塊鏈技術發展科",
     ),
-    role: l("Project Management Intern, TBA Program", "TBA 實習計畫 專案管理實習生"),
+    role: l("Project Management Intern", "專案管理實習生"),
     period: l("Sep 2026 – Jun 2027", "2026/09 – 2027/06"),
     location: l("Taipei", "台北"),
     projects: [{ name: l("Hot Wallet Research Project", "熱錢包研究專案") }],
@@ -135,8 +135,8 @@ export const experience: ExpEntry[] = [
           ),
           l("Built and shipped the official event website.", "建置並上線活動官網。"),
           l(
-            "Outcome: Human ID took first place (USD 5,000); GLEIF co-presented a Trustworthy AI Governance Innovation Award. Selected work will be presented at the 11th Blockchain Enthusiasts Annual Conference in November and included in the annual policy white paper.",
-            "成果：Human ID 奪冠（USD 5,000）；GLEIF 共同頒發可信 AI 治理創新獎。精選作品將於 11 月第 11 屆區塊鏈愛好者年會發表，並收錄於年度政策白皮書。",
+            "Outcome: Human ID took first place (USD 5,000). Selected work will be presented at the 11th Blockchain Enthusiasts Annual Conference in November and included in the annual policy white paper.",
+            "成果：Human ID 奪冠（USD 5,000）。精選作品將於 11 月第 11 屆區塊鏈愛好者年會發表，並收錄於年度政策白皮書。",
           ),
         ],
         links: [
