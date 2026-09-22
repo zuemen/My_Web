@@ -44,7 +44,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-label);
   margin-bottom: var(--space-3);
 }
 
@@ -78,7 +78,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-label);
   margin-bottom: var(--space-1);
 }
 

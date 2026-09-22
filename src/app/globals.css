@@ -1,26 +1,34 @@
 :root {
-  /* Color — paper and ink.
-     The site moved off a near-black ground with a gold accent: that pairing
-     reads as a crypto exchange template, which is the wrong register for an
-     admissions reader. Warm paper, ink-black text and one deep oxblood accent
-     read as print — a journal or an academic CV. */
-  --color-bg: #f5f2ea;
-  --color-surface: #efebe1;
-  --color-surface-2: #e7e2d6;
-  --color-border: #d6cfc0;
-  --color-rule: #1b1a17;
-  --color-text-primary: #1b1a17;
-  /* 8.6:1 and 5.1:1 on --color-bg, so both clear AA as body text. */
-  --color-text-secondary: #46433c;
-  --color-text-tertiary: #69655b;
+  /* Color — dark, restored to the site's original #0a0a0b ground.
+     The paper/oxblood pass replaced it; the owner wanted the dark ground back.
+     What reads as "AI template" on dark is not the dark itself but the extras
+     that usually ride on it: glow, gradients, saturated neon accents and
+     every label painted in the brand colour. So this palette is near
+     monochrome — warm off-white on near-black, hairline greys — and the one
+     accent is a desaturated steel blue reserved for links and interaction. */
+  color-scheme: dark;
+  --color-bg: #0a0a0b;
+  --color-bg-rgb: 10 10 11;
+  --color-surface: #111114;
+  --color-surface-2: #17171c;
+  --color-border: #222228;
+  /* Section rules: one step brighter than --color-border so the page still
+     has structure, without the full-contrast lines of the print layout. */
+  --color-rule: #34343b;
+  --color-text-primary: #ecebe6;
+  /* 8.4:1 and 5.6:1 on --color-bg; tertiary is 5.3:1 on --color-surface. */
+  --color-text-secondary: #a6a59f;
+  --color-text-tertiary: #8a8a93;
+  /* Eyebrows, categories and section labels: neutral, not accent. */
+  --color-label: #8f8e88;
 
-  /* Color — accent. 10:1 on --color-bg. Used sparingly: labels, links, marks. */
-  --color-accent: #8a2b1d;
-  --color-accent-soft: #eee0d6;
-  --color-accent-fg: #f5f2ea;
+  /* Color — accent. 9.1:1 on --color-bg. Links, active state, focus only. */
+  --color-accent: #9bb6d8;
+  --color-accent-soft: #141b24;
+  --color-accent-fg: #0a0a0b;
   /* Channels only, so translucent tints derive from the accent instead of
      being retyped as literals. */
-  --color-accent-rgb: 138 43 29;
+  --color-accent-rgb: 155 182 216;
 
   /* Spacing — 5, 10 and 20 were referenced by several modules but never
      defined, which silently collapsed those gaps to zero. */
@@ -67,10 +75,11 @@ html,
 body {
   background-color: var(--color-bg);
   color: var(--color-text-primary);
-  /* Newsreader is a text face built for long reading; prose sets in it and
-     interface chrome (nav, labels, buttons) opts into the sans explicitly. */
-  font-family: var(--font-display);
-  font-size: 17px;
+  /* Body sets in the sans: a light serif at text size loses its hairlines
+     on a dark ground. Newsreader stays for headings and the hero standfirst,
+     where it is large enough to hold up. */
+  font-family: var(--font-sans);
+  font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
