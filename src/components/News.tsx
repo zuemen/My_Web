@@ -67,12 +67,12 @@ const newsData: NewsItem[] = [
   {
     date: "2026.07",
     title: l(
-      "Completed IBM Qiskit Global Summer School 2026",
-      "完成 IBM Qiskit Global Summer School 2026",
+      "Joined IBM Qiskit Global Summer School 2026",
+      "參加 IBM Qiskit Global Summer School 2026",
     ),
     description: l(
-      "Finished the full core curriculum and lab exercises of IBM's Qiskit Global Summer School, covering quantum algorithms and hands-on implementation in Qiskit.",
-      "完成 IBM Qiskit 全球暑期學校全部核心課程與 lab 實作，內容涵蓋量子演算法與 Qiskit 實務。",
+      "Took part in IBM's Qiskit Global Summer School, a program on quantum algorithms and hands-on implementation in Qiskit.",
+      "參加 IBM Qiskit 全球暑期學校，課程涵蓋量子演算法與 Qiskit 實作。",
     ),
     icon: <GraduationCap size={18} />,
   },
