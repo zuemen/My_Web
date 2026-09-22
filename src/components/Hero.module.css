@@ -46,7 +46,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-label);
   margin-bottom: var(--space-6);
 }
 
@@ -73,6 +73,7 @@
 .intro {
   max-width: 36ch;
   margin: var(--space-8) 0;
+  font-family: var(--font-display);
   font-size: clamp(1.25rem, 1.9vw, 1.5rem);
   line-height: 1.45;
   color: var(--color-text-secondary);

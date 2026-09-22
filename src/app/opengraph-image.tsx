@@ -16,10 +16,10 @@ export const alt = "Zuemen Chu — Blockchain & Digital Trust Infrastructure";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const BG = "#f5f2ea";
-const ACCENT = "#8a2b1d";
-const TEXT = "#1b1a17";
-const MUTED = "#46433c";
+const BG = "#0a0a0b";
+const ACCENT = "#9bb6d8";
+const TEXT = "#ecebe6";
+const MUTED = "#a6a59f";
 
 export default function OpengraphImage() {
   return new ImageResponse(

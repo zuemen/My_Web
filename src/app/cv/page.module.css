@@ -61,7 +61,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--color-accent);
+  color: var(--color-label);
   padding-bottom: var(--space-2);
   border-bottom: 1px solid var(--color-border);
   margin-bottom: var(--space-4);
@@ -218,7 +218,7 @@
 }
 
 /* ── Print ──
-   The site is dark-themed; printing it as-is wastes ink and reads poorly.
+   The site is dark; printing it as-is wastes ink and reads poorly.
    Force an ink-on-paper rendering, drop the fixed navbar/footer offsets, and
    spell out link targets since a printed href is otherwise lost. */
 @media print {
@@ -297,7 +297,7 @@
     display: none;
   }
   .skillCat {
-    color: var(--color-accent);
+    color: var(--color-label);
   }
   .contact {
     flex-direction: column;

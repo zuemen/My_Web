@@ -55,14 +55,11 @@ const Skills = () => {
         />
 
         <ol className={styles.list}>
-          {skillData.map((area, index) => (
+          {skillData.map((area) => (
             <li
               key={area.title.en}
               className={styles.item}
             >
-              <span className={styles.index} aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
               <div className={styles.body}>
                 <h3 className={styles.title}>{t(area.title)}</h3>
                 <p className={styles.desc}>{t(area.description)}</p>
