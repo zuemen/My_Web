@@ -27,9 +27,14 @@ export const dict = {
       "I work on the infrastructure that lets a credential be trusted without trusting whoever hands it to you — self-sovereign identity, and the contract security underneath it.",
       "我做的是讓憑證本身可被信任的基礎建設 —— 不必信任遞出憑證的那個人。自主權身分，以及支撐它的合約安全。",
     ),
+    web3: l(
+      "That line now runs into what an autonomous agent is allowed to do with money: verifiable agent identity, session-bounded trading permissions, and an x402 payment-gated signal API that settles in USDC and splits its revenue on-chain — deployed to the Base Sepolia testnet.",
+      "這條線現在延伸到自主 agent 能對資金做什麼：可驗證的 agent 身分、以 session 為界的交易授權，以及一支 x402 付費訊號 API —— 以 USDC 結算、收入在鏈上分潤，部署於 Base Sepolia 測試網。",
+    ),
     tags: [
       l("Self-Sovereign Identity", "自主權身分"),
       l("Smart Contract Security", "智慧合約安全"),
+      l("Agent Payments (x402)", "代理支付 x402"),
       l("Blockchain & Fintech", "區塊鏈與金融科技"),
     ],
     seeResearch: l("See Research", "查看研究"),

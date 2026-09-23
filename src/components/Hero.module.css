@@ -79,6 +79,17 @@
   color: var(--color-text-secondary);
 }
 
+/* Follow-on paragraph: the concrete build, one step quieter than the
+   standfirst so the hero still has a single loudest line. */
+.web3 {
+  max-width: 52ch;
+  margin: 0 0 var(--space-10);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-text-tertiary);
+}
+
 /* Research areas as a plain typeset line, not pills. */
 .tags {
   display: flex;
@@ -99,7 +110,14 @@
   color: var(--color-text-primary);
 }
 
-.tag + .tag::before {
+.tag {
+  white-space: nowrap;
+}
+
+/* The separator trails its own tag rather than leading the next one: as a
+   ::before it wrapped to the start of the second line, opening that line
+   with a stray slash. */
+.tag:not(:last-child)::after {
   content: "/";
   margin: 0 var(--space-3);
   color: var(--color-text-tertiary);
@@ -204,7 +222,7 @@
     gap: var(--space-1);
   }
 
-  .tag + .tag::before {
+  .tag:not(:last-child)::after {
     content: none;
   }
 }

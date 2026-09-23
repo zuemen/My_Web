@@ -133,8 +133,8 @@ export const projects: Project[] = [
       "部署於 Base Sepolia 的永續差價合約協議，交易 agent 只能在擁有者限定的 session 範圍內下單。",
     ),
     description: l(
-      "A proof-of-concept perpetual CFD protocol deployed to the Base Sepolia testnet, with an on-chain price keeper run on a schedule by GitHub Actions and oracle integration for pricing. Autonomous trading is delegated through session-bounded permissions, so an agent can open positions only within limits the owner signs off, and market signals are sold per request over an x402 payment-gated API. A research prototype that holds no real assets.",
-      "部署於 Base Sepolia 測試網的永續差價合約概念驗證協議，鏈上報價由 GitHub Actions 排程執行，並串接預言機定價。自主交易透過 session 範圍授權委派，agent 只能在擁有者簽署的限額內開倉；市場訊號則透過 x402 付費 API 按次販售。屬研究原型，不涉及任何真實資產。",
+      "A proof-of-concept perpetual CFD protocol deployed to the Base Sepolia testnet, with an on-chain price keeper run on a schedule by GitHub Actions and oracle integration for pricing. Autonomous trading is delegated through session-bounded permissions, so an agent can open positions only within limits the owner signs off, and market signals are sold per request over an x402 payment-gated API — paid in USDC over HTTP, settled on-chain by an x402 facilitator, with the revenue split between trader, platform and protocol by a router contract. A research prototype that holds no real assets.",
+      "部署於 Base Sepolia 測試網的永續差價合約概念驗證協議，鏈上報價由 GitHub Actions 排程執行，並串接預言機定價。自主交易透過 session 範圍授權委派，agent 只能在擁有者簽署的限額內開倉；市場訊號則透過 x402 付費 API 按次販售 —— 以 USDC 在 HTTP 上付款、由 x402 facilitator 在鏈上結算，收入再由路由合約在交易者、平台與協議之間分潤。屬研究原型，不涉及任何真實資產。",
     ),
     outcome: l(
       "Contracts live on Base Sepolia with a working web front end — the one project here with a real on-chain deployment rather than a local chain.",

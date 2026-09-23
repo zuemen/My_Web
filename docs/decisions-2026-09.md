@@ -42,3 +42,12 @@
   - 研究領域拿掉 01–04 編號（四個領域沒有先後，編號只是模板習慣）。
 - **字體**：內文改 IBM Plex Sans 16px（細襯線在深底小字會糊），Newsreader 只留給標題與 hero 引言。
 - 列印樣式維持白底黑字；OG 圖同步改為深色。
+
+## 2026-09-23 — 首頁補上 Web3 / x402 貢獻
+
+- 首頁 hero 加第二段：agent 身分、session 為界的交易授權、x402 付費訊號 API（USDC 結算、收入上鏈分潤、Base Sepolia 測試網）。字級比襯線引言小一級，維持單一最大聲的一行。
+- hero 標籤加第四項 Agent Payments (x402)；分隔斜線改成 `::after`，避免換行時行首出現孤立的「/」。
+- 研究領域「Agentic AI」改為「Agentic AI & Agent Payments」，寫明 did:pkh agent DID + 授權 VC、session 權限、x402 機器支付；措辭為「對標 ERC-8004 / 8183 草案」而非宣稱合規。
+- PepeFi 專案描述補上 x402 的付款路徑：HTTP 上以 USDC 付款 → facilitator 鏈上結算 → 路由合約分潤。
+- metadata description / keywords / OG / Twitter 補 x402、Agent Payments。
+- 事實來源：`pepelab_onchain_cfd/docs/AGENT_ECONOMY_STANDARDS.md`、`CAPSTONE_DELIVERABLES.md`、`VERIFICATION_REPORT.md`、`DESIGN_x402_AI_AGENT.md`。測試網、非真實資產的但書全數保留。

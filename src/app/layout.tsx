@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   // Kept under 155 characters so search engines show it without truncating.
   description:
-    "Zuemen Chu (朱廷翊) — NCCU MIS research assistant and project management intern on Cathay Financial Holdings' blockchain team. SSI and contract security.",
+    "Zuemen Chu (朱廷翊) — NCCU MIS research assistant, Cathay Financial Holdings blockchain intern. SSI, contract security and x402 agent payments.",
   keywords: [
     "Blockchain",
     "SSI",
@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     "Smart Contract Security",
     "RWA Tokenization",
     "ERC-3643",
+    "x402",
+    "Agent Payments",
+    "Agentic AI",
     "Fintech",
     "NCCU MIS",
     "Quantum Finance",
@@ -64,7 +67,7 @@ export const metadata: Metadata = {
     url: "https://zuemen.net",
     title: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
     description:
-      "Research Assistant at NCCU MIS. Working on Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, and RWA Tokenization.",
+      "Research Assistant at NCCU MIS. Working on Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization, and x402 agent payments.",
     siteName: "zuemen.net",
     // Image comes from app/opengraph-image.tsx (file-based metadata). Listing
     // it here too would just reintroduce a hardcoded path to keep in sync.
@@ -74,7 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
     description:
-      "Research Assistant at NCCU MIS. Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization.",
+      "Research Assistant at NCCU MIS. Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization, x402 agent payments.",
     // No twitter:image — Twitter/X falls back to og:image, which is generated.
   },
   alternates: { canonical: "https://zuemen.net" },
