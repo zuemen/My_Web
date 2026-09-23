@@ -34,10 +34,10 @@ const skillData: ResearchArea[] = [
     ),
   },
   {
-    title: l("Agentic AI", "代理式 AI"),
+    title: l("Agentic AI & Agent Payments", "代理式 AI 與代理支付"),
     description: l(
-      "Completed AI interdisciplinary micro-program at NCCU. Researching multi-agent system architectures and their applications in financial intelligence workflows.",
-      "修畢政大人工智慧跨域微學程，研究多代理系統架構及其在金融智慧工作流程中的應用。",
+      "Completed AI interdisciplinary micro-program at NCCU. Researching how an autonomous agent can hold an identity and spend money under rules a counterparty can check: did:pkh agent DIDs with authorisation credentials, session-bounded permissions, and x402 machine payments settled in USDC with on-chain revenue routing. Positioned against the draft ERC-8004 / 8183 agent-economy standards rather than claiming compliance with them.",
+      "修畢政大人工智慧跨域微學程，研究自主 agent 如何在對手方可查核的規則下持有身分與支配資金：did:pkh 的 agent DID 搭配授權憑證、以 session 為界的權限，以及用 USDC 結算、收入上鏈分潤的 x402 機器支付。對標 ERC-8004 / 8183 草案標準，而非宣稱已合規。",
     ),
   },
 ];

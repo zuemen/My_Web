@@ -23,6 +23,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className={styles.intro}>{t(dict.hero.intro)}</p>
+          <p className={styles.web3}>{t(dict.hero.web3)}</p>
           <div className={styles.tags} aria-label={t(dict.sections.researchAreas)}>
             {dict.hero.tags.map((tag) => (
               <span key={tag.en} className={styles.tag}>
