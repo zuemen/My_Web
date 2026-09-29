@@ -91,19 +91,19 @@ const newsData: NewsItem[] = [
   {
     date: "2026.01",
     title: l(
-      "Added AI + Quantum Computing (AI+QC) as a Second Research Track",
-      "新增 AI + 量子計算（AI+QC）研究方向",
+      "Joined the AI+QC Research and Development Program at NCCU MIS",
+      "加入政大資管「AI+QC研發推動計畫」",
     ),
     description: l(
-      "Took on Quantum Finance and Quantum Machine Learning as an additional research direction within the existing Research Assistant post at NCCU MIS, alongside the smart contract security work.",
-      "在既有的政大資管研究助理職位下，於智慧合約安全之外，新增量子金融與量子機器學習研究方向。",
+      "Appointed as a research assistant in the AI+QC program led by Prof. Rua-Huan Tsaih (Jan–Dec 2026) — a separate appointment from the smart contract security research advised by Prof. Feng-Yuan Chuang.",
+      "獲聘為蔡瑞煌教授主持之「AI+QC研發推動計畫」研究助理（2026/01–2026/12），與莊豐源助理教授指導的智慧合約安全研究為不同聘任。",
     ),
     icon: <Zap size={18} />,
   },
   {
     date: "2025.09",
     title: l(
-      "Completed AI Interdisciplinary Micro-Program",
+      "Completed the Interdisciplinary Artificial Intelligence Micro Program",
       "修畢人工智慧跨域微學程",
     ),
     description: l(

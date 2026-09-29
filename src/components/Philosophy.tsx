@@ -37,7 +37,8 @@ const Philosophy = () => {
                   of <strong>ERC-3643</strong> in RWA tokenization. I also keep
                   an adjacent interest in{" "}
                   <strong>quantum finance and QML</strong>, explored through
-                  coursework and my lab&rsquo;s AI+QC program.
+                  coursework and NCCU MIS&rsquo;s AI+QC program, led by Prof.
+                  Rua-Huan Tsaih.
                 </p>
                 <p>
                   I approach research with the belief that emerging technology
@@ -59,7 +60,7 @@ const Philosophy = () => {
                   <strong>W3C DID</strong> 與<strong>可驗證憑證</strong>
                   ）、Solidity 合約的稽核方法，以及 RWA 代幣化中{" "}
                   <strong>ERC-3643</strong>{" "}
-                  的法遵設計。另外透過課程與實驗室的 AI+QC 計畫，延伸關注
+                  的法遵設計。另外透過課程與蔡瑞煌教授主持的政大資管 AI+QC 研發推動計畫，延伸關注
                   <strong>量子金融與量子機器學習</strong>。
                 </p>
                 <p>
