@@ -23,6 +23,8 @@ export interface ExpEntry {
   period: L;
   location?: L;
   advisor?: L;
+  /** Principal investigator of the programme the appointment is under. */
+  pi?: L;
   projects?: ExpDetail[];
   notes?: L[];
 }
@@ -53,22 +55,45 @@ export const experience: ExpEntry[] = [
     projects: [{ name: l("Hot Wallet Research Project", "熱錢包研究專案") }],
   },
   {
+    // Two separate appointments, two supervisors. They were once merged into
+    // one entry under Prof. Chuang, which put the AI+QC programme under the
+    // wrong professor. Source for AI+QC: NCCU 研究計畫人員進用證明單 (printed
+    // 2026-03-22) — programme 「AI+QC研發推動計畫」, PI 蔡瑞煌 (Rua-Huan Tsaih,
+    // the spelling on NCCU MIS's faculty page), appointment 2026-01-01 to
+    // 2026-12-31. Title shown as 研究助理 / Research Assistant, per the owner.
+    id: "nccu-aiqc",
+    company: l("National Chengchi University, MIS", "國立政治大學 資訊管理學系"),
+    role: l("Research Assistant", "研究助理"),
+    period: l("Jan 2026 – Dec 2026", "2026/01 – 2026/12"),
+    pi: l("Prof. Rua-Huan Tsaih (蔡瑞煌)", "蔡瑞煌 教授"),
+    projects: [
+      {
+        name: l(
+          "AI + Quantum Computing (AI+QC) Research and Development Program",
+          "AI+QC研發推動計畫",
+        ),
+      },
+    ],
+    notes: [
+      l(
+        "Literature review, research support, technical documentation",
+        "文獻回顧、研究支援與技術文件撰寫",
+      ),
+    ],
+  },
+  {
+    // Advisor per the owner's CV; his title on the NSTC form he signed
+    // (2026-02-08) is 助理教授.
     id: "nccu-ra",
     company: l("National Chengchi University, MIS", "國立政治大學 資訊管理學系"),
     role: l("Research Assistant", "研究助理"),
     period: l("May 2025 – Dec 2026", "2025/05 – 2026/12"),
-    advisor: l("Prof. Feng-Yuan Chuang (莊豐源)", "莊豐源 教授"),
+    advisor: l("Prof. Feng-Yuan Chuang (莊豐源)", "莊豐源 助理教授"),
     projects: [
       {
         name: l(
           "Smart Contract Security and Auditing Mechanism Research",
           "智慧合約安全與稽核機制研究",
-        ),
-      },
-      {
-        name: l(
-          "AI + Quantum Computing (AI+QC) Research and Development Program",
-          "AI + 量子計算（AI+QC）研發計畫",
         ),
       },
     ],

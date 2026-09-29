@@ -51,3 +51,21 @@
 - PepeFi 專案描述補上 x402 的付款路徑：HTTP 上以 USDC 付款 → facilitator 鏈上結算 → 路由合約分潤。
 - metadata description / keywords / OG / Twitter 補 x402、Agent Payments。
 - 事實來源：`pepelab_onchain_cfd/docs/AGENT_ECONOMY_STANDARDS.md`、`CAPSTONE_DELIVERABLES.md`、`VERIFICATION_REPORT.md`、`DESIGN_x402_AI_AGENT.md`。測試網、非真實資產的但書全數保留。
+
+## 2026-09-29 — 政大研究經歷拆成兩筆（指導教授寫錯的修正）
+
+**錯誤**：網站把 AI+QC 與智慧合約研究合成一筆，只掛莊豐源一位老師，等於把 AI+QC 寫到錯的教授底下。
+
+**依據**（逐份讀過「申學用」資料夾 40 個檔案；GRE 題本除外）：
+- `進用.png`（政大研究計畫人員進用證明單，2026/03/22 列印）：計畫「AI+QC研發推動計畫」，主持人蔡瑞煌，聘期 2026/01/01–2026/12/31。同一張單也嵌在 `量子計畫初版.docx` 附圖二。
+- 蔡瑞煌英文拼法 Rua-Huan Tsaih，依政大資管系英文師資頁。
+- 智慧合約研究：指導教授莊豐源，期間 May 2025 – Dec 2026，依本人 9/23 版履歷；莊豐源職稱「助理教授」依 `證明.pdf`（國科會大專生計畫申請書）。
+
+**改動**：
+- `experience.ts` 拆成兩筆：AI+QC（計畫主持人蔡瑞煌，2026/01–2026/12）與智慧合約（指導教授莊豐源，2025/05–2026/12）。新增 `pi` 欄位與「計畫主持人」標籤。
+- 職稱中英文都寫「研究助理 / Research Assistant」——本人指定，雖然進用單上寫的是「研究獎助生」。
+- AI+QC 中文計畫名改為進用單原文「AI+QC研發推動計畫」。
+- 2026.01 動態原本寫「在既有研究助理職位下新增研究方向」，改為獨立聘任。Philosophy 的「my lab's AI+QC program」改為寫明蔡瑞煌教授主持。
+- 微學程英文依修業證明改為 Interdisciplinary Artificial Intelligence Micro Program。
+- 數位發展部獎項英文補上 Student Division（獎狀原文「學生組優選」）。
+- 進用單上的計畫編號、津貼等欄位不寫進 repo（本人對外版本已遮蔽）。

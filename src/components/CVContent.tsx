@@ -18,8 +18,8 @@ const education: { title: L; lines: L[]; period: L } = {
   lines: [
     l("B.B.A. in Management Information Systems", "資訊管理學系 學士"),
     l(
-      "Artificial Intelligence Interdisciplinary Micro-Program",
-      "人工智慧跨域微學程",
+      "Interdisciplinary Artificial Intelligence Micro Program (completed Sep 2025)",
+      "人工智慧跨域微學程（2025/09 修畢）",
     ),
     l(
       "FinTech Specialization Program — admitted 2026; competitive admission, cohort expanded due to application volume",
@@ -103,6 +103,7 @@ const CVContent = () => {
           const subtitle = [
             exp.division && t(exp.division),
             exp.advisor && `${t(dict.labels.advisor)}: ${t(exp.advisor)}`,
+            exp.pi && `${t(dict.labels.pi)}: ${t(exp.pi)}`,
             exp.location && t(exp.location),
           ]
             .filter(Boolean)

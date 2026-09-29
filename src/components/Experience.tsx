@@ -58,6 +58,11 @@ const Experience = () => {
                         {t(dict.labels.advisor)}: {t(exp.advisor)}
                       </p>
                     )}
+                    {exp.pi && (
+                      <p className={styles.advisor}>
+                        {t(dict.labels.pi)}: {t(exp.pi)}
+                      </p>
+                    )}
                   </div>
                 </div>
 

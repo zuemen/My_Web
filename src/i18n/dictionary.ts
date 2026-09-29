@@ -81,6 +81,7 @@ export const dict = {
     certificatePdf: l("Certificate (PDF)", "證書（PDF）"),
     eventPage: l("Event page", "活動頁面"),
     advisor: l("Advisor", "指導教授"),
+    pi: l("Principal Investigator", "計畫主持人"),
     lastUpdated: l("Last updated", "最後更新"),
     sourceOnGitHub: l("Source on GitHub", "GitHub 原始碼"),
     notes: l("Notes", "筆記"),
