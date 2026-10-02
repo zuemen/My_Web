@@ -147,11 +147,20 @@
   .nonce1col input{text-align:center;font-family:var(--mono);font-size:22px;font-weight:700;color:var(--yellow)}
   .note{font-size:12px;color:var(--dim);margin-top:6px}
   .banner .big{display:block;font-size:clamp(26px,9vw,40px);color:var(--yellow);text-shadow:0 0 16px rgba(255,209,102,.7);margin-top:6px}
+  .storm{position:fixed;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-80px);z-index:22;pointer-events:none;
+    font-family:var(--mono);font-weight:900;font-size:15px;letter-spacing:.06em;white-space:nowrap;padding:8px 16px;border-radius:999px;
+    background:rgba(11,11,26,.92);border:2px solid var(--cyan);color:var(--cyan);box-shadow:0 0 24px rgba(34,211,238,.5);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+  body.storming .storm{transform:translate(-50%,0);animation:zap .35s steps(2) infinite}
+  @keyframes zap{50%{border-color:var(--fg);color:var(--fg)}}
+  body.storming .bgfx::before{background:
+      radial-gradient(ellipse 70% 45% at 50% 0%,rgba(34,211,238,.35),transparent 70%),
+      radial-gradient(ellipse 60% 40% at 15% 60%,rgba(155,123,255,.3),transparent 70%)}
+  body.storming .minebtn.on{border-color:var(--cyan);color:var(--cyan);background:linear-gradient(135deg,rgba(34,211,238,.3),rgba(155,123,255,.25))}
   .reset{width:100%;font-size:16px;font-family:var(--mono);letter-spacing:.06em;background:transparent;border-color:var(--line);color:var(--dim)}
   footer{text-align:center;font-size:12px;color:var(--dim);font-family:var(--mono)}
   @media (prefers-reduced-motion:reduce){
     .bgfx::before,.bgfx::after,h1,.eyebrow .cur{animation:none}
-    .card.pop,.card.shake,.hash.glitch,.hash.close,.link.bad .icon,.minebtn.on,.minebtn.on::after{animation:none}
+    .card.pop,.card.shake,.hash.glitch,.hash.close,.link.bad .icon,.minebtn.on,.minebtn.on::after,body.storming .storm{animation:none}
     .card{transition:none}
   }
 </style>
@@ -162,6 +171,7 @@
 <div class="flash" id="flash" aria-hidden="true"></div>
 <div class="banner" id="banner" role="status" aria-live="assertive"></div>
 <div class="toast" id="toast" aria-hidden="true"></div>
+<div class="storm" id="storm" role="status" aria-live="polite">🌩 HASH STORM ×4 — HOLD NOW!</div>
 
 <main class="wrap">
   <header>
@@ -174,6 +184,7 @@
     <ul class="hints">
       <li><b>MINE</b><span>Hold the button. More teammates holding = more tries per second for your group.</span></li>
       <li><b>VERIFY</b><span>Someone shouted a nonce? Type it into the NONCE box. If it checks out, that block is now yours too.</span></li>
+      <li><b>STORM</b><span>When 🌩 HASH STORM appears, everyone mines 4× faster for a few seconds. Hold!</span></li>
       <li><b>WATCH</b><span>After Block #2 is mined, change Block #1 and see what happens to the chain.</span></li>
     </ul>
   </header>
@@ -261,11 +272,28 @@
     var m = /[?&]d=(\d)/.exec(location.search); var v = m ? parseInt(m[1], 10) : 4;
     return Math.min(6, Math.max(1, v));
   })();
-  var RATE = 40;                       // hashes per second per phone (same for everyone = fair miners)
+  // Speed is tuned so the whole room finds each block in about T seconds on average.
+  // Host can override: ?n=<people in the room> (default 50)  ?t=<target seconds> (default 30)
+  function param(k, d, lo, hi) { var m = new RegExp("[?&]" + k + "=(\\d+)").exec(location.search); var v = m ? parseInt(m[1], 10) : d; return Math.min(hi, Math.max(lo, v)); }
+  var PEOPLE = param("n", 50, 2, 500), TARGET_S = param("t", 30, 5, 600);
+  var ACTIVE = Math.max(1, PEOPLE * 0.7);           // not everyone holds the button all the time
+  var STORM_X = 4, CALM_X = 0.25, SLOT_MS = 5000, CYCLE = 6, CORR = 1.0;
+  // Tuned by simulation: room-wide wait per block ≈ mean 31 s, median 22 s, 10% under 3.5 s, 10% over 70 s.
+  function baseRate(b) { var space = Math.pow(16, D) * (b === 2 ? 16 / 6 : 1); return space / (ACTIVE * TARGET_S) * CORR; }
+  // Every phone derives the same storm schedule from the clock, so storms hit the whole room at once.
+  // Each 30 s cycle has one storm slot (sometimes two) at a random position: calm never lasts more than ~50 s.
+  function rnd(k) { var x = (k ^ 0x9e3779b9) >>> 0; x = Math.imul(x ^ (x >>> 16), 0x85ebca6b) >>> 0; x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35) >>> 0; return ((x ^ (x >>> 16)) >>> 0) / 4294967296; }
+  function stormAt(k) {
+    var c = Math.floor(k / CYCLE), pos = k - c * CYCLE;
+    if (pos === Math.floor(rnd(c * 2 + 1) * CYCLE)) return true;
+    return rnd(c * 2 + 2) < 0.3 && pos === Math.floor(rnd(c * 3 + 7) * CYCLE);
+  }
+  function stormNow() { return stormAt(Math.floor(Date.now() / SLOT_MS)); }
+  function rateFor(b) { return baseRate(b) * (stormNow() ? STORM_X : CALM_X); }
   var ZEROS = new Array(D + 1).join("0");
   var GENESIS_PREV = "0000000000000000";
   var DEFAULTS = { data1: "Alice pays Bob 5", nonce1: "0", data2: "Bob pays Carol 2", nonce2: "0" };
-  var KEY = "mineTheBlock.v2.d" + D;
+  var KEY = "mineTheBlock.v3.d" + D;
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ===== storage (always wrapped) =====
@@ -496,8 +524,8 @@
   function loop(t) {
     if (!miner) return;
     var m = miner;
-    m.acc += Math.min(250, t - m.last) * RATE / 1000; m.last = t;
-    var n = Math.floor(m.acc);
+    m.acc += Math.min(250, t - m.last) * rateFor(m.b) / 1000; m.last = t;
+    var n = Math.min(40, Math.floor(m.acc));
     if (n > 0 && !m.busy) {
       m.acc -= n; m.busy = true;
       var b = m.b, h1 = lastH1, jobs = [];
@@ -521,8 +549,8 @@
         input.value = last.n; hashEl.innerHTML = paint(last.h, b === 1 ? RULE1 : RULE2);
         (b === 1 ? el.tries1 : el.tries2).textContent = fmt(b === 1 ? state.tries1 : state.tries2);
         m.count += res.length;
-        var secs = (t - m.t0) / 1000; (b === 1 ? el.rate1 : el.rate2).textContent = "⚡ " + Math.round(m.count / Math.max(secs, 0.25)) + " H/s";
-        if (m.count % 4 === 0) sTick();
+        (b === 1 ? el.rate1 : el.rate2).textContent = (stormNow() ? "🌩 " : "⚡ ") + Math.round(rateFor(b)) + " H/s";
+        if (t - (m.lastTick || 0) > 90) { sTick(); m.lastTick = t; }
         if (hit) {
           if (b === 1) state.nonce1 = hit.n; else state.nonce2 = hit.n;
           if (b === 1) state.best1 = D; else state.best2 = D;
@@ -540,6 +568,14 @@
     btn.addEventListener("keyup", function (e) { if (e.key === " " || e.key === "Enter") stopMine(); });
   }
   bindHold(el.mine1, 1); bindHold(el.mine2, 2);
+  var storming = false;
+  function sStorm() { tone(300, 0, 0.12, "sawtooth", 0.05); tone(600, 0.08, 0.12, "sawtooth", 0.05); tone(1200, 0.16, 0.2, "square", 0.05); }
+  setInterval(function () {
+    var s = stormNow();
+    if (s === storming) return;
+    storming = s; document.body.classList.toggle("storming", s);
+    if (s) { if (actx) sStorm(); buzz([30, 30, 30, 30, 80]); }
+  }, 200);
   document.addEventListener("visibilitychange", function () { if (document.hidden) stopMine(); });
 
   // ===== inputs =====
