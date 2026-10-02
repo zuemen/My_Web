@@ -122,11 +122,36 @@
   @keyframes flash{0%{opacity:.5}100%{opacity:0}}
   canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:18}
 
+
+  /* mine button */
+  .minebtn{width:100%;min-height:64px;font-family:var(--mono);font-size:20px;font-weight:900;letter-spacing:.06em;
+    border:2px solid var(--purple);background:linear-gradient(135deg,rgba(155,123,255,.35),rgba(34,211,238,.18));
+    -webkit-touch-callout:none;position:relative;overflow:hidden}
+  .minebtn small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+  .minebtn.on{border-color:var(--yellow);color:var(--yellow);animation:pulse .5s ease-in-out infinite alternate;
+    background:linear-gradient(135deg,rgba(255,209,102,.25),rgba(255,77,157,.18))}
+  .minebtn.on::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);animation:sweep .6s linear infinite}
+  @keyframes pulse{to{box-shadow:0 0 26px rgba(255,209,102,.45)}}
+  @keyframes sweep{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+  .minebtn:disabled{opacity:.4}
+  .meter{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--dim);flex-wrap:wrap}
+  .meter b{color:var(--fg);font-variant-numeric:tabular-nums}
+  .zeros{display:flex;gap:4px;align-items:center}
+  .zeros i{width:14px;height:14px;border-radius:3px;border:1px solid var(--line);background:rgba(11,11,26,.6);transition:all .2s}
+  .zeros i.on{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(74,222,128,.7)}
+  .rate{color:var(--yellow)}
+  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,40px);opacity:0;z-index:21;pointer-events:none;
+    font-family:var(--mono);font-weight:800;font-size:16px;padding:10px 16px;border-radius:999px;background:rgba(11,11,26,.92);border:1px solid var(--yellow);color:var(--yellow);white-space:nowrap}
+  .toast.show{animation:toast 1.3s ease-out forwards}
+  @keyframes toast{15%{opacity:1;transform:translate(-50%,0)}75%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-10px)}}
+  .nonce1col input{text-align:center;font-family:var(--mono);font-size:22px;font-weight:700;color:var(--yellow)}
+  .note{font-size:12px;color:var(--dim);margin-top:6px}
+  .banner .big{display:block;font-size:clamp(26px,9vw,40px);color:var(--yellow);text-shadow:0 0 16px rgba(255,209,102,.7);margin-top:6px}
   .reset{width:100%;font-size:16px;font-family:var(--mono);letter-spacing:.06em;background:transparent;border-color:var(--line);color:var(--dim)}
   footer{text-align:center;font-size:12px;color:var(--dim);font-family:var(--mono)}
   @media (prefers-reduced-motion:reduce){
     .bgfx::before,.bgfx::after,h1,.eyebrow .cur{animation:none}
-    .card.pop,.card.shake,.hash.glitch,.hash.close,.link.bad .icon{animation:none}
+    .card.pop,.card.shake,.hash.glitch,.hash.close,.link.bad .icon,.minebtn.on,.minebtn.on::after{animation:none}
     .card{transition:none}
   }
 </style>
@@ -136,6 +161,7 @@
 <canvas id="fx" aria-hidden="true"></canvas>
 <div class="flash" id="flash" aria-hidden="true"></div>
 <div class="banner" id="banner" role="status" aria-live="assertive"></div>
+<div class="toast" id="toast" aria-hidden="true"></div>
 
 <main class="wrap">
   <header>
@@ -144,10 +170,10 @@
       <button type="button" class="sound" id="sound" aria-label="Sound on">🔊</button>
     </div>
     <h1>Mine the Block</h1>
-    <p class="lead">Your group is a miner. Find a nonce that makes the block's hash hit the target. First group to find it shouts — everyone else verifies.</p>
+    <p class="lead">Every phone is a miner. <b>Hold ⛏ MINE</b> and your phone tries random nonces until one makes the hash hit the target. It's pure luck — the first person to hit it shouts the nonce, everyone else verifies.</p>
     <ul class="hints">
-      <li><b>SPLIT</b><span>Split the work: each teammate tries a different range of numbers.</span></li>
-      <li><b>VERIFY</b><span>When another group shouts a nonce, type the same number to check it.</span></li>
+      <li><b>MINE</b><span>Hold the button. More teammates holding = more tries per second for your group.</span></li>
+      <li><b>VERIFY</b><span>Someone shouted a nonce? Type it into the NONCE box. If it checks out, that block is now yours too.</span></li>
       <li><b>WATCH</b><span>After Block #2 is mined, change Block #1 and see what happens to the chain.</span></li>
     </ul>
   </header>
@@ -158,9 +184,13 @@
       <span class="status" id="status1" aria-live="polite">keep mining</span>
     </div>
     <div class="head">
-      <div class="target">Target: hash starts with 0</div>
-      <div class="tries">tries <b id="tries1">0</b></div>
+      <div class="target" id="target1">Target: hash starts with 0000</div>
+      
     </div>
+    <div>
+      <button type="button" class="minebtn" id="mine1" aria-label="Hold to mine block 1">⛏ HOLD TO MINE<small>release to stop</small></button>
+    </div>
+    <div class="meter"><span>tries <b id="tries1">0</b></span><span class="rate" id="rate1">idle</span><span class="zeros" id="zeros1" title="closest so far"></span></div>
     <div>
       <label for="data1">DATA</label>
       <input type="text" id="data1" autocomplete="off" autocapitalize="off" spellcheck="false">
@@ -171,11 +201,8 @@
     </div>
     <div>
       <label for="nonce1">NONCE</label>
-      <div class="nonce">
-        <button type="button" data-step="-1" data-target="nonce1" aria-label="Nonce minus one">−</button>
-        <input type="text" id="nonce1" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
-        <button type="button" data-step="1" data-target="nonce1" aria-label="Nonce plus one">+</button>
-      </div>
+      <div class="nonce1col"><input type="text" id="nonce1" inputmode="numeric" pattern="[0-9]*" autocomplete="off"></div>
+      <p class="note">Type a shouted nonce here to verify it.</p>
     </div>
     <div>
       <span class="lbl">HASH</span>
@@ -191,9 +218,13 @@
       <span class="status" id="status2" aria-live="polite">keep mining</span>
     </div>
     <div class="head">
-      <div class="target">Target: hash starts with 0, then a letter a–f</div>
-      <div class="tries">tries <b id="tries2">0</b></div>
+      <div class="target" id="target2">Target: hash starts with 0000, then a letter a–f</div>
+      
     </div>
+    <div>
+      <button type="button" class="minebtn" id="mine2" aria-label="Hold to mine block 2">⛏ HOLD TO MINE<small>release to stop</small></button>
+    </div>
+    <div class="meter"><span>tries <b id="tries2">0</b></span><span class="rate" id="rate2">idle</span><span class="zeros" id="zeros2" title="closest so far"></span></div>
     <p class="msg wait" id="msg2">Mine Block #1 first.</p>
     <fieldset id="fs2">
       <div>
@@ -206,14 +237,11 @@
       </div>
       <div>
         <label for="nonce2">NONCE</label>
-        <div class="nonce">
-          <button type="button" data-step="-1" data-target="nonce2" aria-label="Nonce minus one">−</button>
-          <input type="text" id="nonce2" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
-          <button type="button" data-step="1" data-target="nonce2" aria-label="Nonce plus one">+</button>
-        </div>
-      </div>
-      <div>
-        <span class="lbl">HASH</span>
+      <div class="nonce1col"><input type="text" id="nonce2" inputmode="numeric" pattern="[0-9]*" autocomplete="off"></div>
+      <p class="note">Type a shouted nonce here to verify it.</p>
+    </div>
+    <div>
+      <span class="lbl">HASH</span>
         <div class="hash" id="hash2">…</div>
       </div>
     </fieldset>
@@ -227,46 +255,45 @@
 (function () {
   "use strict";
 
-  // ===== constants =====
+  // ===== settings =====
+  // Difficulty = number of leading zeros. Host can change it with ?d=3 (small room) … ?d=5 (huge room).
+  var D = (function () {
+    var m = /[?&]d=(\d)/.exec(location.search); var v = m ? parseInt(m[1], 10) : 4;
+    return Math.min(6, Math.max(1, v));
+  })();
+  var RATE = 40;                       // hashes per second per phone (same for everyone = fair miners)
+  var ZEROS = new Array(D + 1).join("0");
   var GENESIS_PREV = "0000000000000000";
   var DEFAULTS = { data1: "Alice pays Bob 5", nonce1: "0", data2: "Bob pays Carol 2", nonce2: "0" };
-  var KEY = "mineTheBlock.v1";
+  var KEY = "mineTheBlock.v2.d" + D;
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ===== storage (always wrapped) =====
-  function load() {
-    try {
-      var raw = window.localStorage.getItem(KEY);
-      if (!raw) return null;
-      var o = JSON.parse(raw);
-      return (o && typeof o === "object") ? o : null;
-    } catch (e) { return null; }
-  }
-  function save() {
-    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
-  }
+  function load() { try { var r = localStorage.getItem(KEY); var o = r ? JSON.parse(r) : null; return (o && typeof o === "object") ? o : null; } catch (e) { return null; } }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
   function str(v, d) { return typeof v === "string" ? v : d; }
   function num(v) { return typeof v === "number" && v >= 0 ? v : 0; }
-
   var saved = load() || {};
   var state = {
     data1: str(saved.data1, DEFAULTS.data1), nonce1: str(saved.nonce1, DEFAULTS.nonce1),
     data2: str(saved.data2, DEFAULTS.data2), nonce2: str(saved.nonce2, DEFAULTS.nonce2),
     lock: typeof saved.lock === "string" ? saved.lock : null,
-    tries1: num(saved.tries1), tries2: num(saved.tries2),
+    tries1: num(saved.tries1), tries2: num(saved.tries2), best1: num(saved.best1), best2: num(saved.best2),
     sound: saved.sound !== false
   };
 
   // ===== elements =====
   var $ = function (id) { return document.getElementById(id); };
   var el = {
-    data1: $("data1"), nonce1: $("nonce1"), hash1: $("hash1"), status1: $("status1"), card1: $("card1"), tries1: $("tries1"),
-    data2: $("data2"), nonce2: $("nonce2"), hash2: $("hash2"), status2: $("status2"), card2: $("card2"), tries2: $("tries2"),
+    data1: $("data1"), nonce1: $("nonce1"), hash1: $("hash1"), status1: $("status1"), card1: $("card1"), tries1: $("tries1"), mine1: $("mine1"), rate1: $("rate1"), zeros1: $("zeros1"),
+    data2: $("data2"), nonce2: $("nonce2"), hash2: $("hash2"), status2: $("status2"), card2: $("card2"), tries2: $("tries2"), mine2: $("mine2"), rate2: $("rate2"), zeros2: $("zeros2"),
     prev2: $("prev2"), msg2: $("msg2"), fs2: $("fs2"),
-    link: $("link"), linkText: $("linkText"), banner: $("banner"), flash: $("flash"), sound: $("sound")
+    link: $("link"), linkText: $("linkText"), banner: $("banner"), flash: $("flash"), sound: $("sound"), toast: $("toast")
   };
+  $("target1").textContent = "Target: hash starts with " + ZEROS;
+  $("target2").textContent = "Target: hash starts with " + ZEROS + ", then a letter a–f";
 
-  // ===== hashing =====
+  // ===== hashing & rules =====
   var enc = new TextEncoder();
   function sha256(s) {
     return crypto.subtle.digest("SHA-256", enc.encode(s)).then(function (buf) {
@@ -275,24 +302,26 @@
       return out;
     });
   }
-  function cleanNonce(v) {
-    var d = String(v).replace(/[^0-9]/g, "").replace(/^0+(?=\d)/, "");
-    return d === "" ? "0" : d;
-  }
-  function ok1(h) { return h.charAt(0) === "0"; }
-  function ok2(h) { return h.charAt(0) === "0" && "abcdef".indexOf(h.charAt(1)) !== -1; }
+  function input1(n) { return "1|" + GENESIS_PREV + "|" + state.data1 + "|" + n; }
+  function input2(h1, n) { return "2|" + h1 + "|" + state.data2 + "|" + n; }
+  function cleanNonce(v) { var d = String(v).replace(/[^0-9]/g, "").replace(/^0+(?=\d)/, ""); return d === "" ? "0" : d; }
+  function lead0(h) { var i = 0; while (i < h.length && h.charAt(i) === "0") i++; return i; }
+  function ok1(h) { return h.slice(0, D) === ZEROS; }
+  function ok2(h) { return h.slice(0, D) === ZEROS && "abcdef".indexOf(h.charAt(D)) !== -1; }
   function esc(s) { return s.replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
-  var RULE1 = [function (c) { return c === "0"; }];
-  var RULE2 = [function (c) { return c === "0"; }, function (c) { return "abcdef".indexOf(c) !== -1; }];
+  var isZero = function (c) { return c === "0"; }, isLetter = function (c) { return "abcdef".indexOf(c) !== -1; };
+  var RULE1 = [], RULE2 = [];
+  for (var i = 0; i < D; i++) { RULE1.push(isZero); RULE2.push(isZero); }
+  RULE2.push(isLetter);
   function paint(h, rules) {
     var out = "";
     for (var i = 0; i < rules.length; i++) out += '<span class="' + (rules[i](h.charAt(i)) ? "ok" : "bad") + '">' + h.charAt(i) + "</span>";
     return out + esc(h.slice(rules.length));
   }
+  function fmt(n) { return Number(n).toLocaleString("en-US"); }
 
-  // ===== effect: hash "rolls" like a slot machine, then lands =====
-  var HEX = "0123456789abcdef";
-  var rollTimers = {};
+  // ===== effect helpers =====
+  var HEX = "0123456789abcdef", rollTimers = {};
   function showHash(node, h, rules, animate) {
     var key = node.id;
     if (rollTimers[key]) { cancelAnimationFrame(rollTimers[key]); rollTimers[key] = 0; }
@@ -308,15 +337,10 @@
   }
   function retrigger(node, cls) { node.classList.remove(cls); void node.offsetWidth; node.classList.add(cls); }
 
-  // ===== effect: sound (Web Audio, starts only after a tap) =====
   var actx = null;
   function audio() {
     if (!state.sound) return null;
-    try {
-      if (!actx) { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null; actx = new C(); }
-      if (actx.state === "suspended") actx.resume();
-      return actx;
-    } catch (e) { return null; }
+    try { if (!actx) { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null; actx = new C(); } if (actx.state === "suspended") actx.resume(); return actx; } catch (e) { return null; }
   }
   function tone(freq, start, len, type, vol) {
     var a = audio(); if (!a) return;
@@ -326,7 +350,8 @@
     g.gain.exponentialRampToValueAtTime(0.0001, t + len);
     o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + len + 0.02);
   }
-  function sTick() { tone(880 + Math.random() * 300, 0, 0.04, "square", 0.025); }
+  function sTick() { tone(700 + Math.random() * 500, 0, 0.03, "square", 0.018); }
+  function sCloser(z) { tone(440 * Math.pow(1.25, z), 0, 0.12, "triangle", 0.08); }
   function sWin(big) {
     var notes = big ? [523, 659, 784, 1047, 1319] : [523, 659, 784, 1047];
     notes.forEach(function (f, i) { tone(f, i * 0.08, 0.22, "square", 0.07); });
@@ -336,7 +361,6 @@
   function buzz(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) {} }
   function setSoundBtn() { el.sound.textContent = state.sound ? "🔊" : "🔇"; el.sound.setAttribute("aria-label", state.sound ? "Sound on" : "Sound off"); }
 
-  // ===== effect: confetti (canvas) =====
   var cv = $("fx"), cx = cv.getContext("2d"), parts = [], raf = 0;
   var COLORS = ["#4ADE80", "#FFD166", "#22D3EE", "#9B7BFF", "#FF4D9D", "#F5F5FA"];
   function resize() { var d = window.devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d, 0, 0, d, 0, 0); }
@@ -359,39 +383,44 @@
     parts.forEach(function (p) {
       p.vy += p.g; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life--;
       cx.save(); cx.globalAlpha = Math.min(1, p.life / 30); cx.translate(p.x, p.y); cx.rotate(p.rot); cx.fillStyle = p.c;
-      if (p.ch) { cx.font = "bold 16px ui-monospace,Menlo,monospace"; cx.fillText(p.ch, -5, 5); }
-      else cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      if (p.ch) { cx.font = "bold 16px ui-monospace,Menlo,monospace"; cx.fillText(p.ch, -5, 5); } else cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
       cx.restore();
     });
     raf = parts.length ? requestAnimationFrame(tick) : 0;
     if (!raf) cx.clearRect(0, 0, innerWidth, innerHeight);
   }
-
-  // ===== effect: banner + flash =====
-  function banner(text, sub, bad) {
-    el.banner.innerHTML = esc(text) + (sub ? "<small>" + esc(sub) + "</small>" : "");
+  function banner(text, sub, big, bad) {
+    el.banner.innerHTML = esc(text) + (big ? '<span class="big">' + esc(big) + "</span>" : "") + (sub ? "<small>" + esc(sub) + "</small>" : "");
     el.banner.className = "banner" + (bad ? " bad" : "");
     void el.banner.offsetWidth; el.banner.classList.add("show");
     el.flash.style.background = bad ? "rgba(255,77,157,.35)" : "rgba(74,222,128,.25)";
     retrigger(el.flash, "go");
   }
+  function toast(t) { el.toast.textContent = t; retrigger(el.toast, "show"); }
 
-  // ===== effects fired on state transitions =====
-  function onMined(n) {
+  // "closest so far" meter: one box per required zero
+  function drawZeros(n) {
+    var node = n === 1 ? el.zeros1 : el.zeros2, best = n === 1 ? state.best1 : state.best2, html = "";
+    for (var i = 0; i < D; i++) html += '<i class="' + (i < best ? "on" : "") + '"></i>';
+    node.innerHTML = html;
+  }
+
+  // ===== celebration / break effects =====
+  function onMined(n, nonce, byMe) {
     var card = n === 1 ? el.card1 : el.card2;
     retrigger(card, "pop");
-    burst(card, n === 1 ? 90 : 160, COLORS);
+    burst(card, n === 1 ? 110 : 180, COLORS);
     if (n === 2) setTimeout(function () { burst(el.card1, 80, COLORS); }, 180);
-    banner(n === 1 ? "⛏ BLOCK MINED!" : "⛓ CHAIN EXTENDED!", n === 1 ? "Shout your nonce!" : "Block #2 is linked to Block #1", false);
-    sWin(n === 2); buzz(n === 1 ? [60, 40, 120] : [60, 40, 60, 40, 200]);
+    if (byMe) banner(n === 1 ? "⛏ YOU MINED IT!" : "⛓ CHAIN EXTENDED!", "SHOUT YOUR NONCE!", "nonce " + nonce, false);
+    else banner("✓ VERIFIED", n === 1 ? "Block #1 accepted — mine Block #2 on top of it" : "Block #2 accepted", "", false);
+    sWin(n === 2); buzz(n === 1 ? [60, 40, 160] : [60, 40, 60, 40, 220]);
   }
   function onBroken() {
     retrigger(el.card2, "shake"); retrigger(el.hash2, "glitch");
     burst(el.link, 40, ["#FF4D9D", "#3A3D5C"]);
-    banner("✗ CHAIN BROKEN", "Someone changed history", true);
+    banner("✗ CHAIN BROKEN", "Someone changed history", "", true);
     sBreak(); buzz([200, 80, 200]);
   }
-
   function setStatus(node, card, kind) {
     node.textContent = { mining: "keep mining", valid: "✓ valid block", broken: "✗ chain broken" }[kind];
     node.className = "status" + (kind === "mining" ? "" : " " + kind);
@@ -399,98 +428,138 @@
     card.classList.toggle("broken", kind === "broken");
   }
 
-  // ===== render (guarded so late async results never overwrite newer ones) =====
-  var seq = 0, prev = null; // prev = last shown {v1, s2}; null on first paint (no effects)
-  var lastH1 = "", lastH2 = "";
+  // ===== render =====
+  var seq = 0, prev = null, lastH1 = "", lastH2 = "", cur = { v1: false, locked: true, h1: "" }, minedByMe = 0;
   function render() {
     var my = ++seq;
-    el.tries1.textContent = state.tries1; el.tries2.textContent = state.tries2;
-    sha256("1|" + GENESIS_PREV + "|" + state.data1 + "|" + state.nonce1).then(function (h1) {
+    el.tries1.textContent = fmt(state.tries1); el.tries2.textContent = fmt(state.tries2);
+    drawZeros(1); drawZeros(2);
+    return sha256(input1(state.nonce1)).then(function (h1) {
       if (my !== seq) return;
-      return sha256("2|" + h1 + "|" + state.data2 + "|" + state.nonce2).then(function (h2) {
+      return sha256(input2(h1, state.nonce2)).then(function (h2) {
         if (my !== seq) return;
-        var v1 = ok1(h1), v2 = ok2(h2);
-        var first = prev === null;
-
-        if (h1 !== lastH1) showHash(el.hash1, h1, RULE1, !first);
-        if (h2 !== lastH2) showHash(el.hash2, h2, RULE2, !first);
-        lastH1 = h1; lastH2 = h2;
+        var v1 = ok1(h1), v2 = ok2(h2), first = prev === null;
+        if (!miner || miner.b !== 1) { if (h1 !== lastH1) showHash(el.hash1, h1, RULE1, !first); lastH1 = h1; }
+        if (!miner || miner.b !== 2) { if (h2 !== lastH2) showHash(el.hash2, h2, RULE2, !first); lastH2 = h2; }
         setStatus(el.status1, el.card1, v1 ? "valid" : "mining");
         el.prev2.textContent = h1.slice(0, 16) + "…";
 
-        // first time Block #2 becomes valid: remember which Block #1 it was built on
         if (v2 && v1 && state.lock === null) { state.lock = h1; save(); }
-
         var locked = !v1 && state.lock === null;
         var broken = state.lock !== null && h1 !== state.lock;
-        el.fs2.disabled = locked;
-        el.card2.classList.toggle("locked", locked);
+        el.fs2.disabled = locked; el.card2.classList.toggle("locked", locked);
+        el.mine1.disabled = v1;
+        el.mine2.disabled = locked || broken || v2;
 
         var s2;
-        if (locked) {
-          s2 = "mining";
-          el.msg2.textContent = "Mine Block #1 first."; el.msg2.className = "msg wait"; el.msg2.hidden = false;
-        } else if (broken) {
-          s2 = "broken";
-          el.msg2.textContent = "Block #1 changed after Block #2 was mined — the link no longer matches.";
-          el.msg2.className = "msg"; el.msg2.hidden = false;
-        } else {
-          s2 = v2 ? "valid" : "mining"; el.msg2.hidden = true;
-        }
+        if (locked) { s2 = "mining"; el.msg2.textContent = "Mine Block #1 first."; el.msg2.className = "msg wait"; el.msg2.hidden = false; }
+        else if (broken) { s2 = "broken"; el.msg2.textContent = "Block #1 changed after Block #2 was mined — the link no longer matches."; el.msg2.className = "msg"; el.msg2.hidden = false; }
+        else { s2 = v2 ? "valid" : "mining"; el.msg2.hidden = true; }
         setStatus(el.status2, el.card2, s2);
-
-        // chain link between the cards
-        el.link.classList.toggle("ok", s2 === "valid");
-        el.link.classList.toggle("bad", s2 === "broken");
+        el.link.classList.toggle("ok", s2 === "valid"); el.link.classList.toggle("bad", s2 === "broken");
         el.linkText.textContent = s2 === "valid" ? "linked" : s2 === "broken" ? "link broken" : "not linked yet";
-        el.prev2.classList.toggle("ok", s2 === "valid");
-        el.prev2.classList.toggle("bad", s2 === "broken");
+        el.prev2.classList.toggle("ok", s2 === "valid"); el.prev2.classList.toggle("bad", s2 === "broken");
+        if (v1) { el.mine1.innerHTML = "✓ MINED<small>nonce " + fmt(state.nonce1) + "</small>"; } else if (!miner || miner.b !== 1) el.mine1.innerHTML = "⛏ HOLD TO MINE<small>release to stop</small>";
+        if (v2 && !broken) { el.mine2.innerHTML = "✓ MINED<small>nonce " + fmt(state.nonce2) + "</small>"; } else if (!miner || miner.b !== 2) el.mine2.innerHTML = "⛏ HOLD TO MINE<small>" + (broken ? "chain broken" : "release to stop") + "</small>";
 
-        // transition effects (never on first paint / reload)
         if (!first) {
-          if (v1 && !prev.v1 && !broken) onMined(1);
-          if (s2 === "valid" && prev.s2 !== "valid") onMined(2);
+          if (v1 && !prev.v1 && !broken) onMined(1, state.nonce1, minedByMe === 1);
+          if (s2 === "valid" && prev.s2 !== "valid") onMined(2, state.nonce2, minedByMe === 2);
           if (s2 === "broken" && prev.s2 !== "broken") onBroken();
-          if (!locked && !v2 && h2.charAt(0) === "0" && s2 === "mining") retrigger(el.hash2, "close"); // so close!
         }
+        minedByMe = 0;
+        cur = { v1: v1, locked: locked, h1: h1 };
         prev = { v1: v1, s2: s2 };
       });
-    }).catch(function () {
-      el.hash1.textContent = "This browser can't compute SHA-256 here. Open the page over https.";
-    });
+    }).catch(function () { el.hash1.textContent = "This browser can't compute SHA-256 here. Open the page over https."; });
   }
 
-  // ===== inputs =====
-  function syncInputs() {
-    el.data1.value = state.data1; el.nonce1.value = state.nonce1;
-    el.data2.value = state.data2; el.nonce2.value = state.nonce2;
+  // ===== the miner: random nonces at a fixed rate while the button is held =====
+  var miner = null;
+  function randNonce() { return String(Math.floor(Math.random() * 1e8)); }
+  function startMine(b) {
+    if (miner) return;
+    if (b === 1 && cur.v1) return;
+    if (b === 2 && (cur.locked || el.mine2.disabled)) return;
+    audio(); // unlock audio on the first touch
+    miner = { b: b, acc: 0, last: performance.now(), busy: false, count: 0, t0: performance.now(), n0: b === 1 ? state.tries1 : state.tries2 };
+    var btn = b === 1 ? el.mine1 : el.mine2;
+    btn.classList.add("on"); btn.innerHTML = "⛏ MINING…<small>keep holding</small>";
+    requestAnimationFrame(loop);
   }
-  el.data1.addEventListener("input", function () { state.data1 = el.data1.value; save(); render(); });
-  el.data2.addEventListener("input", function () { state.data2 = el.data2.value; save(); render(); });
-  function bump(k) { var t = k === "nonce1" ? "tries1" : "tries2"; state[t]++; }
+  function stopMine() {
+    if (!miner) return;
+    var b = miner.b, btn = b === 1 ? el.mine1 : el.mine2;
+    btn.classList.remove("on"); (b === 1 ? el.rate1 : el.rate2).textContent = "idle";
+    miner = null; save(); render();
+  }
+  function loop(t) {
+    if (!miner) return;
+    var m = miner;
+    m.acc += Math.min(250, t - m.last) * RATE / 1000; m.last = t;
+    var n = Math.floor(m.acc);
+    if (n > 0 && !m.busy) {
+      m.acc -= n; m.busy = true;
+      var b = m.b, h1 = lastH1, jobs = [];
+      for (var i = 0; i < n; i++) {
+        (function (nonce) {
+          jobs.push(sha256(b === 1 ? input1(nonce) : input2(h1, nonce)).then(function (h) { return { n: nonce, h: h }; }));
+        })(randNonce());
+      }
+      Promise.all(jobs).then(function (res) {
+        if (miner !== m) return;
+        m.busy = false;
+        var hit = null, bestKey = b === 1 ? "best1" : "best2";
+        res.forEach(function (r) {
+          if (b === 1) state.tries1++; else state.tries2++;
+          var z = lead0(r.h);
+          if (z > state[bestKey] && z < D) { state[bestKey] = z; drawZeros(b); sCloser(z); if (z === D - 1) { toast("🔥 SO CLOSE! " + z + " zeros"); buzz(40); } }
+          if (!hit && (b === 1 ? ok1(r.h) : ok2(r.h))) hit = r;
+        });
+        var last = hit || res[res.length - 1];
+        var input = b === 1 ? el.nonce1 : el.nonce2, hashEl = b === 1 ? el.hash1 : el.hash2;
+        input.value = last.n; hashEl.innerHTML = paint(last.h, b === 1 ? RULE1 : RULE2);
+        (b === 1 ? el.tries1 : el.tries2).textContent = fmt(b === 1 ? state.tries1 : state.tries2);
+        m.count += res.length;
+        var secs = (t - m.t0) / 1000; (b === 1 ? el.rate1 : el.rate2).textContent = "⚡ " + Math.round(m.count / Math.max(secs, 0.25)) + " H/s";
+        if (m.count % 4 === 0) sTick();
+        if (hit) {
+          if (b === 1) state.nonce1 = hit.n; else state.nonce2 = hit.n;
+          if (b === 1) state.best1 = D; else state.best2 = D;
+          minedByMe = b; stopMine();
+        }
+      });
+    }
+    requestAnimationFrame(loop);
+  }
+  function bindHold(btn, b) {
+    btn.addEventListener("pointerdown", function (e) { e.preventDefault(); try { btn.setPointerCapture(e.pointerId); } catch (x) {} startMine(b); });
+    ["pointerup", "pointercancel", "lostpointercapture"].forEach(function (ev) { btn.addEventListener(ev, function () { if (miner && miner.b === b) stopMine(); }); });
+    btn.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    btn.addEventListener("keydown", function (e) { if ((e.key === " " || e.key === "Enter") && !e.repeat) { e.preventDefault(); startMine(b); } });
+    btn.addEventListener("keyup", function (e) { if (e.key === " " || e.key === "Enter") stopMine(); });
+  }
+  bindHold(el.mine1, 1); bindHold(el.mine2, 2);
+  document.addEventListener("visibilitychange", function () { if (document.hidden) stopMine(); });
+
+  // ===== inputs =====
+  function syncInputs() { el.data1.value = state.data1; el.nonce1.value = state.nonce1; el.data2.value = state.data2; el.nonce2.value = state.nonce2; }
+  el.data1.addEventListener("input", function () { stopMine(); state.data1 = el.data1.value; state.best1 = 0; save(); render(); });
+  el.data2.addEventListener("input", function () { stopMine(); state.data2 = el.data2.value; state.best2 = 0; save(); render(); });
   ["nonce1", "nonce2"].forEach(function (k) {
     el[k].addEventListener("input", function () {
+      stopMine();
       var raw = el[k].value, c = raw.replace(/[^0-9]/g, "");
       if (c !== raw) el[k].value = c;
-      var n = cleanNonce(c);
-      if (n !== state[k]) { state[k] = n; bump(k); sTick(); }
-      save(); render();
+      state[k] = cleanNonce(c); save(); render();
     });
     el[k].addEventListener("blur", function () { el[k].value = state[k]; });
   });
-  Array.prototype.forEach.call(document.querySelectorAll("button[data-step]"), function (b) {
-    b.addEventListener("click", function () {
-      var k = b.getAttribute("data-target"), step = parseInt(b.getAttribute("data-step"), 10);
-      var n = String(Math.max(0, parseInt(state[k], 10) + step));
-      if (n !== state[k]) { state[k] = n; bump(k); sTick(); buzz(8); }
-      el[k].value = state[k]; save(); render();
-    });
-  });
   el.sound.addEventListener("click", function () { state.sound = !state.sound; setSoundBtn(); save(); if (state.sound) sTick(); });
   $("reset").addEventListener("click", function () {
-    state.data1 = DEFAULTS.data1; state.nonce1 = DEFAULTS.nonce1;
-    state.data2 = DEFAULTS.data2; state.nonce2 = DEFAULTS.nonce2;
-    state.lock = null; state.tries1 = 0; state.tries2 = 0;
+    stopMine();
+    state.data1 = DEFAULTS.data1; state.nonce1 = DEFAULTS.nonce1; state.data2 = DEFAULTS.data2; state.nonce2 = DEFAULTS.nonce2;
+    state.lock = null; state.tries1 = 0; state.tries2 = 0; state.best1 = 0; state.best2 = 0;
     prev = null; save(); syncInputs(); render();
   });
 
