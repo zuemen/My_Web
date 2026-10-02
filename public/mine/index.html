@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B0B1A">
+<title>Mine the Block</title>
+<style>
+  :root{
+    --bg:#0B0B1A; --card:#1A1B35; --line:#3A3D5C; --fg:#F5F5FA; --dim:#A9ACC8;
+    --green:#4ADE80; --pink:#FF4D9D; --yellow:#FFD166; --cyan:#22D3EE; --purple:#9B7BFF;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono","Liberation Mono",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;min-height:100vh;color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.5;
+    background-color:var(--bg);overflow-x:hidden;
+  }
+  /* animated glow + drifting grid behind everything */
+  .bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+  .bgfx::before{content:"";position:absolute;inset:-20%;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 10%,rgba(155,123,255,.28),transparent 70%),
+      radial-gradient(ellipse 55% 35% at 90% 40%,rgba(34,211,238,.16),transparent 70%),
+      radial-gradient(ellipse 50% 30% at 30% 95%,rgba(255,77,157,.10),transparent 70%);
+    animation:glow 14s ease-in-out infinite alternate}
+  .bgfx::after{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(58,61,92,.28) 1px,transparent 1px),linear-gradient(90deg,rgba(58,61,92,.28) 1px,transparent 1px);
+    background-size:32px 32px;animation:drift 20s linear infinite;
+    -webkit-mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent)}
+  @keyframes glow{to{transform:translate3d(4%,3%,0) scale(1.08)}}
+  @keyframes drift{to{background-position:0 32px,32px 0}}
+
+  .wrap{max-width:560px;margin:0 auto;padding:calc(20px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:18px}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .eyebrow{font-family:var(--mono);font-size:13px;color:var(--cyan);letter-spacing:.04em}
+  .eyebrow .cur{display:inline-block;width:8px;height:14px;background:var(--cyan);vertical-align:-2px;margin-left:4px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .sound{min-height:48px;min-width:48px;font-size:18px;padding:0 10px;border-color:var(--line);background:rgba(26,27,53,.8)}
+  h1{margin:4px 0 6px;font-size:34px;line-height:1.15;font-weight:800;letter-spacing:-.01em;
+    background:linear-gradient(90deg,var(--fg) 0%,var(--fg) 40%,var(--cyan) 50%,var(--fg) 60%,var(--fg) 100%);background-size:250% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s ease-in-out infinite}
+  @keyframes shine{0%,60%{background-position:100% 0}100%{background-position:-50% 0}}
+  .lead{margin:0;color:var(--dim);font-size:15px}
+  .hints{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .hints li{display:grid;grid-template-columns:76px 1fr;gap:10px;font-size:14px;color:var(--dim)}
+  .hints b{font-family:var(--mono);font-size:12px;color:var(--yellow);font-weight:700;letter-spacing:.04em;padding-top:2px}
+
+  .card{position:relative;background:rgba(26,27,53,.92);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;transition:border-color .25s,opacity .25s,box-shadow .25s}
+  .card.valid{border-color:var(--green);box-shadow:0 0 0 1px rgba(74,222,128,.3),0 0 28px rgba(74,222,128,.18)}
+  .card.broken{border-color:var(--pink);box-shadow:0 0 0 1px rgba(255,77,157,.3),0 0 28px rgba(255,77,157,.2)}
+  .card.locked{opacity:.45;filter:grayscale(.7)}
+  .card.pop{animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes pop{0%{transform:scale(1)}35%{transform:scale(1.035)}100%{transform:scale(1)}}
+  .card.shake{animation:shake .5s}
+  @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+  .head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .blockname{font-family:var(--mono);font-weight:800;font-size:17px;letter-spacing:.04em}
+  .status{font-family:var(--mono);font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+  .status.valid{border-color:var(--green);color:var(--green);background:rgba(74,222,128,.08)}
+  .status.broken{border-color:var(--pink);color:var(--pink);background:rgba(255,77,157,.08)}
+  .target{font-size:14px;color:var(--yellow);font-family:var(--mono)}
+  .tries{font-family:var(--mono);font-size:12px;color:var(--dim)}
+  .tries b{color:var(--fg);font-variant-numeric:tabular-nums}
+  .msg{margin:0;font-size:14px;color:var(--pink)}
+  .msg.wait{color:var(--dim)}
+  label,.lbl{display:block;font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.06em;margin-bottom:6px}
+  fieldset{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:12px}
+  input[type=text]{
+    width:100%;font-size:16px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;
+    padding:12px;outline:none;font-family:var(--sans);min-height:48px;
+  }
+  input[type=text]:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(155,123,255,.25)}
+  .prev{font-family:var(--mono);font-size:14px;color:var(--dim);background:rgba(11,11,26,.6);border:1px dashed var(--line);border-radius:10px;padding:12px;word-break:break-all;min-height:48px;transition:color .3s,border-color .3s}
+  .prev.ok{color:var(--green);border-color:rgba(74,222,128,.5)}
+  .prev.bad{color:var(--pink);border-color:rgba(255,77,157,.6);text-decoration:line-through}
+  .nonce{display:grid;grid-template-columns:56px 1fr 56px;gap:8px}
+  .nonce input{text-align:center;font-family:var(--mono);font-size:22px;font-weight:700;color:var(--yellow)}
+  button{
+    -webkit-appearance:none;appearance:none;font:inherit;cursor:pointer;min-height:48px;border-radius:10px;
+    border:1px solid var(--purple);background:rgba(155,123,255,.15);color:var(--fg);font-size:24px;font-weight:700;
+    touch-action:manipulation;user-select:none;-webkit-user-select:none;transition:transform .08s,background .15s;
+  }
+  button:active{background:rgba(155,123,255,.4);transform:scale(.93)}
+  button:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
+  button:disabled{cursor:not-allowed}
+  .hash{position:relative;font-family:var(--mono);font-size:14px;line-height:1.55;word-break:break-all;background:rgba(11,11,26,.6);border:1px solid var(--line);border-radius:10px;padding:12px;min-height:48px;overflow:hidden}
+  .hash .ok{color:var(--green);font-weight:800;text-shadow:0 0 10px rgba(74,222,128,.7)}
+  .hash .bad{color:var(--pink);font-weight:800}
+  .hash.rolling{color:var(--purple)}
+  .hash.close{animation:close .7s}
+  @keyframes close{30%{border-color:var(--yellow);box-shadow:0 0 18px rgba(255,209,102,.35)}}
+  .hash.glitch{animation:glitch .45s steps(2) 2}
+  @keyframes glitch{0%{text-shadow:2px 0 var(--pink),-2px 0 var(--cyan);transform:translateX(0)}25%{transform:translateX(-3px)}50%{text-shadow:-3px 0 var(--pink),3px 0 var(--cyan);transform:translateX(3px)}100%{text-shadow:none;transform:none}}
+
+  /* chain link between the two blocks */
+  .link{display:flex;align-items:center;justify-content:center;gap:10px;margin:-6px 0;height:36px;font-family:var(--mono);font-size:12px;color:var(--dim)}
+  .link .bar{width:3px;height:100%;border-radius:2px;background:var(--line);position:relative}
+  .link .icon{font-size:20px;line-height:1;filter:grayscale(1);opacity:.5;transition:all .3s}
+  .link.ok .bar{background:var(--green);box-shadow:0 0 10px var(--green)}
+  .link.ok .icon{filter:none;opacity:1}
+  .link.ok{color:var(--green)}
+  .link.bad .bar{background:repeating-linear-gradient(var(--pink) 0 5px,transparent 5px 10px);box-shadow:none}
+  .link.bad{color:var(--pink)}
+  .link.bad .icon{filter:none;opacity:1;animation:snap .5s}
+  @keyframes snap{30%{transform:rotate(-25deg) scale(1.4)}60%{transform:rotate(15deg)}}
+
+  /* big celebration banner */
+  .banner{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%) scale(.6);opacity:0;pointer-events:none;z-index:20;
+    font-family:var(--mono);font-weight:900;font-size:clamp(20px,6.4vw,30px);text-align:center;white-space:nowrap;letter-spacing:.02em;max-width:calc(100vw - 24px);
+    padding:16px 22px;border-radius:14px;background:rgba(11,11,26,.88);border:2px solid var(--green);color:var(--green);
+    text-shadow:0 0 18px rgba(74,222,128,.8);box-shadow:0 0 40px rgba(74,222,128,.35)}
+  .banner small{display:block;font-size:13px;font-weight:700;color:var(--fg);letter-spacing:.08em;margin-top:4px;text-shadow:none}
+  .banner.bad{border-color:var(--pink);color:var(--pink);text-shadow:0 0 18px rgba(255,77,157,.8);box-shadow:0 0 40px rgba(255,77,157,.35)}
+  .banner.show{animation:banner 1.8s ease-out forwards}
+  @keyframes banner{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}12%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}22%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-62%) scale(1)}}
+  .flash{position:fixed;inset:0;pointer-events:none;z-index:19;opacity:0}
+  .flash.go{animation:flash .5s ease-out}
+  @keyframes flash{0%{opacity:.5}100%{opacity:0}}
+  canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:18}
+
+  .reset{width:100%;font-size:16px;font-family:var(--mono);letter-spacing:.06em;background:transparent;border-color:var(--line);color:var(--dim)}
+  footer{text-align:center;font-size:12px;color:var(--dim);font-family:var(--mono)}
+  @media (prefers-reduced-motion:reduce){
+    .bgfx::before,.bgfx::after,h1,.eyebrow .cur{animation:none}
+    .card.pop,.card.shake,.hash.glitch,.hash.close,.link.bad .icon{animation:none}
+    .card{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="bgfx" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="flash" id="flash" aria-hidden="true"></div>
+<div class="banner" id="banner" role="status" aria-live="assertive"></div>
+
+<main class="wrap">
+  <header>
+    <div class="top">
+      <div class="eyebrow">&gt; LEVEL_00 // mini game<span class="cur"></span></div>
+      <button type="button" class="sound" id="sound" aria-label="Sound on">🔊</button>
+    </div>
+    <h1>Mine the Block</h1>
+    <p class="lead">Your group is a miner. Find a nonce that makes the block's hash hit the target. First group to find it shouts — everyone else verifies.</p>
+    <ul class="hints">
+      <li><b>SPLIT</b><span>Split the work: each teammate tries a different range of numbers.</span></li>
+      <li><b>VERIFY</b><span>When another group shouts a nonce, type the same number to check it.</span></li>
+      <li><b>WATCH</b><span>After Block #2 is mined, change Block #1 and see what happens to the chain.</span></li>
+    </ul>
+  </header>
+
+  <section class="card" id="card1" aria-labelledby="name1">
+    <div class="head">
+      <span class="blockname" id="name1">BLOCK #1</span>
+      <span class="status" id="status1" aria-live="polite">keep mining</span>
+    </div>
+    <div class="head">
+      <div class="target">Target: hash starts with 0</div>
+      <div class="tries">tries <b id="tries1">0</b></div>
+    </div>
+    <div>
+      <label for="data1">DATA</label>
+      <input type="text" id="data1" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div>
+      <span class="lbl">PREVIOUS HASH</span>
+      <div class="prev" id="prev1">0000000000000000</div>
+    </div>
+    <div>
+      <label for="nonce1">NONCE</label>
+      <div class="nonce">
+        <button type="button" data-step="-1" data-target="nonce1" aria-label="Nonce minus one">−</button>
+        <input type="text" id="nonce1" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+        <button type="button" data-step="1" data-target="nonce1" aria-label="Nonce plus one">+</button>
+      </div>
+    </div>
+    <div>
+      <span class="lbl">HASH</span>
+      <div class="hash" id="hash1">…</div>
+    </div>
+  </section>
+
+  <div class="link" id="link" aria-hidden="true"><span class="bar"></span><span class="icon" id="linkIcon">🔗</span><span id="linkText">not linked yet</span></div>
+
+  <section class="card" id="card2" aria-labelledby="name2">
+    <div class="head">
+      <span class="blockname" id="name2">BLOCK #2</span>
+      <span class="status" id="status2" aria-live="polite">keep mining</span>
+    </div>
+    <div class="head">
+      <div class="target">Target: hash starts with 0, then a letter a–f</div>
+      <div class="tries">tries <b id="tries2">0</b></div>
+    </div>
+    <p class="msg wait" id="msg2">Mine Block #1 first.</p>
+    <fieldset id="fs2">
+      <div>
+        <label for="data2">DATA</label>
+        <input type="text" id="data2" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div>
+        <span class="lbl">PREVIOUS HASH</span>
+        <div class="prev" id="prev2">…</div>
+      </div>
+      <div>
+        <label for="nonce2">NONCE</label>
+        <div class="nonce">
+          <button type="button" data-step="-1" data-target="nonce2" aria-label="Nonce minus one">−</button>
+          <input type="text" id="nonce2" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+          <button type="button" data-step="1" data-target="nonce2" aria-label="Nonce plus one">+</button>
+        </div>
+      </div>
+      <div>
+        <span class="lbl">HASH</span>
+        <div class="hash" id="hash2">…</div>
+      </div>
+    </fieldset>
+  </section>
+
+  <button type="button" class="reset" id="reset">↺ Reset</button>
+  <footer>Blockchain Open Talk · NCCU FinTech Innovation Lab × TABEI</footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  // ===== constants =====
+  var GENESIS_PREV = "0000000000000000";
+  var DEFAULTS = { data1: "Alice pays Bob 5", nonce1: "0", data2: "Bob pays Carol 2", nonce2: "0" };
+  var KEY = "mineTheBlock.v1";
+  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ===== storage (always wrapped) =====
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      return (o && typeof o === "object") ? o : null;
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
+  }
+  function str(v, d) { return typeof v === "string" ? v : d; }
+  function num(v) { return typeof v === "number" && v >= 0 ? v : 0; }
+
+  var saved = load() || {};
+  var state = {
+    data1: str(saved.data1, DEFAULTS.data1), nonce1: str(saved.nonce1, DEFAULTS.nonce1),
+    data2: str(saved.data2, DEFAULTS.data2), nonce2: str(saved.nonce2, DEFAULTS.nonce2),
+    lock: typeof saved.lock === "string" ? saved.lock : null,
+    tries1: num(saved.tries1), tries2: num(saved.tries2),
+    sound: saved.sound !== false
+  };
+
+  // ===== elements =====
+  var $ = function (id) { return document.getElementById(id); };
+  var el = {
+    data1: $("data1"), nonce1: $("nonce1"), hash1: $("hash1"), status1: $("status1"), card1: $("card1"), tries1: $("tries1"),
+    data2: $("data2"), nonce2: $("nonce2"), hash2: $("hash2"), status2: $("status2"), card2: $("card2"), tries2: $("tries2"),
+    prev2: $("prev2"), msg2: $("msg2"), fs2: $("fs2"),
+    link: $("link"), linkText: $("linkText"), banner: $("banner"), flash: $("flash"), sound: $("sound")
+  };
+
+  // ===== hashing =====
+  var enc = new TextEncoder();
+  function sha256(s) {
+    return crypto.subtle.digest("SHA-256", enc.encode(s)).then(function (buf) {
+      var b = new Uint8Array(buf), out = "";
+      for (var i = 0; i < b.length; i++) out += (b[i] < 16 ? "0" : "") + b[i].toString(16);
+      return out;
+    });
+  }
+  function cleanNonce(v) {
+    var d = String(v).replace(/[^0-9]/g, "").replace(/^0+(?=\d)/, "");
+    return d === "" ? "0" : d;
+  }
+  function ok1(h) { return h.charAt(0) === "0"; }
+  function ok2(h) { return h.charAt(0) === "0" && "abcdef".indexOf(h.charAt(1)) !== -1; }
+  function esc(s) { return s.replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+  var RULE1 = [function (c) { return c === "0"; }];
+  var RULE2 = [function (c) { return c === "0"; }, function (c) { return "abcdef".indexOf(c) !== -1; }];
+  function paint(h, rules) {
+    var out = "";
+    for (var i = 0; i < rules.length; i++) out += '<span class="' + (rules[i](h.charAt(i)) ? "ok" : "bad") + '">' + h.charAt(i) + "</span>";
+    return out + esc(h.slice(rules.length));
+  }
+
+  // ===== effect: hash "rolls" like a slot machine, then lands =====
+  var HEX = "0123456789abcdef";
+  var rollTimers = {};
+  function showHash(node, h, rules, animate) {
+    var key = node.id;
+    if (rollTimers[key]) { cancelAnimationFrame(rollTimers[key]); rollTimers[key] = 0; }
+    if (!animate || REDUCED) { node.classList.remove("rolling"); node.innerHTML = paint(h, rules); return; }
+    var start = performance.now(), dur = 260;
+    node.classList.add("rolling");
+    (function frame(t) {
+      var p = Math.min(1, (t - start) / dur), fixed = Math.floor(p * h.length), s = "";
+      for (var i = 0; i < h.length; i++) s += i < fixed ? h.charAt(i) : HEX.charAt((Math.random() * 16) | 0);
+      if (p < 1) { node.textContent = s; rollTimers[key] = requestAnimationFrame(frame); }
+      else { node.classList.remove("rolling"); node.innerHTML = paint(h, rules); rollTimers[key] = 0; }
+    })(start);
+  }
+  function retrigger(node, cls) { node.classList.remove(cls); void node.offsetWidth; node.classList.add(cls); }
+
+  // ===== effect: sound (Web Audio, starts only after a tap) =====
+  var actx = null;
+  function audio() {
+    if (!state.sound) return null;
+    try {
+      if (!actx) { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null; actx = new C(); }
+      if (actx.state === "suspended") actx.resume();
+      return actx;
+    } catch (e) { return null; }
+  }
+  function tone(freq, start, len, type, vol) {
+    var a = audio(); if (!a) return;
+    var o = a.createOscillator(), g = a.createGain(), t = a.currentTime + start;
+    o.type = type || "square"; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol || 0.08, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + len + 0.02);
+  }
+  function sTick() { tone(880 + Math.random() * 300, 0, 0.04, "square", 0.025); }
+  function sWin(big) {
+    var notes = big ? [523, 659, 784, 1047, 1319] : [523, 659, 784, 1047];
+    notes.forEach(function (f, i) { tone(f, i * 0.08, 0.22, "square", 0.07); });
+    tone(big ? 1568 : 1319, notes.length * 0.08, 0.45, "triangle", 0.09);
+  }
+  function sBreak() { tone(220, 0, 0.18, "sawtooth", 0.09); tone(140, 0.12, 0.3, "sawtooth", 0.09); tone(70, 0.28, 0.4, "square", 0.06); }
+  function buzz(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) {} }
+  function setSoundBtn() { el.sound.textContent = state.sound ? "🔊" : "🔇"; el.sound.setAttribute("aria-label", state.sound ? "Sound on" : "Sound off"); }
+
+  // ===== effect: confetti (canvas) =====
+  var cv = $("fx"), cx = cv.getContext("2d"), parts = [], raf = 0;
+  var COLORS = ["#4ADE80", "#FFD166", "#22D3EE", "#9B7BFF", "#FF4D9D", "#F5F5FA"];
+  function resize() { var d = window.devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d, 0, 0, d, 0, 0); }
+  window.addEventListener("resize", resize); resize();
+  function burst(fromEl, count, palette) {
+    if (REDUCED) return;
+    var r = fromEl.getBoundingClientRect(), ox = r.left + r.width / 2, oy = Math.max(40, Math.min(innerHeight - 40, r.top + 40));
+    for (var i = 0; i < count; i++) {
+      var a = Math.random() * Math.PI * 2, sp = 4 + Math.random() * 9;
+      parts.push({ x: ox, y: oy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 6, g: 0.28 + Math.random() * 0.12,
+        w: 5 + Math.random() * 6, h: 3 + Math.random() * 5, rot: Math.random() * 6, vr: (Math.random() - .5) * .4,
+        c: palette[(Math.random() * palette.length) | 0], life: 70 + Math.random() * 50,
+        ch: Math.random() < .3 ? HEX.charAt((Math.random() * 16) | 0) : null });
+    }
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  function tick() {
+    cx.clearRect(0, 0, innerWidth, innerHeight);
+    parts = parts.filter(function (p) { return p.life > 0 && p.y < innerHeight + 40; });
+    parts.forEach(function (p) {
+      p.vy += p.g; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life--;
+      cx.save(); cx.globalAlpha = Math.min(1, p.life / 30); cx.translate(p.x, p.y); cx.rotate(p.rot); cx.fillStyle = p.c;
+      if (p.ch) { cx.font = "bold 16px ui-monospace,Menlo,monospace"; cx.fillText(p.ch, -5, 5); }
+      else cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      cx.restore();
+    });
+    raf = parts.length ? requestAnimationFrame(tick) : 0;
+    if (!raf) cx.clearRect(0, 0, innerWidth, innerHeight);
+  }
+
+  // ===== effect: banner + flash =====
+  function banner(text, sub, bad) {
+    el.banner.innerHTML = esc(text) + (sub ? "<small>" + esc(sub) + "</small>" : "");
+    el.banner.className = "banner" + (bad ? " bad" : "");
+    void el.banner.offsetWidth; el.banner.classList.add("show");
+    el.flash.style.background = bad ? "rgba(255,77,157,.35)" : "rgba(74,222,128,.25)";
+    retrigger(el.flash, "go");
+  }
+
+  // ===== effects fired on state transitions =====
+  function onMined(n) {
+    var card = n === 1 ? el.card1 : el.card2;
+    retrigger(card, "pop");
+    burst(card, n === 1 ? 90 : 160, COLORS);
+    if (n === 2) setTimeout(function () { burst(el.card1, 80, COLORS); }, 180);
+    banner(n === 1 ? "⛏ BLOCK MINED!" : "⛓ CHAIN EXTENDED!", n === 1 ? "Shout your nonce!" : "Block #2 is linked to Block #1", false);
+    sWin(n === 2); buzz(n === 1 ? [60, 40, 120] : [60, 40, 60, 40, 200]);
+  }
+  function onBroken() {
+    retrigger(el.card2, "shake"); retrigger(el.hash2, "glitch");
+    burst(el.link, 40, ["#FF4D9D", "#3A3D5C"]);
+    banner("✗ CHAIN BROKEN", "Someone changed history", true);
+    sBreak(); buzz([200, 80, 200]);
+  }
+
+  function setStatus(node, card, kind) {
+    node.textContent = { mining: "keep mining", valid: "✓ valid block", broken: "✗ chain broken" }[kind];
+    node.className = "status" + (kind === "mining" ? "" : " " + kind);
+    card.classList.toggle("valid", kind === "valid");
+    card.classList.toggle("broken", kind === "broken");
+  }
+
+  // ===== render (guarded so late async results never overwrite newer ones) =====
+  var seq = 0, prev = null; // prev = last shown {v1, s2}; null on first paint (no effects)
+  var lastH1 = "", lastH2 = "";
+  function render() {
+    var my = ++seq;
+    el.tries1.textContent = state.tries1; el.tries2.textContent = state.tries2;
+    sha256("1|" + GENESIS_PREV + "|" + state.data1 + "|" + state.nonce1).then(function (h1) {
+      if (my !== seq) return;
+      return sha256("2|" + h1 + "|" + state.data2 + "|" + state.nonce2).then(function (h2) {
+        if (my !== seq) return;
+        var v1 = ok1(h1), v2 = ok2(h2);
+        var first = prev === null;
+
+        if (h1 !== lastH1) showHash(el.hash1, h1, RULE1, !first);
+        if (h2 !== lastH2) showHash(el.hash2, h2, RULE2, !first);
+        lastH1 = h1; lastH2 = h2;
+        setStatus(el.status1, el.card1, v1 ? "valid" : "mining");
+        el.prev2.textContent = h1.slice(0, 16) + "…";
+
+        // first time Block #2 becomes valid: remember which Block #1 it was built on
+        if (v2 && v1 && state.lock === null) { state.lock = h1; save(); }
+
+        var locked = !v1 && state.lock === null;
+        var broken = state.lock !== null && h1 !== state.lock;
+        el.fs2.disabled = locked;
+        el.card2.classList.toggle("locked", locked);
+
+        var s2;
+        if (locked) {
+          s2 = "mining";
+          el.msg2.textContent = "Mine Block #1 first."; el.msg2.className = "msg wait"; el.msg2.hidden = false;
+        } else if (broken) {
+          s2 = "broken";
+          el.msg2.textContent = "Block #1 changed after Block #2 was mined — the link no longer matches.";
+          el.msg2.className = "msg"; el.msg2.hidden = false;
+        } else {
+          s2 = v2 ? "valid" : "mining"; el.msg2.hidden = true;
+        }
+        setStatus(el.status2, el.card2, s2);
+
+        // chain link between the cards
+        el.link.classList.toggle("ok", s2 === "valid");
+        el.link.classList.toggle("bad", s2 === "broken");
+        el.linkText.textContent = s2 === "valid" ? "linked" : s2 === "broken" ? "link broken" : "not linked yet";
+        el.prev2.classList.toggle("ok", s2 === "valid");
+        el.prev2.classList.toggle("bad", s2 === "broken");
+
+        // transition effects (never on first paint / reload)
+        if (!first) {
+          if (v1 && !prev.v1 && !broken) onMined(1);
+          if (s2 === "valid" && prev.s2 !== "valid") onMined(2);
+          if (s2 === "broken" && prev.s2 !== "broken") onBroken();
+          if (!locked && !v2 && h2.charAt(0) === "0" && s2 === "mining") retrigger(el.hash2, "close"); // so close!
+        }
+        prev = { v1: v1, s2: s2 };
+      });
+    }).catch(function () {
+      el.hash1.textContent = "This browser can't compute SHA-256 here. Open the page over https.";
+    });
+  }
+
+  // ===== inputs =====
+  function syncInputs() {
+    el.data1.value = state.data1; el.nonce1.value = state.nonce1;
+    el.data2.value = state.data2; el.nonce2.value = state.nonce2;
+  }
+  el.data1.addEventListener("input", function () { state.data1 = el.data1.value; save(); render(); });
+  el.data2.addEventListener("input", function () { state.data2 = el.data2.value; save(); render(); });
+  function bump(k) { var t = k === "nonce1" ? "tries1" : "tries2"; state[t]++; }
+  ["nonce1", "nonce2"].forEach(function (k) {
+    el[k].addEventListener("input", function () {
+      var raw = el[k].value, c = raw.replace(/[^0-9]/g, "");
+      if (c !== raw) el[k].value = c;
+      var n = cleanNonce(c);
+      if (n !== state[k]) { state[k] = n; bump(k); sTick(); }
+      save(); render();
+    });
+    el[k].addEventListener("blur", function () { el[k].value = state[k]; });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("button[data-step]"), function (b) {
+    b.addEventListener("click", function () {
+      var k = b.getAttribute("data-target"), step = parseInt(b.getAttribute("data-step"), 10);
+      var n = String(Math.max(0, parseInt(state[k], 10) + step));
+      if (n !== state[k]) { state[k] = n; bump(k); sTick(); buzz(8); }
+      el[k].value = state[k]; save(); render();
+    });
+  });
+  el.sound.addEventListener("click", function () { state.sound = !state.sound; setSoundBtn(); save(); if (state.sound) sTick(); });
+  $("reset").addEventListener("click", function () {
+    state.data1 = DEFAULTS.data1; state.nonce1 = DEFAULTS.nonce1;
+    state.data2 = DEFAULTS.data2; state.nonce2 = DEFAULTS.nonce2;
+    state.lock = null; state.tries1 = 0; state.tries2 = 0;
+    prev = null; save(); syncInputs(); render();
+  });
+
+  setSoundBtn(); syncInputs(); render();
+})();
+</script>
+</body>
+</html>
