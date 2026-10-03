@@ -99,7 +99,7 @@ const jsonLd = {
   image: "https://zuemen.net/zuemen.jpg",
   sameAs: [
     "https://github.com/zuemen",
-    "https://www.linkedin.com/in/%E5%BB%B7%E7%BF%8A-%E6%9C%B1-95838538a/",
+    "https://www.linkedin.com/in/ting-yi-chu-95838538a/",
   ],
   jobTitle: "Research Assistant",
   affiliation: {

@@ -26,9 +26,8 @@ const contactLinks: ContactLink[] = [
   {
     name: "LinkedIn",
     icon: <LinkIcon size={24} />,
-    url: "https://www.linkedin.com/in/%E5%BB%B7%E7%BF%8A-%E6%9C%B1-95838538a/",
-    label: "廷翊 朱",
-    labelLang: "zh-Hant",
+    url: "https://www.linkedin.com/in/ting-yi-chu-95838538a/",
+    label: "Ting-Yi Chu",
   },
   {
     name: "Email",
