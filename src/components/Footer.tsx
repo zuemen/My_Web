@@ -23,7 +23,7 @@ const Footer = ({ lastUpdated }: FooterProps) => {
   const externalLinks = [
     { href: "https://github.com/zuemen", label: "GitHub" },
     {
-      href: "https://www.linkedin.com/in/%E5%BB%B7%E7%BF%8A-%E6%9C%B1-95838538a/",
+      href: "https://www.linkedin.com/in/ting-yi-chu-95838538a/",
       label: "LinkedIn",
     },
     { href: "mailto:112306007@g.nccu.edu.tw", label: t(dict.labels.email) },
