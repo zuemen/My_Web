@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { l, pick, type L } from "@/i18n/config";
@@ -60,20 +61,32 @@ const CVContent = () => {
     <article className={styles.cv}>
       {/* ── Header ── */}
       <header className={styles.header}>
-        <h1 className={styles.name}>{lang === "en" ? "Ting-Yi Chu" : "朱廷翊"}</h1>
-        <p className={styles.contact}>
-          <span>{lang === "en" ? "Taipei, Taiwan" : "台灣 台北"}</span>
-          <span className={styles.sep}>|</span>
-          <a href="mailto:112306007@g.nccu.edu.tw">112306007@g.nccu.edu.tw</a>
-          <span className={styles.sep}>|</span>
-          <a href="https://zuemen.net" target="_blank" rel="noopener noreferrer">
-            zuemen.net
-          </a>
-          <span className={styles.sep}>|</span>
-          <a href="https://github.com/zuemen" target="_blank" rel="noopener noreferrer">
-            github.com/zuemen
-          </a>
-        </p>
+        <div>
+          <h1 className={styles.name}>{lang === "en" ? "Ting-Yi Chu" : "朱廷翊"}</h1>
+          <p className={styles.contact}>
+            <span>{lang === "en" ? "Taipei, Taiwan" : "台灣 台北"}</span>
+            <span className={styles.sep}>|</span>
+            <a href="mailto:112306007@g.nccu.edu.tw">112306007@g.nccu.edu.tw</a>
+            <span className={styles.sep}>|</span>
+            <a href="https://zuemen.net" target="_blank" rel="noopener noreferrer">
+              zuemen.net
+            </a>
+            <span className={styles.sep}>|</span>
+            <a href="https://github.com/zuemen" target="_blank" rel="noopener noreferrer">
+              github.com/zuemen
+            </a>
+          </p>
+        </div>
+        <figure className={styles.photo}>
+          <Image
+            src="/portrait.jpg"
+            alt={t(dict.hero.photoAlt)}
+            width={240}
+            height={320}
+            sizes="(max-width: 640px) 96px, 132px"
+            style={{ objectFit: "cover", objectPosition: "center 20%" }}
+          />
+        </figure>
       </header>
 
       {/* ── Summary ── */}
