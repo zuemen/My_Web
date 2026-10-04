@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
   column-gap: var(--space-16);
-  align-items: end;
+  align-items: start;
 }
 
 /* Entrance is CSS, not framer-motion, so the hero copy is present and visible
@@ -46,6 +46,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  line-height: 1.6;
   color: var(--color-label);
   margin-bottom: var(--space-6);
 }
@@ -168,7 +169,10 @@
 /* Photograph set as a plate with a caption beneath, the way a monograph
    would run a portrait. */
 .visual {
-  margin: 0;
+  /* Top of the portrait on the cap line of the name: the role line above the
+     name is 0.75rem at line-height 1.6, then --space-6. Measured: the
+     name's capitals start within 1px of its line box at line-height 0.95. */
+  margin: calc(0.75rem * 1.6 + var(--space-6)) 0 0;
 }
 
 .profileWrapper {
@@ -214,6 +218,7 @@
   .visual {
     order: -1;
     width: 150px;
+    margin-top: 0;
   }
 
   /* Stacked, the slash separators would land at the start of each line. */
