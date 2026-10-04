@@ -44,7 +44,7 @@ const Hero = () => {
         <figure className={styles.visual}>
           <div className={styles.profileWrapper}>
             <Image
-              src="/zuemen.jpg"
+              src="/portrait.jpg"
               alt={t(dict.hero.photoAlt)}
               width={300}
               height={400}

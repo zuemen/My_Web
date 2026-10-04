@@ -96,7 +96,7 @@ const jsonLd = {
   name: "Zuemen Chu",
   alternateName: ["Zuemen", "朱廷翊", "Ting-Yi Chu"],
   url: "https://zuemen.net",
-  image: "https://zuemen.net/zuemen.jpg",
+  image: "https://zuemen.net/portrait.jpg",
   sameAs: [
     "https://github.com/zuemen",
     "https://www.linkedin.com/in/ting-yi-chu-95838538a/",
