@@ -76,6 +76,8 @@
   margin: var(--space-8) 0;
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 1.9vw, 1.5rem);
+  /* No one-character last line (the Chinese standfirst left 「賴。」 alone). */
+  text-wrap: pretty;
   line-height: 1.45;
   color: var(--color-text-secondary);
 }
