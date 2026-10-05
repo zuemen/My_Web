@@ -19,22 +19,24 @@ export const dict = {
   },
 
   hero: {
+    // Rewritten 2026-10-05 from the owner's bio: who he is now (the eyebrow),
+    // what the work is about (the standfirst), and where it happens today.
     role: l(
-      "Research Assistant · National Chengchi University MIS",
-      "研究助理 · 國立政治大學資訊管理學系",
+      "MIS, National Chengchi University · Class of 2027",
+      "國立政治大學 資訊管理學系 · 2027 屆",
     ),
     intro: l(
-      "I work on the infrastructure that lets a credential be trusted without trusting whoever hands it to you — self-sovereign identity, and the contract security underneath it.",
-      "我做的是讓憑證本身可被信任的基礎建設 —— 不必信任遞出憑證的那個人。自主權身分，以及支撐它的合約安全。",
+      "I work on digital trust — making a credential verifiable without trusting whoever hands it to you, and making the contracts underneath it safe to rely on.",
+      "我做的是數位信任——讓一份憑證不必信任遞出它的人也能被驗證，也讓它底下的合約值得依賴。",
     ),
     web3: l(
-      "That line now runs in two directions: blockchain practice inside a financial institution, and what an autonomous agent is allowed to do with money — verifiable agent identity, session-bounded trading permissions, and an x402 payment-gated signal API that settles in USDC and splits its revenue on-chain, deployed to the Base Sepolia testnet.",
-      "這條線現在往兩個方向延伸：在金融機構內實踐區塊鏈，以及自主 agent 能對資金做什麼——可驗證的 agent 身分、以 session 為界的交易授權，以及一支以 USDC 結算、收入在鏈上分潤的 x402 付費訊號 API，部署於 Base Sepolia 測試網。",
+      "Right now I'm a Project Management Intern in the Blockchain Technology Development Section at Cathay Financial Holdings, research Web3 agent protocols and trustworthy AI at TABEI, and work on two research tracks at NCCU MIS. In my own builds, identity extends to autonomous agents — agent DIDs, session-bounded permissions, and x402 machine payments prototyped on the Base Sepolia testnet.",
+      "目前我在國泰金控區塊鏈技術發展科擔任專案管理實習生，在 TABEI 研究 Web3 agent 協定與可信 AI，也在政大資管參與兩條研究線。我自己的專案則把身分延伸到自主 agent：agent DID、以 session 為界的權限，以及在 Base Sepolia 測試網上實作的 x402 機器支付。",
     ),
     tags: [
       l("Self-Sovereign Identity", "自主權身分"),
       l("Smart Contract Security", "智慧合約安全"),
-      l("Agent Payments (x402)", "代理支付 x402"),
+      l("Agent Identity & Payments", "Agent 身分與支付"),
       l("Blockchain & Fintech", "區塊鏈與金融科技"),
     ],
     seeResearch: l("See Research", "查看研究"),
