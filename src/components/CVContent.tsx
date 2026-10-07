@@ -9,8 +9,8 @@ import { awards, formatAwardDate } from "@/data/awards";
 import styles from "@/app/cv/page.module.css";
 
 const summary = l(
-  "Management Information Systems student at National Chengchi University working on blockchain trust infrastructure — self-sovereign identity, smart contract security, and their application in finance. Currently a project management intern in the Blockchain Technology Development Section at Cathay Financial Holdings and an intern at the Taiwan Association for Blockchain Ecosystem Innovation, where I help run industry events including ETHTaipei. Led teams to a Ministry of Digital Affairs merit award and the FinTech Taipei Awards finals, and work across research support, backend development, and system integration.",
-  "國立政治大學資訊管理學系學生，研究區塊鏈信任基礎建設——自主權身分、智慧合約安全，以及它們在金融上的應用。目前為國泰金控區塊鏈技術發展科專案管理實習生，並於臺灣區塊鏈愛好者協會實習，參與 ETHTaipei 等產業活動的籌辦。曾帶領團隊獲數位發展部優選、入圍台北金融科技獎決審，經驗涵蓋研究支援、後端開發與系統整合。",
+  "Management Information Systems student at National Chengchi University working on blockchain trust infrastructure — self-sovereign identity, smart contract security, and their application in finance. Currently a project management intern in the Blockchain Technology Development Section at Cathay Financial Holdings and an intern at the Taiwan Association for Blockchain Ecosystem Innovation, where I help run industry events including ETHTaipei. Led teams to a Ministry of Digital Affairs merit award and a FinTech Taipei Awards win, and work across research support, backend development, and system integration.",
+  "國立政治大學資訊管理學系學生，研究區塊鏈信任基礎建設——自主權身分、智慧合約安全，以及它們在金融上的應用。目前為國泰金控區塊鏈技術發展科專案管理實習生，並於臺灣區塊鏈愛好者協會實習，參與 ETHTaipei 等產業活動的籌辦。曾帶領團隊獲數位發展部優選、獲台北金融科技獎優勝，經驗涵蓋研究支援、後端開發與系統整合。",
 );
 
 const education: { title: L; lines: L[]; period: L } = {

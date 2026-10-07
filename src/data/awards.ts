@@ -24,21 +24,22 @@ export interface Award {
  */
 export const awards: Award[] = [
   {
-    // Final results are announced 2026-10-07 — update `result` then.
+    // Winners announced 2026-10-07: three teams per division, listed by entry
+    // number and not ranked, so "Winner" with no place.
     slug: "fintech-taipei-2026",
     title: l("FinTech Taipei Awards 2026", "2026 台北金融科技獎"),
     issuer: l(
       "Financial Innovation Award, Campus Division",
       "金融創新獎－校園組",
     ),
-    date: "2026-09",
-    result: l("Finalist", "入圍決審"),
+    date: "2026-10",
+    result: l("Winner", "優勝"),
     role: l("Team Lead", "團隊負責人"),
     detail: l(
-      "ChainLens, an explainable graph-analytics system for tracing crypto fraud money flows, advanced to the final review with a three-person team.",
-      "以「鏈鏡 ChainLens」——可解釋的虛擬資產詐騙金流圖分析系統——三人團隊入圍決審。",
+      "ChainLens, an explainable graph-analytics system for tracing crypto fraud money flows, was one of three winning teams in the Campus Division after the final round on Oct 5–6. Guided by the Financial Supervisory Commission; organized by the Taiwan Financial Services Roundtable and the Taiwan Academy of Banking and Finance.",
+      "以「鏈鏡 ChainLens」——可解釋的虛擬資產詐騙金流圖分析系統——三人團隊經 10/5–6 決賽，獲校園組三支優勝團隊之一。金管會指導，台灣金融服務業聯合總會、台灣金融研訓院主辦。",
     ),
-    link: "https://chain-lens-beta.vercel.app",
+    link: "https://contest.bhuntr.com/tw/cbgkrznrqnl64691mx/article/4474/",
   },
   {
     slug: "gleif-appreciation-award-2026",
