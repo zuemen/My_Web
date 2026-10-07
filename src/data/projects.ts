@@ -40,8 +40,8 @@ export const projects: Project[] = [
     ),
     shortTitle: l("ChainLens", "鏈鏡 ChainLens"),
     category: l(
-      "FinTech Taipei Awards 2026 — Finalist",
-      "2026 台北金融科技獎 — 入圍決審",
+      "FinTech Taipei Awards 2026 — Winner",
+      "2026 台北金融科技獎 — 優勝",
     ),
     summary: l(
       "Compliance screening for Taiwanese virtual asset service providers, where every risk flag comes with the graph evidence behind it rather than a bare score.",
@@ -52,8 +52,8 @@ export const projects: Project[] = [
       "為虛擬資產服務商打造的金流篩查平台。即時篩查採用社會網路分析與洗錢圖樣偵測，並為每個判定附上結構證據——中心性異常、社群歸屬與資金路徑圖樣——讓法遵人員看得到位址被標記的原因。另以 GCN／GraphSAGE 在 Elliptic 資料集（20.3 萬筆比特幣交易）上做離線研究基準；在建立在地標註資料集之前，刻意不接入即時審查。",
     ),
     outcome: l(
-      "Advanced to the final review of the FinTech Taipei Awards 2026 (Financial Innovation Award, Campus Division) as team lead of a three-person team, with a live screening demo deployed.",
-      "以三人團隊負責人身分入圍 2026 台北金融科技獎金融創新獎校園組決審，並已部署可線上操作的篩查 demo。",
+      "Won the FinTech Taipei Awards 2026 (Financial Innovation Award, Campus Division) — one of three winning teams — as team lead of a three-person team, with a live screening demo deployed.",
+      "以三人團隊負責人身分獲 2026 台北金融科技獎金融創新獎校園組優勝（三支優勝團隊之一），並已部署可線上操作的篩查 demo。",
     ),
     tags: ["SNA", "Graph Neural Networks", "AML Compliance", "Python", "Next.js"],
     link: "https://github.com/zuemen/ChainLens",
