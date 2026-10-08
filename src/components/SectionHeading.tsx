@@ -7,6 +7,8 @@ interface SectionHeadingProps {
   subtitle?: string;
   /** Heading level, so pages keep a sensible h1→h2→h3 order. */
   as?: "h1" | "h2";
+  /** Full-width header above its content, instead of the left rail. */
+  wide?: boolean;
 }
 
 /**
@@ -20,9 +22,10 @@ const SectionHeading = ({
   title,
   subtitle,
   as: Tag = "h2",
+  wide = false,
 }: SectionHeadingProps) => {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${wide ? styles.wide : ""}`}>
       {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
       <Tag className={styles.title}>{title}</Tag>
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}

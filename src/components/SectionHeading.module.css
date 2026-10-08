@@ -41,3 +41,25 @@
     font-size: 1.85rem;
   }
 }
+
+/* Wide sections (the demo theatre, the work index) put the heading above
+   the content and give it room: these are the page's main events. */
+@media (min-width: 1024px) {
+  .wide {
+    margin-bottom: var(--space-10);
+  }
+
+  .wide .title {
+    font-size: clamp(2.2rem, 3.4vw, 2.9rem);
+  }
+
+  .wide .subtitle {
+    max-width: 60ch;
+    font-style: normal;
+  }
+}
+
+.wide .subtitle {
+  max-width: 60ch;
+  font-style: normal;
+}

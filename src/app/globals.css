@@ -30,6 +30,21 @@
      being retyped as literals. */
   --color-accent-rgb: 155 182 216;
 
+  /* Color — status. Used only where something is being checked: the demo
+     replays, proof badges and outcome stamps. Desaturated to sit with the
+     steel blue; each is ≥ 7:1 on --color-bg. Never decorative. */
+  --color-pass: #8cc9a1;
+  --color-pass-rgb: 140 201 161;
+  --color-refuse: #f0907a;
+  --color-refuse-rgb: 240 144 122;
+  --color-warn: #e3c07a;
+  --color-warn-rgb: 227 192 122;
+
+  /* Panels — the demo stage and case-study blocks. The only raised surfaces
+     on the site; everything else sits on the ground with hairlines. */
+  --radius-panel: 6px;
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 24px 48px -24px rgb(0 0 0 / 0.6);
+
   /* Spacing — 5, 10 and 20 were referenced by several modules but never
      defined, which silently collapsed those gaps to zero. */
   --space-1: 0.25rem;
@@ -228,8 +243,16 @@ ul {
   }
 }
 
+/* Full-width section: heading above, content across the whole container. */
+.section-wide {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+}
+
 @media (max-width: 768px) {
-  .section-container {
+  .section-container,
+  .section-wide {
     padding: 0 var(--space-5);
   }
 }
