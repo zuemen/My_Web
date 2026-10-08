@@ -34,18 +34,6 @@ const newsData: NewsItem[] = [
   {
     date: "2026.09",
     title: l(
-      "Shipped two agent-mandate protocols on public testnets",
-      "兩套 agent 授權協議部署上公開測試網",
-    ),
-    description: l(
-      "Agent Passport on Monad testnet (12 verified contracts) and Mandate Layer on Base Sepolia (17 verified contracts), each with a recorded run in which the contracts refuse out-of-mandate actions on-chain.",
-      "Agent Passport 部署於 Monad 測試網（12 支驗證合約）、Mandate Layer 部署於 Base Sepolia（17 支驗證合約），兩者都有完整執行紀錄，合約在鏈上拒絕超出授權的動作。",
-    ),
-    icon: <Zap size={18} />,
-  },
-  {
-    date: "2026.09",
-    title: l(
       "Joined Cathay Financial Holdings as a Project Management Intern",
       "加入國泰金控擔任專案管理實習生",
     ),

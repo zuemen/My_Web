@@ -1,9 +1,46 @@
+/* /research opens like an article: a large heading over a standfirst and
+   body, on the same container and gutter as the rest of the site. The page
+   shell already clears the navbar. */
 .philosophy {
-  padding: calc(var(--space-20) + 64px) 0 var(--space-20);
+  position: relative;
+  padding: var(--space-20) 0 var(--space-16);
+  overflow: hidden;
+}
+
+.philosophy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 60% 55% at 20% 20%, #000 15%, transparent 70%);
+}
+
+.container {
+  position: relative;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+}
+
+.content {
+  max-width: 760px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-10);
 }
 
 .textBlock {
-  max-width: var(--measure);
   font-size: 1.0625rem;
   color: var(--color-text-secondary);
   line-height: 1.8;
@@ -14,14 +51,25 @@
 
 /* First paragraph reads as a standfirst, the way an article opens. */
 .textBlock p:first-child {
-  font-size: 1.2rem;
+  padding-left: var(--space-5);
+  border-left: 2px solid var(--color-accent);
+  font-size: 1.22rem;
   line-height: 1.65;
   color: var(--color-text-primary);
 }
 
+.textBlock strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .philosophy {
-    padding: calc(var(--space-12) + 64px) 0 var(--space-12);
+    padding: var(--space-12) 0 var(--space-10);
+  }
+
+  .container {
+    padding: 0 var(--space-5);
   }
 
   .textBlock {
@@ -30,5 +78,6 @@
 
   .textBlock p:first-child {
     font-size: 1.1rem;
+    padding-left: var(--space-4);
   }
 }

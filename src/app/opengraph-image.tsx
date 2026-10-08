@@ -12,7 +12,7 @@ import { ImageResponse } from "next/og";
  * characters that the title tag already carries.
  */
 
-export const alt = "Zuemen Chu — Trust infrastructure for AI agents that move money";
+export const alt = "Zuemen Chu — Blockchain & Digital Trust Infrastructure";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -71,13 +71,13 @@ export default function OpengraphImage() {
               color: ACCENT,
             }}
           >
-            Trust infrastructure for AI agents that move money
+            Blockchain &amp; Digital Trust Infrastructure
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", fontSize: 28, color: MUTED }}>
-            Agent mandates · Verifiable organisational identity · Explainable on-chain risk
+            Self-Sovereign Identity · Smart Contract Security · RWA Tokenization
           </div>
           <div
             style={{
@@ -87,7 +87,7 @@ export default function OpengraphImage() {
               color: MUTED,
             }}
           >
-            Winner, FinTech Taipei Awards 2026 · NCCU MIS · zuemen.net
+            Research Assistant, NCCU MIS · zuemen.net
           </div>
         </div>
       </div>

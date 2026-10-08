@@ -1,14 +1,15 @@
-/* Opening spread: the claim on the left, the person on the right, the
-   evidence across the bottom. Sized to content, not to the viewport. */
+/* Opening spread. Sized to its content rather than stretched to fill the
+   viewport — a full-height hero left most of the first screen empty. */
 .hero {
   position: relative;
   padding-top: calc(64px + var(--space-20));
+  padding-bottom: var(--space-16);
   border-bottom: 1px solid var(--color-rule);
   overflow: hidden;
 }
 
-/* A faint ledger grid behind the claim — the one atmospheric touch on the
-   page, masked so it fades out before the content ends. */
+/* A faint ledger grid behind the name — the one atmospheric touch on the
+   page, masked so it fades out well before the content ends. */
 .hero::before {
   content: "";
   position: absolute;
@@ -18,7 +19,7 @@
     linear-gradient(to right, rgb(255 255 255 / 0.028) 1px, transparent 1px),
     linear-gradient(to bottom, rgb(255 255 255 / 0.028) 1px, transparent 1px);
   background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 70% 60% at 30% 35%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 65% at 30% 35%, #000 20%, transparent 75%);
 }
 
 .container {
@@ -27,19 +28,22 @@
   margin: 0 auto;
   padding: 0 var(--space-8);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
+  grid-template-columns: minmax(0, 1fr) 280px;
   column-gap: var(--space-16);
   align-items: start;
 }
 
+/* Entrance is CSS, not framer-motion, so the hero copy is present and visible
+   in the server-rendered HTML. The reduced-motion block in globals.css zeroes
+   these. */
 .content,
-.visual,
-.proofWrap {
+.visual {
   animation: heroIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-.visual { animation-delay: 0.1s; }
-.proofWrap { animation-delay: 0.2s; }
+.visual {
+  animation-delay: 0.12s;
+}
 
 @keyframes heroIn {
   from {
@@ -52,55 +56,99 @@
   }
 }
 
-.eyebrow {
-  display: inline-flex;
+.role {
+  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  margin-bottom: var(--space-6);
+  gap: var(--space-3);
   font-family: var(--font-mono);
   font-size: 0.74rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.6;
   color: var(--color-text-tertiary);
+  margin-bottom: var(--space-6);
 }
 
-.eyebrow::before {
+.role::before {
   content: "";
-  width: 18px;
+  flex-shrink: 0;
+  width: 20px;
   border-top: 1px solid var(--color-accent);
 }
 
-.headline {
-  max-width: 15ch;
+.name {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 4.9rem);
+  font-size: clamp(3.4rem, 8vw, 6.5rem);
   font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
   color: var(--color-text-primary);
-  text-wrap: balance;
+  margin-bottom: var(--space-4);
 }
 
-:global(html[lang="zh-Hant"]) .headline {
-  max-width: 13em;
+.nameChinese {
+  display: block;
+  margin-top: var(--space-4);
   font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--color-text-tertiary);
 }
 
-.lead {
-  max-width: 58ch;
-  margin: var(--space-8) 0 var(--space-10);
-  font-size: 1.06rem;
+.intro {
+  max-width: 36ch;
+  margin: var(--space-8) 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  /* No one-character last line (the Chinese standfirst left 「賴。」 alone). */
+  text-wrap: pretty;
+  line-height: 1.42;
+  color: var(--color-text-primary);
+}
+
+/* Follow-on paragraph: the concrete build, one step quieter than the
+   standfirst so the hero still has a single loudest line. */
+.web3 {
+  max-width: 56ch;
+  margin: 0 0 var(--space-8);
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--color-rule);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
   line-height: 1.7;
   color: var(--color-text-secondary);
-  text-wrap: pretty;
 }
 
-.name {
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border: 1px solid var(--color-rule);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.02);
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
   font-weight: 500;
+  letter-spacing: 0.02em;
   color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.tag::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
 }
 
 .ctaGroup {
@@ -113,16 +161,16 @@
 .primaryBtn {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
   min-height: 48px;
   padding: 0 var(--space-6);
   background: var(--color-text-primary);
   color: var(--color-bg);
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   border-radius: 3px;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .primaryBtn:hover {
@@ -133,6 +181,7 @@
   display: inline-flex;
   align-items: center;
   min-height: 48px;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -145,10 +194,9 @@
   border-color: var(--color-accent);
 }
 
-/* ── Portrait and "now" ─────────────────────────────────────────────── */
-
+/* Photograph set as a plate, top-aligned with the cap line of the name. */
 .visual {
-  margin-top: var(--space-2);
+  margin: calc(0.74rem * 1.6 + var(--space-6)) 0 0;
 }
 
 .profileWrapper {
@@ -156,7 +204,22 @@
   aspect-ratio: 3 / 4;
   overflow: hidden;
   border: 1px solid var(--color-rule);
-  border-radius: 3px;
+  border-radius: 4px;
+  box-shadow: var(--shadow-panel);
+}
+
+/* A hairline frame offset behind the photo, for depth without a glow. */
+.visual {
+  position: relative;
+}
+
+.visual::before {
+  content: "";
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  pointer-events: none;
 }
 
 .profileImage {
@@ -165,156 +228,38 @@
   filter: saturate(0.85) contrast(1.02);
 }
 
-.now {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  margin-top: var(--space-4);
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--color-border);
-}
-
-.nowLabel {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-label);
-}
-
-.nowLine {
-  font-size: 0.78rem;
-  line-height: 1.5;
-  color: var(--color-text-secondary);
-}
-
-/* ── Proof bar ───────────────────────────────────────────────────────── */
-
-.proofWrap {
-  position: relative;
-  max-width: var(--container);
-  margin: var(--space-16) auto 0;
-  padding: 0 var(--space-8);
-}
-
-.proof {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--color-rule);
-}
-
-.proofItem + .proofItem {
-  border-left: 1px solid var(--color-border);
-}
-
-.proofLink {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  height: 100%;
-  padding: var(--space-6) var(--space-6) var(--space-8);
-  transition: background 0.2s ease;
-}
-
-.proofItem:first-child .proofLink {
-  padding-left: 0;
-}
-
-.proofLink:hover {
-  background: rgb(var(--color-accent-rgb) / 0.04);
-}
-
-.proofValue {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--color-text-primary);
-  font-variant-numeric: tabular-nums;
-}
-
-.proofLabel {
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: var(--color-text-tertiary);
-}
-
-.proofArrow {
-  display: inline;
-  margin-left: 3px;
-  vertical-align: -1px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.proofLink:hover .proofLabel { color: var(--color-text-secondary); }
-.proofLink:hover .proofArrow { opacity: 1; }
-
 @media (max-width: 1024px) {
   .container {
-    grid-template-columns: minmax(0, 1fr) 200px;
+    grid-template-columns: minmax(0, 1fr) 220px;
     column-gap: var(--space-10);
-  }
-
-  .proof {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .proofItem:nth-child(3) {
-    border-left: 0;
-  }
-
-  .proofItem:nth-child(n + 3) {
-    border-top: 1px solid var(--color-border);
-  }
-
-  .proofItem:nth-child(3) .proofLink {
-    padding-left: 0;
   }
 }
 
-/* Phones: the portrait shrinks to an avatar beside the "now" lines and moves
-   below the claim, so the first screen is the headline and the buttons. */
+/* Phones: the portrait shrinks to a small plate above the name, so the first
+   screen is the name and the standfirst rather than a photograph. */
 @media (max-width: 720px) {
   .hero {
     padding-top: calc(64px + var(--space-10));
+    padding-bottom: var(--space-10);
   }
 
   .container {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: var(--space-10);
+    row-gap: var(--space-8);
     padding: 0 var(--space-5);
-  }
-
-  .lead {
-    margin: var(--space-6) 0 var(--space-8);
-    font-size: 1rem;
   }
 
   .visual {
-    display: grid;
-    grid-template-columns: 72px minmax(0, 1fr);
-    column-gap: var(--space-4);
-    align-items: start;
-    margin: 0;
-  }
-
-  .now {
+    order: -1;
+    width: 96px;
     margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
   }
 
-  .proofWrap {
-    margin-top: var(--space-10);
-    padding: 0 var(--space-5);
+  .visual::before {
+    inset: 8px -8px -8px 8px;
   }
 
-  .proofLink {
-    padding: var(--space-5) var(--space-4) var(--space-6);
-  }
-
-  .proofItem:nth-child(odd) .proofLink {
-    padding-left: 0;
+  .intro {
+    margin: var(--space-6) 0;
   }
 }

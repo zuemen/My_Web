@@ -4,9 +4,9 @@ import ResearchFocus from "@/components/ResearchFocus";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "About & Research",
+  title: "Research",
   description:
-    "Zuemen Chu's research: bounded authority for AI agents that move money, verifiable organisational identity (vLEI, SSI), explainable on-chain risk, smart contract security and quantum computing.",
+    "Zuemen Chu's research areas: Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization, and Quantum Finance.",
 };
 
 export default function ResearchPage() {

@@ -5,8 +5,9 @@ import { Check, X, AlertTriangle, Circle, ChevronLeft, ChevronRight, Pause, Play
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { pick, type L } from "@/i18n/config";
-import type { Tone } from "@/data/demos";
 import styles from "./ReplayFrame.module.css";
+
+export type Tone = "pass" | "refuse" | "warn" | "neutral";
 
 export interface LogItem {
   id: string;

@@ -1,47 +1,38 @@
 "use client";
 
-import Link from "next/link";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { l, pick, type L } from "@/i18n/config";
-import { tracks, type TrackId } from "@/data/tracks";
-import { projects, caseStudyHref } from "@/data/projects";
-import SectionHeading from "./SectionHeading";
-import styles from "./ResearchFocus.module.css";
+import styles from "@/app/research/page.module.css";
 
-interface Area {
-  title: L;
-  desc: L;
-  /** Projects in this track are listed under the area. */
-  track?: TrackId;
-  /** The appointment the area sits under, for the two university tracks. */
-  context?: L;
-}
-
-/*
- * The three theses come from data/tracks.ts so /research, /projects and the
- * homepage describe the work in the same words. The two research
- * appointments are kept as their own areas.
- */
-const areas: Area[] = [
-  ...tracks
-    .filter((track) => track.id !== "earlier")
-    .map((track) => ({ title: track.title, desc: track.thesis, track: track.id })),
+const areas: { area: L; desc: L }[] = [
   {
-    title: l("Smart contract security", "智慧合約安全"),
+    area: l("Self-Sovereign Identity (SSI/DID)", "自主權身分（SSI／DID）"),
     desc: l(
-      "Auditing methodology for Solidity contracts: static analysis (Slither), manual review patterns, and formal verification approaches.",
-      "Solidity 合約的稽核方法：靜態分析（Slither）、人工審查模式與形式化驗證。",
+      "Researching decentralized identity standards (W3C DID, Verifiable Credentials) and their application to cross-institution credential verification, where citizens today must repeatedly re-submit the same credentials to different agencies.",
+      "研究去中心化身分標準（W3C DID、可驗證憑證）在跨機構憑證驗證的應用——目前民眾面對不同機關，往往得一再重複提交同一份證明。",
     ),
-    context: l("Research Assistant, NCCU MIS — advised by Prof. Feng-Yuan Chuang", "政大資管研究助理——莊豐源助理教授指導"),
   },
   {
-    title: l("Quantum computing and finance", "量子計算與金融"),
+    area: l("Smart Contract Security", "智慧合約安全"),
     desc: l(
-      "The expressivity and entanglement structure of variational quantum neural networks, and where quantum machine learning could matter in finance.",
-      "變分量子神經網路的表達能力與糾纏結構，以及量子機器學習在金融中可能的用途。",
+      "Studying auditing methodologies for Solidity contracts. Research spans static analysis tools (Slither), manual review patterns, and formal verification approaches.",
+      "研究 Solidity 合約的稽核方法，涵蓋靜態分析工具（Slither）、人工審查模式與形式化驗證。",
     ),
-    context: l("AI+QC Research and Development Program, NCCU — PI Prof. Rua-Huan Tsaih", "政大 AI+QC 研發推動計畫——計畫主持人蔡瑞煌教授"),
+  },
+  {
+    area: l("RWA Tokenization (ERC-3643)", "實體資產代幣化（ERC-3643）"),
+    desc: l(
+      "Investigating regulatory-compliant tokenization of real-world assets. Focus on identity-gated ownership structures and legal compliance frameworks for institutional DeFi.",
+      "研究合規的實體資產代幣化，聚焦需身分驗證的持有結構，以及機構級 DeFi 的法遵框架。",
+    ),
+  },
+  {
+    area: l("Quantum Finance & QML", "量子金融與量子機器學習"),
+    desc: l(
+      "Exploring variational quantum algorithms (VQE, QAOA) for financial optimization. Investigating quantum speedup potential in machine learning tasks using Qiskit and PennyLane.",
+      "探索變分量子演算法（VQE、QAOA）在金融最佳化的應用，並以 Qiskit 與 PennyLane 研究機器學習任務的量子加速潛力。",
+    ),
   },
 ];
 
@@ -51,32 +42,16 @@ const ResearchFocus = () => {
 
   return (
     <section className={styles.areas}>
-      <div className="section-container">
-        <SectionHeading eyebrow={t(l("Research", "研究"))} title={t(dict.sections.researchFocus)} />
-        <ol className={styles.list}>
-          {areas.map((area) => {
-            const related = area.track ? projects.filter((p) => p.track === area.track) : [];
-            return (
-              <li key={area.title.en} className={styles.item}>
-                <h3 className={styles.title}>{t(area.title)}</h3>
-                {area.context && <p className={styles.context}>{t(area.context)}</p>}
-                <p className={styles.desc}>{t(area.desc)}</p>
-                {related.length > 0 && (
-                  <p className={styles.related}>
-                    {related.map((p, i) => (
-                      <span key={p.slug}>
-                        {i > 0 && " · "}
-                        <Link href={caseStudyHref(p) ?? `/projects#${p.slug}`} className={styles.link}>
-                          {t(p.shortTitle)}
-                        </Link>
-                      </span>
-                    ))}
-                  </p>
-                )}
-              </li>
-            );
-          })}
-        </ol>
+      <div className={styles.container}>
+        <h2 className={styles.heading}>{t(dict.sections.researchFocus)}</h2>
+        <div className={styles.grid}>
+          {areas.map((item) => (
+            <div key={item.area.en} className={styles.areaCard}>
+              <h3 className={styles.areaTitle}>{t(item.area)}</h3>
+              <p className={styles.areaDesc}>{t(item.desc)}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

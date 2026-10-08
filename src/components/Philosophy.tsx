@@ -1,7 +1,6 @@
 "use client";
 
 import { useLang } from "@/i18n/LanguageProvider";
-import SectionHeading from "./SectionHeading";
 import styles from "./Philosophy.module.css";
 
 /** The bio, as the owner wrote it (2026-10-05). */
@@ -20,22 +19,25 @@ const BIO = {
   ],
 };
 
-/** /research opens with the bio, in the same rail layout as every other section. */
 const Philosophy = () => {
   const { lang } = useLang();
 
   return (
     <section id="about" className={styles.philosophy}>
-      <div className="section-container">
-        <SectionHeading
-          as="h1"
-          eyebrow={lang === "en" ? "About" : "關於"}
-          title={lang === "en" ? "About me" : "關於我"}
-        />
-        <div className={styles.textBlock}>
-          {(lang === "en" ? BIO.en : BIO.zh).map((paragraph) => (
-            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-          ))}
+      <div className={styles.container}>
+        <div
+          className={styles.content}
+        >
+          {/* h1: this is the top-level heading of /research, the only page
+              that renders Philosophy. */}
+          <h1 className={styles.heading}>
+            {lang === "en" ? "About Me & Research Philosophy" : "關於我與研究理念"}
+          </h1>
+          <div className={styles.textBlock}>
+            {(lang === "en" ? BIO.en : BIO.zh).map((paragraph) => (
+              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+            ))}
+          </div>
         </div>
       </div>
     </section>

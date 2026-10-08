@@ -34,12 +34,12 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://zuemen.net"),
   title: {
-    default: "Zuemen Chu (朱廷翊) — Trust Infrastructure for AI Agents That Move Money",
+    default: "Zuemen Chu (朱廷翊) — Blockchain & Digital Trust Infrastructure",
     template: "%s · Zuemen Chu",
   },
   // Kept under 155 characters so search engines show it without truncating.
   description:
-    "Zuemen Chu (朱廷翊) builds agent mandates, verifiable organisational identity and explainable on-chain risk — with replays verifiable on testnets.",
+    "Zuemen Chu (朱廷翊) — NCCU MIS research assistant, Cathay Financial Holdings blockchain intern. SSI, contract security and x402 agent payments.",
   keywords: [
     "Blockchain",
     "SSI",
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: "https://zuemen.net",
-    title: "Zuemen Chu — Trust Infrastructure for AI Agents That Move Money",
+    title: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
     description:
-      "Agent mandates on Monad and Base, vLEI-backed organisational identity, and explainable crypto-fraud screening (Winner, FinTech Taipei Awards 2026).",
+      "Research Assistant at NCCU MIS. Working on Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization, and x402 agent payments.",
     siteName: "zuemen.net",
     // Image comes from app/opengraph-image.tsx (file-based metadata). Listing
     // it here too would just reintroduce a hardcoded path to keep in sync.
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zuemen Chu — Trust Infrastructure for AI Agents That Move Money",
+    title: "Zuemen Chu — Blockchain & Digital Trust Infrastructure",
     description:
-      "Agent mandates on Monad and Base, vLEI-backed organisational identity, and explainable crypto-fraud screening (Winner, FinTech Taipei Awards 2026).",
+      "Research Assistant at NCCU MIS. Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization, x402 agent payments.",
     // No twitter:image — Twitter/X falls back to og:image, which is generated.
   },
   alternates: { canonical: "https://zuemen.net" },

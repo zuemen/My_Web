@@ -46,6 +46,9 @@ const Footer = ({ lastUpdated }: FooterProps) => {
               {link.label}
             </a>
           ))}
+          <Link href="/notes" className={styles.link}>
+            {t(dict.labels.notes)}
+          </Link>
         </div>
         <p className={styles.copy}>
           © {copyrightYear} Zuemen Chu <span lang="zh-Hant">朱廷翊</span>{" "}
