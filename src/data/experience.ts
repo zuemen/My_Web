@@ -147,8 +147,8 @@ export const experience: ExpEntry[] = [
             "負責三天活動（2026/8/29–31，N24 台北方舟）的規劃與營運；活動在國家發展委員會指導下舉辦，屬其可信 AI、隱私運算與信任科技政策研究計畫的一環。",
           ),
           l(
-            "Ran the intake and selection pipeline: 50 teams applied, 20 advanced to the final round through written review, competing for a USD 12,000+ prize pool across six industry challenge tracks.",
-            "負責收件與初選流程：50 隊報名，經書面初審 20 隊進入決賽，角逐逾 1.2 萬美元獎金與六大產業命題。",
+            "Ran the intake and selection pipeline: 50 teams applied, 20 advanced to the final round through written review, competing for a USD 14,000+ prize pool (special prizes included) across six industry challenge tracks.",
+            "負責收件與初選流程：50 隊報名，經書面初審 20 隊進入決賽，角逐逾 1.4 萬美元獎金（含特別獎）與六大產業命題。",
           ),
           l(
             "Translated one closed-door expert roundtable (June) and two industry roundtables (July) into the six challenge tracks — carbon footprint and DPP data-flow control, suspicious activity detection under payment privacy constraints, cross-sector health insurance data collaboration, fragmented government service credentials, migrant worker digital trust and financial inclusion, and RBA supply chain compliance credentials.",

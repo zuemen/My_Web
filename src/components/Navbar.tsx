@@ -10,10 +10,12 @@ import { dict } from "@/i18n/dictionary";
 import { pick } from "@/i18n/config";
 import styles from "./Navbar.module.css";
 
+// Work leads: for the readers this site is written for, it is the first
+// thing to check. "research" is labelled About — the page opens with the bio.
 const navLinks = [
-  { href: "/research", key: "research" },
-  { href: "/experience", key: "experience" },
   { href: "/projects", key: "projects" },
+  { href: "/experience", key: "experience" },
+  { href: "/research", key: "research" },
   { href: "/cv", key: "cv" },
 ] as const;
 
@@ -48,7 +50,8 @@ const Navbar = () => {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
-  const isActive = (href: string) => pathname === href;
+  // Case studies live under /projects/…, so Work stays lit on them.
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <motion.nav

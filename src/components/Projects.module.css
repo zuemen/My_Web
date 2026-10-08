@@ -1,175 +1,69 @@
 .projects {
-  padding: var(--space-16) 0 var(--space-20);
+  padding: var(--space-16) 0 var(--space-24);
 }
 
-.list {
+.track {
+  padding: var(--space-12) 0;
   border-top: 1px solid var(--color-rule);
+  scroll-margin-top: 80px;
 }
 
-.projectItem {
+.trackHead {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
-  gap: var(--space-10);
-  align-items: start;
-  padding: var(--space-10) 0;
-  border-bottom: 1px solid var(--color-border);
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
 }
 
-.projectInfo {
-  grid-column: 1;
-  grid-row: 1;
-  min-width: 0;
-  max-width: var(--measure);
+.trackIndex {
+  padding-top: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent);
 }
 
-.projectImageWrapper {
-  grid-column: 2;
-  grid-row: 1;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border: 1px solid var(--color-rule);
-}
-
-.projectImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.85);
-}
-
-.category {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-label);
+.trackTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--color-text-primary);
   margin-bottom: var(--space-3);
 }
 
-.title {
-  font-family: var(--font-display);
-  font-size: 1.9rem;
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: var(--color-text-primary);
-  margin-bottom: var(--space-4);
-}
-
-.desc {
-  font-size: 1.02rem;
+.trackThesis {
+  max-width: 70ch;
+  font-size: 0.95rem;
   line-height: 1.65;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-5);
-}
-
-.outcome {
-  margin-bottom: var(--space-5);
-  padding: var(--space-4) 0 var(--space-4) var(--space-5);
-  border-left: 2px solid var(--color-accent);
-}
-
-.outcomeLabel {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-label);
-  margin-bottom: var(--space-1);
-}
-
-.outcomeText {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-text-primary);
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) 0;
-  margin-bottom: var(--space-4);
-}
-
-.tag {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
   color: var(--color-text-tertiary);
 }
 
-.tag + .tag::before {
-  content: "·";
-  margin: 0 var(--space-2);
-}
-
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: var(--space-5);
 }
 
-.caseStudyLink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  min-height: 44px;
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  border-bottom: 1px solid var(--color-text-primary);
-  transition: color 0.2s ease, border-color 0.2s ease;
+.cell {
+  scroll-margin-top: 96px;
 }
 
-.caseStudyLink:hover {
-  color: var(--color-accent);
+.cell:target > * {
   border-color: var(--color-accent);
 }
 
-.linkIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
-  color: var(--color-text-tertiary);
-  transition: color 0.2s ease;
-}
-
-.linkIcon:hover {
-  color: var(--color-accent);
-}
-
-@media (max-width: 1024px) {
-  .projectItem {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-5);
-  }
-
-  .projectImageWrapper {
-    grid-row: 1;
-    grid-column: 1;
-    max-width: 360px;
-  }
-
-  .projectInfo {
-    grid-row: 2;
-  }
-}
-
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .projects {
-    padding: var(--space-10) 0 var(--space-12);
+    padding: var(--space-10) 0 var(--space-16);
   }
 
-  .title {
-    font-size: 1.5rem;
+  .trackHead {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
