@@ -91,6 +91,20 @@ export const dict = {
     backToProjects: l("Back to Projects", "回到作品列表"),
   },
 
+  // Chrome for the ChainLens replay (components/demos). UI labels only.
+  demo: {
+    play: l("Play", "播放"),
+    pause: l("Pause", "暫停"),
+    previous: l("Previous step", "上一步"),
+    next: l("Next step", "下一步"),
+    step: l("Step", "步驟"),
+    runLog: l("Run log", "執行紀錄"),
+    tx: l("tx", "交易"),
+    noTx: l("off-chain", "鏈下"),
+    openLive: l("Open the live demo", "開啟線上 demo"),
+    replayLabel: l("Replay", "重播"),
+  },
+
   cv: {
     summary: l("Professional Summary", "專業摘要"),
     education: l("Education", "學歷"),

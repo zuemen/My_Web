@@ -3,18 +3,36 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* Four areas as a 2×2 set of panels. No 01–04 counters: numbering four
+   unordered areas implied a sequence that isn't there. */
 .list {
   list-style: none;
-  border-top: 1px solid var(--color-rule);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
 }
 
 .item {
-  /* No 01–04 counters: numbering four unordered areas implied a sequence
-     that isn't there, and is one of the most templated moves on the web. */
-  padding: var(--space-6) 0;
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.018), transparent 55%);
+  transition: border-color 0.25s ease;
 }
 
+.item::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: var(--space-6);
+  width: 28px;
+  border-top: 1px solid var(--color-accent);
+}
+
+.item:hover {
+  border-color: var(--color-rule);
+}
 
 .body {
   max-width: var(--measure);
@@ -22,22 +40,32 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 500;
+  font-size: 1.35rem;
+  font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--color-text-primary);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .desc {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.93rem;
+  line-height: 1.65;
   color: var(--color-text-secondary);
+}
+
+@media (max-width: 1180px) {
+  .list {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .skills {
     padding: var(--space-12) 0;
+  }
+
+  .item {
+    padding: var(--space-5);
   }
 }
