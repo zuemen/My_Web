@@ -8,7 +8,6 @@ import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { pick, type L } from "@/i18n/config";
 import SectionHeading from "./SectionHeading";
-import ChainLensReplay from "./demos/ChainLensReplay";
 import styles from "./SelectedWork.module.css";
 
 /**
@@ -31,11 +30,6 @@ const SelectedWork = () => {
           eyebrow={t(dict.sections.selectedWorkEyebrow)}
           title={t(dict.sections.projects)}
         />
-
-        {/* The lead project, played rather than described. */}
-        <div className={styles.showcase}>
-          <ChainLensReplay />
-        </div>
 
         <ul className={styles.list}>
           {featured.map((project) => {

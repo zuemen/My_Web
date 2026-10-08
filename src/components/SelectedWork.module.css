@@ -3,10 +3,6 @@
   border-top: 1px solid var(--color-border);
 }
 
-.showcase {
-  margin-bottom: var(--space-10);
-}
-
 /* Projects as a row of cards; the whole card is the link. */
 .list {
   display: grid;
