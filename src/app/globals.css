@@ -11,6 +11,9 @@
   --color-bg-rgb: 10 10 11;
   --color-surface: #111114;
   --color-surface-2: #17171c;
+  /* Raised panels (cards, timeline entries). One step off the ground so a
+     card reads as a card, still well below --color-surface. */
+  --color-panel: #0f0f12;
   --color-border: #222228;
   /* Section rules: one step brighter than --color-border so the page still
      has structure, without the full-contrast lines of the print layout. */
@@ -72,8 +75,8 @@
   --radius-xl: 2px;
 
   /* Typography */
-  --font-sans: var(--font-plex-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-  --font-display: var(--font-newsreader, Georgia, serif);
+  --font-sans: var(--font-plex-sans), var(--font-noto-sans-tc), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: var(--font-newsreader), var(--font-noto-serif-tc), Georgia, serif;
   --font-mono: var(--font-jetbrains-mono, 'JetBrains Mono', Menlo, monospace);
 
 }

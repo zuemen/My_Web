@@ -24,6 +24,16 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  // At the top of a page the bar sits on the page; once the page moves under
+  // it, it gets its blurred ground and hairline and tightens a little.
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Close the menu on navigation, otherwise it stays open over the new page.
   // Adjusting during render (rather than in an effect) avoids the extra commit
@@ -53,6 +63,7 @@ const Navbar = () => {
   return (
     <motion.nav
       className={styles.navbar}
+      data-scrolled={scrolled || menuOpen}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.4 }}

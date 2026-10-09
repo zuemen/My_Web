@@ -1,56 +1,79 @@
+/* The homepage's visual peak: a full-bleed band one step lighter than the
+   page, with larger cards than any other section. */
 .work {
-  padding: var(--space-20) 0;
+  position: relative;
+  padding: var(--space-24) 0;
   border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background:
+    radial-gradient(ellipse 60% 50% at 85% 0%, rgb(var(--color-accent-rgb) / 0.05), transparent 70%),
+    var(--color-surface);
 }
 
-/* Projects as a row of cards; the whole card is the link. */
 .list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
 }
 
 .item {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: var(--space-6) var(--space-5);
+  padding: var(--space-8);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-panel);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.018), transparent 55%);
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  background: var(--color-bg);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .item:hover {
   border-color: var(--color-rule);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-panel);
+}
+
+/* Media slot for a project video. Rendered only when the project has one. */
+.media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  margin: calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) var(--space-6);
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+  background: var(--color-surface-2);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .category {
   display: block;
-  min-height: 2.6em;
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  line-height: 1.3;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
   text-transform: uppercase;
   color: var(--color-label);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 .title {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: var(--space-2);
+  gap: var(--space-3);
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: clamp(1.7rem, 2.6vw, 2.2rem);
   font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.015em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--color-text-primary);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
   transition: color 0.2s ease;
 }
 
@@ -66,12 +89,13 @@
 
 .item:hover .arrow {
   color: var(--color-accent);
-  transform: translate(2px, -2px);
+  transform: translate(3px, -3px);
 }
 
 .summary {
-  font-size: 0.9rem;
-  line-height: 1.6;
+  max-width: 52ch;
+  font-size: 0.98rem;
+  line-height: 1.65;
   color: var(--color-text-secondary);
 }
 
@@ -81,7 +105,7 @@
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  margin-top: var(--space-8);
+  margin-top: var(--space-10);
   font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
@@ -95,22 +119,22 @@
   border-color: var(--color-accent);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
   .list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 640px) {
   .work {
-    padding: var(--space-12) 0;
+    padding: var(--space-16) 0;
   }
 
-  .list {
-    grid-template-columns: minmax(0, 1fr);
+  .item {
+    padding: var(--space-6);
   }
 
-  .category {
-    min-height: 0;
+  .media {
+    margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-5);
   }
 }
