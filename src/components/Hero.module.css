@@ -97,7 +97,7 @@
 }
 
 .intro {
-  max-width: 36ch;
+  max-width: 34ch;
   margin: var(--space-8) 0;
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 2vw, 1.6rem);
@@ -110,14 +110,14 @@
 /* Follow-on paragraph: the concrete build, one step quieter than the
    standfirst so the hero still has a single loudest line. */
 .web3 {
-  max-width: 56ch;
+  max-width: 50ch;
   margin: 0 0 var(--space-8);
   padding-left: var(--space-4);
   border-left: 1px solid var(--color-rule);
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   line-height: 1.7;
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
 }
 
 .tags {
@@ -208,7 +208,8 @@
   box-shadow: var(--shadow-panel);
 }
 
-/* A hairline frame offset behind the photo, for depth without a glow. */
+/* A soft accent glow behind the photo instead of a frame: depth without a
+   second outline competing with the first. */
 .visual {
   position: relative;
 }
@@ -216,10 +217,10 @@
 .visual::before {
   content: "";
   position: absolute;
-  inset: 14px -14px -14px 14px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
+  inset: -12% -18% -8% -18%;
+  z-index: -1;
   pointer-events: none;
+  background: radial-gradient(closest-side, rgb(var(--color-accent-rgb) / 0.10), transparent 70%);
 }
 
 .profileImage {
@@ -255,9 +256,6 @@
     margin-top: 0;
   }
 
-  .visual::before {
-    inset: 8px -8px -8px 8px;
-  }
 
   .intro {
     margin: var(--space-6) 0;

@@ -21,6 +21,11 @@ export interface Project {
   demoUrl?: string;
   certificateUrl?: string;
   caseStudyUrl?: string;
+  /**
+   * Short demo video for the homepage card (a file under /public, e.g.
+   * "/videos/chainlens.mp4"). The card shows a media slot only when set.
+   */
+  video?: { src: string; poster?: string };
 }
 
 /**

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, Newsreader, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, Newsreader, JetBrains_Mono, Noto_Serif_TC, Noto_Sans_TC } from "next/font/google";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -23,6 +23,25 @@ const newsreader = Newsreader({
   style: ["normal", "italic"],
   variable: "--font-newsreader",
   display: "swap",
+});
+
+// Newsreader and Plex have no CJK glyphs, so Chinese text used to fall back
+// to whatever serif or sans the visitor's OS had. These two sit second in the
+// font stacks (globals.css): Latin keeps its faces, Chinese gets a matched
+// pair. Not preloaded — they are split by unicode-range and only the
+// characters a page actually uses are fetched.
+const notoSerifTC = Noto_Serif_TC({
+  weight: ["400", "500"],
+  variable: "--font-noto-serif-tc",
+  display: "swap",
+  preload: false,
+});
+
+const notoSansTC = Noto_Sans_TC({
+  weight: ["400", "500"],
+  variable: "--font-noto-sans-tc",
+  display: "swap",
+  preload: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -129,7 +148,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plexSans.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}
+      className={`${plexSans.variable} ${newsreader.variable} ${jetbrainsMono.variable} ${notoSerifTC.variable} ${notoSansTC.variable}`}
     >
       <body>
         <Script
