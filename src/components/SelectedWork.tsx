@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useReducedMotion } from "framer-motion";
 
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
@@ -21,6 +22,8 @@ const SelectedWork = () => {
   const t = (v: L) => pick(v, lang);
   // Homepage shows the flagged few; /projects shows everything.
   const featured = projects.filter((p) => p.featured);
+  // Card videos loop silently, except for visitors who ask for less motion.
+  const reduced = useReducedMotion();
 
   return (
     <section id="work" className={styles.work}>
@@ -41,6 +44,21 @@ const SelectedWork = () => {
                 key={project.slug}
               >
                 <Link href={href} className={styles.item}>
+                  {project.video && (
+                    <span className={styles.media}>
+                      <video
+                        className={styles.video}
+                        src={project.video.src}
+                        poster={project.video.poster}
+                        muted
+                        loop
+                        playsInline
+                        autoPlay={!reduced}
+                        preload="metadata"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  )}
                   <span className={styles.category}>{t(project.category)}</span>
                   <h3 className={styles.title}>
                     {t(project.shortTitle)}

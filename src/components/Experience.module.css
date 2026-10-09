@@ -2,15 +2,55 @@
   padding: var(--space-16) 0 var(--space-20);
 }
 
+/* Same language as Recent Updates on the homepage: a vertical rail with a
+   node per appointment, and each appointment set in a panel. */
 .expList {
-  border-top: 1px solid var(--color-rule);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-left: var(--space-8);
 }
 
-/* Entries are ruled rows now, matching Awards and Projects; the bordered
-   cards and briefcase icons were the last boxed layout on the site. */
+.expList::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  bottom: 28px;
+  left: 5px;
+  border-left: 1px solid var(--color-rule);
+}
+
 .expCard {
-  padding: var(--space-8) 0;
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  padding: var(--space-6) var(--space-8) var(--space-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: var(--color-panel);
+  transition: border-color 0.25s ease;
+}
+
+.expCard:hover {
+  border-color: var(--color-rule);
+}
+
+/* The node on the rail, level with the company name. */
+.expCard::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-6) + 0.55rem);
+  left: calc(-1 * var(--space-8));
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-text-tertiary);
+}
+
+.expCard:first-child::before {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgb(var(--color-accent-rgb) / 0.15);
 }
 
 .cardHeader {
@@ -24,7 +64,7 @@
 .company {
   font-family: var(--font-display);
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.015em;
   color: var(--color-text-primary);
@@ -42,42 +82,41 @@
 
 .division {
   margin-top: var(--space-2);
-  font-size: 0.975rem;
-  font-style: italic;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: var(--color-text-secondary);
 }
 
 .roleTitle {
+  display: inline-block;
   margin-top: var(--space-3);
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-label);
 }
 
 .advisor {
   margin-top: var(--space-2);
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   color: var(--color-text-secondary);
 }
 
 .projectList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-6);
 }
 
 .projectItem {
-  padding-left: var(--space-5);
-  border-left: 1px solid var(--color-border);
+  padding: var(--space-5) 0 0;
+  border-top: 1px solid var(--color-border);
 }
 
 .withPhoto {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-columns: minmax(0, 1fr) 200px;
   gap: var(--space-8);
   align-items: start;
 }
@@ -93,10 +132,10 @@
   gap: var(--space-2);
   font-family: var(--font-display);
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.35;
   color: var(--color-text-primary);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .projectName svg {
@@ -112,16 +151,18 @@
 .details li {
   position: relative;
   padding-left: var(--space-4);
-  font-size: 0.975rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.65;
   color: var(--color-text-secondary);
 }
 
 .details li::before {
-  content: "—";
+  content: "";
   position: absolute;
   left: 0;
-  color: var(--color-text-tertiary);
+  top: 0.75em;
+  width: 6px;
+  border-top: 1px solid var(--color-text-tertiary);
 }
 
 .notes {
@@ -131,37 +172,44 @@
 .projectLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-6);
-  margin-top: var(--space-3);
+  gap: var(--space-2);
+  margin-top: var(--space-4);
 }
 
 .projectLink {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  min-height: 40px;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-rule);
+  border-radius: 999px;
   font-family: var(--font-sans);
-  font-size: 0.825rem;
-  font-weight: 600;
-  color: var(--color-accent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .projectLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
+/* Both event photos in one frame size, whatever their original shape. */
 .photo {
   margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--color-rule);
+  border-radius: 4px;
 }
 
 .photoImg {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 300px;
+  height: 100%;
   object-fit: cover;
-  border: 1px solid var(--color-rule);
   filter: saturate(0.85);
 }
 
@@ -170,13 +218,27 @@
     padding: var(--space-10) 0 var(--space-12);
   }
 
+  .expList {
+    padding-left: var(--space-6);
+  }
+
+  .expCard {
+    padding: var(--space-5);
+  }
+
+  .expCard::before {
+    top: calc(var(--space-5) + 0.45rem);
+    left: calc(-1 * var(--space-6));
+  }
+
   .withPhoto {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-4);
   }
 
   .photo {
-    max-width: 260px;
+    max-width: 240px;
+    aspect-ratio: 4 / 3;
   }
 
   .company {
