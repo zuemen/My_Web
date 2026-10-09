@@ -1,37 +1,22 @@
+/* Deliberately lighter than Selected Work below it: a two-column list on
+   hairlines, no panels, so the page has a quiet beat before its peak. No
+   01–04 counters — the four areas are unordered. */
 .skills {
-  padding: var(--space-20) 0;
+  padding: var(--space-16) 0;
   border-top: 1px solid var(--color-border);
 }
 
-/* Four areas as a 2×2 set of panels. No 01–04 counters: numbering four
-   unordered areas implied a sequence that isn't there. */
 .list {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-4);
+  column-gap: var(--space-10);
+  border-top: 1px solid var(--color-rule);
 }
 
 .item {
-  position: relative;
-  padding: var(--space-6);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-panel);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.018), transparent 55%);
-  transition: border-color 0.25s ease;
-}
-
-.item::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: var(--space-6);
-  width: 28px;
-  border-top: 1px solid var(--color-accent);
-}
-
-.item:hover {
-  border-color: var(--color-rule);
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .body {
@@ -40,32 +25,84 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--color-text-primary);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+/* On wide screens the title is plain text; the button only acts on phones. */
+.toggle {
+  all: unset;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  cursor: default;
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.chevron {
+  display: none;
+  flex-shrink: 0;
+  color: var(--color-text-tertiary);
+  transition: transform 0.2s ease;
 }
 
 .desc {
-  font-size: 0.93rem;
+  font-size: 0.92rem;
   line-height: 1.65;
   color: var(--color-text-secondary);
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 900px) {
   .list {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (max-width: 768px) {
+/* Phones: descriptions fold under their titles; tap a title to open it. */
+@media (max-width: 640px) {
   .skills {
     padding: var(--space-12) 0;
   }
 
   .item {
-    padding: var(--space-5);
+    padding: var(--space-4) 0;
+  }
+
+  .title {
+    margin-bottom: 0;
+    font-size: 1.2rem;
+  }
+
+  .toggle {
+    cursor: pointer;
+    min-height: 32px;
+    align-items: center;
+  }
+
+  .chevron {
+    display: block;
+  }
+
+  .item[data-open="true"] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .desc {
+    display: none;
+    margin-top: var(--space-2);
+  }
+
+  .item[data-open="true"] .desc {
+    display: block;
   }
 }
