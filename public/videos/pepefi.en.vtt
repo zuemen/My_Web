@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:11.060
+PepeLab's RWA proof of concept on the Base Sepolia testnet: synthetic CFDs on stocks, gold and crypto, with no real assets held.
+
+00:00:12.284 --> 00:00:17.504
+A fresh demo wallet connects, injected into the browser for this recording.
+
+00:00:17.504 --> 00:00:22.584
+Beforehand, it took mock USDC from the faucet and deposited it as margin.
+
+00:00:26.503 --> 00:00:33.246
+Markets span crypto, U.S. stocks and gold; stocks are reduce-only while the U.S. market is closed.
+
+00:00:33.246 --> 00:00:37.373
+The team's own keeper writes prices on-chain, on a schedule.
+
+00:00:38.606 --> 00:00:45.267
+Next, a long position on synthetic ETH: 20 mock USDC of margin at two times leverage.
+
+00:00:45.267 --> 00:00:50.516
+The wallet signs, and the order fills on-chain at the oracle price.
+
+00:00:54.156 --> 00:01:02.996
+The position is read back from the contract: entry price, margin, leverage and P&L. Closing it is one more transaction.
+
+00:01:04.513 --> 00:01:13.135
+Gold is a real-world-asset market: it needs a qualified-investor credential on-chain, here issued by the team's own test wallet.
+
+00:01:13.135 --> 00:01:16.503
+This wallet has none, so the app blocks the order.
+
+00:01:17.725 --> 00:01:24.355
+Before recording, this wallet sent the same order straight to the contract, bypassing the app.
+
+00:01:24.355 --> 00:01:27.740
+The explorer shows the result: Not-KYC-Verified.
+
+00:01:27.740 --> 00:01:29.855
+The rule is enforced on-chain.

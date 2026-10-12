@@ -102,6 +102,40 @@ const Projects = () => {
                   )}
                 </div>
               </div>
+              {project.video && (
+                <div className={styles.projectVideo}>
+                  {/* Remount on language change so the matching caption track is the default. */}
+                  <video
+                    key={lang}
+                    className={styles.video}
+                    controls
+                    preload="none"
+                    playsInline
+                    poster={project.video.poster}
+                    aria-label={`${t(dict.labels.demoVideo)}: ${t(project.title)}`}
+                  >
+                    <source src={project.video.src} type="video/mp4" />
+                    {project.video.captions && (
+                      <>
+                        <track
+                          kind="captions"
+                          src={project.video.captions.en}
+                          srcLang="en"
+                          label={t(dict.labels.captionsEn)}
+                          default={lang === "en"}
+                        />
+                        <track
+                          kind="captions"
+                          src={project.video.captions.zh}
+                          srcLang="zh-Hant"
+                          label={t(dict.labels.captionsZh)}
+                          default={lang === "zh"}
+                        />
+                      </>
+                    )}
+                  </video>
+                </div>
+              )}
             </div>
           ))}
         </div>

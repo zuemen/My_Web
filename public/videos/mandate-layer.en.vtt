@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:07.550
+Mandate Layer gives an AI agent a trading mandate, and a contract on Base checks every order against it.
+
+00:00:08.782 --> 00:00:17.082
+It is a separate deployment of the PepeFi codebase, built for the Colosseum hackathon's Base track, on the Base Sepolia testnet.
+
+00:00:19.743 --> 00:00:25.393
+Agent Mode needs no wallet; it reads what the agent did straight from Base Sepolia.
+
+00:00:25.393 --> 00:00:28.183
+The agent can only trade inside its caps.
+
+00:00:29.410 --> 00:00:34.790
+This button runs a read-only simulation: margin 80 against a cap of 50.
+
+00:00:34.790 --> 00:00:38.730
+Nothing is sent, and the contract itself rejects it.
+
+00:00:40.011 --> 00:00:43.831
+An asset outside the session's allow-list is rejected too.
+
+00:00:43.831 --> 00:00:47.981
+The green check means the guard held; neither order was placed.
+
+00:00:49.204 --> 00:00:51.428
+Each session is a hard limit.
+
+00:00:51.428 --> 00:00:55.644
+Session 3 is active; the others are revoked or expired.
+
+00:00:56.888 --> 00:01:04.348
+The agent paid for its signals in test USDC over x402: four payments, each one on chain.
+
+00:01:05.592 --> 00:01:10.028
+In a recorded run, a Base Spend Permission allows 100 a day.
+
+00:01:10.028 --> 00:01:15.352
+A second top-up would have made 110, so Coinbase's contract reverted it.
+
+00:01:16.598 --> 00:01:26.198
+Rejected orders emit no events, so this run was recorded: an over-cap order and one sent after revocation both reverted on chain.
