@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Award, Code, ExternalLink } from "lucide-react";
+import { ArrowLeft, Code, ExternalLink } from "lucide-react";
 import PepeLabArchitecture from "@/components/PepeLabArchitecture";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
@@ -68,7 +68,6 @@ const copy = {
   ),
   stackTitle: l("Tech Stack", "技術"),
   linksTitle: l("Links", "連結"),
-  certificate: l("Award certificate (PDF)", "獲獎證書（PDF）"),
 };
 
 const techStack = [
@@ -171,14 +170,6 @@ const PepeLabContent = () => {
           >
             <Code size={16} /> github.com/zuemen/pepelab_v2
             <ExternalLink size={12} />
-          </a>
-          <a
-            href="/awards/moda-digital-credential-2025-certificate.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.inlineLink}
-          >
-            <Award size={16} /> {t(copy.certificate)}
           </a>
         </div>
       </section>

@@ -133,7 +133,6 @@ export const projects: Project[] = [
     tags: ["SSI", "VC/DID", "FastAPI", "Python", "System Architecture"],
     image: "/digital_credential_new.jpg",
     link: "https://github.com/zuemen/pepelab_v2",
-    certificateUrl: "/awards/moda-digital-credential-2025-certificate.pdf",
     caseStudyUrl: "/projects/pepelab",
     video: demoVideo("medssi"),
   },

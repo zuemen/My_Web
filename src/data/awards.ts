@@ -129,7 +129,6 @@ export const awards: Award[] = [
     date: "2025-11",
     result: l("Merit Award, Student Division", "學生組優選"),
     role: l("Team Leader", "隊長"),
-    certificateUrl: "/awards/moda-digital-credential-2025-certificate.pdf",
   },
 ];
 
