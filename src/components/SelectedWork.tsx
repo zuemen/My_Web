@@ -9,6 +9,7 @@ import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { pick, type L } from "@/i18n/config";
 import SectionHeading from "./SectionHeading";
+import LoopVideo from "./LoopVideo";
 import styles from "./SelectedWork.module.css";
 
 /**
@@ -44,20 +45,23 @@ const SelectedWork = () => {
                 key={project.slug}
               >
                 <Link href={href} className={styles.item}>
-                  {project.video && (
+                  {/* The loop is the short silent preview, never the full narrated take. */}
+                  {project.video?.preview ? (
                     <span className={styles.media}>
-                      <video
+                      <LoopVideo
                         className={styles.video}
-                        src={project.video.src}
+                        src={project.video.preview}
                         poster={project.video.poster}
-                        muted
-                        loop
-                        playsInline
-                        autoPlay={!reduced}
-                        preload="metadata"
-                        aria-hidden="true"
+                        play={!reduced}
                       />
                     </span>
+                  ) : (
+                    project.image && (
+                      <span className={styles.media}>
+                        {/* eslint-disable-next-line @next/next/no-img-element -- decorative card art */}
+                        <img className={styles.video} src={project.image} alt="" loading="lazy" />
+                      </span>
+                    )
                   )}
                   <span className={styles.category}>{t(project.category)}</span>
                   <h3 className={styles.title}>

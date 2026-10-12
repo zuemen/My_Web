@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:11.100
+Before an AI agent moves money, Agent Passport checks its ERC-8004 identity and its owner's mandate on Monad testnet.
+
+00:00:12.329 --> 00:00:17.756
+The owner signs one mandate; only its Merkle root and a hash go on chain.
+
+00:00:17.756 --> 00:00:20.879
+The DEX is shown four of these nine lines.
+
+00:00:22.114 --> 00:00:25.383
+Here, Claude Code is the agent, through MCP.
+
+00:00:25.383 --> 00:00:30.734
+Told to pay a new DEX address, it checks, is refused, and sends nothing.
+
+00:00:31.970 --> 00:00:36.558
+The DEX sees those four, Merkle-proven, and nothing else.
+
+00:00:36.558 --> 00:00:43.560
+A live read from Monad: the mandate has since been revoked, so even 80 apUSD is denied.
+
+00:00:44.795 --> 00:00:55.055
+This replays the run recorded on September 23: 80 apUSD granted, 150 over the limit, a look-alike DEX refused.
+
+00:00:56.275 --> 00:01:05.315
+A merchant that needs a vLEI-verified owner refuses until a vLEI result is recorded, here a stand-in from the verifier key.
+
+00:01:05.315 --> 00:01:08.035
+After revocation, the swap is denied.
+
+00:01:09.243 --> 00:01:13.721
+Each refusal in the ledger is a real, reverted transaction.
+
+00:01:13.721 --> 00:01:20.703
+The page decodes one from Monad's public RPC: Claude Code's forced payment, PayeeNotAllowed.

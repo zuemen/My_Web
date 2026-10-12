@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:05.656
+Evidence at Source keeps facts about a migrant worker in the worker's own wallet.
+
+00:00:05.656 --> 00:00:09.220
+It's a fictional demo that runs entirely in the browser.
+
+00:00:10.434 --> 00:00:16.800
+An agency or a factory signs each fact, but it only counts once the worker counter-signs.
+
+00:00:16.800 --> 00:00:20.234
+After that, changing any number breaks the pair.
+
+00:00:21.450 --> 00:00:23.808
+A bank's AI agent asks to check them.
+
+00:00:23.808 --> 00:00:28.270
+The worker sees that it can only get yes-or-no answers, and allows it.
+
+00:00:29.489 --> 00:00:31.624
+Every query passes three gates.
+
+00:00:31.624 --> 00:00:41.819
+The first checks the agent's authority and institution on a vLEI chain, our own simulation rather than GLEIF's live system, and a forged root fails.
+
+00:00:43.041 --> 00:00:46.624
+Only yes-or-no answers and group rates get through.
+
+00:00:46.624 --> 00:00:56.391
+The bank's agent sees three trues and a recommendation for human review; the brand's sees 85 percent across 20 workers, but no one's hours.
+
+00:00:57.904 --> 00:01:05.844
+When the worker leaves the country, their credentials are revoked, and the credential gate stops the bank's agent before it reads anything.
+
+00:01:07.635 --> 00:01:08.722
+We attack it too.
+
+00:01:08.722 --> 00:01:19.025
+A planted instruction changes nothing, because no language model makes the call, and a second query that would single out five workers by subtraction is refused.
+
+00:01:20.538 --> 00:01:24.328
+Evidence at Source: the agents get answers, not data.

@@ -22,11 +22,25 @@ export interface Project {
   certificateUrl?: string;
   caseStudyUrl?: string;
   /**
-   * Short demo video for the homepage card (a file under /public, e.g.
-   * "/videos/chainlens.mp4"). The card shows a media slot only when set.
+   * Demo video, files under /public/videos. `src` is the full narrated take,
+   * played with controls on /projects; `preview` is a short silent clip that
+   * loops on the homepage card; `captions` are WebVTT tracks in both languages.
    */
-  video?: { src: string; poster?: string };
+  video?: {
+    src: string;
+    poster?: string;
+    preview?: string;
+    captions?: L;
+  };
 }
+
+/** The files the demo recorder writes for one take, under /public/videos/<name>.* */
+const demoVideo = (name: string): NonNullable<Project["video"]> => ({
+  src: `/videos/${name}.mp4`,
+  poster: `/videos/${name}.webp`,
+  preview: `/videos/${name}-preview.mp4`,
+  captions: l(`/videos/${name}.en.vtt`, `/videos/${name}.zh.vtt`),
+});
 
 /**
  * Source of truth for projects, read by the Projects list on /projects and the
@@ -34,9 +48,10 @@ export interface Project {
  */
 export const projects: Project[] = [
   {
-    // Describe the live screener as SNA plus laundering-pattern detection. The
-    // GNN (GCN / GraphSAGE) is an offline benchmark on the Elliptic dataset and
-    // is explicitly not wired into live review — see the repository README.
+    // Matches the live demo as of 2026-10-12: a rule engine plus a GraphSAGE
+    // second engine that can only escalate release → enhanced review. The demo
+    // runs on synthetic scenarios and the model is not validated on real
+    // labelled data; the Elliptic GCN / GraphSAGE runs stay an offline baseline.
     slug: "chainlens",
     featured: true,
     title: l(
@@ -53,8 +68,8 @@ export const projects: Project[] = [
       "為台灣虛擬資產服務商設計的法遵篩查工具——每個風險判定都附上背後的圖結構證據，而不是一個黑箱分數。",
     ),
     description: l(
-      "A money-flow screening platform for virtual asset service providers. The live screener uses social network analysis and laundering-pattern detection, and attaches structural evidence to each decision — centrality anomalies, community membership, and fund-path patterns — so a compliance officer can see why an address was flagged. A GCN / GraphSAGE model is benchmarked offline on the Elliptic dataset (203k Bitcoin transactions) as a research baseline, kept separate from live review until a locally labelled dataset exists.",
-      "為虛擬資產服務商打造的金流篩查平台。即時篩查採用社會網路分析與洗錢圖樣偵測，並為每個判定附上結構證據——中心性異常、社群歸屬與資金路徑圖樣——讓法遵人員看得到位址被標記的原因。另以 GCN／GraphSAGE 在 Elliptic 資料集（20.3 萬筆比特幣交易）上做離線研究基準；在建立在地標註資料集之前，刻意不接入即時審查。",
+      "A withdrawal screening platform for virtual asset service providers. Two engines judge each request: a rule engine that traces the fund path upstream and matches laundering patterns such as fan-in collection, rapid fan-out and peeling chains, and a graph neural network (GraphSAGE) that scores the structure around the destination. The model can only raise a release to enhanced review — it never holds or downgrades on its own — and every decision comes with its evidence chain and a draft suspicious transaction report, with a person making the final call. The public demo runs on synthetic scenarios, and the model has not yet been validated on real labelled data. Separately, GCN / GraphSAGE baselines are benchmarked offline on the Elliptic dataset (203k Bitcoin transactions).",
+      "為虛擬資產服務商打造的出金審查平台。每筆出金由兩個引擎判斷：規則引擎往上游追資金路徑、比對集資、快速分散、剝皮鏈等洗錢圖樣；圖神經網路（GraphSAGE）評估目的地址周邊的結構。模型只能把「放行」升為「加強審查」，不能自己暫緩或降級；每個判定都附證據鏈與可疑交易申報草稿，最後由人工決定。公開示範使用合成劇本，模型尚未在真實標註資料上驗證。另以 GCN／GraphSAGE 在 Elliptic 資料集（20.3 萬筆比特幣交易）上做離線研究基準。",
     ),
     outcome: l(
       "Won the FinTech Taipei Awards 2026 (Financial Innovation Award, Campus Division) — one of three winning teams — as team lead of a three-person team, with a live screening demo deployed.",
@@ -63,6 +78,7 @@ export const projects: Project[] = [
     tags: ["SNA", "Graph Neural Networks", "AML Compliance", "Python", "Next.js"],
     link: "https://github.com/zuemen/ChainLens",
     demoUrl: "https://chain-lens-beta.vercel.app",
+    video: demoVideo("chainlens"),
   },
   {
     slug: "evidence-at-source",
@@ -88,6 +104,7 @@ export const projects: Project[] = [
     tags: ["vLEI", "Verifiable Credentials", "Selective Disclosure", "AI Agents", "TypeScript"],
     link: "https://github.com/zuemen/evidence-at-source",
     demoUrl: "https://zuemen.github.io/evidence-at-source/",
+    video: demoVideo("evidence-at-source"),
   },
   {
     slug: "pepelab",
@@ -124,9 +141,13 @@ export const projects: Project[] = [
     // collateralised, and keep the "no real assets" framing from the README.
     slug: "pepefi-onchain-cfd",
     featured: true,
+    // Since 2026-10 the project's focus is the rwa-poc tenant: CFDs as the
+    // trading engine, RWA-referenced markets, credential-gated access. The
+    // 70/20/10 revenue router is not executed on that deployment, so it is not
+    // claimed here; pricing comes from a keeper-fed guarded oracle.
     title: l(
-      "PepeFi — On-Chain Perpetual CFD Protocol",
-      "PepeFi — 鏈上永續差價合約協議",
+      "PepeFi — RWA-Referenced Perpetual CFDs with Verifiable-Credential Access",
+      "PepeFi — 參照真實資產的鏈上永續差價合約（可驗證憑證准入）",
     ),
     shortTitle: l("PepeFi On-Chain CFD", "PepeFi 鏈上差價合約"),
     category: l(
@@ -134,20 +155,82 @@ export const projects: Project[] = [
       "政大 2026 畢業專題 — Base Sepolia 測試網",
     ),
     summary: l(
-      "A perpetual contract-for-difference protocol deployed on Base Sepolia, with an agent that trades only inside a session its owner has bounded.",
-      "部署於 Base Sepolia 的永續差價合約協議，交易 agent 只能在擁有者限定的 session 範圍內下單。",
+      "A testnet perpetual-CFD engine on Base Sepolia whose markets reference US equities, gold and crypto. RWA positions require an on-chain-verified credential, and AI agents trade only inside an owner-bounded session.",
+      "部署於 Base Sepolia 測試網的永續差價合約引擎，市場參照美股、黃金與加密資產；開 RWA 部位須提交鏈上驗證的憑證，AI agent 只能在擁有者限定的 session 內下單。",
     ),
     description: l(
-      "A proof-of-concept perpetual CFD protocol deployed to the Base Sepolia testnet, with an on-chain price keeper run on a schedule by GitHub Actions and oracle integration for pricing. Autonomous trading is delegated through session-bounded permissions, so an agent can open positions only within limits the owner signs off, and market signals are sold per request over an x402 payment-gated API — paid in USDC over HTTP, settled on-chain by an x402 facilitator, with the revenue split between trader, platform and protocol by a router contract. A research prototype that holds no real assets.",
-      "部署於 Base Sepolia 測試網的永續差價合約概念驗證協議，鏈上報價由 GitHub Actions 排程執行，並串接預言機定價。自主交易透過 session 範圍授權委派，agent 只能在擁有者簽署的限額內開倉；市場訊號則透過 x402 付費 API 按次販售 —— 以 USDC 在 HTTP 上付款、由 x402 facilitator 在鏈上結算，收入再由路由合約在交易者、平台與協議之間分潤。屬研究原型，不涉及任何真實資產。",
+      "A perpetual CFD engine whose markets reference real-world assets — US equities, gold and crypto — as synthetic exposure: nothing real is issued or held. Opening a position on an RWA market requires an on-chain-verified \"qualified investor\" credential, equities switch to reduce-only while their market is closed, and an AI agent can trade only inside a session its owner has bounded on-chain. A keeper pushes public market prices into a guarded oracle on a GitHub Actions schedule, and market signals are sold per request over x402 — USDC over HTTP, settled by a public facilitator. A research prototype: testnet only, mock USDC as margin, and self-issued credentials.",
+      "永續差價合約引擎，市場參照美股、黃金與加密資產等真實世界資產，但只是合成部位：不發行、也不持有任何實體資產。開 RWA 部位前須提交經鏈上驗證的「合格投資人」可驗證憑證；美股休市時自動切換為只減倉；AI agent 只能在擁有者於鏈上限定的 session 內下單。價格由 keeper 依 GitHub Actions 排程寫入有界的預言機，市場訊號則透過 x402 按次販售（以 USDC 在 HTTP 上付款，由公開 facilitator 結算）。屬研究原型：僅限測試網、保證金為 MockUSDC、憑證為自行簽發。",
     ),
     outcome: l(
-      "Contracts live on Base Sepolia with a working web front end — the one project here with a real on-chain deployment rather than a local chain.",
-      "合約已部署於 Base Sepolia 並有可運作的網頁前端——是這裡唯一真正上鏈部署、而非只跑本地鏈的專案。",
+      "Deployed to Base Sepolia with a working web front end; positions have been opened and closed on-chain both by an investor wallet and by an agent trading through its session.",
+      "已部署於 Base Sepolia 並有可運作的網頁前端；投資人錢包與透過 session 下單的 agent 都已在鏈上實際開倉、平倉。",
     ),
-    tags: ["Solidity", "Foundry", "Base Sepolia", "x402", "Agent Delegation"],
+    tags: ["Solidity", "Foundry", "Base Sepolia", "RWA", "Verifiable Credentials", "x402", "Agent Delegation"],
     link: "https://github.com/zuemen/pepelab_onchain_cfd",
-    demoUrl: "https://pepelab-onchain-cfd-djot.vercel.app",
+    demoUrl: "https://pepelab-rwa-poc.vercel.app",
+    video: demoVideo("pepefi"),
+  },
+  {
+    // Same codebase as PepeFi, deployed separately (fresh keys, fresh
+    // addresses) for the hackathon; the repository's SUBMISSION.md §12
+    // discloses which parts predate the contest.
+    slug: "mandate-layer",
+    featured: true,
+    title: l(
+      "Mandate Layer — Trading Mandates for AI Agents, Enforced On-Chain",
+      "Mandate Layer — 由合約強制執行的 AI agent 交易授權",
+    ),
+    shortTitle: l("Mandate Layer", "Mandate Layer"),
+    category: l(
+      "Colosseum Crypto World's Fair 2026 — Base Track",
+      "2026 Colosseum Crypto World's Fair — Base 賽道",
+    ),
+    summary: l(
+      "A user gives an AI trading agent a mandate — per-order margin, total budget, leverage cap, asset list, expiry — and a contract on Base checks it on every order.",
+      "使用者給 AI 交易 agent 一份授權——單筆保證金、總預算、槓桿上限、資產清單、到期日——由 Base 上的合約在每一筆下單時檢查。",
+    ),
+    description: l(
+      "Built on the PepeFi perpetual CFD exchange, Mandate Layer bounds what an autonomous agent can do with a user's funds. Before any position opens, the AgentSessionManager contract checks the agent's identity, whether the session was revoked or has expired, the asset allowlist, per-order margin, cumulative budget and leverage, and a session can only close positions it opened itself. The mandate is signed as an EIP-712 credential by an ordinary wallet or an ERC-1271 smart account, margin can be topped up through Base Spend Permissions, and agents pay for market data and signals over x402. It started before the contest as the PepeLab capstone; the submission lists which parts were built during the hackathon.",
+      "建立在 PepeFi 永續差價合約交易所之上，用來限制自主 agent 能拿使用者的資金做什麼。任何部位開倉前，AgentSessionManager 合約會依序檢查 agent 身分、session 是否已撤銷或過期、資產白名單、單筆保證金、累計預算與槓桿；session 也只能平掉自己開的部位。授權以 EIP-712 憑證簽署，一般錢包或 ERC-1271 智能合約帳戶皆可；保證金可透過 Base Spend Permissions 補入；agent 以 x402 付費取得行情與訊號。本專案在賽前以 PepeLab 畢業專題起步，提交文件逐項列出哪些部分是賽期內完成。",
+    ),
+    outcome: l(
+      "A separate deployment on Base Sepolia with an agent-mode page where the contract's refusals can be seen without connecting a wallet. Known limits — testnet only, mock USDC, a single keeper key that posts prices — are documented in the submission.",
+      "在 Base Sepolia 上獨立部署，並提供 agent 模式頁面，不連錢包也能看到合約拒絕越權下單。已知限制——僅限測試網、MockUSDC、由單一 keeper 金鑰寫入價格——都寫在提交文件中。",
+    ),
+    tags: ["Solidity", "Base Sepolia", "AI Agents", "EIP-712", "x402", "TypeScript"],
+    link: "https://github.com/zuemen/mandate-layer",
+    demoUrl: "https://zuemen.github.io/mandate-layer/agent-mode",
+    video: demoVideo("mandate-layer"),
+  },
+  {
+    slug: "agent-passport",
+    featured: true,
+    title: l(
+      "Agent Passport — Verifiable Identity and Mandates for Paying AI Agents",
+      "Agent Passport — 讓付款的 AI agent 帶著可驗證身分與授權",
+    ),
+    shortTitle: l("Agent Passport", "Agent Passport"),
+    category: l(
+      "Monad Metropolis 2026 — Track 04",
+      "2026 Monad Metropolis 黑客松 — Track 04",
+    ),
+    summary: l(
+      "Before an AI agent pays, the receiving contract checks — in the same transaction — who authorised it, what its mandate allows, and whether that mandate is still valid.",
+      "AI agent 付款前，收款方合約在同一筆交易裡檢查：誰授權了它、授權範圍是什麼、授權是否仍然有效。",
+    ),
+    description: l(
+      "An ERC-8004 agent identity plus a selectively disclosed mandate: the owner signs the mandate once, and the agent reveals only the fields a counterparty needs, each proven against a Merkle root. On Monad testnet, PassportGate checks the identity, the mandate's status, the Merkle proofs, the agent's signature and a daily limit inside the payment transaction, and a revoked mandate is refused on-chain. The owner's organisation can be verified with GLEIF vLEI credentials against a local KERIA test setup, and any MCP-capable agent can use the passport through four MCP tools, tested with Claude Code.",
+      "ERC-8004 agent 身分加上可選擇性揭露的授權：擁有者簽署一次授權，agent 只揭露對方需要的欄位，每個欄位都以 Merkle 根證明。在 Monad 測試網上，PassportGate 在付款交易內檢查身分、授權狀態、Merkle 證明、agent 簽章與每日額度；已撤銷的授權會在鏈上被拒絕。擁有者所屬組織可用 GLEIF vLEI 憑證在本機 KERIA 測試環境中驗證；任何支援 MCP 的 agent 都能透過四個 MCP 工具使用這本護照，並以 Claude Code 實測。",
+    ),
+    outcome: l(
+      "Twelve contracts deployed to Monad testnet and verified on Sourcify (exact match), 147 tests across contracts, SDK, MCP server and verifier, and a nine-transaction storyline in which the contracts refuse four.",
+      "十二個合約部署於 Monad 測試網並在 Sourcify 完全比對驗證；合約、SDK、MCP 伺服器與驗證器共 147 個測試；示範情節共九筆交易，其中四筆被合約拒絕。",
+    ),
+    tags: ["Solidity", "Monad", "ERC-8004", "vLEI", "MCP", "TypeScript"],
+    link: "https://github.com/zuemen/agent-passport",
+    demoUrl: "https://zuemen.github.io/agent-passport/",
+    video: demoVideo("agent-passport"),
   },
   {
     slug: "rwa-tokenization",

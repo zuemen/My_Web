@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:06.100
+ChainLens screens a crypto withdrawal before the money leaves, by tracing where it came from.
+
+00:00:07.319 --> 00:00:13.822
+In this synthetic case, the address has never been reported, so a blacklist would let it through.
+
+00:00:13.822 --> 00:00:19.789
+Upstream, victims' money was collected, layered through mule wallets, and merged into it.
+
+00:00:25.380 --> 00:00:27.065
+Run the screening: 0.
+
+00:00:27.065 --> 00:00:29.231
+73 from the rule engine, 0.
+
+00:00:29.231 --> 00:00:31.878
+99 from the graph neural network.
+
+00:00:31.878 --> 00:00:36.530
+The withdrawal is held, and a person makes the final call.
+
+00:00:38.239 --> 00:00:45.569
+Every decision comes with its evidence: the risky path into the address, and the chain of linked wallets behind it.
+
+00:00:46.783 --> 00:00:52.883
+Compliance staff get a draft suspicious transaction report, ready to review and edit.
+
+00:00:54.097 --> 00:00:57.157
+Here the rules alone would release the funds.
+
+00:00:57.157 --> 00:01:02.869
+The graph model recognises a fast in-and-out relay and raises it to enhanced review.
+
+00:01:02.869 --> 00:01:06.677
+It can escalate, but never hold or downgrade on its own.
+
+00:01:08.383 --> 00:01:10.557
+It also avoids collateral damage.
+
+00:01:10.557 --> 00:01:17.803
+A user paid from an exchange hot-wallet batch is released, not flagged along with everyone else in that batch.
+
+00:01:19.519 --> 00:01:24.989
+On the fund-flow graph, any wallet can be opened to see its score and the patterns it matched.
+
+00:01:26.693 --> 00:01:27.361
+ChainLens.
+
+00:01:27.361 --> 00:01:32.703
+The scenarios are synthetic, and live chain lookups are off on this public demo.
