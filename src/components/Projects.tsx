@@ -104,7 +104,8 @@ const Projects = () => {
               </div>
               {project.video && (
                 <div className={styles.projectVideo}>
-                  {/* Remount on language change so the matching caption track is the default. */}
+                  {/* The voice-over is English, so only Chinese captions come on by default (in 中 mode);
+                      English captions stay one click away. Remount on language change to apply it. */}
                   <video
                     key={lang}
                     className={styles.video}
@@ -122,7 +123,6 @@ const Projects = () => {
                           src={project.video.captions.en}
                           srcLang="en"
                           label={t(dict.labels.captionsEn)}
-                          default={lang === "en"}
                         />
                         <track
                           kind="captions"

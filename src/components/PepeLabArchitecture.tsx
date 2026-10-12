@@ -24,7 +24,7 @@ const PepeLabArchitecture = () => {
         role="img"
         aria-labelledby="arch-title arch-desc"
       >
-        <title id="arch-title">PepeLab system architecture</title>
+        <title id="arch-title">MedSSI system architecture</title>
         <desc id="arch-desc">
           A hospital issuer sends a credential offer as a QR code to a
           patient-held wallet. The wallet presents a verifiable presentation to

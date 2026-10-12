@@ -110,21 +110,21 @@ export const projects: Project[] = [
     slug: "pepelab",
     featured: true,
     title: l(
-      "PepeLab — Decentralized Credential Verification",
-      "PepeLab — 去中心化憑證驗證",
+      "MedSSI — Health Credentials Disclosed Field by Field",
+      "MedSSI — 醫療憑證選擇性揭露與領藥驗證",
     ),
-    shortTitle: l("PepeLab", "PepeLab"),
+    shortTitle: l("MedSSI", "MedSSI"),
     category: l(
-      "Award-winning Project (Merit Award)",
-      "獲獎作品（數位發展部優選）",
+      "Merit Award — Digital Credential Challenge 2025 (team PepeLab)",
+      "數位憑證場景創新賽 2025 學生組優選（隊名 PepeLab）",
     ),
     summary: l(
-      "A decentralized identity platform on SSI, VC and DID standards, so a credential issued by one institution can be verified by another.",
-      "基於 SSI、VC 與 DID 標準的去中心化身分平台，讓一個機構核發的憑證能由另一個機構驗證。",
+      "A hospital issues a health credential once; the patient keeps it in Taiwan's government digital wallet, and a pharmacy, researcher or insurer sees only the fields its scenario allows.",
+      "醫院只發一次健康憑證，病人放在政府的數位憑證皮夾裡；藥局、研究單位或保險只看得到各自情境允許的欄位。",
     ),
     description: l(
-      "Led a team in a national competition hosted by the Ministry of Digital Affairs, Taiwan. Cross-agency credential verification in the public sector lacks interoperable infrastructure, forcing citizens to re-submit the same credentials to every institution. Architected a decentralized identity platform on SSI, VC, and DID standards to make those credentials verifiable across institutions.",
-      "帶領團隊參加數位發展部主辦的全國競賽。公部門跨機關的憑證驗證缺乏可互通的基礎建設，民眾得向每個機關重複提交同一份證明。我以 SSI、VC 與 DID 標準設計去中心化身分平台，讓這些憑證能跨機構驗證。",
+      "Led team PepeLab in a national competition hosted by the Ministry of Digital Affairs, Taiwan. A patient collecting medication, joining a study or filing a claim usually hands over far more of their record than anyone needs. MedSSI, built on SSI, VC and DID standards, lets the hospital issue one credential that the patient holds in the government's digital wallet; issuance and presentation verification run through the Ministry's wallet sandbox, and a local layer enforces FHIR-path selective disclosure and a minimum identity-assurance level, rejecting any field outside the scenario.",
+      "帶領 PepeLab 團隊參加數位發展部主辦的全國競賽。病人領藥、參加研究或申請理賠時，往往得交出遠超過對方需要的病歷。MedSSI 以 SSI、VC 與 DID 標準，讓醫院只發一次憑證、由病人存放在政府的數位憑證皮夾；發卡與出示驗證走數位部皮夾沙盒，本地層再依 FHIR 路徑執行選擇性揭露與最低身分保證等級，情境外的欄位一律拒收。",
     ),
     outcome: l(
       "Merit Award (學生組優選) at the Digital Credential Scenario Innovation Challenge, Nov 2025. Delivered a working credential verification system and translated government interoperability requirements into implementable technical specifications.",
@@ -135,6 +135,7 @@ export const projects: Project[] = [
     link: "https://github.com/zuemen/pepelab_v2",
     certificateUrl: "/awards/moda-digital-credential-2025-certificate.pdf",
     caseStudyUrl: "/projects/pepelab",
+    video: demoVideo("medssi"),
   },
   {
     // Research prototype on testnet. Never describe the vault as fully

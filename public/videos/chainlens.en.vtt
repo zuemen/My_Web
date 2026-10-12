@@ -1,52 +1,76 @@
 WEBVTT
 
-00:00:00.500 --> 00:00:06.100
-ChainLens screens a crypto withdrawal before the money leaves, by tracing where it came from.
+00:00:00.400 --> 00:00:06.950
+A synthetic case: a user asks an exchange to send 500,000 USDT to an address.
 
-00:00:07.319 --> 00:00:13.822
-In this synthetic case, the address has never been reported, so a blacklist would let it through.
+00:00:07.300 --> 00:00:08.763
+The address looks clean.
 
-00:00:13.822 --> 00:00:19.789
-Upstream, victims' money was collected, layered through mule wallets, and merged into it.
+00:00:08.763 --> 00:00:09.800
+But is the money?
 
-00:00:25.380 --> 00:00:27.065
-Run the screening: 0.
+00:00:10.800 --> 00:00:14.619
+A blacklist only knows addresses someone already reported.
 
-00:00:27.065 --> 00:00:29.231
-73 from the rule engine, 0.
+00:00:14.619 --> 00:00:16.990
+This one isn't listed, so it passes.
 
-00:00:29.231 --> 00:00:31.878
-99 from the graph neural network.
+00:00:17.990 --> 00:00:20.538
+ChainLens follows the money backwards.
 
-00:00:31.878 --> 00:00:36.530
-The withdrawal is held, and a person makes the final call.
+00:00:20.538 --> 00:00:23.220
+Two hops up: a scam's collection wallet,
 
-00:00:38.239 --> 00:00:45.569
-Every decision comes with its evidence: the risky path into the address, and the chain of linked wallets behind it.
+00:00:23.570 --> 00:00:28.070
+fed by victims, split across mule wallets, and merged back in.
 
-00:00:46.783 --> 00:00:52.883
-Compliance staff get a draft suspicious transaction report, ready to review and edit.
+00:00:29.170 --> 00:00:33.280
+On the demo site, both engines point the same way: hold.
 
-00:00:54.097 --> 00:00:57.157
-Here the rules alone would release the funds.
+00:00:34.280 --> 00:00:42.020
+Two engines judge every request: a rulebook of known laundering patterns, and a model that reads the network's shape.
 
-00:00:57.157 --> 00:01:02.869
-The graph model recognises a fast in-and-out relay and raises it to enhanced review.
+00:00:42.370 --> 00:00:47.110
+A person makes the final call, with the evidence and a draft report in hand.
 
-00:01:02.869 --> 00:01:06.677
-It can escalate, but never hold or downgrade on its own.
+00:00:48.110 --> 00:00:50.530
+The evidence: the path the money took.
 
-00:01:08.383 --> 00:01:10.557
-It also avoids collateral damage.
+00:00:52.610 --> 00:00:56.451
+A newer trick: money that rests for minutes, then moves on.
 
-00:01:10.557 --> 00:01:17.803
-A user paid from an exchange hot-wallet batch is released, not flagged along with everyone else in that batch.
+00:00:56.451 --> 00:00:58.600
+The rules alone would release it.
 
-00:01:19.519 --> 00:01:24.989
-On the fund-flow graph, any wallet can be opened to see its score and the patterns it matched.
+00:00:58.950 --> 00:01:04.475
+The model spots the shape and asks for a closer look by a person: enhanced review.
 
-00:01:26.693 --> 00:01:27.361
-ChainLens.
+00:01:04.475 --> 00:01:05.890
+That's all it can do.
 
-00:01:27.361 --> 00:01:32.703
-The scenarios are synthetic, and live chain lookups are off on this public demo.
+00:01:05.890 --> 00:01:09.730
+It can't hold a withdrawal, or downgrade one, on its own.
+
+00:01:10.730 --> 00:01:13.360
+Released by the rules, flagged by the model.
+
+00:01:15.230 --> 00:01:17.322
+And it mustn't punish the innocent.
+
+00:01:17.322 --> 00:01:20.550
+An exchange paying thirty users looks like laundering,
+
+00:01:20.900 --> 00:01:22.540
+unless you know it's an exchange.
+
+00:01:24.430 --> 00:01:25.702
+Labelled: released.
+
+00:01:25.702 --> 00:01:30.990
+The system's own what-if says that without the label, all thirty would be held.
+
+00:01:32.390 --> 00:01:34.466
+Same withdrawal, two answers.
+
+00:01:34.466 --> 00:01:40.910
+ChainLens's screening model was trained and tested on synthetic scenarios, not real cases.

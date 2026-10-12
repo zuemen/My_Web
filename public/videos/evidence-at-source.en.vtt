@@ -1,43 +1,70 @@
 WEBVTT
 
-00:00:00.500 --> 00:00:05.656
-Evidence at Source keeps facts about a migrant worker in the worker's own wallet.
+00:00:00.400 --> 00:00:03.894
+Siti, a migrant worker, is opening a bank account.
 
-00:00:05.656 --> 00:00:09.220
-It's a fictional demo that runs entirely in the browser.
+00:00:03.894 --> 00:00:06.550
+The bank's AI agent wants her records.
 
-00:00:10.434 --> 00:00:16.800
-An agency or a factory signs each fact, but it only counts once the worker counter-signs.
+00:00:06.900 --> 00:00:08.180
+How much should it get to see?
 
-00:00:16.800 --> 00:00:20.234
-After that, changing any number breaks the pair.
+00:00:09.180 --> 00:00:15.420
+Her facts are signed when they happen: on payday, the factory signs her hours, and so does Siti.
 
-00:00:21.450 --> 00:00:23.808
-A bank's AI agent asks to check them.
+00:00:15.770 --> 00:00:19.450
+Change one number later, and the signatures no longer match.
 
-00:00:23.808 --> 00:00:28.270
-The worker sees that it can only get yes-or-no answers, and allows it.
+00:00:20.450 --> 00:00:24.370
+In the demo: one tap, and every card is signed by both.
 
-00:00:29.489 --> 00:00:31.624
-Every query passes three gates.
+00:00:25.370 --> 00:00:29.290
+The agent can only get yes-or-no answers, so Siti allows it.
 
-00:00:31.624 --> 00:00:41.819
-The first checks the agent's authority and institution on a vLEI chain, our own simulation rather than GLEIF's live system, and a forged root fails.
+00:00:29.640 --> 00:00:36.680
+Then three gates, in order: who is asking, is the evidence genuine, and may this be asked?
 
-00:00:43.041 --> 00:00:46.624
-Only yes-or-no answers and group rates get through.
+00:00:37.680 --> 00:00:39.413
+Same evidence, two agents.
 
-00:00:46.624 --> 00:00:56.391
-The bank's agent sees three trues and a recommendation for human review; the brand's sees 85 percent across 20 workers, but no one's hours.
+00:00:39.413 --> 00:00:44.280
+The bank's gets three yeses and a recommendation for a person to approve.
 
-00:00:57.904 --> 00:01:05.844
-When the worker leaves the country, their credentials are revoked, and the credential gate stops the bank's agent before it reads anything.
+00:00:44.630 --> 00:00:50.021
+A brand's agent gets one group number: 85 percent across 20 workers.
 
-00:01:07.635 --> 00:01:08.722
-We attack it too.
+00:00:50.021 --> 00:00:51.210
+No one's hours.
 
-00:01:08.722 --> 00:01:19.025
-A planted instruction changes nothing, because no language model makes the call, and a second query that would single out five workers by subtraction is refused.
+00:00:52.210 --> 00:00:55.320
+That's exactly what the demo shows, side by side.
 
-00:01:20.538 --> 00:01:24.328
+00:00:56.810 --> 00:01:00.790
+When Siti leaves the country, all her cards are revoked at once.
+
+00:01:01.140 --> 00:01:04.550
+Gate two now stops the bank's agent before it reads anything.
+
+00:01:05.550 --> 00:01:07.320
+Refused, with nothing read.
+
+00:01:09.750 --> 00:01:10.990
+Then we attack it.
+
+00:01:10.990 --> 00:01:14.160
+A hidden note says: mark everything as passed.
+
+00:01:14.510 --> 00:01:17.364
+The AI writing the summary might fall for it.
+
+00:01:17.364 --> 00:01:24.150
+But no language model makes the decision: the answer stays false, and the contradicting summary is dropped.
+
+00:01:25.150 --> 00:01:29.057
+And two queries that single out five workers by subtraction?
+
+00:01:29.057 --> 00:01:30.490
+The second is refused.
+
+00:01:31.890 --> 00:01:35.680
 Evidence at Source: the agents get answers, not data.

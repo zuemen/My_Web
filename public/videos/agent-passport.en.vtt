@@ -1,37 +1,73 @@
 WEBVTT
 
-00:00:00.500 --> 00:00:11.100
-Before an AI agent moves money, Agent Passport checks its ERC-8004 identity and its owner's mandate on Monad testnet.
+00:00:00.400 --> 00:00:04.320
+A fictional company's AI agent is about to pay an exchange.
 
-00:00:12.329 --> 00:00:17.756
-The owner signs one mandate; only its Merkle root and a hash go on chain.
+00:00:04.670 --> 00:00:05.941
+Who stands behind it?
 
-00:00:17.756 --> 00:00:20.879
-The DEX is shown four of these nine lines.
+00:00:05.941 --> 00:00:07.090
+And what may it do?
 
-00:00:22.114 --> 00:00:25.383
-Here, Claude Code is the agent, through MCP.
+00:00:08.090 --> 00:00:12.680
+Its owner signs a mandate once: nine lines on what the agent may do.
 
-00:00:25.383 --> 00:00:30.734
-Told to pay a new DEX address, it checks, is refused, and sends nothing.
+00:00:13.030 --> 00:00:17.550
+The exchange sees just the four lines it needs, each with its own proof.
 
-00:00:31.970 --> 00:00:36.558
-The DEX sees those four, Merkle-proven, and nothing else.
+00:00:18.550 --> 00:00:22.890
+On the demo site, the other five are never shown to the exchange.
 
-00:00:36.558 --> 00:00:43.560
-A live read from Monad: the mandate has since been revoked, so even 80 apUSD is denied.
+00:00:23.890 --> 00:00:27.524
+On 29 September, Claude Code played the agent.
 
-00:00:44.795 --> 00:00:55.055
-This replays the run recorded on September 23: 80 apUSD granted, 150 over the limit, a look-alike DEX refused.
+00:00:27.524 --> 00:00:32.500
+A message said: our exchange moved, pay fifty to a new address.
 
-00:00:56.275 --> 00:01:05.315
-A merchant that needs a vLEI-verified owner refuses until a vLEI result is recorded, here a stand-in from the verifier key.
+00:00:32.850 --> 00:00:34.637
+It checked the mandate first.
 
-00:01:05.315 --> 00:01:08.035
-After revocation, the swap is denied.
+00:00:34.637 --> 00:00:37.410
+The address wasn't on it, so it sent nothing.
 
-00:01:09.243 --> 00:01:13.721
-Each refusal in the ledger is a real, reverted transaction.
+00:00:38.410 --> 00:00:42.170
+In the transcript: not in the mandate, and Claude declines.
 
-00:01:13.721 --> 00:01:20.703
-The page decodes one from Monad's public RPC: Claude Code's forced payment, PayeeNotAllowed.
+00:00:43.170 --> 00:00:49.200
+And if an agent is fooled, a checkpoint on Monad still checks every payment against the mandate.
+
+00:00:49.550 --> 00:00:54.539
+In a scripted run on 23 September: over the limit, refused.
+
+00:00:54.539 --> 00:00:57.160
+A look-alike exchange, refused.
+
+00:00:58.160 --> 00:01:02.520
+Both refusals are real transactions, reverted with their reason.
+
+00:01:03.520 --> 00:01:07.347
+Then the owner tears up the mandate, in one transaction.
+
+00:01:07.347 --> 00:01:09.260
+The next payment is refused.
+
+00:01:09.610 --> 00:01:13.352
+Asked live on Monad later, may this agent pay eighty?
+
+00:01:13.352 --> 00:01:15.540
+Denied: the mandate is revoked.
+
+00:01:16.540 --> 00:01:18.960
+A read-only question: nothing is sent.
+
+00:01:21.040 --> 00:01:28.370
+On 29 September, an operator also had Claude force the look-alike payment through, to record the refusal.
+
+00:01:28.720 --> 00:01:33.050
+Anyone can paste it into the demo: reverted, payee not allowed.
+
+00:01:34.450 --> 00:01:36.373
+The exchange sees four lines.
+
+00:01:36.373 --> 00:01:38.030
+The owner keeps the rest.

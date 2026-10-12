@@ -10,10 +10,10 @@ import { l, pick, type L } from "@/i18n/config";
 import styles from "@/app/projects/pepelab/page.module.css";
 
 const copy = {
-  category: l("Award-winning Project · Team Leader", "獲獎作品 · 隊長"),
+  category: l("Award-winning Project · Team Leader (team PepeLab)", "獲獎作品 · 隊長（隊名 PepeLab）"),
   title: l(
-    "PepeLab — Decentralized Credential Verification",
-    "PepeLab — 去中心化憑證驗證",
+    "MedSSI — Decentralized Health Credential Verification",
+    "MedSSI — 去中心化醫療憑證驗證",
   ),
   lead: l(
     "A decentralized credential verification system built on Self-Sovereign Identity standards, demonstrated on health records — the setting where re-submitting the same credential is most costly, and where the consequences of over-disclosing are most serious.",
