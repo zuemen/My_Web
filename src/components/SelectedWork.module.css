@@ -5,9 +5,7 @@
   padding: var(--space-24) 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
-  background:
-    radial-gradient(ellipse 60% 50% at 85% 0%, rgb(var(--color-accent-rgb) / 0.05), transparent 70%),
-    var(--color-surface);
+  background: var(--color-surface);
 }
 
 .list {
@@ -71,6 +69,7 @@
   font-size: clamp(1.7rem, 2.6vw, 2.2rem);
   font-weight: 400;
   line-height: 1.1;
+  text-wrap: balance;
   letter-spacing: -0.02em;
   color: var(--color-text-primary);
   margin-bottom: var(--space-4);

@@ -259,3 +259,15 @@ ul {
     padding: 0 var(--space-5);
   }
 }
+
+/* Headings break into balanced lines; paragraphs avoid a lone last word. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}

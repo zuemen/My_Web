@@ -26,8 +26,30 @@
   padding: 0 var(--space-8);
 }
 
+/* Wide screens: the heading holds a left column and the text keeps a reading
+   measure on the right, so the page is balanced instead of leaving the right
+   half empty. (Not sticky: .philosophy clips overflow for its grid texture.) */
 .content {
   max-width: 760px;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+    column-gap: var(--space-16);
+    align-items: start;
+  }
+
+  .heading {
+    margin-bottom: 0;
+    text-wrap: balance;
+  }
+
+  .textBlock {
+    max-width: 68ch;
+  }
 }
 
 .heading {

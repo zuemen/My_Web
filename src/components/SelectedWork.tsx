@@ -37,8 +37,8 @@ const SelectedWork = () => {
 
         <ul className={styles.list}>
           {featured.map((project) => {
-            // Only PepeLab has a case study; the rest land on the list page.
-            const href = project.caseStudyUrl ?? "/projects#projects";
+            // A case study when there is one; otherwise straight to the project's entry.
+            const href = project.caseStudyUrl ?? `/projects#${project.slug}`;
 
             return (
               <li

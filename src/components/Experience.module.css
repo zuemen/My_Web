@@ -21,24 +21,21 @@
   border-left: 1px solid var(--color-rule);
 }
 
+/* No panel: the rail and the spacing carry each entry. */
 .expCard {
   position: relative;
-  padding: var(--space-6) var(--space-8) var(--space-8);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-panel);
-  background: var(--color-panel);
-  transition: border-color 0.25s ease;
+  padding: 0 0 var(--space-12);
 }
 
-.expCard:hover {
-  border-color: var(--color-rule);
+.expCard:last-child {
+  padding-bottom: 0;
 }
 
 /* The node on the rail, level with the company name. */
 .expCard::before {
   content: "";
   position: absolute;
-  top: calc(var(--space-6) + 0.55rem);
+  top: 0.55rem;
   left: calc(-1 * var(--space-8));
   width: 11px;
   height: 11px;
@@ -172,7 +169,7 @@
 .projectLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: var(--space-2) var(--space-5);
   margin-top: var(--space-4);
 }
 
@@ -180,13 +177,11 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 34px;
-  padding: 0 var(--space-3);
-  border: 1px solid var(--color-rule);
-  border-radius: 999px;
+  min-height: 32px;
+  border-bottom: 1px solid var(--color-rule);
   font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
   color: var(--color-text-secondary);
   transition: color 0.2s ease, border-color 0.2s ease;
 }
@@ -223,11 +218,11 @@
   }
 
   .expCard {
-    padding: var(--space-5);
+    padding: 0 0 var(--space-10);
   }
 
   .expCard::before {
-    top: calc(var(--space-5) + 0.45rem);
+    top: 0.45rem;
     left: calc(-1 * var(--space-6));
   }
 

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Code, ExternalLink } from "lucide-react";
 import PepeLabArchitecture from "@/components/PepeLabArchitecture";
@@ -52,13 +51,9 @@ const copy = {
   ],
   architectureTitle: l("System Architecture", "系統架構"),
   demoTitle: l("Demo", "Demo"),
-  demoAlt: l(
-    "The verifier screen at the competition demo, offering three scenarios: medication pickup, research authorisation, and insurance application.",
-    "競賽 demo 中的驗證端畫面，提供三種情境：領藥、研究授權與保險申請。",
-  ),
   demoCaption: l(
-    "Scenario picker from the live demo. Each option requests a different subset of the same credential.",
-    "現場 demo 的情境選擇畫面。每個選項會請求同一份憑證的不同欄位子集。",
+    "An animated walkthrough with real clips: MedSSI's 2025 run against the Ministry of Digital Affairs' wallet sandbox, and its story page re-run locally in 2026. The patient is fictional.",
+    "動畫解說搭配真實片段：MedSSI 2025 年串接數位部數位憑證皮夾沙盒的錄影，以及 2026 年在本機重跑的故事頁。病人為虛構。",
   ),
   recognitionTitle: l("Recognition", "肯定"),
   recognition: l("Merit Award (學生組優選)", "學生組優選"),
@@ -126,14 +121,26 @@ const PepeLabContent = () => {
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>{t(copy.demoTitle)}</h2>
         <figure className={styles.demoFigure}>
-          <Image
-            src="/pepelab-demo.webp"
-            alt={t(copy.demoAlt)}
-            width={880}
-            height={572}
-            sizes="(max-width: 768px) 100vw, 860px"
-            className={styles.demoImage}
-          />
+          {/* English voice-over; Chinese captions come on by default in 中 mode. */}
+          <video
+            key={lang}
+            className={styles.demoVideo}
+            controls
+            preload="none"
+            playsInline
+            poster="/videos/medssi.webp"
+            aria-label={`${t(dict.labels.demoVideo)}: ${t(copy.title)}`}
+          >
+            <source src="/videos/medssi.mp4" type="video/mp4" />
+            <track kind="captions" src="/videos/medssi.en.vtt" srcLang="en" label={t(dict.labels.captionsEn)} />
+            <track
+              kind="captions"
+              src="/videos/medssi.zh.vtt"
+              srcLang="zh-Hant"
+              label={t(dict.labels.captionsZh)}
+              default={lang === "zh"}
+            />
+          </video>
           <figcaption className={styles.caption}>{t(copy.demoCaption)}</figcaption>
         </figure>
       </section>
