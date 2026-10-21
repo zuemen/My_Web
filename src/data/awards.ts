@@ -71,7 +71,7 @@ export const awards: Award[] = [
   {
     // Winners announced 2026-10-07: three teams per division, listed by entry
     // number and not ranked, so "Winner" with no place.
-    // TODO: 10/23–24 FinTech Taipei 頒獎與展示結束後，加照片與展示敘述（使用者確認後）
+    // TODO: FinTech Taipei 頒獎與展示已延期（使用者 10/21：日期未定、先不放照片）；辦完後再加照片與展示敘述（使用者確認後）
     slug: "fintech-taipei-2026",
     project: "chainlens",
     tags: ["fintech", "blockchain-identity", "ai"],

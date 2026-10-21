@@ -49,7 +49,7 @@ export interface Update {
  */
 const entries: UpdateEntry[] = [
   {
-    // TODO: 10/23–24 FinTech Taipei 展示後補展示敘述（使用者確認後）
+    // TODO: FinTech Taipei 展示已延期（日期未定）；辦完後再補展示敘述（使用者確認後）
     date: "2026-10",
     icon: "trophy",
     ref: { type: "award", id: "fintech-taipei-2026" },
