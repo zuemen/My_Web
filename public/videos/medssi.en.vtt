@@ -1,52 +1,43 @@
 WEBVTT
 
-00:00:00.500 --> 00:00:05.090
+00:00:00.500 --> 00:00:04.990
 Meet Xiao Zhu, a fictional patient, collecting a repeat prescription.
 
-00:00:05.440 --> 00:00:09.500
-For one medicine, the pharmacy's screen opens his whole record.
+00:00:05.340 --> 00:00:10.050
+In the story, the pharmacy's screen opens his whole record for one medicine.
 
-00:00:10.500 --> 00:00:16.690
-MedSSI's 2025 story page, re-run on a laptop in 2026.
+00:00:10.900 --> 00:00:19.070
+With MedSSI, the pharmacy sees only what the pickup needs: the medicine and dose, the days' supply, an allergy check.
 
-00:00:17.690 --> 00:00:22.970
-The pharmacist needs the medicine and dose, the days' supply, and an allergy check.
+00:00:21.000 --> 00:00:29.324
+MedSSI's 2025 story pages, re-run on a laptop in 2026: first the problem, then the fix.
 
-00:00:23.320 --> 00:00:27.510
-Not his diagnoses, his psychiatric notes, or his ID number.
+00:00:29.324 --> 00:00:31.620
+Both are scripted pages.
 
-00:00:28.510 --> 00:00:35.830
+00:00:32.820 --> 00:00:39.980
 MedSSI's idea: the hospital issues a digital credential once, into the government wallet app on his phone.
 
-00:00:36.180 --> 00:00:41.750
+00:00:40.330 --> 00:00:45.780
 Issuing and signature checks ran on the Ministry of Digital Affairs' test sandbox.
 
-00:00:42.750 --> 00:00:50.630
-In the team's 2025 recording, the sandbox answers an allergy-card request with a real one-time QR code.
+00:00:46.880 --> 00:00:58.577
+In the team's 2025 recording, the sandbox answers both sides: a one-time QR to issue an allergy card, and, in a separate run, a request QR for a consent check.
 
-00:00:51.630 --> 00:00:53.678
-The turn: selective disclosure.
-
-00:00:53.678 --> 00:00:59.160
-The pharmacy asks only for the pickup fields; his wallet shows what will be shared.
-
-00:00:59.510 --> 00:01:01.610
-He agrees, and only those go.
-
-00:01:01.610 --> 00:01:06.100
-MedSSI's server check rejects any field that wasn't requested.
-
-00:01:07.100 --> 00:01:11.150
-The story page spells it out: what is shown, and what is not.
-
-00:01:12.150 --> 00:01:16.838
-On the checking side, the sandbox returned a request QR for one scope.
-
-00:01:16.838 --> 00:01:18.780
+00:00:58.577 --> 00:01:00.710
 The phone scan wasn't filmed.
 
-00:01:19.980 --> 00:01:22.952
+00:01:01.710 --> 00:01:07.550
+How it works: the pharmacy asks only for the pickup fields; his wallet shows what will be shared.
+
+00:01:07.900 --> 00:01:09.952
+He agrees, and only those go.
+
+00:01:09.952 --> 00:01:14.340
+MedSSI's server check rejects any field that wasn't requested.
+
+00:01:17.840 --> 00:01:20.745
 Share the prescription, not the record.
 
-00:01:22.952 --> 00:01:28.820
+00:01:20.745 --> 00:01:26.480
 MedSSI was a 2025 student prototype on a test sandbox, not a medical product.

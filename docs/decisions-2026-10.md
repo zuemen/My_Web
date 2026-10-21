@@ -40,3 +40,14 @@
 | 首頁作品區右上角帶 AI 味的漸層光暈 | 拿掉 |
 | 標題斷行不平均、段落最後一行孤字 | 全站 `text-wrap: balance`（標題）／`pretty`（段落） |
 | 首頁作品卡都連到 /projects 頂端 | 改連 `/projects#<slug>` 直達該作品 |
+
+## 10/21 影片差異化（使用者 10/13：「同質性有點高，可以各個針對適合的方式呈現」；10/20：「幫我思考並處理」）
+
+| 項目 | 決定 | 理由 |
+|---|---|---|
+| 呈現形式 | 6 支各一個世界：ChainLens 證據板（建議先行→倒帶查證）、Evidence at Source 移工手機視角、MedSSI 左右分割（無 MedSSI／有 MedSSI）、PepeFi 交易台多窗格（硬切）、Mandate Layer 漫畫頁、Agent Passport 機場走廊（水平跟拍） | 原 6 支同一套版面、片段卡、結構、片尾；改成各自招牌版面＋鏡頭文法；盲測 6／6 配對正確、最像 3／5 分 |
+| 不變 | 深色網站配色、旁白聲音 AndrewNeural 第三人稱、Illustration／Real recording 標示、每幀頁尾揭露、真實片段原速只裁切放大、片尾揭露逐字保留 | 已定案的規則；換聲音、加音效需使用者決定，未做 |
+| 事實 | 旁白多數沿用已審句；新句與新畫面文字都在各片 NOTES 有出處表；計畫經兩份 Opus 對抗式審查＋修正複審，成片再經兩份審查 | 新比喻容易讓說法變強（例：PepeFi 的 sAAPL 只畫規則、不畫被拒的委託單；Agent Passport 9/29 與 9/23 兩條線分開） |
+| MedSSI QR | 成片審查發現 2025 沙盒畫面的 QR 可解出 deep link（含一次性 nonce），c2 改用打馬賽克的副本並在畫面註明 | 「成品不可出現 token 或 deep link」；QR 即 deep link。舊版（10/12）仍在 git 歷史，內容為已過期的一次性 offer／request |
+| 檔案大小 | chainlens.mp4 28.5 MB（軟木紋理）、mandate-layer.mp4 12.8 MB（漫畫網點），其餘 3.8–6.1 MB；public/videos 共約 63 MB | 點了才載入（preload none）；首頁預覽仍 <1 MB |
+| 長度 | 86–116 秒（ChainLens 115.5、Agent Passport 106.8 較長：鏡頭平移與查證節奏） | 未壓短，動畫時間點綁旁白，硬壓需重新排版 |

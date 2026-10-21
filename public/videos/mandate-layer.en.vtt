@@ -1,70 +1,61 @@
 WEBVTT
 
-00:00:00.400 --> 00:00:02.610
+00:00:00.400 --> 00:00:02.530
 You let an AI agent trade with your money.
 
-00:00:02.960 --> 00:00:04.720
+00:00:02.880 --> 00:00:04.570
 What stops it from going too far?
 
-00:00:07.900 --> 00:00:17.510
+00:00:07.400 --> 00:00:16.610
 Mandate Layer gives it an allowance card: fifty per trade, a hundred and fifty in total, three times leverage, two assets, seven days.
 
-00:00:17.860 --> 00:00:21.280
+00:00:16.960 --> 00:00:20.240
 A contract on Base checks the card on every order.
 
-00:00:22.280 --> 00:00:30.360
+00:00:21.240 --> 00:00:28.980
 Inside those limits, it works alone: it buys market data for a cent or less per request, and opens a small trade.
 
-00:00:31.880 --> 00:00:33.333
+00:00:30.440 --> 00:00:31.835
 Then it tries eighty.
 
-00:00:33.333 --> 00:00:34.717
+00:00:31.835 --> 00:00:33.165
 The card says fifty.
 
-00:00:34.717 --> 00:00:36.170
+00:00:33.165 --> 00:00:34.560
 The contract says no.
 
-00:00:39.380 --> 00:00:44.120
+00:00:37.240 --> 00:00:41.780
 From a recorded run: the order was really sent, and reverted on chain.
 
-00:00:45.120 --> 00:00:50.370
-On the website, anyone can ask the contract what would happen, without sending anything.
-
-00:00:50.720 --> 00:00:52.560
-Over the cap: rejected.
-
-00:00:52.560 --> 00:00:54.640
-Not on the card: rejected.
-
-00:00:55.640 --> 00:01:02.950
+00:00:42.980 --> 00:00:49.980
 The wallet has a second wall: a Base Spend Permission lets the agent refill its card, at most a hundred a day.
 
-00:01:03.300 --> 00:01:04.285
+00:00:50.330 --> 00:00:51.274
 Sixty: fine.
 
-00:01:04.285 --> 00:01:08.224
+00:00:51.274 --> 00:00:55.051
 Fifty more the same day makes a hundred and ten.
 
-00:01:08.224 --> 00:01:08.880
+00:00:55.051 --> 00:00:55.680
 Refused.
 
-00:01:09.880 --> 00:01:11.871
+00:00:56.680 --> 00:00:58.585
 That was a second recorded run.
 
-00:01:11.871 --> 00:01:14.760
+00:00:58.585 --> 00:01:01.350
 Coinbase's own contract reverted it on chain.
 
-00:01:15.760 --> 00:01:17.944
+00:01:02.550 --> 00:01:04.639
 Then the user revokes the card.
 
-00:01:17.944 --> 00:01:21.960
+00:01:04.639 --> 00:01:08.480
 The next order, small and inside every limit, is refused.
 
-00:01:23.260 --> 00:01:27.680
+00:01:09.850 --> 00:01:14.090
 The first run's last step: reverted on chain, after revocation.
 
-00:01:29.080 --> 00:01:32.591
+00:01:15.490 --> 00:01:18.854
 The agent can trade; the contract decides how far.
 
-00:01:32.591 --> 00:01:38.910
+00:01:18.854 --> 00:01:24.910
 This is the PepeFi codebase, deployed separately for the Colosseum hackathon's Base track.
