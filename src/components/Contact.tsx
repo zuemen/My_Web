@@ -5,6 +5,7 @@ import SectionHeading from "./SectionHeading";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { pick, type L } from "@/i18n/config";
+import { LINKEDIN_URL } from "@/data/site";
 import styles from "./Contact.module.css";
 
 interface ContactLink {
@@ -26,7 +27,7 @@ const contactLinks: ContactLink[] = [
   {
     name: "LinkedIn",
     icon: <LinkIcon size={24} />,
-    url: "https://www.linkedin.com/in/ting-yi-chu-95838538a/",
+    url: LINKEDIN_URL,
     label: "Ting-Yi Chu",
   },
   {

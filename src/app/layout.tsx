@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
 import LanguageProvider from "@/i18n/LanguageProvider";
 import SkipLink from "@/components/SkipLink";
+import { LINKEDIN_URL } from "@/data/site";
 import "./globals.css";
 
 // Inter was the body face. It is the default of every scaffolded site and
@@ -118,7 +119,7 @@ const jsonLd = {
   image: "https://zuemen.net/portrait.jpg",
   sameAs: [
     "https://github.com/zuemen",
-    "https://www.linkedin.com/in/ting-yi-chu-95838538a/",
+    LINKEDIN_URL,
   ],
   jobTitle: "Research Assistant",
   affiliation: {

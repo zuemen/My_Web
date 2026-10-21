@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { pick } from "@/i18n/config";
+import { LINKEDIN_URL } from "@/data/site";
 import styles from "./Footer.module.css";
 
 interface FooterProps {
@@ -22,10 +23,7 @@ const Footer = ({ lastUpdated }: FooterProps) => {
 
   const externalLinks = [
     { href: "https://github.com/zuemen", label: "GitHub" },
-    {
-      href: "https://www.linkedin.com/in/ting-yi-chu-95838538a/",
-      label: "LinkedIn",
-    },
+    { href: LINKEDIN_URL, label: "LinkedIn" },
     { href: "mailto:112306007@g.nccu.edu.tw", label: t(dict.labels.email) },
   ];
 
