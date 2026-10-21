@@ -1,0 +1,46 @@
+.now {
+  padding: var(--space-20) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* A short ruled list, lighter than the timeline below it. */
+.list {
+  list-style: none;
+  max-width: var(--measure);
+  border-top: 1px solid var(--color-rule);
+}
+
+.item {
+  position: relative;
+  padding: var(--space-4) 0 var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(var(--space-4) + 0.6rem);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.updated {
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .now {
+    padding: var(--space-12) 0;
+  }
+}

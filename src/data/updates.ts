@@ -44,10 +44,35 @@ export interface Update {
 /**
  * Recent Updates on the homepage, newest first. A running log of milestones.
  * Awards and competitive selections live in data/awards.ts and render in the
- * Awards section on /experience; an update that is about one of them should
- * use `ref` rather than repeat its text, so the two cannot disagree.
+ * Awards section on /experience; an update that is about one of them uses
+ * `ref`, and takes from the award whatever it does not write out itself.
  */
 const entries: UpdateEntry[] = [
+  {
+    // TODO: 10/23–24 FinTech Taipei 展示後補展示敘述（使用者確認後）
+    date: "2026-10",
+    icon: "trophy",
+    ref: { type: "award", id: "fintech-taipei-2026" },
+    title: l(
+      "Won the FinTech Taipei Awards 2026 (Campus Division)",
+      "獲 2026 台北金融科技獎校園組優勝",
+    ),
+    description: l(
+      "ChainLens took the Financial Innovation Award, Campus Division.",
+      "鏈鏡 ChainLens 獲金融創新獎－校園組優勝。",
+    ),
+  },
+  {
+    // TODO: 11/2 結果公布後更新
+    // Description comes from the award's detail.
+    date: "2026-10",
+    icon: "trophy",
+    ref: { type: "award", id: "chunghwa-telecom-2026" },
+    title: l(
+      "Grand finalist — Chunghwa Telecom Smart Innovation Application Competition 2026",
+      "進入 2026 中華電信智慧創新應用大賽總決賽",
+    ),
+  },
   {
     date: "2026-09",
     icon: "briefcase",
