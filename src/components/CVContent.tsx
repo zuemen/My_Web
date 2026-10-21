@@ -6,6 +6,8 @@ import { dict } from "@/i18n/dictionary";
 import { l, pick, type L } from "@/i18n/config";
 import { experience } from "@/data/experience";
 import { awards, formatAwardDate } from "@/data/awards";
+import { publications, STATUS_LABEL } from "@/data/publications";
+import { AuthorList } from "./Publications";
 import styles from "@/app/cv/page.module.css";
 
 const summary = l(
@@ -191,6 +193,28 @@ const CVContent = () => {
           </div>
         ))}
       </section>
+
+      {/* ── Publications — from data/publications.ts; hidden while empty ── */}
+      {publications.length > 0 && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>{t(dict.cv.publications)}</h2>
+          {publications.map((pub) => (
+            <div key={pub.id} className={styles.awardRow}>
+              <div className={styles.entryHeader}>
+                <span className={styles.entryTitle}>{t(pub.title)}</span>
+                <span className={styles.entryPeriod}>{pub.year}</span>
+              </div>
+              <p className={styles.entrySubtitle}>
+                <AuthorList pub={pub} />
+                {" | "}
+                {t(pub.venue)}
+                {" | "}
+                {t(STATUS_LABEL[pub.status])}
+              </p>
+            </div>
+          ))}
+        </section>
+      )}
 
       {/* ── Skills ── */}
       <section className={styles.section}>

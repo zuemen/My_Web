@@ -1,4 +1,16 @@
 import { l, type L } from "@/i18n/config";
+import type { Photo } from "@/data/experience";
+
+/** Filter categories for the Awards list on /experience. */
+export type AwardTag = "fintech" | "blockchain-identity" | "quantum" | "ai";
+
+/** Filter buttons, in display order. "All" is added by the component. */
+export const AWARD_TAGS: { id: AwardTag; label: L }[] = [
+  { id: "fintech", label: l("Fintech", "金融科技") },
+  { id: "blockchain-identity", label: l("Blockchain & Identity", "區塊鏈與身分") },
+  { id: "quantum", label: l("Quantum", "量子") },
+  { id: "ai", label: l("AI", "AI") },
+];
 
 export interface Award {
   slug: string;
@@ -15,7 +27,19 @@ export interface Award {
   certificateUrl?: string;
   /** Evidence image shown as a small thumbnail, e.g. a notification screenshot. */
   image?: { src: string; alt: L; width: number; height: number };
+  /** Event photo, laid out beside the entry like the photos on /experience. */
+  photo?: Photo;
   link?: string;
+  /**
+   * Slug of the project in data/projects.ts this award was won with. The
+   * project's card (homepage and /projects) takes its badge from here, so the
+   * award and the card can no longer disagree.
+   */
+  project?: string;
+  /** Badge text on that project card. Defaults to "title — result". */
+  badge?: L;
+  /** Categories for the Awards filter. No tags: shown under "All" only. */
+  tags?: AwardTag[];
 }
 
 /**
@@ -26,7 +50,10 @@ export const awards: Award[] = [
   {
     // Winners announced 2026-10-07: three teams per division, listed by entry
     // number and not ranked, so "Winner" with no place.
+    // TODO: 10/23–24 FinTech Taipei 頒獎與展示結束後，加照片與展示敘述（使用者確認後）
     slug: "fintech-taipei-2026",
+    project: "chainlens",
+    tags: ["fintech", "blockchain-identity", "ai"],
     title: l("FinTech Taipei Awards 2026", "2026 台北金融科技獎"),
     issuer: l(
       "Financial Innovation Award, Campus Division",
@@ -43,6 +70,8 @@ export const awards: Award[] = [
   },
   {
     slug: "gleif-appreciation-award-2026",
+    project: "evidence-at-source",
+    tags: ["blockchain-identity", "ai"],
     title: l("GLEIF Appreciation Award", "GLEIF 感謝獎"),
     issuer: l(
       "Sponsored by GLEIF (Global Legal Entity Identifier Foundation)",
@@ -57,6 +86,7 @@ export const awards: Award[] = [
   },
   {
     slug: "ntu-ibm-qiskit-hackathon-2026",
+    tags: ["quantum"],
     title: l(
       "NTU–IBM Qiskit Quantum Computing Hackathon Taiwan 2026",
       "NTU–IBM Qiskit 量子計算黑客松 Taiwan 2026",
@@ -72,6 +102,7 @@ export const awards: Award[] = [
   },
   {
     slug: "swift-hackathon-2026",
+    tags: ["fintech"],
     title: l("SWIFT Hackathon 2026", "SWIFT Hackathon 2026"),
     issuer: l("SWIFT", "SWIFT"),
     date: "2026-07",
@@ -107,6 +138,7 @@ export const awards: Award[] = [
   },
   {
     slug: "nurie-ai-2026",
+    tags: ["ai"],
     title: l("Cross-Platform Innovation Awards", "跨平台創新獎"),
     issuer: l("Nurie AI", "Nurie AI"),
     date: "2026-05",
@@ -118,6 +150,13 @@ export const awards: Award[] = [
   },
   {
     slug: "moda-digital-credential-2025",
+    project: "pepelab",
+    // The card has always used this shorter wording, with the team name.
+    badge: l(
+      "Merit Award — Digital Credential Challenge 2025 (team PepeLab)",
+      "數位憑證場景創新賽 2025 學生組優選（隊名 PepeLab）",
+    ),
+    tags: ["blockchain-identity"],
     title: l(
       "Digital Credential Scenario Innovation Challenge",
       "數位憑證場景創新賽",
@@ -131,6 +170,22 @@ export const awards: Award[] = [
     role: l("Team Leader", "隊長"),
   },
 ];
+
+/** The badge a project card shows for this award. */
+export const awardBadge = (award: Award): L =>
+  award.badge ??
+  (award.result
+    ? l(
+        `${award.title.en} — ${award.result.en}`,
+        `${award.title.zh} — ${award.result.zh}`,
+      )
+    : award.title);
+
+/** Badge for a project, from its most recent award; undefined if none. */
+export const awardBadgeFor = (projectSlug: string): L | undefined => {
+  const award = awards.find((a) => a.project === projectSlug);
+  return award && awardBadge(award);
+};
 
 const MONTHS_EN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 

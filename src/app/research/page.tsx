@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Philosophy from "@/components/Philosophy";
 import ResearchFocus from "@/components/ResearchFocus";
+import Publications from "@/components/Publications";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function ResearchPage() {
     <main id="main-content" className={styles.main}>
       <Philosophy />
       <ResearchFocus />
+      <Publications />
     </main>
   );
 }

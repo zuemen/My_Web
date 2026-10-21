@@ -4,6 +4,43 @@
   scroll-margin-top: 80px;
 }
 
+/* Category filter: plain text buttons on a hairline, the current one in ink
+   with an underline — a setting, not a row of pills. Wraps on phones. */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.filter {
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter:hover {
+  color: var(--color-accent);
+}
+
+.filter[aria-pressed="true"] {
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-text-primary);
+}
+
+.filter:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 /* Each award is a panel, dated on the left, like an entry in a ledger. */
 /* A ruled list, like the rest of the page — no panels. */
 .list {
@@ -34,6 +71,40 @@
 
 .body {
   max-width: var(--measure);
+}
+
+.main {
+  min-width: 0;
+}
+
+/* An event photo beside the entry, the same layout as the photos on the
+   Experience section above. */
+.body.withPhoto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: var(--space-8);
+  align-items: start;
+  max-width: none;
+}
+
+.withPhoto .main {
+  max-width: var(--measure);
+}
+
+.photo {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--color-rule);
+  border-radius: 4px;
+}
+
+.photoImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85);
 }
 
 .title {
@@ -137,6 +208,18 @@
 .link:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .body.withPhoto {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .photo {
+    max-width: 240px;
+    aspect-ratio: 4 / 3;
+  }
 }
 
 @media (max-width: 640px) {

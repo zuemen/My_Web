@@ -72,6 +72,7 @@ export const dict = {
       "在新興技術與制度需求之間搭橋。",
     ),
     researchFocus: l("Research Focus", "研究重點"),
+    publications: l("Publications", "論文發表"),
   },
 
   labels: {
@@ -94,6 +95,8 @@ export const dict = {
     notes: l("Notes", "筆記"),
     email: l("Email", "電子郵件"),
     backToProjects: l("Back to Projects", "回到作品列表"),
+    allAwards: l("All", "全部"),
+    filterAwards: l("Filter awards by category", "依類別篩選獎項"),
   },
 
   cv: {
@@ -102,5 +105,6 @@ export const dict = {
     experience: l("Experience", "工作經歷"),
     awards: l("Leadership & Awards", "領導與獲獎"),
     skills: l("Technical Skills", "專業技能"),
+    publications: l("Publications", "論文發表"),
   },
 } as const;

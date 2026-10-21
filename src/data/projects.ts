@@ -1,10 +1,15 @@
 import { l, type L } from "@/i18n/config";
+import { awardBadgeFor } from "@/data/awards";
 
 export interface Project {
   slug: string;
   title: L;
   /** Compact title for the homepage list, where the full one is too long. */
   shortTitle: L;
+  /**
+   * The label above the title. For a project with an award in data/awards.ts
+   * (matched by `project`), it is that award's badge and is not written here.
+   */
   category: L;
   /** One line for the homepage. The full description lives on /projects. */
   summary: L;
@@ -42,11 +47,10 @@ const demoVideo = (name: string): NonNullable<Project["video"]> => ({
   captions: l(`/videos/${name}.en.vtt`, `/videos/${name}.zh.vtt`),
 });
 
-/**
- * Source of truth for projects, read by the Projects list on /projects and the
- * Selected Work section on the homepage, so the two cannot drift apart.
- */
-export const projects: Project[] = [
+/** As written below: `category` only for projects without an award. */
+type ProjectEntry = Omit<Project, "category"> & { category?: L };
+
+const entries: ProjectEntry[] = [
   {
     // Matches the live demo as of 2026-10-12: a rule engine plus a GraphSAGE
     // second engine that can only escalate release → enhanced review. The demo
@@ -59,10 +63,7 @@ export const projects: Project[] = [
       "鏈鏡 ChainLens — 可解釋的虛擬資產詐騙金流偵測",
     ),
     shortTitle: l("ChainLens", "鏈鏡 ChainLens"),
-    category: l(
-      "FinTech Taipei Awards 2026 — Winner",
-      "2026 台北金融科技獎 — 優勝",
-    ),
+    // category: from awards.ts (fintech-taipei-2026)
     summary: l(
       "Compliance screening for Taiwanese virtual asset service providers, where every risk flag comes with the graph evidence behind it rather than a bare score.",
       "為台灣虛擬資產服務商設計的法遵篩查工具——每個風險判定都附上背後的圖結構證據，而不是一個黑箱分數。",
@@ -88,7 +89,7 @@ export const projects: Project[] = [
       "Evidence at Source 證據前置 — 讓 AI Agent 問得到答案、拿不到資料",
     ),
     shortTitle: l("Evidence at Source", "Evidence at Source 證據前置"),
-    category: l("GLEIF Appreciation Award", "GLEIF 感謝獎"),
+    // category: from awards.ts (gleif-appreciation-award-2026)
     summary: l(
       "Facts about a migrant worker are signed by both parties when they happen and held by the worker, so a bank's or brand's AI agent can get an answer without ever getting the data.",
       "關於移工的事實在發生當下由雙方簽章封存、由勞工本人持有，讓銀行或品牌的 AI Agent 拿得到答案，卻拿不到原始資料。",
@@ -114,10 +115,7 @@ export const projects: Project[] = [
       "MedSSI — 醫療憑證選擇性揭露與領藥驗證",
     ),
     shortTitle: l("MedSSI", "MedSSI"),
-    category: l(
-      "Merit Award — Digital Credential Challenge 2025 (team PepeLab)",
-      "數位憑證場景創新賽 2025 學生組優選（隊名 PepeLab）",
-    ),
+    // category: from awards.ts (moda-digital-credential-2025)
     summary: l(
       "A hospital issues a health credential once; the patient keeps it in Taiwan's government digital wallet, and a pharmacy, researcher or insurer sees only the fields its scenario allows.",
       "醫院只發一次健康憑證，病人放在政府的數位憑證皮夾裡；藥局、研究單位或保險只看得到各自情境允許的欄位。",
@@ -279,3 +277,16 @@ export const projects: Project[] = [
     link: "https://github.com/zuemen/qc_ML",
   },
 ];
+
+/**
+ * Source of truth for projects, read by the Projects list on /projects and the
+ * Selected Work section on the homepage, so the two cannot drift apart. The
+ * award badge comes from data/awards.ts so it cannot drift from Experience.
+ */
+export const projects: Project[] = entries.map((entry) => {
+  const category = awardBadgeFor(entry.slug) ?? entry.category;
+  if (!category) {
+    throw new Error(`Project "${entry.slug}" has neither an award nor a category`);
+  }
+  return { ...entry, category };
+});
