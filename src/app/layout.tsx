@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Newsreader, JetBrains_Mono, Noto_Serif_TC, Noto_Sans_TC } from "next/font/google";
-import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
@@ -100,7 +99,6 @@ export const metadata: Metadata = {
       "Research Assistant at NCCU MIS. Self-Sovereign Identity (SSI/VC/DID), Smart Contract Security, RWA Tokenization, x402 agent payments.",
     // No twitter:image — Twitter/X falls back to og:image, which is generated.
   },
-  alternates: { canonical: "https://zuemen.net" },
 };
 
 // Evaluated at build time — layout is a server component — so each deploy
@@ -152,10 +150,14 @@ export default function RootLayout({
       className={`${plexSans.variable} ${newsreader.variable} ${jetbrainsMono.variable} ${notoSerifTC.variable} ${notoSansTC.variable}`}
     >
       <body>
-        <Script
-          id="json-ld"
+        {/* A plain <script> rather than next/script, so the JSON-LD is in the
+            initial HTML that crawlers read, not injected later in the browser.
+            "<" is escaped so the JSON can never close the tag early. */}
+        <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
         <LanguageProvider>
           <SkipLink />

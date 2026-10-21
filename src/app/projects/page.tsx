@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Projects from "@/components/Projects";
 
-export const metadata: Metadata = {
+export const generateMetadata = pageMetadata({
+  path: "/projects",
   title: "Projects",
   description:
     "Zuemen Chu's research projects: decentralized credential verification (SSI/VC/DID), RWA tokenization, and quantum ML simulations.",
-};
+});
 
 export default function ProjectsPage() {
   return (
