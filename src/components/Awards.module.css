@@ -139,6 +139,15 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
+  background: var(--color-text-secondary);
+}
+
+/* Placings and awards in the accent; being selected or shortlisted stays neutral. */
+.resultWin {
+  color: var(--color-accent);
+}
+
+.resultWin::before {
   background: var(--color-accent);
 }
 

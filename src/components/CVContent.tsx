@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Download } from "lucide-react";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { l, pick, type L } from "@/i18n/config";
@@ -78,6 +79,12 @@ const CVContent = () => {
               github.com/zuemen
             </a>
           </p>
+          {/* Opens the print dialog: the print styles below already lay the CV out on white
+              A4, so "Save as PDF" gives a clean file in the language currently shown. */}
+          <button type="button" className={styles.printButton} onClick={() => window.print()}>
+            <Download size={14} aria-hidden="true" />
+            {t(dict.cv.downloadPdf)}
+          </button>
         </div>
         <figure className={styles.photo}>
           <Image

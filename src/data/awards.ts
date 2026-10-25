@@ -20,6 +20,13 @@ export interface Award {
   date: string;
   /** Headline outcome — "First Place", "Finalist", "Shortlisted", … */
   result?: L;
+  /**
+   * "win" for a placing or an award (Winner, First Place, Merit, Appreciation
+   * Award) — shown in the accent colour; "selection" for being chosen to compete
+   * (Finalist, Selected, Shortlisted) — shown in grey. Explicit, so the colour
+   * never depends on parsing the wording.
+   */
+  tier: "win" | "selection";
   role?: L;
   /** One extra line: prize, track, scale. */
   detail?: L;
@@ -54,6 +61,7 @@ export const awards: Award[] = [
     // form (member 1, team lead). ChainTrust has no project card, so there
     // is no `project` slug here.
     slug: "chunghwa-telecom-2026",
+    tier: "selection",
     tags: ["fintech", "blockchain-identity", "ai"],
     title: l(
       "Chunghwa Telecom Smart Innovation Application Competition 2026",
@@ -73,6 +81,7 @@ export const awards: Award[] = [
     // number and not ranked, so "Winner" with no place.
     // TODO: FinTech Taipei 頒獎與展示已延期（使用者 10/21：日期未定、先不放照片）；辦完後再加照片與展示敘述（使用者確認後）
     slug: "fintech-taipei-2026",
+    tier: "win",
     project: "chainlens",
     tags: ["fintech", "blockchain-identity", "ai"],
     title: l("FinTech Taipei Awards 2026", "2026 台北金融科技獎"),
@@ -91,6 +100,7 @@ export const awards: Award[] = [
   },
   {
     slug: "gleif-appreciation-award-2026",
+    tier: "win",
     project: "evidence-at-source",
     tags: ["blockchain-identity", "ai"],
     title: l("GLEIF Appreciation Award", "GLEIF 感謝獎"),
@@ -107,6 +117,7 @@ export const awards: Award[] = [
   },
   {
     slug: "ntu-ibm-qiskit-hackathon-2026",
+    tier: "selection",
     tags: ["quantum"],
     title: l(
       "NTU–IBM Qiskit Quantum Computing Hackathon Taiwan 2026",
@@ -123,6 +134,7 @@ export const awards: Award[] = [
   },
   {
     slug: "swift-hackathon-2026",
+    tier: "selection",
     tags: ["fintech"],
     title: l("SWIFT Hackathon 2026", "SWIFT Hackathon 2026"),
     issuer: l("SWIFT", "SWIFT"),
@@ -144,6 +156,7 @@ export const awards: Award[] = [
   },
   {
     slug: "egx-collegiate-business-2026",
+    tier: "win",
     title: l(
       "EGX 1st Collegiate Business Competition",
       "EGX 恩奕遊戲 第一屆大專院校商業競賽",
@@ -159,6 +172,7 @@ export const awards: Award[] = [
   },
   {
     slug: "nurie-ai-2026",
+    tier: "win",
     tags: ["ai"],
     title: l("Cross-Platform Innovation Awards", "跨平台創新獎"),
     issuer: l("Nurie AI", "Nurie AI"),
@@ -171,6 +185,7 @@ export const awards: Award[] = [
   },
   {
     slug: "moda-digital-credential-2025",
+    tier: "win",
     project: "pepelab",
     // The card has always used this shorter wording, with the team name.
     badge: l(
@@ -201,6 +216,10 @@ export const awardBadge = (award: Award): L =>
         `${award.title.zh} — ${award.result.zh}`,
       )
     : award.title);
+
+/** The award a project's card badge comes from (its most recent), if any. */
+export const awardFor = (projectSlug: string): Award | undefined =>
+  awards.find((a) => a.project === projectSlug);
 
 /** Badge for a project, from its most recent award; undefined if none. */
 export const awardBadgeFor = (projectSlug: string): L | undefined => {

@@ -32,11 +32,24 @@ const Projects = () => {
           as="h1"
         />
 
+        {/* The page runs about ten screens: one line of anchors to jump straight to a project. */}
+        <nav className={styles.index} aria-label={t(dict.labels.projectsIndex)}>
+          <ul>
+            {projects.map((project) => (
+              <li key={project.slug}>
+                <a href={`#${project.slug}`}>{t(project.shortTitle)}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         <div className={styles.list}>
           {projects.map((project) => (
             <article key={project.slug} id={project.slug} className={styles.entry}>
               <header className={styles.head}>
-                <p className={styles.category}>{t(project.category)}</p>
+                <p className={`${styles.category} ${project.awardTier === "win" ? styles.categoryWin : ""}`}>
+                  {t(project.category)}
+                </p>
                 <h2 className={styles.title}>{t(project.title)}</h2>
                 <p className={styles.lead}>{t(project.summary)}</p>
               </header>

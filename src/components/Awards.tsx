@@ -81,7 +81,9 @@ const Awards = () => {
                   <h3 className={styles.title}>
                     {t(award.title)}
                     {award.result && (
-                      <span className={styles.result}>{t(award.result)}</span>
+                      <span className={`${styles.result} ${award.tier === "win" ? styles.resultWin : ""}`}>
+                        {t(award.result)}
+                      </span>
                     )}
                   </h3>
 

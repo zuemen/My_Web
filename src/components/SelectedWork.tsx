@@ -89,7 +89,9 @@ const SelectedWork = () => {
                       </span>
                     )
                   )}
-                  <span className={styles.category}>{t(project.category)}</span>
+                  <span className={`${styles.category} ${project.awardTier === "win" ? styles.categoryWin : ""}`}>
+                    {t(project.category)}
+                  </span>
                   <h3 className={styles.title}>
                     {t(project.shortTitle)}
                     <ArrowUpRight className={styles.arrow} size={18} />

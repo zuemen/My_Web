@@ -101,11 +101,13 @@ export const dict = {
     allAwards: l("All", "全部"),
     filterAwards: l("Filter awards by category", "依類別篩選獎項"),
     pausePreviews: l("Pause previews", "暫停預覽"),
+    projectsIndex: l("Projects on this page", "本頁作品"),
     playPreviews: l("Play previews", "播放預覽"),
   },
 
   cv: {
     summary: l("Professional Summary", "專業摘要"),
+    downloadPdf: l("Download PDF", "下載 PDF"),
     education: l("Education", "學歷"),
     experience: l("Experience", "工作經歷"),
     awards: l("Leadership & Awards", "領導與獲獎"),

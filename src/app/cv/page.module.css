@@ -47,6 +47,30 @@
   color: var(--color-text-primary);
 }
 
+.printButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  margin-top: var(--space-3);
+  padding: 0 0.9rem;
+  background: none;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.printButton:hover {
+  background: var(--color-accent-soft);
+}
+
+.printButton:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 .contact {
   display: flex;
   flex-wrap: wrap;
@@ -242,6 +266,10 @@
    Force an ink-on-paper rendering, drop the fixed navbar/footer offsets, and
    spell out link targets since a printed href is otherwise lost. */
 @media print {
+  .printButton {
+    display: none !important;
+  }
+
   .main {
     min-height: 0;
     padding: 0;

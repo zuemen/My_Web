@@ -1,5 +1,5 @@
 import { l, type L } from "@/i18n/config";
-import { awardBadgeFor } from "@/data/awards";
+import { awardBadge, awardFor } from "@/data/awards";
 
 export interface Project {
   slug: string;
@@ -11,6 +11,8 @@ export interface Project {
    * (matched by `project`), it is that award's badge and is not written here.
    */
   category: L;
+  /** Set when `category` is an award badge: a "win" shows in the accent colour, a "selection" in grey. */
+  awardTier?: "win" | "selection";
   /** One line for the homepage. The full description lives on /projects. */
   summary: L;
   description: L;
@@ -284,9 +286,10 @@ const entries: ProjectEntry[] = [
  * award badge comes from data/awards.ts so it cannot drift from Experience.
  */
 export const projects: Project[] = entries.map((entry) => {
-  const category = awardBadgeFor(entry.slug) ?? entry.category;
+  const award = awardFor(entry.slug);
+  const category = (award && awardBadge(award)) ?? entry.category;
   if (!category) {
     throw new Error(`Project "${entry.slug}" has neither an award nor a category`);
   }
-  return { ...entry, category };
+  return { ...entry, category, awardTier: award?.tier };
 });
