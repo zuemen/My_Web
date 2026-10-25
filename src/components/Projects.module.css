@@ -214,11 +214,10 @@
 }
 
 /* Index of the projects below: one wrapping line of anchors between hairlines. */
+/* No bottom rule: the first entry's top border closes the index. */
 .index {
-  margin: 0 0 var(--space-12, 3rem);
   padding: var(--space-3) 0;
   border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .index ul {
