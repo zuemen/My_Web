@@ -1,6 +1,7 @@
 import { pageMetadata } from "@/lib/seo";
 import Philosophy from "@/components/Philosophy";
 import ResearchFocus from "@/components/ResearchFocus";
+import ResearchPositions from "@/components/ResearchPositions";
 import Publications from "@/components/Publications";
 import styles from "./page.module.css";
 
@@ -16,6 +17,7 @@ export default function ResearchPage() {
   return (
     <main id="main-content" className={styles.main}>
       <Philosophy />
+      <ResearchPositions />
       <ResearchFocus />
       <Publications />
     </main>

@@ -51,6 +51,65 @@
   line-height: 1.7;
 }
 
+/* Related work under each direction: mono links, like the /projects index. */
+.related {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.relatedLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.relatedLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 0.3em;
+  transition: color 0.2s ease;
+}
+
+.relatedLink:hover {
+  color: var(--color-accent);
+}
+
+/* Research positions: one row per appointment, hairlines like the grid. */
+.positions {
+  list-style: none;
+  border-top: 1px solid var(--color-rule);
+}
+
+.position {
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.positionName {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.positionMeta {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: minmax(0, 1fr);

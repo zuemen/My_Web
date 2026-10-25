@@ -32,11 +32,11 @@ const Hero = () => {
             ))}
           </div>
           <div className={styles.ctaGroup}>
-            <Link href="/research" className={styles.primaryBtn}>
-              {t(dict.hero.seeResearch)}
+            <Link href="/projects" className={styles.primaryBtn}>
+              {t(dict.hero.seeProjects)}
             </Link>
-            <Link href="/#contact" className={styles.secondaryBtn}>
-              {t(dict.hero.contact)}
+            <Link href="/cv" className={styles.secondaryBtn}>
+              {t(dict.hero.cv)}
             </Link>
           </div>
         </div>

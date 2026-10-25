@@ -7,6 +7,7 @@ import { dict } from "@/i18n/dictionary";
 import { l, pick, type L } from "@/i18n/config";
 import { experience } from "@/data/experience";
 import { awards, formatAwardDate } from "@/data/awards";
+import { projects } from "@/data/projects";
 import { publications, STATUS_LABEL } from "@/data/publications";
 import { AuthorList } from "./Publications";
 import styles from "@/app/cv/page.module.css";
@@ -59,13 +60,15 @@ const skills: { category: L; value: string }[] = [
 const CVContent = () => {
   const { lang } = useLang();
   const t = (v: L) => pick(v, lang);
+  // Which project an award was for, so the CV reads "… — Winner · ChainLens".
+  const projectName = (slug: string) => projects.find((p) => p.slug === slug)?.shortTitle;
 
   return (
     <article className={styles.cv}>
       {/* ── Header ── */}
       <header className={styles.header}>
         <div>
-          <h1 className={styles.name}>{lang === "en" ? "Ting-Yi Chu" : "朱廷翊"}</h1>
+          <h1 className={styles.name}>{lang === "en" ? "Ting-Yi (Zuemen) Chu" : "朱廷翊"}</h1>
           <p className={styles.contact}>
             <span>{lang === "en" ? "Taipei, Taiwan" : "台灣 台北"}</span>
             <span className={styles.sep}>|</span>
@@ -131,7 +134,9 @@ const CVContent = () => {
             .filter(Boolean)
             .join(" | ");
           const bullets = [
-            ...(exp.projects ?? []).flatMap((p) => p.details ?? []),
+            ...(exp.projects ?? []).flatMap((p) =>
+              (p.details ?? []).filter((_, k) => !p.cvDetails || p.cvDetails.includes(k)),
+            ),
             ...(exp.notes ?? []),
           ];
 
@@ -166,6 +171,36 @@ const CVContent = () => {
         })}
       </section>
 
+      {/* ── Selected Projects — the homepage's featured work, from data/projects.ts.
+          The line under each title is the award badge, or the project's own
+          category (competition entry, capstone) when it has no award. ── */}
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>{t(dict.cv.projects)}</h2>
+        {projects
+          .filter((p) => p.featured)
+          .map((p, i) => (
+            <div key={p.slug} className={i > 0 ? styles.entrySpaced : undefined}>
+              <div className={styles.entryHeader}>
+                <span className={styles.entryTitle}>{t(p.shortTitle)}</span>
+                {p.link && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.inlineLink}
+                  >
+                    {p.link.replace(/^https:\/\//, "")}
+                  </a>
+                )}
+              </div>
+              <p className={styles.entrySubtitle}>{t(p.category)}</p>
+              <ul className={styles.bulletList}>
+                <li>{t(p.summary)}</li>
+              </ul>
+            </div>
+          ))}
+      </section>
+
       {/* ── Awards — rendered from data/awards.ts ── */}
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>{t(dict.cv.awards)}</h2>
@@ -175,6 +210,9 @@ const CVContent = () => {
               <span className={styles.entryTitle}>
                 {t(award.title)}
                 {award.result && <> &mdash; {t(award.result)}</>}
+                {award.project && projectName(award.project) && (
+                  <> &middot; {t(projectName(award.project)!)}</>
+                )}
               </span>
               <span className={styles.entryPeriod}>
                 {formatAwardDate(award.date, lang)}

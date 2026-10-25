@@ -11,6 +11,8 @@ export interface ResearchArea {
    * the summary already says everything (it is then shown on both pages).
    */
   detail?: L;
+  /** Slugs in data/projects.ts that show this direction in practice (linked on /research). */
+  related?: string[];
 }
 
 /**
@@ -22,6 +24,7 @@ export interface ResearchArea {
 export const researchAreas: ResearchArea[] = [
   {
     id: "blockchain-identity",
+    related: ["pepelab", "evidence-at-source", "rwa-tokenization"],
     title: l("Blockchain & Digital Identity", "區塊鏈與數位身分"),
     summary: l(
       "Building trust infrastructure on Self-Sovereign Identity standards (W3C DID, Verifiable Credentials), and extending it to identity-gated asset ownership through ERC-3643 RWA tokenization.",
@@ -34,6 +37,7 @@ export const researchAreas: ResearchArea[] = [
   },
   {
     id: "contract-security",
+    related: ["mandate-layer", "agent-passport"],
     title: l("Smart Contract Security", "智慧合約安全"),
     summary: l(
       "Studying auditing methodologies for Solidity contracts — static analysis with Slither, manual review patterns, and formal verification approaches for on-chain financial systems.",
@@ -46,6 +50,7 @@ export const researchAreas: ResearchArea[] = [
   },
   {
     id: "quantum-qml",
+    related: ["qml-simulation"],
     title: l("Quantum Finance & QML", "量子金融與量子機器學習"),
     summary: l(
       "Implemented QML simulations using Qiskit, exploring VQE and QAOA for financial optimization. Focused on quantum speedup potential for ML tasks in the finance domain.",
@@ -59,6 +64,7 @@ export const researchAreas: ResearchArea[] = [
   {
     // Same text on both pages (no detail): the homepage version is the full one.
     id: "agentic-ai",
+    related: ["mandate-layer", "agent-passport", "pepefi-onchain-cfd"],
     title: l("Agentic AI & Agent Payments", "代理式 AI 與代理支付"),
     summary: l(
       "Completed NCCU's Interdisciplinary Artificial Intelligence Micro Program. Researching how an autonomous agent can hold an identity and spend money under rules a counterparty can check: did:pkh agent DIDs with authorisation credentials, session-bounded permissions, and x402 machine payments settled in USDC with on-chain revenue routing. Positioned against the draft ERC-8004 / 8183 agent-economy standards rather than claiming compliance with them.",

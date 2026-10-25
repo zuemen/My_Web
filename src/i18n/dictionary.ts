@@ -39,8 +39,8 @@ export const dict = {
       l("Agent Identity & Payments", "Agent 身分與支付"),
       l("Blockchain & Fintech", "區塊鏈與金融科技"),
     ],
-    seeResearch: l("See Research", "查看研究"),
-    contact: l("Contact", "聯絡我"),
+    seeProjects: l("See projects", "看作品"),
+    cv: l("CV", "履歷"),
     photoAlt: l(
       "Profile photo of Zuemen Chu (朱廷翊)",
       "朱廷翊的個人照片",
@@ -75,6 +75,7 @@ export const dict = {
       "在新興技術與制度需求之間搭橋。",
     ),
     researchFocus: l("Research Focus", "研究重點"),
+    researchPositions: l("Research Positions", "研究職位"),
     publications: l("Publications", "論文發表"),
   },
 
@@ -93,6 +94,7 @@ export const dict = {
     eventPage: l("Event page", "活動頁面"),
     advisor: l("Advisor", "指導教授"),
     pi: l("Principal Investigator", "計畫主持人"),
+    related: l("Related work", "相關作品"),
     lastUpdated: l("Last updated", "最後更新"),
     sourceOnGitHub: l("Source on GitHub", "GitHub 原始碼"),
     notes: l("Notes", "筆記"),
@@ -109,6 +111,7 @@ export const dict = {
   cv: {
     summary: l("Professional Summary", "專業摘要"),
     downloadPdf: l("Download PDF", "下載 PDF"),
+    projects: l("Selected Projects", "精選作品"),
     education: l("Education", "學歷"),
     experience: l("Experience", "工作經歷"),
     awards: l("Leadership & Awards", "領導與獲獎"),

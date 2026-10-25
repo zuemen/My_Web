@@ -10,6 +10,8 @@ export interface Photo {
 export interface ExpDetail {
   name: L;
   details?: L[];
+  /** Indexes into `details` that the CV keeps; /experience shows them all. */
+  cvDetails?: number[];
   /** Public pages a reader can verify the work against. */
   links?: { href: string; label: L }[];
   photo?: Photo;
@@ -141,6 +143,8 @@ export const experience: ExpEntry[] = [
           "Trustworthy AI Hackathon 2026 — Organizing Team",
           "2026 可信 AI 黑客松 — 籌辦團隊",
         ),
+        // CV: planning and operations, intake and selection, outcome.
+        cvDetails: [0, 1, 6],
         details: [
           l(
             "Led planning and operations for the three-day event (Aug 29–31, 2026) at N24 Taipei Ark, held under the guidance of the National Development Council as part of its policy research program on trustworthy AI, privacy computing and trust technology.",
@@ -189,5 +193,12 @@ export const experience: ExpEntry[] = [
     role: l("Inaugural Officer", "第一屆幹部"),
     period: l("Jun 2026 – Present", "2026/06 – 至今"),
     location: l("Taipei", "台北"),
+    // As the owner's bio on /research puts it (2026-10-05).
+    notes: [
+      l(
+        "Founded the club's Web3 Research Group and teach its Blockchain Fundamentals series.",
+        "創立社內 Web3 研究小組，並開設「區塊鏈基礎」系列課程。",
+      ),
+    ],
   },
 ];

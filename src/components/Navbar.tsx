@@ -61,12 +61,11 @@ const Navbar = () => {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <motion.nav
+    // No entrance animation: it hid the bar (and the logo, the homepage's
+    // largest paint) at translateY(-100px) until hydration.
+    <nav
       className={styles.navbar}
       data-scrolled={scrolled || menuOpen}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4 }}
       role="navigation"
       aria-label="Main navigation"
     >
@@ -164,7 +163,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 };
 
