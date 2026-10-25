@@ -6,7 +6,7 @@ export const generateMetadata = pageMetadata({
   path: "/experience",
   title: "Experience",
   description:
-    "Professional experience and awards of Zuemen Chu (朱廷翊): blockchain internship at Cathay Financial Holdings, research assistantship at NCCU MIS, and hackathon organizing.",
+    "Professional experience and awards of Zuemen Chu (朱廷翊): project management internship (blockchain) at Cathay Financial Holdings, research assistantship at NCCU MIS, and hackathon organizing.",
 });
 
 export default function ExperiencePage() {

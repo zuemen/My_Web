@@ -24,6 +24,8 @@ export interface Project {
   image?: string;
   /** Source repository. */
   link?: string;
+  /** A competition entry without an award: the CV prefixes its category with "Competition entry". */
+  competitionEntry?: boolean;
   /** Live, working demo. Checked for a 200 before being added. */
   demoUrl?: string;
   certificateUrl?: string;
@@ -104,8 +106,8 @@ const entries: ProjectEntry[] = [
       "由勞工持有的雙簽憑證錢包，接受代表不同機構的查驗 Agent 查詢。每次查詢都要通過三層政策閘門，只回傳布林值與原因碼，絕不回傳原始紀錄。Agent 透過 GLEIF vLEI 憑證鏈證明自己代表哪個機構，且每次查詢都重新驗證全鏈；Agent 也從不做最終決定——它只產生建議，交由具名的人類覆核者裁定，覆核者可撤銷的職務憑證會封存在可獨立重驗的稽核軌跡中。",
     ),
     outcome: l(
-      "The project also received the GLEIF Appreciation Award. Built by a three-person team, with a public demo and an executable test suite behind each technical claim.",
-      "本專案同時獲得 GLEIF 感謝獎。由三人團隊開發，提供公開 demo，每項技術主張都有可執行的測試佐證。",
+      "Received the GLEIF Appreciation Award. Built by a three-person team, with a public demo and an executable test suite behind each technical claim.",
+      "獲 GLEIF 感謝獎。由三人團隊開發，提供公開 demo，每項技術主張都有可執行的測試佐證。",
     ),
     tags: ["vLEI", "Verifiable Credentials", "Selective Disclosure", "AI Agents", "TypeScript"],
     link: "https://github.com/zuemen/evidence-at-source",
@@ -162,8 +164,8 @@ const entries: ProjectEntry[] = [
       "部署於 Base Sepolia 測試網的永續差價合約引擎，市場參照美股、黃金與加密資產；開 RWA 部位須提交鏈上驗證的憑證，AI agent 只能在擁有者限定的 session 內下單。",
     ),
     description: l(
-      "A perpetual CFD engine whose markets reference real-world assets — US equities, gold and crypto — as synthetic exposure: nothing real is issued or held. Opening a position on an RWA market requires an on-chain-verified \"qualified investor\" credential, equities switch to reduce-only while their market is closed, and an AI agent can trade only inside a session its owner has bounded on-chain. A keeper pushes public market prices into a guarded oracle on a GitHub Actions schedule, and market signals are sold per request over x402 — USDC over HTTP, settled by a public facilitator. A research prototype: testnet only, mock USDC as margin, and self-issued credentials.",
-      "永續差價合約引擎，市場參照美股、黃金與加密資產等真實世界資產，但只是合成部位：不發行、也不持有任何實體資產。開 RWA 部位前須提交經鏈上驗證的「合格投資人」可驗證憑證；美股休市時自動切換為只減倉；AI agent 只能在擁有者於鏈上限定的 session 內下單。價格由 keeper 依 GitHub Actions 排程寫入有界的預言機，市場訊號則透過 x402 按次販售（以 USDC 在 HTTP 上付款，由公開 facilitator 結算）。屬研究原型：僅限測試網、保證金為 MockUSDC、憑證為自行簽發。",
+      "A perpetual CFD engine whose markets reference real-world assets — US equities, gold and crypto — as synthetic exposure: nothing real is issued or held. Opening a position on an RWA market requires an on-chain-verified \"qualified investor\" credential, equities switch to reduce-only while their market is closed, and an AI agent can trade only inside a session its owner has bounded on-chain. A keeper pushes public market prices into a guarded oracle on a GitHub Actions schedule, and market signals are sold per request over x402 — USDC over HTTP, settled by a public facilitator. A research prototype: testnet only, mock USDC as margin, and self-issued credentials. The project has since moved toward on-chain social (copy) trading, also testnet-only; the video and live demo here show its separate RWA + credential-gated deployment.",
+      "永續差價合約引擎，市場參照美股、黃金與加密資產等真實世界資產，但只是合成部位：不發行、也不持有任何實體資產。開 RWA 部位前須提交經鏈上驗證的「合格投資人」可驗證憑證；美股休市時自動切換為只減倉；AI agent 只能在擁有者於鏈上限定的 session 內下單。價格由 keeper 依 GitHub Actions 排程寫入有界的預言機，市場訊號則透過 x402 按次販售（以 USDC 在 HTTP 上付款，由公開 facilitator 結算）。屬研究原型：僅限測試網、保證金為 MockUSDC、憑證為自行簽發。專案之後轉向「鏈上社交（跟單）交易」，同樣只在測試網；本頁影片與 demo 是另外部署的 RWA＋憑證准入版本。",
     ),
     outcome: l(
       "Deployed to Base Sepolia with a working web front end; positions have been opened and closed on-chain both by an investor wallet and by an agent trading through its session.",
@@ -179,6 +181,7 @@ const entries: ProjectEntry[] = [
     // addresses) for the hackathon; the repository's SUBMISSION.md §12
     // discloses which parts predate the contest.
     slug: "mandate-layer",
+    competitionEntry: true,
     featured: true,
     title: l(
       "Mandate Layer — Trading Mandates for AI Agents, Enforced On-Chain",
@@ -194,8 +197,8 @@ const entries: ProjectEntry[] = [
       "使用者給 AI 交易 agent 一份授權——單筆保證金、總預算、槓桿上限、資產清單、到期日——由 Base 上的合約在每一筆下單時檢查。",
     ),
     description: l(
-      "Built on the PepeFi perpetual CFD exchange, Mandate Layer bounds what an autonomous agent can do with a user's funds. Before any position opens, the AgentSessionManager contract checks the agent's identity, whether the session was revoked or has expired, the asset allowlist, per-order margin, cumulative budget and leverage, and a session can only close positions it opened itself. The mandate is signed as an EIP-712 credential by an ordinary wallet or an ERC-1271 smart account, margin can be topped up through Base Spend Permissions, and agents pay for market data and signals over x402. It started before the contest as the PepeLab capstone; the submission lists which parts were built during the hackathon.",
-      "建立在 PepeFi 永續差價合約交易所之上，用來限制自主 agent 能拿使用者的資金做什麼。任何部位開倉前，AgentSessionManager 合約會依序檢查 agent 身分、session 是否已撤銷或過期、資產白名單、單筆保證金、累計預算與槓桿；session 也只能平掉自己開的部位。授權以 EIP-712 憑證簽署，一般錢包或 ERC-1271 智能合約帳戶皆可；保證金可透過 Base Spend Permissions 補入；agent 以 x402 付費取得行情與訊號。本專案在賽前以 PepeLab 畢業專題起步，提交文件逐項列出哪些部分是賽期內完成。",
+      "Built on the PepeFi perpetual CFD exchange, Mandate Layer bounds what an autonomous agent can do with a user's funds. Before any position opens, the AgentSessionManager contract checks the agent's identity, whether the session was revoked or has expired, the asset allowlist, per-order margin, cumulative budget and leverage, and a session can only close positions it opened itself. The mandate is signed as an EIP-712 credential by an ordinary wallet or an ERC-1271 smart account, margin can be topped up through Base Spend Permissions, and agents pay for market data and signals over x402. It started before the contest as PepeFi (formerly PepeLab), my NCCU capstone; the submission lists which parts were built during the hackathon.",
+      "建立在 PepeFi 永續差價合約交易所之上，用來限制自主 agent 能拿使用者的資金做什麼。任何部位開倉前，AgentSessionManager 合約會依序檢查 agent 身分、session 是否已撤銷或過期、資產白名單、單筆保證金、累計預算與槓桿；session 也只能平掉自己開的部位。授權以 EIP-712 憑證簽署，一般錢包或 ERC-1271 智能合約帳戶皆可；保證金可透過 Base Spend Permissions 補入；agent 以 x402 付費取得行情與訊號。本專案在賽前以政大畢業專題 PepeFi（原名 PepeLab）起步，提交文件逐項列出哪些部分是賽期內完成。",
     ),
     outcome: l(
       "A separate deployment on Base Sepolia with an agent-mode page where the contract's refusals can be seen without connecting a wallet. Known limits — testnet only, mock USDC, a single keeper key that posts prices — are documented in the submission.",
@@ -208,6 +211,7 @@ const entries: ProjectEntry[] = [
   },
   {
     slug: "agent-passport",
+    competitionEntry: true,
     featured: true,
     title: l(
       "Agent Passport — Verifiable Identity and Mandates for Paying AI Agents",
@@ -270,7 +274,7 @@ const entries: ProjectEntry[] = [
     shortTitle: l("Quantum Machine Learning Simulation", "量子機器學習模擬"),
     // One notebook, one seed, no committed outputs (repo read 2026-10-25):
     // described as a method, not as a measured result.
-    category: l("Quantum ML Study", "量子機器學習練習"),
+    category: l("Quantum ML Study", "量子機器學習研究筆記"),
     summary: l(
       "A 2×2 design crossing classical and quantum data sources with classical and quantum classifiers, set up to tell a data advantage from a model advantage.",
       "以 2×2 設計交叉古典／量子資料與古典／量子分類器，用來分辨優勢來自資料還是模型。",

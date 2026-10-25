@@ -193,7 +193,10 @@ const CVContent = () => {
                   </a>
                 )}
               </div>
-              <p className={styles.entrySubtitle}>{t(p.category)}</p>
+              <p className={styles.entrySubtitle}>
+                {p.competitionEntry && t(dict.cv.competitionEntry)}
+                {t(p.category)}
+              </p>
               <ul className={styles.bulletList}>
                 <li>{t(p.summary)}</li>
               </ul>

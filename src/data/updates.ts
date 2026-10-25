@@ -69,8 +69,8 @@ const entries: UpdateEntry[] = [
     icon: "trophy",
     ref: { type: "award", id: "chunghwa-telecom-2026" },
     title: l(
-      "Grand finalist — Chunghwa Telecom Smart Innovation Application Competition 2026",
-      "進入 2026 中華電信智慧創新應用大賽總決賽",
+      "Finalist — Chunghwa Telecom Smart Innovation Application Competition 2026",
+      "入圍 2026 中華電信智慧創新應用大賽決賽",
     ),
   },
   {

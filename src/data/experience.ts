@@ -143,8 +143,9 @@ export const experience: ExpEntry[] = [
           "Trustworthy AI Hackathon 2026 — Organizing Team",
           "2026 可信 AI 黑客松 — 籌辦團隊",
         ),
-        // CV: planning and operations, intake and selection, outcome.
-        cvDetails: [0, 1, 6],
+        // CV: planning and operations, intake and selection, the event website
+        // (the owner's own deliverables; the winners stay on /experience).
+        cvDetails: [0, 1, 4],
         details: [
           l(
             "Led planning and operations for the three-day event (Aug 29–31, 2026) at N24 Taipei Ark, held under the guidance of the National Development Council as part of its policy research program on trustworthy AI, privacy computing and trust technology.",
@@ -196,7 +197,7 @@ export const experience: ExpEntry[] = [
     // As the owner's bio on /research puts it (2026-10-05).
     notes: [
       l(
-        "Founded the club's Web3 Research Group and teach its Blockchain Fundamentals series.",
+        "Founded the club's Web3 Research Group and teach a Blockchain Fundamentals series.",
         "創立社內 Web3 研究小組，並開設「區塊鏈基礎」系列課程。",
       ),
     ],

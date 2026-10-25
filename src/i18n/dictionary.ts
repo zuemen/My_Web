@@ -30,8 +30,8 @@ export const dict = {
       "我做的是數位信任——讓一份憑證不必信任遞出它的人也能被驗證，也讓它底下的合約值得依賴。",
     ),
     web3: l(
-      "Right now I'm a Project Management Intern in the Blockchain Technology Development Section at Cathay Financial Holdings, research Web3 agent protocols and trustworthy AI at TABEI, and work on two research tracks at NCCU MIS. In my own builds, identity extends to autonomous agents — agent DIDs, session-bounded permissions, and x402 machine payments prototyped on the Base Sepolia testnet.",
-      "目前我在國泰金控區塊鏈技術發展科擔任專案管理實習生，在 TABEI 研究 Web3 agent 協定與可信 AI，也在政大資管參與兩條研究線。我自己的專案則把身分延伸到自主 agent：agent DID、以 session 為界的權限，以及在 Base Sepolia 測試網上實作的 x402 機器支付。",
+      "I'm a Project Management Intern in the Blockchain Technology Development Section at Cathay Financial Holdings, research Web3 agent protocols and trustworthy AI at TABEI, and work on two research tracks at NCCU MIS. My own builds extend identity to autonomous agents: agent DIDs, session-bounded permissions and x402 machine payments, prototyped on the Base Sepolia testnet.",
+      "目前在國泰金控區塊鏈技術發展科擔任專案管理實習生，在 TABEI 研究 Web3 agent 協定與可信 AI，也在政大資管參與兩條研究線。自己的專案把身分延伸到自主 agent：agent DID、以 session 為界的權限，以及在 Base Sepolia 測試網上實作的 x402 機器支付。",
     ),
     tags: [
       l("Self-Sovereign Identity", "自主權身分"),
@@ -112,6 +112,7 @@ export const dict = {
     summary: l("Professional Summary", "專業摘要"),
     downloadPdf: l("Download PDF", "下載 PDF"),
     projects: l("Selected Projects", "精選作品"),
+    competitionEntry: l("Competition entry — ", "參賽作品 — "),
     education: l("Education", "學歷"),
     experience: l("Experience", "工作經歷"),
     awards: l("Leadership & Awards", "領導與獲獎"),

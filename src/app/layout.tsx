@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   // Kept under 155 characters so search engines show it without truncating.
   description:
-    "Zuemen Chu (朱廷翊) — NCCU MIS research assistant, Cathay Financial Holdings blockchain intern. SSI, contract security and x402 agent payments.",
+    "Zuemen Chu (朱廷翊) — NCCU MIS research assistant and Cathay Financial Holdings project management intern (blockchain). SSI, contract security, x402.",
   keywords: [
     "Blockchain",
     "SSI",
