@@ -100,6 +100,8 @@ export const dict = {
     backToProjects: l("Back to Projects", "回到作品列表"),
     allAwards: l("All", "全部"),
     filterAwards: l("Filter awards by category", "依類別篩選獎項"),
+    pausePreviews: l("Pause previews", "暫停預覽"),
+    playPreviews: l("Play previews", "播放預覽"),
   },
 
   cv: {

@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
 import { projects } from "@/data/projects";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
@@ -18,13 +19,31 @@ import styles from "./SelectedWork.module.css";
  * item. This surfaces the same three projects as /projects, one line each,
  * reading from data/projects.ts so the two can't drift.
  */
+const PAUSE_KEY = "zuemen-previews-paused";
+
 const SelectedWork = () => {
   const { lang } = useLang();
   const t = (v: L) => pick(v, lang);
   // Homepage shows the flagged few; /projects shows everything.
   const featured = projects.filter((p) => p.featured);
-  // Card videos loop silently, except for visitors who ask for less motion.
+  // Card videos loop silently, except for visitors who ask for less motion or
+  // pause them here (WCAG 2.2.2: moving content longer than five seconds needs
+  // a way to stop it). The choice is remembered on this device.
   const reduced = useReducedMotion();
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    try {
+      setPaused(localStorage.getItem(PAUSE_KEY) === "1");
+    } catch {}
+  }, []);
+  const togglePaused = () => {
+    setPaused((was) => {
+      try {
+        localStorage.setItem(PAUSE_KEY, was ? "0" : "1");
+      } catch {}
+      return !was;
+    });
+  };
 
   return (
     <section id="work" className={styles.work}>
@@ -34,6 +53,13 @@ const SelectedWork = () => {
           eyebrow={t(dict.sections.selectedWorkEyebrow)}
           title={t(dict.sections.projects)}
         />
+
+        {!reduced && (
+          <button type="button" className={styles.motion} onClick={togglePaused} aria-pressed={paused}>
+            {paused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
+            {t(paused ? dict.labels.playPreviews : dict.labels.pausePreviews)}
+          </button>
+        )}
 
         <ul className={styles.list}>
           {featured.map((project) => {
@@ -52,7 +78,7 @@ const SelectedWork = () => {
                         className={styles.video}
                         src={project.video.preview}
                         poster={project.video.poster}
-                        play={!reduced}
+                        play={!reduced && !paused}
                       />
                     </span>
                   ) : (
