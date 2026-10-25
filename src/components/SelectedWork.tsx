@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useReducedMotion } from "framer-motion";
 
 import { ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
@@ -21,6 +21,34 @@ import styles from "./SelectedWork.module.css";
  */
 const PAUSE_KEY = "zuemen-previews-paused";
 
+// The stored choice is external state, read through useSyncExternalStore like
+// the language preference. With storage blocked it lasts for this page view.
+const pauseListeners = new Set<() => void>();
+let pausedInMemory = false;
+
+const subscribePaused = (listener: () => void) => {
+  pauseListeners.add(listener);
+  return () => {
+    pauseListeners.delete(listener);
+  };
+};
+
+const getPaused = () => {
+  try {
+    return localStorage.getItem(PAUSE_KEY) === "1";
+  } catch {
+    return pausedInMemory;
+  }
+};
+
+const storePaused = (next: boolean) => {
+  pausedInMemory = next;
+  try {
+    localStorage.setItem(PAUSE_KEY, next ? "1" : "0");
+  } catch {}
+  pauseListeners.forEach((listener) => listener());
+};
+
 const SelectedWork = () => {
   const { lang } = useLang();
   const t = (v: L) => pick(v, lang);
@@ -30,20 +58,8 @@ const SelectedWork = () => {
   // pause them here (WCAG 2.2.2: moving content longer than five seconds needs
   // a way to stop it). The choice is remembered on this device.
   const reduced = useReducedMotion();
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    try {
-      setPaused(localStorage.getItem(PAUSE_KEY) === "1");
-    } catch {}
-  }, []);
-  const togglePaused = () => {
-    setPaused((was) => {
-      try {
-        localStorage.setItem(PAUSE_KEY, was ? "0" : "1");
-      } catch {}
-      return !was;
-    });
-  };
+  const paused = useSyncExternalStore(subscribePaused, getPaused, () => false);
+  const togglePaused = () => storePaused(!paused);
 
   return (
     <section id="work" className={styles.work}>
