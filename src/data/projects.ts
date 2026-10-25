@@ -259,7 +259,7 @@ const entries: ProjectEntry[] = [
       "四支 Solidity 合約（IdentityRegistry、PropertyToken、RentalDistributor、MockUSDC）部署在本地 Hardhat 網路，串接 React 前端與 Node 後端，並有租金分配的 Hardhat 測試；轉給白名單外地址的交易由代幣合約本身拒絕。",
     ),
     tags: ["Solidity", "Hardhat", "RWA", "Fractional Ownership", "React"],
-    link: "https://github.com/zuemen/rwa_g",
+    // No source link: the owner archived zuemen/rwa_g on 2026-10-25.
   },
   {
     slug: "qml-simulation",
@@ -284,7 +284,7 @@ const entries: ProjectEntry[] = [
       "可執行的 notebook，四組比較並排設定。只用單一 seed 模擬、未存結果，展示的是方法，不是已量測到的優勢。",
     ),
     tags: ["QML", "Qiskit", "QSVM", "QNN", "Python"],
-    link: "https://github.com/zuemen/qc_ML",
+    // No source link: the owner archived zuemen/qc_ML on 2026-10-25.
   },
 ];
 

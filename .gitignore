@@ -43,3 +43,6 @@ next-env.d.ts
 # AI agent configs (do not publish)
 CLAUDE.md
 AGENTS.md
+
+# Internal decision notes: kept locally, not published
+docs/decisions-*.md
