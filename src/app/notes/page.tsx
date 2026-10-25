@@ -7,6 +7,7 @@ export const generateMetadata = pageMetadata({
   title: "Notes",
   description:
     "Reading notes and short writings by Zuemen Chu on Quantum Finance and Smart Contract Security — coming soon.",
+  index: false,
 });
 
 export default function NotesPage() {

@@ -105,7 +105,11 @@ const Projects = () => {
               <div className={styles.body}>
                 <p className={styles.desc}>{t(project.description)}</p>
 
-                <aside className={styles.facts}>
+                <div
+                  className={styles.facts}
+                  role="group"
+                  aria-label={`${t(project.shortTitle)} — ${t(dict.labels.projectFacts)}`}
+                >
                   <div>
                     <span className={styles.label}>{t(dict.labels.outcome)}</span>
                     <p className={styles.outcome}>{t(project.outcome)}</p>
@@ -152,7 +156,7 @@ const Projects = () => {
                       </a>
                     )}
                   </div>
-                </aside>
+                </div>
               </div>
             </article>
           ))}

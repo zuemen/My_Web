@@ -20,10 +20,13 @@ export const pageMetadata =
     path,
     title,
     description,
+    index = true,
   }: {
     path: string;
     title: string;
     description: string;
+    /** false keeps a placeholder page (e.g. /notes before its first post) out of search results. */
+    index?: boolean;
   }) =>
   async (_props: unknown, parent: ResolvingMetadata): Promise<Metadata> => {
     const inherited = await parent;
@@ -32,6 +35,7 @@ export const pageMetadata =
       title,
       description,
       alternates: { canonical: path },
+      ...(index ? {} : { robots: { index: false, follow: true } }),
       openGraph: {
         type: "profile",
         url: path,

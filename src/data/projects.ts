@@ -38,15 +38,18 @@ export interface Project {
     poster?: string;
     preview?: string;
     captions?: L;
+    /** Length of the full take in seconds (for the VideoObject structured data on /projects). */
+    seconds?: number;
   };
 }
 
 /** The files the demo recorder writes for one take, under /public/videos/<name>.* */
-const demoVideo = (name: string): NonNullable<Project["video"]> => ({
+const demoVideo = (name: string, seconds: number): NonNullable<Project["video"]> => ({
   src: `/videos/${name}.mp4`,
   poster: `/videos/${name}.webp`,
   preview: `/videos/${name}-preview.mp4`,
   captions: l(`/videos/${name}.en.vtt`, `/videos/${name}.zh.vtt`),
+  seconds,
 });
 
 /** As written below: `category` only for projects without an award. */
@@ -81,7 +84,7 @@ const entries: ProjectEntry[] = [
     tags: ["SNA", "Graph Neural Networks", "AML Compliance", "Python", "Next.js"],
     link: "https://github.com/zuemen/ChainLens",
     demoUrl: "https://chain-lens-beta.vercel.app",
-    video: demoVideo("chainlens"),
+    video: demoVideo("chainlens", 115.5),
   },
   {
     slug: "evidence-at-source",
@@ -107,7 +110,7 @@ const entries: ProjectEntry[] = [
     tags: ["vLEI", "Verifiable Credentials", "Selective Disclosure", "AI Agents", "TypeScript"],
     link: "https://github.com/zuemen/evidence-at-source",
     demoUrl: "https://zuemen.github.io/evidence-at-source/",
-    video: demoVideo("evidence-at-source"),
+    video: demoVideo("evidence-at-source", 93.2),
   },
   {
     slug: "pepelab",
@@ -134,7 +137,7 @@ const entries: ProjectEntry[] = [
     image: "/digital_credential_new.jpg",
     link: "https://github.com/zuemen/pepelab_v2",
     caseStudyUrl: "/projects/pepelab",
-    video: demoVideo("medssi"),
+    video: demoVideo("medssi", 87.1),
   },
   {
     // Research prototype on testnet. Never describe the vault as fully
@@ -169,7 +172,7 @@ const entries: ProjectEntry[] = [
     tags: ["Solidity", "Foundry", "Base Sepolia", "RWA", "Verifiable Credentials", "x402", "Agent Delegation"],
     link: "https://github.com/zuemen/pepelab_onchain_cfd",
     demoUrl: "https://pepelab-rwa-poc.vercel.app",
-    video: demoVideo("pepefi"),
+    video: demoVideo("pepefi", 88.1),
   },
   {
     // Same codebase as PepeFi, deployed separately (fresh keys, fresh
@@ -201,7 +204,7 @@ const entries: ProjectEntry[] = [
     tags: ["Solidity", "Base Sepolia", "AI Agents", "EIP-712", "x402", "TypeScript"],
     link: "https://github.com/zuemen/mandate-layer",
     demoUrl: "https://zuemen.github.io/mandate-layer/agent-mode",
-    video: demoVideo("mandate-layer"),
+    video: demoVideo("mandate-layer", 85.7),
   },
   {
     slug: "agent-passport",
@@ -230,7 +233,7 @@ const entries: ProjectEntry[] = [
     tags: ["Solidity", "Monad", "ERC-8004", "vLEI", "MCP", "TypeScript"],
     link: "https://github.com/zuemen/agent-passport",
     demoUrl: "https://zuemen.github.io/agent-passport/",
-    video: demoVideo("agent-passport"),
+    video: demoVideo("agent-passport", 106.8),
   },
   {
     slug: "rwa-tokenization",

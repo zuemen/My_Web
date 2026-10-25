@@ -4,9 +4,10 @@ import styles from "./page.module.css";
 
 export const generateMetadata = pageMetadata({
   path: "/projects/pepelab",
-  title: "MedSSI — Decentralized Health Credential Verification",
+  // Title and description kept within ~60 and 155 characters so search results don't truncate them.
+  title: "MedSSI — Health Credential Verification",
   description:
-    "MedSSI (team PepeLab): a decentralized health credential verification system built on SSI, VC, and DID standards, so a patient discloses only the fields each pharmacy, researcher or insurer needs. Merit Award, Digital Credential Scenario Innovation Challenge (Ministry of Digital Affairs, Taiwan).",
+    "MedSSI: SSI health credentials that let a patient show a pharmacy only the fields it needs. Merit Award, MODA Digital Credential Scenario Innovation Challenge.",
 });
 
 export default function PepeLabPage() {

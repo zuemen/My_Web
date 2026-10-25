@@ -13,7 +13,7 @@ export const dict = {
     contact: l("Contact", "聯絡"),
     openMenu: l("Open menu", "開啟選單"),
     closeMenu: l("Close menu", "關閉選單"),
-    home: l("Zuemen Chu — Home", "朱廷翊 — 首頁"),
+    home: l("Zuemen Chu 朱廷翊 — Home", "Zuemen Chu 朱廷翊 — 首頁"),
     skip: l("Skip to main content", "跳至主要內容"),
     switchTo: l("切換至中文", "Switch to English"),
   },
@@ -102,6 +102,7 @@ export const dict = {
     filterAwards: l("Filter awards by category", "依類別篩選獎項"),
     pausePreviews: l("Pause previews", "暫停預覽"),
     projectsIndex: l("Projects on this page", "本頁作品"),
+    projectFacts: l("key facts", "重點"),
     playPreviews: l("Play previews", "播放預覽"),
   },
 

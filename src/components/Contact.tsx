@@ -63,7 +63,7 @@ const Contact = () => {
                   : "noopener noreferrer"
               }
               className={styles.contactItem}
-              aria-label={`Contact via ${link.name}: ${link.label}`}
+              aria-label={`${link.name}: ${link.label}`}
             >
               <span className={styles.iconWrapper}>{link.icon}</span>
               <span className={styles.name}>{link.name}</span>
