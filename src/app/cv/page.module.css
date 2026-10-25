@@ -211,8 +211,12 @@
 }
 
 /* ── Inline link ── */
+/* Underlined: next to grey body text the accent alone is only 1.2:1 (axe link-in-text-block). */
 .inlineLink {
   color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
   transition: opacity 0.2s ease;
 }
 

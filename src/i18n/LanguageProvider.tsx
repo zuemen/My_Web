@@ -7,12 +7,16 @@ import {
   useEffect,
   useSyncExternalStore,
 } from "react";
+import dynamic from "next/dynamic";
 import { DEFAULT_LANG, HTML_LANG, LANGS, STORAGE_KEY, type Lang } from "./config";
 
 interface LanguageContextValue {
   lang: Lang;
   setLang: (next: Lang) => void;
 }
+
+// Chinese webfonts, fetched the first time the page is shown in Chinese.
+const ChineseFonts = dynamic(() => import("./ChineseFonts"), { ssr: false });
 
 const LanguageContext = createContext<LanguageContextValue>({
   lang: DEFAULT_LANG,
@@ -75,6 +79,7 @@ const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <LanguageContext.Provider value={{ lang, setLang }}>
+      {lang === "zh" && <ChineseFonts />}
       {children}
     </LanguageContext.Provider>
   );

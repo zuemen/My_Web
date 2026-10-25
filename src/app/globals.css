@@ -75,17 +75,19 @@
   --radius-xl: 2px;
 
   /* Typography */
-  /* English pages carry Noto TC only in the Chinese stacks below: the few CJK glyphs on an English
-     page (the name in the logo) use the system's Chinese face instead of pulling ~700 KB of Noto slices. */
+  /* English pages carry Noto TC only in the Chinese stacks below (loaded by ChineseFonts in Chinese
+     mode): the few CJK glyphs on an English page (the name in the logo) use the system's Chinese face. */
   --font-sans: var(--font-plex-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
   --font-display: var(--font-newsreader), Georgia, 'Microsoft JhengHei', 'PingFang TC', serif;
   --font-mono: var(--font-jetbrains-mono, 'JetBrains Mono', Menlo, monospace);
 
 }
 
+/* The Noto variables arrive with ChineseFonts a moment after the switch; until then the
+   fallbacks keep the stacks valid (an undefined var() would drop the whole font-family). */
 html[lang|="zh"] {
-  --font-sans: var(--font-plex-sans), var(--font-noto-sans-tc), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: var(--font-newsreader), var(--font-noto-serif-tc), Georgia, serif;
+  --font-sans: var(--font-plex-sans), var(--font-noto-sans-tc, 'Microsoft JhengHei', 'PingFang TC'), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: var(--font-newsreader), var(--font-noto-serif-tc, 'Microsoft JhengHei', 'PingFang TC'), Georgia, serif;
 }
 
 *,
