@@ -14,8 +14,9 @@ interface LoopVideoProps {
  * Silent looping clip for a card. React leaves `muted` out of the server HTML,
  * so browsers may refuse to autoplay it; this sets it on the element and plays
  * the clip only while it is on screen. The file is not requested until the card
- * comes near the viewport (six clips used to load with the page and compete
- * with it for bandwidth); until then the poster shows.
+ * comes within about a screen of the viewport (six clips used to load with the
+ * page and compete with it for bandwidth), early enough that a clip has a head
+ * start before its card scrolls in; until then the poster shows.
  */
 const LoopVideo = ({ src, poster, className, play }: LoopVideoProps) => {
   const ref = useRef<HTMLVideoElement>(null);
@@ -29,7 +30,7 @@ const LoopVideo = ({ src, poster, className, play }: LoopVideoProps) => {
       ([entry]) => {
         if (entry?.isIntersecting) setNear(true);
       },
-      { rootMargin: "300px 0px" },
+      { rootMargin: "800px 0px" },
     );
     observer.observe(video);
     return () => observer.disconnect();
