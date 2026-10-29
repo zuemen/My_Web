@@ -93,23 +93,6 @@
   background: var(--color-accent);
 }
 
-.contactBtn {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 var(--space-1);
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-.contactBtn:hover {
-  border-bottom-color: var(--color-accent);
-}
-
 /* Language toggle — both options shown, the current one in ink, so it reads
    as a setting rather than a mystery button labelled with one character. */
 .langToggle {

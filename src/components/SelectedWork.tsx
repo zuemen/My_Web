@@ -66,7 +66,6 @@ const SelectedWork = () => {
       <div className="section-wide">
         <SectionHeading
           wide
-          eyebrow={t(dict.sections.selectedWorkEyebrow)}
           title={t(dict.sections.projects)}
         />
 

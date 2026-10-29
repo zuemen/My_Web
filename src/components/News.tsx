@@ -38,10 +38,7 @@ const News = () => {
   return (
     <section className={styles.news}>
       <div className="section-container">
-        <SectionHeading
-          eyebrow={t(dict.sections.latestEyebrow)}
-          title={t(dict.sections.recentUpdates)}
-        />
+        <SectionHeading title={t(dict.sections.recentUpdates)} />
 
         <div className={styles.timeline}>
           {updates.map((item) => (

@@ -1,8 +1,6 @@
 import styles from "./SectionHeading.module.css";
 
 interface SectionHeadingProps {
-  /** Small mono label above the title, e.g. "01 — Updates". */
-  eyebrow?: string;
   title: string;
   subtitle?: string;
   /** Heading level, so pages keep a sensible h1→h2→h3 order. */
@@ -18,7 +16,6 @@ interface SectionHeadingProps {
  * landing-page template. This replaces all of them.
  */
 const SectionHeading = ({
-  eyebrow,
   title,
   subtitle,
   as: Tag = "h2",
@@ -26,7 +23,6 @@ const SectionHeading = ({
 }: SectionHeadingProps) => {
   return (
     <header className={`${styles.header} ${wide ? styles.wide : ""}`}>
-      {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
       <Tag className={styles.title}>{title}</Tag>
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
     </header>

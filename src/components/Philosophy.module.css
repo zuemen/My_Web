@@ -71,12 +71,12 @@
   gap: var(--space-6);
 }
 
-/* First paragraph reads as a standfirst, the way an article opens. */
+/* First paragraph reads as a standfirst: brighter ink and one step up in
+   size. It runs eight lines, so it stays close to body size — at 1.22rem with
+   an accent rule it read as a wall rather than an opening. */
 .textBlock p:first-child {
-  padding-left: var(--space-5);
-  border-left: 2px solid var(--color-accent);
-  font-size: 1.22rem;
-  line-height: 1.65;
+  font-size: 1.125rem;
+  line-height: 1.7;
   color: var(--color-text-primary);
 }
 
@@ -99,7 +99,6 @@
   }
 
   .textBlock p:first-child {
-    font-size: 1.1rem;
-    padding-left: var(--space-4);
+    font-size: 1.05rem;
   }
 }

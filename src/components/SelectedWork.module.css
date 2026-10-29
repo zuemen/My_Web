@@ -22,13 +22,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-panel);
   background: var(--color-bg);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.25s ease;
 }
 
+/* One hover signal: the edge brightens. No lift, no shadow halo on dark. */
 .item:hover {
   border-color: var(--color-rule);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-panel);
 }
 
 /* Media slot for a project video. Rendered only when the project has one. */

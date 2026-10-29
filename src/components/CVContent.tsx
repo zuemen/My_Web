@@ -133,12 +133,10 @@ const CVContent = () => {
           ]
             .filter(Boolean)
             .join(" | ");
-          const bullets = [
-            ...(exp.projects ?? []).flatMap((p) =>
-              (p.details ?? []).filter((_, k) => !p.cvDetails || p.cvDetails.includes(k)),
-            ),
-            ...(exp.notes ?? []),
-          ];
+          // Each project keeps its own bullets underneath it; notes about the
+          // appointment as a whole follow the projects.
+          const cvDetails = (p: NonNullable<typeof exp.projects>[number]) =>
+            (p.details ?? []).filter((_, k) => !p.cvDetails || p.cvDetails.includes(k));
 
           return (
             <div key={exp.id}>
@@ -154,14 +152,26 @@ const CVContent = () => {
               {subtitle && <p className={styles.entrySubtitle}>{subtitle}</p>}
               {exp.projects && exp.projects.length > 0 && (
                 <ul className={styles.projectList}>
-                  {exp.projects.map((p) => (
-                    <li key={p.name.en}>{t(p.name)}</li>
-                  ))}
+                  {exp.projects.map((p) => {
+                    const details = cvDetails(p);
+                    return (
+                      <li key={p.name.en}>
+                        <span className={styles.projectName}>{t(p.name)}</span>
+                        {details.length > 0 && (
+                          <ul className={styles.bulletList}>
+                            {details.map((b) => (
+                              <li key={b.en}>{t(b)}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
-              {bullets.length > 0 && (
+              {exp.notes && exp.notes.length > 0 && (
                 <ul className={styles.bulletList}>
-                  {bullets.map((b) => (
+                  {exp.notes.map((b) => (
                     <li key={b.en}>{t(b)}</li>
                   ))}
                 </ul>

@@ -20,7 +20,6 @@ const Experience = () => {
     <section id="experience" className={styles.experience}>
       <div className="section-container">
         <SectionHeading
-          eyebrow={t(dict.sections.experienceEyebrow)}
           title={t(dict.sections.experience)}
           as="h1"
         />

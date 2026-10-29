@@ -47,23 +47,29 @@
   color: var(--color-text-primary);
 }
 
+/* Same solid button as the homepage's "See projects": one primary button
+   style across the site. */
 .printButton {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   min-height: 44px;
   margin-top: var(--space-3);
-  padding: 0 0.9rem;
-  background: none;
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
+  padding: 0 var(--space-5);
+  background: var(--color-text-primary);
+  border: none;
+  border-radius: 3px;
+  color: var(--color-bg);
   font: inherit;
   font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .printButton:hover {
-  background: var(--color-accent-soft);
+  background: var(--color-accent);
 }
 
 .printButton:focus-visible {
@@ -146,34 +152,30 @@
 
 .entrySubtitle {
   font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  font-style: italic;
+  color: var(--color-text-tertiary);
   margin-bottom: var(--space-1);
   line-height: 1.5;
 }
 
 /* ── Lists ── */
+/* A project is a small subhead with its own bullets beneath it, so a
+   reader can tell which work each bullet belongs to. One bullet glyph. */
 .projectList {
   list-style: none;
-  padding: var(--space-2) 0;
+  padding: var(--space-2) 0 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-3);
 }
 
-.projectList li {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  padding-left: var(--space-4);
-  position: relative;
+.projectName {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
 }
 
-.projectList li::before {
-  content: "›";
-  position: absolute;
-  left: 0;
-  color: var(--color-accent);
-  font-weight: 700;
+.projectList .bulletList {
+  padding-top: var(--space-1);
 }
 
 .bulletList {
@@ -297,7 +299,7 @@
   .entrySubtitle,
   .entryPeriod,
   .body,
-  .projectList li,
+  .projectName,
   .bulletList li,
   .skillVal,
   .inlineLink {
@@ -319,10 +321,6 @@
 
   .skillRow {
     border-bottom: 1px dashed #999;
-  }
-
-  .projectList li::before {
-    color: #000;
   }
 
   /* A printed link is dead unless the URL is visible. */

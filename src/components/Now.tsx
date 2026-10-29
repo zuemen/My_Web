@@ -15,10 +15,7 @@ const Now = () => {
   return (
     <section id="now" className={styles.now}>
       <div className="section-container">
-        <SectionHeading
-          eyebrow={t(dict.sections.nowEyebrow)}
-          title={t(dict.sections.now)}
-        />
+        <SectionHeading title={t(dict.sections.now)} />
         <ul className={styles.list}>
           {now.map((item) => (
             <li key={item.en} className={styles.item}>

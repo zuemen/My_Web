@@ -2,7 +2,7 @@
    viewport — a full-height hero left most of the first screen empty. */
 .hero {
   position: relative;
-  padding-top: calc(64px + var(--space-20));
+  padding-top: calc(64px + var(--space-12));
   padding-bottom: var(--space-16);
   border-bottom: 1px solid var(--color-rule);
   overflow: hidden;
@@ -98,7 +98,7 @@
 
 .intro {
   max-width: 34ch;
-  margin: var(--space-8) 0;
+  margin: var(--space-6) 0;
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 2vw, 1.6rem);
   /* No one-character last line (the Chinese standfirst left 「賴。」 alone). */
@@ -108,47 +108,39 @@
 }
 
 /* Follow-on paragraph: the concrete build, one step quieter than the
-   standfirst so the hero still has a single loudest line. */
+   standfirst so the hero still has a single loudest line. Size and colour
+   carry that step; no rule down its left edge. */
 .web3 {
-  max-width: 50ch;
-  margin: 0 0 var(--space-8);
-  padding-left: var(--space-4);
-  border-left: 1px solid var(--color-rule);
+  max-width: 58ch;
+  margin: 0 0 var(--space-6);
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--color-text-tertiary);
 }
 
+/* The four areas as one line of text rather than a row of pills: on a
+   phone the pills stacked four deep and pushed the buttons off the screen. */
 .tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-10);
+  max-width: 62ch;
+  margin-bottom: var(--space-8);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  color: var(--color-text-secondary);
 }
 
 .tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border: 1px solid var(--color-rule);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 0.02);
-  font-family: var(--font-sans);
-  font-size: 0.76rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--color-text-primary);
   white-space: nowrap;
 }
 
-.tag::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--color-accent);
+.tag:not(:last-child)::after {
+  content: "·";
+  /* With the space that follows, the dot sits midway between two tags. */
+  margin: 0 0.3em 0 0.55em;
+  color: var(--color-text-tertiary);
 }
 
 .ctaGroup {

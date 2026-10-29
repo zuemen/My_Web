@@ -139,6 +139,11 @@
   display: none;
 }
 
+/* A project with no details (the confidential Cathay entry) ends at its name. */
+.projectName:last-child {
+  margin-bottom: 0;
+}
+
 .details {
   display: flex;
   flex-direction: column;
@@ -163,7 +168,7 @@
 }
 
 .notes {
-  margin-top: var(--space-5);
+  margin-top: var(--space-3);
 }
 
 .projectLinks {

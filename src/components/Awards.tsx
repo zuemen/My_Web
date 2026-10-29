@@ -41,10 +41,7 @@ const Awards = () => {
   return (
     <section id="awards" className={styles.awards}>
       <div className="section-container">
-        <SectionHeading
-          eyebrow={t(dict.sections.recognitionEyebrow)}
-          title={t(dict.sections.awards)}
-        />
+        <SectionHeading title={t(dict.sections.awards)} />
 
         <div
           className={styles.filters}
@@ -78,16 +75,16 @@ const Awards = () => {
                 className={`${styles.body} ${award.photo ? styles.withPhoto : ""}`}
               >
                 <div className={styles.main}>
-                  <h3 className={styles.title}>
-                    {t(award.title)}
+                  <h3 className={styles.title}>{t(award.title)}</h3>
+
+                  {/* The result opens the line under the title on every entry, so it
+                      no longer jumps between the title's end and a line of its own. */}
+                  <p className={styles.issuer}>
                     {award.result && (
                       <span className={`${styles.result} ${award.tier === "win" ? styles.resultWin : ""}`}>
                         {t(award.result)}
                       </span>
                     )}
-                  </h3>
-
-                  <p className={styles.issuer}>
                     {t(award.issuer)}
                     {award.role && ` · ${t(award.role)}`}
                   </p>

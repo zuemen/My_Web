@@ -25,17 +25,19 @@ const ResearchFocus = () => {
             return (
               <div key={item.id} className={styles.areaCard}>
                 <h3 className={styles.areaTitle}>{t(item.title)}</h3>
-                <p className={styles.areaDesc}>{t(item.detail ?? item.summary)}</p>
-                {related.length > 0 && (
-                  <p className={styles.related}>
-                    <span className={styles.relatedLabel}>{t(dict.labels.related)}</span>
-                    {related.map((p) => (
-                      <Link key={p.slug} href={`/projects#${p.slug}`} className={styles.relatedLink}>
-                        {t(p.shortTitle)}
-                      </Link>
-                    ))}
-                  </p>
-                )}
+                <div className={styles.areaBody}>
+                  <p className={styles.areaDesc}>{t(item.detail ?? item.summary)}</p>
+                  {related.length > 0 && (
+                    <p className={styles.related}>
+                      <span className={styles.relatedLabel}>{t(dict.labels.related)}</span>
+                      {related.map((p) => (
+                        <Link key={p.slug} href={`/projects#${p.slug}`} className={styles.relatedLink}>
+                          {t(p.shortTitle)}
+                        </Link>
+                      ))}
+                    </p>
+                  )}
+                </div>
               </div>
             );
           })}

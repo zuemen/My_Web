@@ -1,0 +1,61 @@
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-video);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* The whole poster is the hit area; the visible mark is one round button. */
+.play {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.playIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  padding-left: 3px;
+  border: 1px solid rgb(var(--color-accent-rgb) / 0.5);
+  border-radius: 50%;
+  background: rgb(var(--color-bg-rgb) / 0.72);
+  color: var(--color-text-primary);
+  backdrop-filter: blur(4px);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.play:hover .playIcon {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.play:focus-visible .playIcon {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.play:active .playIcon {
+  background: rgb(var(--color-bg-rgb) / 0.9);
+}
+
+@media (max-width: 640px) {
+  .playIcon {
+    width: 52px;
+    height: 52px;
+  }
+}
