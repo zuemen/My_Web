@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Fragment } from "react";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { pick } from "@/i18n/config";
@@ -25,10 +26,12 @@ const Hero = () => {
           <p className={styles.intro}>{t(dict.hero.intro)}</p>
           <p className={styles.web3}>{t(dict.hero.web3)}</p>
           <div className={styles.tags} aria-label={t(dict.sections.researchAreas)}>
-            {dict.hero.tags.map((tag) => (
-              <span key={tag.en} className={styles.tag}>
-                {t(tag)}
-              </span>
+            {/* A space between tags gives the line somewhere to break. */}
+            {dict.hero.tags.map((tag, i) => (
+              <Fragment key={tag.en}>
+                {i > 0 && " "}
+                <span className={styles.tag}>{t(tag)}</span>
+              </Fragment>
             ))}
           </div>
           <div className={styles.ctaGroup}>

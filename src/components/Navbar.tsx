@@ -87,10 +87,8 @@ const Navbar = () => {
             </li>
           ))}
           <li>
-            <Link
-              href="/#contact"
-              className={styles.contactBtn}
-            >
+            {/* Set like the other links: a coloured fake button read as the AI-nav template. */}
+            <Link href="/#contact" className={styles.navLink}>
               {t(dict.nav.contact)}
             </Link>
           </li>

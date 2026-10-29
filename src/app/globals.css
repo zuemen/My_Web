@@ -14,6 +14,9 @@
   /* Raised panels (cards, timeline entries). One step off the ground so a
      card reads as a card, still well below --color-surface. */
   --color-panel: #0f0f12;
+  /* Behind a video before its poster paints: one step under the ground,
+     not pure black. */
+  --color-video: #060607;
   --color-border: #222228;
   /* Section rules: one step brighter than --color-border so the page still
      has structure, without the full-contrast lines of the print layout. */
@@ -83,11 +86,24 @@
 
 }
 
+/* Chinese text uses full-width punctuation that the Latin faces at the head of the stacks
+   also contain: Newsreader and Plex draw "——" as two short dashes with a gap and "……" as
+   two separate dot groups. This face covers just those two characters with the reader's
+   own Chinese system font, so they come out as one continuous line. Where none of these
+   fonts is installed the rule matches nothing and the stack carries on as before. */
+@font-face {
+  font-family: "CJK Punctuation";
+  src: local("PingFang TC"), local("PingFangTC-Regular"), local("Microsoft JhengHei"),
+    local("Noto Sans CJK TC"), local("NotoSansCJKtc-Regular"), local("Noto Sans TC"),
+    local("WenQuanYi Zen Hei");
+  unicode-range: U+2014, U+2026;
+}
+
 /* The Noto variables arrive with ChineseFonts a moment after the switch; until then the
    fallbacks keep the stacks valid (an undefined var() would drop the whole font-family). */
 html[lang|="zh"] {
-  --font-sans: var(--font-plex-sans), var(--font-noto-sans-tc, 'Microsoft JhengHei', 'PingFang TC'), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: var(--font-newsreader), var(--font-noto-serif-tc, 'Microsoft JhengHei', 'PingFang TC'), Georgia, serif;
+  --font-sans: "CJK Punctuation", var(--font-plex-sans), var(--font-noto-sans-tc, 'Microsoft JhengHei', 'PingFang TC'), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: "CJK Punctuation", var(--font-newsreader), var(--font-noto-serif-tc, 'Microsoft JhengHei', 'PingFang TC'), Georgia, serif;
 }
 
 *,

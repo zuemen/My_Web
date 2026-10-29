@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { Code, Award, ArrowRight, ExternalLink } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import DemoVideo from "./DemoVideo";
 import { projects } from "@/data/projects";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
@@ -26,7 +27,6 @@ const Projects = () => {
       <div className="section-wide">
         <SectionHeading
           wide
-          eyebrow={t(dict.sections.selectedWorkEyebrow)}
           title={t(dict.sections.projectsTitle)}
           subtitle={t(dict.sections.projectsSubtitle)}
           as="h1"
@@ -55,38 +55,24 @@ const Projects = () => {
               </header>
 
               {project.video ? (
-                <div className={styles.media}>
-                  {/* The voice-over is English, so only Chinese captions come on by default (in 中 mode);
-                      English captions stay one click away. Remount on language change to apply it. */}
-                  <video
-                    key={lang}
-                    className={styles.video}
-                    controls
-                    preload="none"
-                    playsInline
-                    poster={project.video.poster}
-                    aria-label={`${t(dict.labels.demoVideo)}: ${t(project.title)}`}
-                  >
-                    <source src={project.video.src} type="video/mp4" />
-                    {project.video.captions && (
-                      <>
-                        <track
-                          kind="captions"
-                          src={project.video.captions.en}
-                          srcLang="en"
-                          label={t(dict.labels.captionsEn)}
-                        />
-                        <track
-                          kind="captions"
-                          src={project.video.captions.zh}
-                          srcLang="zh-Hant"
-                          label={t(dict.labels.captionsZh)}
-                          default={lang === "zh"}
-                        />
-                      </>
-                    )}
-                  </video>
-                </div>
+                // The voice-over is English, so only Chinese captions come on by default (in 中 mode);
+                // English captions stay one click away. Remount on language change to apply it.
+                <DemoVideo
+                  key={lang}
+                  className={styles.media}
+                  src={project.video.src}
+                  poster={project.video.poster}
+                  label={`${t(dict.labels.demoVideo)}: ${t(project.title)}`}
+                  playLabel={t(dict.labels.play)}
+                  captions={
+                    project.video.captions && {
+                      ...project.video.captions,
+                      enLabel: t(dict.labels.captionsEn),
+                      zhLabel: t(dict.labels.captionsZh),
+                    }
+                  }
+                  zhDefault={lang === "zh"}
+                />
               ) : (
                 project.image && (
                   <div className={styles.imageWrap}>

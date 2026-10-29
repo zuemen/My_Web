@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, GitFork, LinkIcon, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
@@ -10,7 +10,6 @@ import styles from "./Contact.module.css";
 
 interface ContactLink {
   name: string;
-  icon: React.ReactNode;
   url: string;
   label: string;
   /** Set when the label isn't English, so screen readers switch voice. */
@@ -20,19 +19,16 @@ interface ContactLink {
 const contactLinks: ContactLink[] = [
   {
     name: "GitHub",
-    icon: <GitFork size={24} />,
     url: "https://github.com/zuemen",
     label: "@zuemen",
   },
   {
     name: "LinkedIn",
-    icon: <LinkIcon size={24} />,
     url: LINKEDIN_URL,
     label: "Ting-Yi Chu",
   },
   {
     name: "Email",
-    icon: <Mail size={24} />,
     url: "mailto:112306007@g.nccu.edu.tw",
     label: "112306007@g.nccu.edu.tw",
   },
@@ -46,34 +42,37 @@ const Contact = () => {
     <section id="contact" className={styles.contact}>
       <div className="section-container">
         <SectionHeading
-          eyebrow={t(dict.sections.contactEyebrow)}
           title={t(dict.sections.getInTouch)}
           subtitle={t(dict.sections.contactSubtitle)}
         />
 
-        <div className={styles.grid}>
+        <ul className={styles.list}>
           {contactLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target={link.url.startsWith("mailto") ? undefined : "_blank"}
-              rel={
-                link.url.startsWith("mailto")
-                  ? undefined
-                  : "noopener noreferrer"
-              }
-              className={styles.contactItem}
-              aria-label={`${link.name}: ${link.label}`}
-            >
-              <span className={styles.iconWrapper}>{link.icon}</span>
-              <span className={styles.name}>{link.name}</span>
-              <span className={styles.label} lang={link.labelLang}>
-                {link.label}
-              </span>
-              <ArrowUpRight className={styles.arrow} size={16} />
-            </a>
+            <li key={link.name}>
+              <a
+                href={link.url}
+                target={link.url.startsWith("mailto") ? undefined : "_blank"}
+                rel={
+                  link.url.startsWith("mailto")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                className={styles.contactItem}
+                aria-label={`${link.name}: ${link.label}`}
+              >
+                <span className={styles.name}>{link.name}</span>
+                <span className={styles.label} lang={link.labelLang}>
+                  {link.label}
+                </span>
+                <ArrowUpRight
+                  className={styles.arrow}
+                  size={16}
+                  aria-hidden="true"
+                />
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

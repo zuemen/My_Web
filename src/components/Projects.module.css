@@ -73,21 +73,11 @@
   color: var(--color-text-secondary);
 }
 
-/* The narrated demo, across the full container at its native 16:9. */
+/* The narrated demo, across the full container at its native 16:9
+   (frame and play button live in DemoVideo). */
 .media {
-  aspect-ratio: 16 / 9;
   margin-bottom: var(--space-10);
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background: #000;
   box-shadow: var(--shadow-panel);
-}
-
-.video {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 /* Only for a project with a still and no video. */
@@ -220,11 +210,22 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* A grid rather than a wrapping row, so the anchors fall into even rows
+   instead of leaving one project alone on a second line. */
 .index ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--space-5, 1.25rem);
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 0 var(--space-10);
   list-style: none;
+}
+
+/* Phones: back to a wrapping row; four fixed columns don't fit. */
+@media (max-width: 1024px) {
+  .index ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
+  }
 }
 
 .index a {
@@ -236,6 +237,7 @@
   letter-spacing: 0.04em;
   color: var(--color-text-secondary);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .index a:hover {

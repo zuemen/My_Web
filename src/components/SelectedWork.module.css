@@ -22,17 +22,23 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-panel);
   background: var(--color-bg);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.25s ease;
 }
 
+/* One hover signal: the edge brightens. No lift, no shadow halo on dark. */
 .item:hover {
   border-color: var(--color-rule);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-panel);
 }
 
-/* Media slot for a project video. Rendered only when the project has one. */
+/* Media slot for a project video. Rendered only when the project has one.
+   The six previews were drawn in six palettes (sepia, violet, teal, pink,
+   yellow, navy) and read as six different sites side by side. One shared
+   treatment pulls them into the page's range: muted colour and a slight dim
+   at rest, full colour when the card is hovered or focused; a fade at the
+   foot lets the frame settle into the card and keeps the tiny print at the
+   bottom of each preview from competing with the title. */
 .media {
+  position: relative;
   display: block;
   aspect-ratio: 16 / 9;
   margin: calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) var(--space-6);
@@ -42,11 +48,26 @@
   background: var(--color-surface-2);
 }
 
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 62%, rgb(var(--color-bg-rgb) / 0.7));
+}
+
 .video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: saturate(0.4) brightness(0.8);
+  transition: filter 0.3s ease;
+}
+
+.item:hover .video,
+.item:focus-visible .video {
+  filter: none;
 }
 
 .category {

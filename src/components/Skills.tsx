@@ -19,10 +19,7 @@ const Skills = () => {
   return (
     <section id="skills" className={styles.skills}>
       <div className="section-container">
-        <SectionHeading
-          eyebrow={t(dict.sections.researchAreasEyebrow)}
-          title={t(dict.sections.researchAreas)}
-        />
+        <SectionHeading title={t(dict.sections.researchAreas)} />
 
         <ol className={styles.list}>
           {researchAreas.map((area) => {

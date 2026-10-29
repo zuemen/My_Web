@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, Code, ExternalLink } from "lucide-react";
 import PepeLabArchitecture from "@/components/PepeLabArchitecture";
+import DemoVideo from "@/components/DemoVideo";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { l, pick, type L } from "@/i18n/config";
@@ -122,25 +123,20 @@ const PepeLabContent = () => {
         <h2 className={styles.sectionTitle}>{t(copy.demoTitle)}</h2>
         <figure className={styles.demoFigure}>
           {/* English voice-over; Chinese captions come on by default in 中 mode. */}
-          <video
+          <DemoVideo
             key={lang}
-            className={styles.demoVideo}
-            controls
-            preload="none"
-            playsInline
+            src="/videos/medssi.mp4"
             poster="/videos/medssi.webp"
-            aria-label={`${t(dict.labels.demoVideo)}: ${t(copy.title)}`}
-          >
-            <source src="/videos/medssi.mp4" type="video/mp4" />
-            <track kind="captions" src="/videos/medssi.en.vtt" srcLang="en" label={t(dict.labels.captionsEn)} />
-            <track
-              kind="captions"
-              src="/videos/medssi.zh.vtt"
-              srcLang="zh-Hant"
-              label={t(dict.labels.captionsZh)}
-              default={lang === "zh"}
-            />
-          </video>
+            label={`${t(dict.labels.demoVideo)}: ${t(copy.title)}`}
+            playLabel={t(dict.labels.play)}
+            captions={{
+              en: "/videos/medssi.en.vtt",
+              zh: "/videos/medssi.zh.vtt",
+              enLabel: t(dict.labels.captionsEn),
+              zhLabel: t(dict.labels.captionsZh),
+            }}
+            zhDefault={lang === "zh"}
+          />
           <figcaption className={styles.caption}>{t(copy.demoCaption)}</figcaption>
         </figure>
       </section>
