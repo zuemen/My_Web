@@ -232,24 +232,46 @@
    screen is the name and the standfirst rather than a photograph. */
 @media (max-width: 720px) {
   .hero {
-    padding-top: calc(64px + var(--space-10));
+    padding-top: calc(64px + var(--space-6));
     padding-bottom: var(--space-10);
   }
 
   .container {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: var(--space-8);
+    row-gap: var(--space-5);
     padding: 0 var(--space-5);
   }
 
   .visual {
     order: -1;
-    width: 96px;
+    width: 72px;
     margin-top: 0;
   }
 
+  /* Tighter rhythm so the buttons land on (or just under) the first screen. */
+  .role {
+    margin-bottom: var(--space-4);
+  }
+
+  .name {
+    margin-bottom: var(--space-3);
+  }
+
+  .nameChinese {
+    margin-top: var(--space-3);
+  }
 
   .intro {
-    margin: var(--space-6) 0;
+    margin: var(--space-5) 0;
+    font-size: 1.2rem;
+  }
+
+  .web3 {
+    margin-bottom: var(--space-5);
+    font-size: 0.875rem;
+  }
+
+  .tags {
+    margin-bottom: var(--space-5);
   }
 }
