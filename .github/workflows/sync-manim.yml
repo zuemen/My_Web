@@ -1,10 +1,9 @@
 # 把 zuemen/zuemen 用 Manim 算好的專案動畫同步進 public/videos/
-# （動畫原始碼與算圖在 zuemen/zuemen 的 manim/，這裡只負責搬檔；有變動才 commit，Vercel 會自動部署）
+# （動畫原始碼與算圖在 zuemen/zuemen 的 manim/，這裡只負責搬檔）
+# 只能手動觸發，而且只推到 manim-sync 分支、不碰 main：看過畫面再合併，免得沒審就上線。
 name: sync-manim
 
 on:
-  schedule:
-    - cron: "41 19 * * *"      # 每天台北時間 03:41
   workflow_dispatch:
 
 permissions:
@@ -33,14 +32,15 @@ jobs:
           done
           rm -rf _manim
 
-      - name: Commit if changed
+      - name: Push to manim-sync if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/videos
           if git diff --cached --quiet; then
-            echo "no changes"
+            echo "no changes" >> "$GITHUB_STEP_SUMMARY"
           else
             git commit -m "chore: sync Manim explainers from zuemen/zuemen"
-            git push
+            git push --force origin HEAD:manim-sync
+            echo "Review and merge: https://github.com/${{ github.repository }}/compare/main...manim-sync" >> "$GITHUB_STEP_SUMMARY"
           fi
