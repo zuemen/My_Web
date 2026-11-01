@@ -264,6 +264,14 @@ const entries: ProjectEntry[] = [
     ),
     tags: ["Solidity", "Hardhat", "RWA", "Fractional Ownership", "React"],
     // No source link: the owner archived zuemen/rwa_g on 2026-10-25.
+    // Silent Manim explainer (no voice-over, so no captions), rendered in
+    // zuemen/zuemen manim/projects.py and synced by .github/workflows/sync-manim.yml.
+    video: {
+      src: "/videos/rwa-tokenization.mp4",
+      poster: "/videos/rwa-tokenization.webp",
+      preview: "/videos/rwa-tokenization-preview.mp4",
+      seconds: 9.1,
+    },
   },
   {
     slug: "qml-simulation",
@@ -289,6 +297,14 @@ const entries: ProjectEntry[] = [
     ),
     tags: ["QML", "Qiskit", "QSVM", "QNN", "Python"],
     // No source link: the owner archived zuemen/qc_ML on 2026-10-25.
+    // Silent Manim explainer (no voice-over, so no captions), rendered in
+    // zuemen/zuemen manim/projects.py and synced by .github/workflows/sync-manim.yml.
+    video: {
+      src: "/videos/qml-simulation.mp4",
+      poster: "/videos/qml-simulation.webp",
+      preview: "/videos/qml-simulation-preview.mp4",
+      seconds: 10.1,
+    },
   },
 ];
 
