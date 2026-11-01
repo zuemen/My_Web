@@ -270,7 +270,7 @@ const entries: ProjectEntry[] = [
       src: "/videos/rwa-tokenization.mp4",
       poster: "/videos/rwa-tokenization.webp",
       preview: "/videos/rwa-tokenization-preview.mp4",
-      seconds: 9.1,
+      seconds: 20.1,
     },
   },
   {
@@ -303,7 +303,7 @@ const entries: ProjectEntry[] = [
       src: "/videos/qml-simulation.mp4",
       poster: "/videos/qml-simulation.webp",
       preview: "/videos/qml-simulation-preview.mp4",
-      seconds: 10.1,
+      seconds: 19.2,
     },
   },
 ];
