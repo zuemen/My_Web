@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import styles from "./DemoVideo.module.css";
 
@@ -12,6 +12,8 @@ interface DemoVideoProps {
   /** Text for the play button, read by screen readers. */
   playLabel: string;
   captions?: { en: string; zh: string; enLabel: string; zhLabel: string };
+  /** For a silent illustration: what it shows, in words (read via aria-describedby). */
+  description?: string;
   /** Chinese captions come on by default in 中 mode. */
   zhDefault?: boolean;
   className?: string;
@@ -29,11 +31,14 @@ const DemoVideo = ({
   label,
   playLabel,
   captions,
+  description,
   zhDefault = false,
   className,
 }: DemoVideoProps) => {
   const ref = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
+  const descId = useId();
+  const describedBy = description ? descId : undefined;
 
   const start = () => {
     setStarted(true);
@@ -50,6 +55,7 @@ const DemoVideo = ({
         playsInline
         poster={poster}
         aria-label={label}
+        aria-describedby={describedBy}
       >
         <source src={src} type="video/mp4" />
         {captions && (
@@ -66,11 +72,22 @@ const DemoVideo = ({
         )}
       </video>
       {!started && (
-        <button type="button" className={styles.play} onClick={start} aria-label={`${playLabel}: ${label}`}>
+        <button
+          type="button"
+          className={styles.play}
+          onClick={start}
+          aria-label={`${playLabel}: ${label}`}
+          aria-describedby={describedBy}
+        >
           <span className={styles.playIcon}>
             <Play size={22} aria-hidden="true" />
           </span>
         </button>
+      )}
+      {description && (
+        <p id={descId} className={styles.srOnly}>
+          {description}
+        </p>
       )}
     </div>
   );

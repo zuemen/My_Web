@@ -77,6 +77,7 @@ export const dict = {
     readCaseStudy: l("Read case study", "閱讀案例"),
     liveDemo: l("Live demo", "線上 Demo"),
     demoVideo: l("Demo video", "示範影片"),
+    illustrationVideo: l("Illustration (silent animation)", "示意動畫（無聲）"),
     play: l("Play", "播放"),
     builtWith: l("Built with", "技術"),
     source: l("Source", "原始碼"),

@@ -42,6 +42,13 @@ export interface Project {
     captions?: L;
     /** Length of the full take in seconds (for the VideoObject structured data on /projects). */
     seconds?: number;
+    /**
+     * Set for a silent illustration (no voice-over, so no captions): what the
+     * animation shows, in words. Screen readers get it through aria-describedby.
+     */
+    described?: L;
+    /** Publication date of this take, when it is not the 2026-10-21 batch. */
+    uploaded?: string;
   };
 }
 
@@ -270,7 +277,12 @@ const entries: ProjectEntry[] = [
       src: "/videos/rwa-tokenization.mp4",
       poster: "/videos/rwa-tokenization.webp",
       preview: "/videos/rwa-tokenization-preview.mp4",
-      seconds: 20.1,
+      seconds: 20.5,
+      uploaded: "2026-11-01",
+      described: l(
+        "Silent animation. Twelve token units belong to holders A, B and C, each registered in IdentityRegistry; D is not registered. A transfer from A to C passes the identity check inside the token contract. A transfer from A to D reverts with \"Receiver failed KYC/AML check\". The owner then distributes 1,200 in rent, 100 per unit, and A, B and C each call claimRent() to collect 500, 400 and 300. Local Hardhat network, sample data, mock USDC.",
+        "無聲動畫。12 個代幣單位分屬持有人 A、B、C，三人都已登記在 IdentityRegistry，D 沒有登記。A 轉給 C 時，代幣合約內的身分檢查通過；A 轉給 D 時，合約以「Receiver failed KYC/AML check」revert。接著 owner 分配 1,200 租金、每單位 100，A、B、C 各自呼叫 claimRent() 領取 500、400、300。本地 Hardhat 網路、範例資料、mock USDC。",
+      ),
     },
   },
   {
@@ -303,7 +315,12 @@ const entries: ProjectEntry[] = [
       src: "/videos/qml-simulation.mp4",
       poster: "/videos/qml-simulation.webp",
       preview: "/videos/qml-simulation-preview.mp4",
-      seconds: 19.2,
+      seconds: 18.9,
+      uploaded: "2026-11-01",
+      described: l(
+        "Silent animation. A 2×2 grid crosses classical and quantum data with a logistic-regression baseline and quantum models. The classical data is make_moons (n = 320, noise 0.18); the quantum data comes from random (α, β) run through a two-qubit circuit on Aer, measured over 512 shots. The quantum models are a QSVM on a ZZFeatureMap fidelity kernel (reps 2), a variational QNN (reps 1) and a QSVT-like approximation. All four cells use the same split and seed 42, and the notebook saved no outputs, so the animation shows the method, not an advantage.",
+        "無聲動畫。2×2 格交叉古典／量子資料與邏輯斯迴歸基準／量子模型。古典資料是 make_moons（n = 320、noise 0.18）；量子資料由隨機 (α, β) 經 Aer 上的雙量子位元電路、512 shots 量測產生。量子模型為 ZZFeatureMap fidelity 量子核的 QSVM（reps 2）、變分 QNN（reps 1）與 QSVT 式近似。四格用同一個切分與 seed 42，notebook 沒有存下任何輸出，所以動畫展示的是方法，不是優勢。",
+      ),
     },
   },
 ];

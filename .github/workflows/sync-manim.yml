@@ -25,10 +25,14 @@ jobs:
       - name: Copy into public/videos
         run: |
           # 只同步網站有用到 Manim 動畫的專案（沒有實錄 demo 的那幾個）
+          command -v ffprobe >/dev/null || { sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends ffmpeg; }
           for slug in rwa-tokenization qml-simulation; do
             for f in "$slug.mp4" "$slug.webp" "$slug-preview.mp4"; do
               cp "_manim/assets/manim/$f" "public/videos/$f"
             done
+            # 片長不會自動寫回 src/data/projects.ts 的 seconds：印出來，合併前手動對一次
+            secs=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "public/videos/$slug.mp4")
+            printf -- '- %s: %.1f s（對照 projects.ts 的 seconds）\n' "$slug" "$secs" >> "$GITHUB_STEP_SUMMARY"
           done
           rm -rf _manim
 

@@ -62,7 +62,8 @@ const Projects = () => {
                   className={styles.media}
                   src={project.video.src}
                   poster={project.video.poster}
-                  label={`${t(dict.labels.demoVideo)}: ${t(project.title)}`}
+                  label={`${t(project.video.described ? dict.labels.illustrationVideo : dict.labels.demoVideo)}: ${t(project.title)}`}
+                  description={project.video.described && t(project.video.described)}
                   playLabel={t(dict.labels.play)}
                   captions={
                     project.video.captions && {

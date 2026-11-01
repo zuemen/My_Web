@@ -6,7 +6,7 @@ import { l, type L } from "@/i18n/config";
  * a line changes. Wording follows the records it comes from — the Cathay line
  * uses the unit and title in data/experience.ts (and the bio).
  */
-export const nowUpdatedAt = "2026-10-21";
+export const nowUpdatedAt = "2026-11-01";
 
 export const now: L[] = [
   l(
@@ -15,8 +15,8 @@ export const now: L[] = [
   ),
   // TODO: 11/2 中華電信結果公布後更新或移除
   l(
-    "Preparing for the Chunghwa Telecom competition grand final",
-    "準備 2026 中華電信智慧創新應用大賽總決賽",
+    "Awaiting the Chunghwa Telecom competition grand-final results (due Nov 2)",
+    "等待 2026 中華電信智慧創新應用大賽總決賽結果（11/2 公布）",
   ),
   l(
     "Building agent identity & payment prototypes (x402, agent DIDs)",

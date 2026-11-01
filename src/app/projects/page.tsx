@@ -20,21 +20,22 @@ const isoDuration = (seconds: number) => {
 /**
  * One VideoObject per demo, so the videos can be picked up by video search.
  * Server-rendered like the Person JSON-LD in the layout. Upload date: the
- * current takes were published 2026-10-21.
+ * narrated takes were published 2026-10-21; later takes carry their own date.
+ * Silent illustrations are named as such and carry no spoken language.
  */
 const videoLd = projects
   .filter((p) => p.video)
   .map((p) => ({
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    name: `${p.shortTitle.en} — demo`,
-    description: p.summary.en,
+    name: `${p.shortTitle.en} — ${p.video!.described ? "illustration" : "demo"}`,
+    description: p.video!.described?.en ?? p.summary.en,
     thumbnailUrl: `${SITE}${p.video!.poster}`,
     contentUrl: `${SITE}${p.video!.src}`,
     embedUrl: `${SITE}/projects#${p.slug}`,
-    uploadDate: "2026-10-21",
+    uploadDate: p.video!.uploaded ?? "2026-10-21",
     ...(p.video!.seconds ? { duration: isoDuration(p.video!.seconds) } : {}),
-    inLanguage: "en",
+    ...(p.video!.described ? {} : { inLanguage: "en" }),
   }));
 
 export default function ProjectsPage() {
