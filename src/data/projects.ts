@@ -277,7 +277,7 @@ const entries: ProjectEntry[] = [
       src: "/videos/rwa-tokenization.mp4",
       poster: "/videos/rwa-tokenization.webp",
       preview: "/videos/rwa-tokenization-preview.mp4",
-      seconds: 20.5,
+      seconds: 23,
       uploaded: "2026-11-01",
       described: l(
         "Silent animation. Twelve token units belong to holders A, B and C, each registered in IdentityRegistry; D is not registered. A transfer from A to C passes the identity check inside the token contract. A transfer from A to D reverts with \"Receiver failed KYC/AML check\". The owner then distributes 1,200 in rent, 100 per unit, and A, B and C each call claimRent() to collect 500, 400 and 300. Local Hardhat network, sample data, mock USDC.",
