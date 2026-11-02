@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import CredentialTree from "@/components/CredentialTree";
 import Skills from "@/components/Skills";
 import SelectedWork from "@/components/SelectedWork";
 import Now from "@/components/Now";
@@ -25,6 +26,7 @@ export default function Home() {
   return (
     <main id="main-content" className={styles.main}>
       <Hero />
+      <CredentialTree />
       <Skills />
       <SelectedWork />
       <Now />
