@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLang } from "@/i18n/LanguageProvider";
-import TraceLens from "./TraceLens";
+import WorkGraph from "./WorkGraph";
 import styles from "@/app/not-found.module.css";
 
 const NotFoundContent = () => {
@@ -18,8 +18,8 @@ const NotFoundContent = () => {
           ? "The link may be old, or the page has moved. The projects and the CV are a click away."
           : "連結可能已經過期，或頁面搬家了。作品與履歷都在下面。"}
       </p>
-      {/* Easter egg: trace where the page went, the way ChainLens traces funds. */}
-      <TraceLens />
+      {/* Lost? A map of everything that is here, with the ChainLens lens. */}
+      <WorkGraph height={340} />
       <p className={styles.links}>
         <Link href="/" className={styles.link}>
           {en ? "Home" : "首頁"}
