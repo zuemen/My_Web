@@ -1,0 +1,27 @@
+.figure {
+  margin: var(--space-8) 0 var(--space-6);
+}
+
+.stage {
+  height: 300px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-mono);
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+
+.caption {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-tertiary);
+}

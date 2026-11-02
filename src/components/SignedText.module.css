@@ -1,0 +1,19 @@
+/* The real text keeps its box; the scramble sits on top of it. */
+.stack {
+  position: relative;
+  display: inline-block;
+}
+
+/* Hidden visually while the scramble plays, but still in the layout and
+   still read by assistive tech (opacity, not visibility). */
+.holding {
+  opacity: 0;
+}
+
+.scramble {
+  position: absolute;
+  inset: 0 auto auto 0;
+  white-space: nowrap;
+  color: var(--color-accent);
+  pointer-events: none;
+}
