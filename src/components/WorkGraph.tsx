@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { projects } from "@/data/projects";
 import { useLang } from "@/i18n/LanguageProvider";
 import { l, pick, type Lang } from "@/i18n/config";
+import { wrapCanvasText } from "./wrapCanvasText";
 import styles from "./WorkGraph.module.css";
 
 /**
@@ -26,14 +27,16 @@ const T = {
     "A graph of this site's projects around Zuemen Chu, joined to the tools they share. A lens follows the pointer and names what it covers; selecting a project opens it on the projects page.",
     "以 Zuemen Chu 為中心的作品圖：每個專案連到它們共用的技術。放大鏡跟著游標，鏡內會顯示名稱；點專案會跳到作品頁的那一項。",
   ),
-  idle: l("move the lens over my work · click a project to open it", "把放大鏡移到我的作品上 · 點專案可以打開"),
+  idle: l("move the lens over my work · click or tap a project to open it", "把放大鏡移到我的作品上 · 點專案可以打開"),
   shared: l("shared by", "共用於"),
-  open: l("click to open", "點擊打開"),
+  open: l("click or tap to open", "點擊打開"),
   caption: l("Projects and the tools they share · from data/projects.ts", "專案與它們共用的技術 · 資料來自 data/projects.ts"),
 };
 
 const NAME = "Zuemen Chu";
-const TOUCH_HOLD = 1.6; // seconds the lens stays after a finger lifts
+const TOUCH_HOLD = 3; // seconds the lens stays after a finger lifts
+// Tags that name the same tool, so projects connect even if spelled differently.
+const TOOL_ALIAS: Record<string, string> = { "VC/DID": "Verifiable Credentials" };
 
 const WorkGraph = ({ height = 420 }: { height?: number }) => {
   const { lang } = useLang();
@@ -71,7 +74,12 @@ const WorkGraph = ({ height = 420 }: { height?: number }) => {
     });
     // Only tools at least two projects list: those are the connections.
     const usage = new Map<string, number[]>();
-    projects.forEach((p, i) => p.tags.forEach((tag) => usage.set(tag, [...(usage.get(tag) ?? []), i + 1])));
+    projects.forEach((p, i) =>
+      p.tags.forEach((raw) => {
+        const tag = TOOL_ALIAS[raw] ?? raw;
+        usage.set(tag, [...(usage.get(tag) ?? []), i + 1]);
+      }),
+    );
     for (const [tag, users] of usage) {
       if (users.length < 2) continue;
       nodes.push({ kind: "tool", key: tag, x: 0, y: 0, links: [] });
@@ -95,9 +103,10 @@ const WorkGraph = ({ height = 420 }: { height?: number }) => {
       W = r.width; H = r.height;
       canvas!.width = Math.round(W * dpr); canvas!.height = Math.round(H * dpr);
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const cx = W / 2, cy = (H - 34) / 2 + 4;
       narrow = W < 640;
-      const rx = Math.min(W * (narrow ? 0.3 : 0.26), 300), ry = (H - 34) * 0.3;
+      const foot = narrow ? 62 : 34; // read-out area under the graph
+      const cx = W / 2, cy = (H - foot) / 2 + 4;
+      const rx = Math.min(W * (narrow ? 0.3 : 0.26), 300), ry = (H - foot) * 0.3;
       const P = nodes.filter((n) => n.kind === "project");
       nodes[0]!.x = cx; nodes[0]!.y = cy;
       P.forEach((n, i) => {
@@ -132,7 +141,7 @@ const WorkGraph = ({ height = 420 }: { height?: number }) => {
               if (B.kind === "tool") { B.x += (dx / d) * m; B.y += (dy / d) * m; }
             }
           }
-      nodes.forEach((n) => { n.x = Math.max(44, Math.min(W - 44, n.x)); n.y = Math.max(18, Math.min(H - 48, n.y)); });
+      nodes.forEach((n) => { n.x = Math.max(44, Math.min(W - 44, n.x)); n.y = Math.max(18, Math.min(H - foot - 14, n.y)); });
       lens.r = Math.max(64, Math.min(96, W * 0.11));
       if (!lens.x) { lens.x = cx; lens.y = cy; }
     }
@@ -212,7 +221,15 @@ const WorkGraph = ({ height = 420 }: { height?: number }) => {
           ctx!.globalAlpha = on ? 1 : inside ? 0.9 : n.kind === "me" ? 0.75 : n.kind === "tool" ? 0.42 : 0.38;
           ctx!.fillStyle = n.kind === "me" ? col.text : n.kind === "project" ? col.text : col.warn;
           ctx!.font = `${n.kind === "me" ? 13 : 11}px ${mono}`;
-          ctx!.fillText(label(n, lng), n.x, n.y + (n.kind === "tool" ? -13 : 18));
+          const text = label(n, lng), tw = ctx!.measureText(text).width;
+          const lx = Math.max(tw / 2 + 4, Math.min(W - tw / 2 - 4, n.x)), ly = n.y + (n.kind === "tool" ? -13 : 18);
+          if (on || inside) {
+            const fill = ctx!.fillStyle, alpha = ctx!.globalAlpha;
+            ctx!.globalAlpha = 0.85; ctx!.fillStyle = col.panel;
+            ctx!.fillRect(lx - tw / 2 - 2, ly - 8, tw + 4, 16);
+            ctx!.globalAlpha = alpha; ctx!.fillStyle = fill;
+          }
+          ctx!.fillText(text, lx, ly);
         }
       });
 
@@ -240,10 +257,17 @@ const WorkGraph = ({ height = 420 }: { height?: number }) => {
         line = `${f.key} · ${pick(T.shared, lng)} ${f.links.map((i) => label(nodes[i]!, lng)).join(" · ")}`;
         color = col.warn;
       } else if (f?.kind === "me") {
-        line = `${NAME} 朱廷翊 · ${projects.length} projects · ${nodes.filter((n) => n.kind === "tool").length} shared tools`;
+        const tools = nodes.filter((n) => n.kind === "tool").length;
+        line = lng === "zh"
+          ? `${NAME} 朱廷翊 · ${projects.length} 個專案 · ${tools} 項共用技術`
+          : `${NAME} 朱廷翊 · ${projects.length} projects · ${tools} shared tools`;
         color = col.pass;
       }
-      ctx!.fillStyle = color; ctx!.fillText(line, 12, H - 14, W - 24);
+      const lines = wrapCanvasText(ctx!, line, W - 24, 3);
+      const band = lines.length * 15 + 13;
+      ctx!.fillStyle = col.panel; ctx!.fillRect(0, H - band, W, band);
+      ctx!.fillStyle = color;
+      lines.forEach((text, i) => ctx!.fillText(text, 12, H - band + 13 + i * 15, W - 24));
     }
 
     const FRAME = 1000 / 30;
