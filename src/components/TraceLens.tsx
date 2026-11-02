@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { useLang } from "@/i18n/LanguageProvider";
 import { l, pick, type L, type Lang } from "@/i18n/config";
+import { wrapCanvasText } from "./wrapCanvasText";
 import styles from "./TraceLens.module.css";
 
 /**
@@ -21,10 +22,10 @@ import styles from "./TraceLens.module.css";
 
 const T = {
   aria: l(
-    "A transaction graph with a magnifying lens that follows your pointer. Inside the lens, a suspicious path is labelled: pooled sources, an OTC out-address, two fast relays and the destination TRelay03.",
-    "一張交易圖，放大鏡跟著游標移動。鏡內會標出可疑路徑：多個來源集資到 OTC 出金地址，經兩個快進快出中繼，最後到 TRelay03。",
+    "A transaction graph with a magnifying lens that follows your pointer or finger. Inside the lens, a suspicious path is labelled: pooled sources, an OTC out-address, two fast relays and the destination TRelay03.",
+    "一張交易圖，放大鏡跟著游標或手指移動。鏡內會標出可疑路徑：多個來源集資到 OTC 出金地址，經兩個快進快出中繼，最後到 TRelay03。",
   ),
-  idle: l("move the lens over the graph", "把放大鏡移到圖上"),
+  idle: l("tap or sweep the lens over the graph", "點一下或移動放大鏡到圖上"),
   found: l("found", "已發現"),
   verdict: l("rule engine 0.19 · release → graph model 0.98 · enhanced review → a person decides", "規則引擎 0.19 · 放行 → 圖模型 0.98 · 加強審查 → 由人決定"),
   caption: l("ChainLens · synthetic scenario 07 · illustration", "ChainLens · 合成情境 07 · 示意"),
@@ -97,7 +98,8 @@ const TraceLens = () => {
 
     let W = 0, H = 0, dpr = 1, time = 0, raf = 0, last = 0, visible = true, disposed = false;
     const lens = { x: 0, y: 0, r: 100 };
-    const ptr = { x: 0, y: 0, active: false };
+    const ptr = { x: 0, y: 0, active: false, hold: 0 };
+    const TOUCH_HOLD = 3; // seconds the lens stays where a finger tapped
     const found = new Set<Tag>();
 
     function layout() {
@@ -118,6 +120,11 @@ const TraceLens = () => {
       const still = reducedRef.current;
       const lng = langRef.current;
       ctx!.clearRect(0, 0, W, H);
+
+      if (ptr.hold > 0) {
+        ptr.hold -= dt;
+        if (ptr.hold <= 0) ptr.active = false;
+      }
 
       // Lens: follow the pointer, otherwise patrol along the path.
       const tx = ptr.active ? ptr.x : W * (0.5 + 0.38 * Math.sin(time * 0.33));
@@ -153,12 +160,7 @@ const TraceLens = () => {
         ctx!.strokeStyle = (n.tag || onPath) && inside ? col.warn : col.muted;
         ctx!.lineWidth = onPath ? 1.6 : 1;
         ctx!.beginPath(); ctx!.arc(n.x, n.y, onPath ? 6 : 3.4, 0, Math.PI * 2); ctx!.fill(); ctx!.stroke();
-        if (n.tag && inside) {
-          found.add(n.tag);
-          ctx!.fillStyle = col.warn;
-          ctx!.fillText(pick(TAG_TEXT[n.tag], lng), n.x, n.y - 15);
-          if (n.tag === "dest") { ctx!.fillStyle = col.text2; ctx!.fillText("200,000 USDT", n.x, n.y + 17); }
-        }
+        if (n.tag && inside) found.add(n.tag);
       }
 
       if (!still) {
@@ -173,12 +175,39 @@ const TraceLens = () => {
         }
       }
 
+      // Labels go above the nodes and the lens ring, on a backing so they stay legible.
+      const label = (text: string, x: number, y: number, color: string) => {
+        const w = ctx!.measureText(text).width;
+        const cx = Math.max(w / 2 + 6, Math.min(W - w / 2 - 6, x));
+        ctx!.globalAlpha = 0.9; ctx!.fillStyle = col.panel;
+        ctx!.fillRect(cx - w / 2 - 3, y - 8, w + 6, 16);
+        ctx!.globalAlpha = 1; ctx!.fillStyle = color;
+        ctx!.fillText(text, cx, y);
+      };
+      ctx!.textAlign = "center";
+      for (const n of nodes) {
+        if (!n.tag || !inLens(n.x, n.y)) continue;
+        // On narrow screens the relay label is too wide to share a row with OTC.
+        const above = n.tag === "relay" && W < 480 ? 32 : 15;
+        label(pick(TAG_TEXT[n.tag], lng), n.x, n.y - above, col.warn);
+        if (n.tag === "dest") label("200,000 USDT", n.x, n.y + 17, col.text2);
+      }
+
       // Footer line: progress, then the verdict once the whole path was seen.
       ctx!.globalAlpha = 1; ctx!.textAlign = "left"; ctx!.font = `11px ${mono}`;
       const seen = (["sources", "otc", "relay", "dest"] as Tag[]).filter((k) => found.has(k));
-      if (seen.length === 4) { ctx!.fillStyle = col.pass; ctx!.fillText(pick(T.verdict, lng), 12, H - 16, W - 24); }
-      else if (seen.length) { ctx!.fillStyle = col.warn; ctx!.fillText(`${pick(T.found, lng)}: ${seen.map((k) => pick(TAG_TEXT[k], lng)).join(" → ")}`, 12, H - 16, W - 24); }
-      else { ctx!.fillStyle = col.muted; ctx!.fillText(pick(T.idle, lng), 12, H - 16); }
+      const done = seen.length === 4;
+      const status = done
+        ? pick(T.verdict, lng)
+        : seen.length
+          ? `${pick(T.found, lng)}: ${seen.map((k) => pick(TAG_TEXT[k], lng)).join(" → ")}`
+          : pick(T.idle, lng);
+      const lines = wrapCanvasText(ctx!, status, W - 24, 3);
+      const band = lines.length * 15 + 13;
+      ctx!.fillStyle = col.panel;
+      ctx!.fillRect(0, H - band, W, band);
+      ctx!.fillStyle = done ? col.pass : seen.length ? col.warn : col.muted;
+      lines.forEach((line, i) => ctx!.fillText(line, 12, H - band + 13 + i * 15, W - 24));
     }
 
     const FRAME = 1000 / 30;
@@ -198,9 +227,13 @@ const TraceLens = () => {
 
     const onMove = (e: PointerEvent) => {
       const r = canvas.getBoundingClientRect();
-      ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; ptr.active = true;
+      ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; ptr.active = true; ptr.hold = 0;
     };
-    const onLeave = () => { ptr.active = false; };
+    // A finger lifts as soon as it taps, so keep the lens there for a moment.
+    const onLeave = (e: PointerEvent) => {
+      if (e.pointerType === "touch") ptr.hold = TOUCH_HOLD;
+      else ptr.active = false;
+    };
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerdown", onMove);
     canvas.addEventListener("pointerleave", onLeave);
