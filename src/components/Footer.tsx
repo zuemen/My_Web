@@ -5,6 +5,7 @@ import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
 import { pick } from "@/i18n/config";
 import { LINKEDIN_URL } from "@/data/site";
+import SignedText from "./SignedText";
 import styles from "./Footer.module.css";
 
 interface FooterProps {
@@ -49,7 +50,9 @@ const Footer = ({ lastUpdated }: FooterProps) => {
           </Link>
         </div>
         <p className={styles.copy}>
-          © {copyrightYear} Zuemen Chu <span lang="zh-Hant">朱廷翊</span>{" "}
+          {/* Easter egg: pointing at the name replays the signed-text check. */}
+          © {copyrightYear} <SignedText text="Zuemen Chu" trigger="hover" />{" "}
+          <span lang="zh-Hant">朱廷翊</span>{" "}
           &mdash; {t(dict.labels.lastUpdated)}:{" "}
           <time dateTime={lastUpdated}>{lastUpdated}</time>
         </p>
