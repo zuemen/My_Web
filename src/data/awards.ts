@@ -56,7 +56,8 @@ export interface Award {
 export const awards: Award[] = [
   {
     // Finalists announced 2026-10-16; grand-final judging 10/31; organiser
-    // confirmed 2026-11-02 that the team did not place, so "Finalist" is final.
+    // confirmed 2026-11-02 that the team did not place, so "Finalist" is final;
+    // 605 entering teams is from the same organiser email.
     // Sources:
     // ChainTrust CLAUDE.md (one-line description) and the final-round survey
     // form (member 1, team lead). ChainTrust has no project card, so there
@@ -73,8 +74,8 @@ export const awards: Award[] = [
     result: l("Finalist", "決賽入圍"),
     role: l("Team Lead", "隊長"),
     detail: l(
-      "Advanced to the grand final with ChainTrust, an SSI financial-identity wallet with AI anti-fraud: one KYC reused across institutions (SD-JWT minimal disclosure) and real-time interception of high-risk transfers.",
-      "以鏈信 ChainTrust 進入總決賽：SSI 金融身分錢包＋AI 反詐 PoC——一次 KYC 跨機構重用（SD-JWT 最小揭露）、高風險交易即時攔截。",
+      "One of the finalists from 605 entering teams with ChainTrust, an SSI financial-identity wallet with AI anti-fraud: one KYC reused across institutions (SD-JWT minimal disclosure) and real-time interception of high-risk transfers.",
+      "在 605 支參賽隊伍中，以鏈信 ChainTrust 進入總決賽：SSI 金融身分錢包＋AI 反詐 PoC——一次 KYC 跨機構重用（SD-JWT 最小揭露）、高風險交易即時攔截。",
     ),
   },
   {
