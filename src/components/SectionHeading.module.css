@@ -68,7 +68,3 @@
 .signatureOn {
   opacity: 1;
 }
-
-.check {
-  color: var(--color-pass);
-}

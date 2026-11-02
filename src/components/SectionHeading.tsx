@@ -20,9 +20,9 @@ interface SectionHeadingProps {
  * landing-page template. This replaces all of them.
  *
  * Page titles (as="h1") arrive as a hash and verify into the title once per
- * session, then show a quiet signature line under did:web:zuemen.net — the
- * site's one recurring nod to verifiable credentials. Section titles (h2) stay
- * plain.
+ * session, then show a quiet fingerprint line — the site's one recurring nod to
+ * verifiable credentials. It is decoration, not a signature, so it says so and
+ * must not name a DID or claim to be signed. Section titles (h2) stay plain.
  */
 const SectionHeading = ({
   title,
@@ -44,7 +44,7 @@ const SectionHeading = ({
       </Tag>
       {signed && (
         <p className={`${styles.signature} ${verified ? styles.signatureOn : ""}`} aria-hidden="true">
-          <span className={styles.check}>✓</span> signed · did:web:zuemen.net · 0x{fingerprint(title).slice(0, 8)}
+          illustration · 0x{fingerprint(title).slice(0, 8)}
         </p>
       )}
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
