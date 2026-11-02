@@ -226,6 +226,11 @@
     max-width: 240px;
     aspect-ratio: 4 / 3;
   }
+
+  /* The landscape crop must not cut off heads. */
+  .photoImg {
+    object-position: center top;
+  }
 }
 
 @media (max-width: 640px) {

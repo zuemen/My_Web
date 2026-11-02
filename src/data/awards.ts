@@ -73,6 +73,15 @@ export const awards: Award[] = [
     date: "2026-10",
     result: l("Finalist", "決賽入圍"),
     role: l("Team Lead", "隊長"),
+    photo: {
+      src: "/photos/chunghwa-telecom-2026-final.webp",
+      alt: l(
+        "Zuemen Chu presenting at the Chunghwa Telecom Smart Innovation Application Competition 2026 grand final",
+        "朱廷翊在 2026 中華電信智慧創新應用大賽總決賽上台報告",
+      ),
+      width: 800,
+      height: 1000,
+    },
     detail: l(
       "One of the finalists from 605 entering teams with ChainTrust, an SSI financial-identity wallet with AI anti-fraud: one KYC reused across institutions (SD-JWT minimal disclosure) and real-time interception of high-risk transfers.",
       "在 605 支參賽隊伍中，以鏈信 ChainTrust 進入總決賽：SSI 金融身分錢包＋AI 反詐 PoC——一次 KYC 跨機構重用（SD-JWT 最小揭露）、高風險交易即時攔截。",
