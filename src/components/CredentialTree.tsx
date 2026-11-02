@@ -7,6 +7,7 @@ import { Pause, Play } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { useLang } from "@/i18n/LanguageProvider";
 import { l, pick, type L, type Lang } from "@/i18n/config";
+import { wrapCanvasText } from "./wrapCanvasText";
 import styles from "./CredentialTree.module.css";
 
 /**
@@ -38,10 +39,11 @@ const CLAIMS: [string, L, L][] = [
 const TEXT = {
   title: l("My record, as a credential", "我的經歷，是一張可驗證憑證"),
   subtitle: l(
-    "Point at a claim: only that line is disclosed, with the hashes that tie it to the signed root. The other seven stay hidden and still check out.",
-    "游標移到任一項：只揭露那一條，以及把它連到已簽章 root 的雜湊；其餘七條保持遮住，仍然驗得到。",
+    "Pick a claim: only that line is disclosed, with the hashes that tie it to the signed root. The other seven stay hidden and still check out.",
+    "點選任一項：只揭露那一條，以及把它連到已簽章 root 的雜湊；其餘七條保持遮住，仍然驗得到。",
   ),
   revealed: l("REVEALED CLAIM", "已揭露"),
+  leafRevealed: l("revealed", "已揭露"),
   issuer: l("issuer", "發證單位"),
   sees: l("verifier sees 1 of 8 claims", "驗證者只看到 8 條中的 1 條"),
   proof: l("3 proof hashes · root matches ✓", "3 個證明雜湊 · root 相符 ✓"),
@@ -50,8 +52,8 @@ const TEXT = {
     "示意動畫 — 雜湊為示範用，不是密碼學證明。",
   ),
   canvas: l(
-    "A Merkle tree of eight claims from this record under a root signed as did:web:zuemen.net. Pointing at a claim reveals only that claim and the sibling hashes along its path to the root.",
-    "以八條經歷組成的 Merkle 樹，root 以 did:web:zuemen.net 簽章。指向任一條時，只揭露該條與通往 root 的兄弟雜湊。",
+    "Illustration: a Merkle tree of eight claims from this record under a root labelled did:web:zuemen.net. Selecting a claim reveals only that claim and the sibling hashes along its path to the root.",
+    "示意：以八條經歷組成的 Merkle 樹，root 標示為 did:web:zuemen.net。選取任一條時，只揭露該條與通往 root 的兄弟雜湊。",
   ),
   pause: l("Pause animation", "暫停動畫"),
   play: l("Play animation", "播放動畫"),
@@ -125,13 +127,15 @@ const CredentialTree = () => {
 
     const HEX = "0123456789abcdef";
     const CELL = 18;
+    const CARD_H = 92; // room for a two-line claim
+    const TOUCH_HOLD = 4; // extra seconds before auto-advance after a tap
     const atlas = document.createElement("canvas");
     const actx = atlas.getContext("2d")!;
-    let W = 0, H = 0, dpr = 1, cols = 0, rows = 0, narrow = false;
+    let W = 0, H = 0, dpr = 1, cols = 0, rows = 0, narrow = false, phoneW = 58;
     let xy: { x: number; y: number }[][] = [];
-    let card = { x: 0, y: 0, w: 0, h: 74 };
+    let card = { x: 0, y: 0, w: 0, h: CARD_H };
     let sel = 1, auto = 0, time = 0, raf = 0, last = 0, visible = true, disposed = false;
-    const ptr = { x: 0, y: 0, active: false, idle: 99 };
+    const ptr = { x: 0, y: 0, active: false, tapped: false, idle: 99 };
 
     function layout() {
       const r = canvas!.getBoundingClientRect();
@@ -148,12 +152,14 @@ const CredentialTree = () => {
       [...HEX].forEach((ch, i) => actx.fillText(ch, i * CELL + CELL / 2, CELL / 2));
       cols = Math.ceil(W / CELL); rows = Math.ceil(H / CELL);
 
-      card = { x: 16, y: 16, w: narrow ? W - 32 : Math.min(460, W * 0.5), h: 74 };
+      card = { x: 16, y: 16, w: narrow ? W - 32 : Math.min(460, W * 0.5), h: CARD_H };
       if (narrow) {
         // Phones: root on the left, the eight claims stacked down the right.
         const top = card.y + card.h + 28, bottom = H - 44;
-        // Node width 58 on phones; leave ~78px right of the leaves for their labels.
-        const left = 16 + 29, right = W - 16 - 78 - 8 - 29;
+        // Four columns of nodes plus ~68px right of the leaves for their labels;
+        // narrow the nodes so neighbouring columns never overlap.
+        phoneW = Math.max(42, Math.min(58, Math.floor((W - 32 - 68 - 12) / 4)));
+        const left = 16 + phoneW / 2, right = W - 16 - 68 - phoneW / 2;
         xy = LEVELS.map((lv, li) =>
           lv.map((_, i) => {
             const span = (bottom - top) / lv.length;
@@ -189,7 +195,9 @@ const CredentialTree = () => {
 
       // Which claim is disclosed: nearest leaf to the pointer, else auto-advance.
       ptr.idle += dt;
-      if (ptr.active) {
+      if (ptr.active || ptr.tapped) {
+        ptr.tapped = false; // a tap can lift before this frame runs
+        auto = 0;
         let best = Infinity;
         xy[0]!.forEach((p, i) => {
           const d = narrow ? Math.abs(p.y - ptr.y) : Math.abs(p.x - ptr.x);
@@ -201,7 +209,7 @@ const CredentialTree = () => {
       }
 
       const grow = still ? 1 : clamp01(time / 2.2);
-      const leafW = narrow ? 58 : Math.min(86, (W - 2 * Math.max(40, W * 0.06)) / 8 - 10);
+      const leafW = narrow ? phoneW : Math.min(86, (W - 2 * Math.max(40, W * 0.06)) / 8 - 10);
 
       // Edges, centre to centre; boxes are drawn over them.
       for (let lv = 1; lv < DEPTH; lv++)
@@ -229,7 +237,7 @@ const CredentialTree = () => {
           const role = roleOf(lv, i, sel);
           const isRoot = lv === DEPTH - 1, isLeaf = lv === 0;
           const stroke = isRoot ? col.pass : role === "path" ? (isLeaf ? col.pass : col.accent) : role === "proof" ? col.warn : col.rule;
-          const w = narrow ? 58 : isLeaf ? leafW : 86, h = narrow ? 24 : 26;
+          const w = narrow ? phoneW : isLeaf ? leafW : 86, h = narrow ? 24 : 26;
           ctx!.globalAlpha = k;
           ctx!.fillStyle = role === "hidden" ? col.panel : col.soft;
           ctx!.strokeStyle = stroke; ctx!.lineWidth = role === "hidden" ? 1 : 1.4;
@@ -246,12 +254,15 @@ const CredentialTree = () => {
             else {
               ctx!.fillText(CLAIMS[i]![0], p.x, p.y + 30);
               ctx!.fillStyle = role === "path" ? col.text : col.rule;
-              ctx!.fillText(role === "path" ? "revealed" : "•••", p.x, p.y + 46);
+              ctx!.fillText(role === "path" ? pick(TEXT.leafRevealed, lng) : "•••", p.x, p.y + 46);
             }
           }
           if (isRoot) {
             ctx!.font = `10px ${mono}`; ctx!.fillStyle = col.pass;
-            if (narrow) { ctx!.fillText("did:web:", p.x, p.y - 30); ctx!.fillText("zuemen.net ✓", p.x, p.y - 18); }
+            if (narrow) {
+              ctx!.fillStyle = col.panel; ctx!.fillRect(p.x - 38, p.y - 37, 76, 26);
+              ctx!.fillStyle = col.pass; ctx!.fillText("did:web:", p.x, p.y - 30); ctx!.fillText("zuemen.net ✓", p.x, p.y - 18);
+            }
             else ctx!.fillText("did:web:zuemen.net  ✓", p.x, p.y - 24);
           }
           ctx!.globalAlpha = 1;
@@ -260,15 +271,18 @@ const CredentialTree = () => {
       // Disclosure card.
       const [key, val, iss] = CLAIMS[sel]!;
       ctx!.globalAlpha = smooth(grow * (DEPTH - 1) - (DEPTH - 2));
+      ctx!.font = `${narrow ? 13 : 14}px ${mono}`;
+      const valLines = wrapCanvasText(ctx!, pick(val, lng), card.w - 28, 2);
+      const extra = (valLines.length - 1) * 18;
       ctx!.fillStyle = col.soft; ctx!.strokeStyle = col.pass; ctx!.lineWidth = 1.2;
-      ctx!.beginPath(); ctx!.roundRect(card.x, card.y, card.w, card.h, 2); ctx!.fill(); ctx!.stroke();
+      ctx!.beginPath(); ctx!.roundRect(card.x, card.y, card.w, card.h - 18 + extra, 2); ctx!.fill(); ctx!.stroke();
       ctx!.textAlign = "left";
       ctx!.font = `10px ${mono}`; ctx!.fillStyle = col.label;
       ctx!.fillText(`${pick(TEXT.revealed, lng)} · ${key.toUpperCase()}`, card.x + 14, card.y + 18);
-      ctx!.font = `14px ${mono}`; ctx!.fillStyle = col.text;
-      ctx!.fillText(pick(val, lng), card.x + 14, card.y + 40, card.w - 28);
+      ctx!.font = `${narrow ? 13 : 14}px ${mono}`; ctx!.fillStyle = col.text;
+      valLines.forEach((line, i) => ctx!.fillText(line, card.x + 14, card.y + 40 + i * 18, card.w - 28));
       ctx!.font = `11px ${mono}`; ctx!.fillStyle = col.pass;
-      ctx!.fillText(`${pick(TEXT.issuer, lng)} · ${pick(iss, lng)}`, card.x + 14, card.y + 60, card.w - 28);
+      ctx!.fillText(`${pick(TEXT.issuer, lng)} · ${pick(iss, lng)}`, card.x + 14, card.y + 60 + extra, card.w - 28);
 
       // Footer line inside the canvas.
       ctx!.globalAlpha = 1; ctx!.font = `11px ${mono}`;
@@ -297,10 +311,14 @@ const CredentialTree = () => {
 
     const onMove = (e: PointerEvent) => {
       const r = canvas.getBoundingClientRect();
-      ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; ptr.active = true; ptr.idle = 0;
+      ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; ptr.active = true; ptr.tapped = true; ptr.idle = 0;
       if (pausedRef.current) draw(0); // still respond while paused
     };
-    const onLeave = () => { ptr.active = false; };
+    // A finger lifts as soon as it taps, so hold that claim long enough to read.
+    const onLeave = (e: PointerEvent) => {
+      ptr.active = false;
+      if (e.pointerType === "touch") ptr.idle = -TOUCH_HOLD;
+    };
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerdown", onMove);
     canvas.addEventListener("pointerleave", onLeave);
