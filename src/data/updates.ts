@@ -63,7 +63,6 @@ const entries: UpdateEntry[] = [
     ),
   },
   {
-    // TODO: 11/2 結果公布後更新
     // Description comes from the award's detail.
     date: "2026-10",
     icon: "trophy",

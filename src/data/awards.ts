@@ -55,8 +55,9 @@ export interface Award {
  */
 export const awards: Award[] = [
   {
-    // TODO: 11/2 結果公布後更新名次
-    // Finalists announced 2026-10-16; grand-final judging 10/31. Sources:
+    // Finalists announced 2026-10-16; grand-final judging 10/31; organiser
+    // confirmed 2026-11-02 that the team did not place, so "Finalist" is final.
+    // Sources:
     // ChainTrust CLAUDE.md (one-line description) and the final-round survey
     // form (member 1, team lead). ChainTrust has no project card, so there
     // is no `project` slug here.
