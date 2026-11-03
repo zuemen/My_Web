@@ -15,7 +15,8 @@ import styles from "./SignedText.module.css";
  * The real text always holds the layout (no width jump) and is what assistive
  * tech reads; the scrambled copy is aria-hidden on top of it. Nothing plays
  * under prefers-reduced-motion. Timing borrows the nearhackathon.com counter:
- * a 65 ms step, character i settling after 380 + 65·i ms.
+ * a 65 ms step, character i settling after 380 + gap·i ms, where the gap is
+ * 65 ms for short text and shrinks so long titles settle in about a second.
  */
 
 const HEX = "0123456789abcdef";
@@ -57,11 +58,12 @@ const SignedText = ({ text, trigger, onceKey, onVerified }: SignedTextProps) => 
     }
     cancelAnimationFrame(raf.current);
     const chars = [...text];
+    const gap = Math.min(65, 900 / Math.max(chars.length, 1));
     const start = performance.now();
     let lastStep = -1;
     const step = (now: number) => {
       const ms = now - start;
-      if (ms >= 450 + 65 * chars.length) {
+      if (ms >= 450 + gap * chars.length) {
         setShown(null);
         doneRef.current?.();
         return;
@@ -72,7 +74,7 @@ const SignedText = ({ text, trigger, onceKey, onVerified }: SignedTextProps) => 
         setShown(
           chars
             .map((c, i) =>
-              ms < 380 + 65 * i && /\S/.test(c) && !/[.,·&—'’()]/.test(c)
+              ms < 380 + gap * i && /\S/.test(c) && !/[.,·&—'’()]/.test(c)
                 ? HEX[((Math.imul(i + 1, 0x9e3779b1) >>> 0) + n * 7 + i) & 15]
                 : c,
             )

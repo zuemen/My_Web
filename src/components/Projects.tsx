@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Code, Award, ArrowRight, ExternalLink } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import DemoVideo from "./DemoVideo";
+import WorkGraph from "./WorkGraph";
+import SignedText from "./SignedText";
 import { projects } from "@/data/projects";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
@@ -32,6 +34,9 @@ const Projects = () => {
           as="h1"
         />
 
+        {/* Every project around one name, joined by the tools they share; click to jump. */}
+        <WorkGraph />
+
         {/* The page runs about ten screens: one line of anchors to jump straight to a project. */}
         <nav className={styles.index} aria-label={t(dict.labels.projectsIndex)}>
           <ul>
@@ -50,7 +55,9 @@ const Projects = () => {
                 <p className={`${styles.category} ${project.awardTier === "win" ? styles.categoryWin : ""}`}>
                   {t(project.category)}
                 </p>
-                <h2 className={styles.title}>{t(project.title)}</h2>
+                <h2 className={styles.title}>
+                  <SignedText text={t(project.title)} trigger="view" onceKey={`project:${project.slug}:${lang}`} />
+                </h2>
                 <p className={styles.lead}>{t(project.summary)}</p>
               </header>
 
