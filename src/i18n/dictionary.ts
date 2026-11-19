@@ -55,6 +55,7 @@ export const dict = {
     now: l("Currently", "目前進行中"),
     nowUpdated: l("Updated", "更新於"),
     awardsLink: l("Awards & competitions", "獎項與競賽"),
+    featuredIn: l("Featured in", "報導於"),
     getInTouch: l("Get in Touch", "聯絡我"),
     contactSubtitle: l(
       "Open for research collaborations and technical discussions.",
