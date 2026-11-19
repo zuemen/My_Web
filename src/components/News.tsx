@@ -11,6 +11,7 @@ import {
   Users,
   CalendarDays,
   ArrowRight,
+  ArrowUpRight,
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { useLang } from "@/i18n/LanguageProvider";
@@ -53,6 +54,17 @@ const News = () => {
               <div className={styles.content}>
                 <h3>{t(item.title)}</h3>
                 <p>{t(item.description)}</p>
+                {item.press && (
+                  <a
+                    href={item.press.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.press}
+                  >
+                    {t(dict.sections.featuredIn)} {t(item.press.outlet)}
+                    <ArrowUpRight size={13} aria-hidden="true" />
+                  </a>
+                )}
               </div>
             </div>
           ))}

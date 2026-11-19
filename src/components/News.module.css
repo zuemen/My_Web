@@ -81,6 +81,25 @@
   color: var(--color-text-secondary);
 }
 
+/* The outlet that covered an update; a quiet link under its text. */
+.press {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-tertiary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.press:hover {
+  color: var(--color-accent);
+}
+
 .moreLink {
   /* A grid item stretches to the column; keep the underline to the text. */
   justify-self: start;

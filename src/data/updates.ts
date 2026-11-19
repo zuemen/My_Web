@@ -31,6 +31,14 @@ export interface UpdateEntry {
   title?: L;
   description?: L;
   ref?: UpdateRef;
+  /** Public coverage of this update; the outlet name links to the article. */
+  press?: Press;
+}
+
+/** A news article that names Zuemen; shown as "Featured in <outlet>". */
+export interface Press {
+  outlet: L;
+  url: string;
 }
 
 export interface Update {
@@ -39,6 +47,7 @@ export interface Update {
   title: L;
   description: L;
   ref?: UpdateRef;
+  press?: Press;
 }
 
 /**
@@ -48,6 +57,39 @@ export interface Update {
  * `ref`, and takes from the award whatever it does not write out itself.
  */
 const entries: UpdateEntry[] = [
+  {
+    // 預告：11/23 活動後改成過去式（「Gave the opening remarks…」）。
+    date: "2026-11",
+    icon: "calendar",
+    title: l(
+      "Opening Remarks — \u201cWho Vouches for Your AI?\u201d Forum, TABEI Annual Conference",
+      "TABEI 年會「誰在替你的 AI 背書？」論壇引言人",
+    ),
+    description: l(
+      "Giving the opening remarks on Nov 23 at Trust Day, the first day of TABEI's 11th Taiwan Blockchain Annual Conference. The forum, chaired by FIDO Alliance Taiwan, covers digital identity and cross-organization authorization for AI agents, alongside the launch of the Trustworthy AI Economy policy white paper.",
+      "11/23 於 TABEI 第 11 屆臺灣區塊鏈年會首日「信任日」擔任論壇引言人。論壇由 FIDO 聯盟臺灣分會主持，探討 AI Agent 的數位身分與跨組織授權，當天並發表《可信任 AI 經濟政策白皮書》。",
+    ),
+    press: {
+      outlet: l("CryptoCity", "動區動趨"),
+      url: "https://www.cryptocity.tw/news/ai-agent-identity-and-authorization",
+    },
+  },
+  {
+    date: "2026-11",
+    icon: "book",
+    title: l(
+      "Lead Instructor — Web3 Cross-Domain Talent Certification Course (NCCU FTL × TABEI)",
+      "擔任「Web3 跨域實戰人才認證課程」主講人（政大 FTL × TABEI）",
+    ),
+    description: l(
+      "Taught the four-week public course (Oct 19 – Nov 13) on cryptography, stablecoins, DID and zero-knowledge proofs, and RWA tokenization. Built its course platform, course.zuemen.net, the first at NCCU to send registration passes and completion certificates to the Ministry of Digital Affairs' Digital Credential Wallet.",
+      "主講為期四週的公益課程（10/19–11/13），涵蓋密碼學、穩定幣、DID 與零知識證明、RWA 代幣化。並自建課程平臺 course.zuemen.net，在政大首度以數位發展部「數位憑證皮夾」發送報名憑證與結業證書。",
+    ),
+    press: {
+      outlet: l("NCCU News", "政大新聞"),
+      url: "https://www.nccu.edu.tw/p/405-1000-24515.php?Lang=zh-tw",
+    },
+  },
   {
     // TODO: FinTech Taipei 展示已延期（日期未定）；辦完後再補展示敘述（使用者確認後）
     date: "2026-10",
@@ -191,7 +233,14 @@ export const updates: Update[] = entries.map((entry) => {
   if (!title || !description) {
     throw new Error(`Update ${entry.date}: needs a title and description, or a ref`);
   }
-  return { date: entry.date, icon: entry.icon, title, description, ref: entry.ref };
+  return {
+    date: entry.date,
+    icon: entry.icon,
+    title,
+    description,
+    ref: entry.ref,
+    press: entry.press,
+  };
 });
 
 /** "2026-09" -> "2026.09", the format Recent Updates has always shown. */
