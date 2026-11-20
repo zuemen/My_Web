@@ -6,9 +6,10 @@ import type { MetadataRoute } from "next";
  * content changes. /notes is left out until it has a post (it is noindex).
  */
 const PAGES: { path: string; updated: string; changeFrequency: "monthly" | "yearly"; priority: number }[] = [
-  { path: "", updated: "2026-10-25", changeFrequency: "monthly", priority: 1 },
+  { path: "", updated: "2026-11-20", changeFrequency: "monthly", priority: 1 },
   { path: "/research", updated: "2026-10-21", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/experience", updated: "2026-10-25", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/experience", updated: "2026-11-20", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/teaching", updated: "2026-11-20", changeFrequency: "monthly", priority: 0.8 },
   { path: "/projects", updated: "2026-10-25", changeFrequency: "monthly", priority: 0.8 },
   { path: "/projects/pepelab", updated: "2026-10-21", changeFrequency: "monthly", priority: 0.7 },
   { path: "/cv", updated: "2026-10-25", changeFrequency: "monthly", priority: 0.7 },

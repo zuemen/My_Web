@@ -9,32 +9,33 @@
   color-scheme: dark;
   --color-bg: #0a0a0b;
   --color-bg-rgb: 10 10 11;
-  --color-surface: #111114;
-  --color-surface-2: #17171c;
+  --color-surface: #131317;
+  --color-surface-2: #1b1b21;
   /* Raised panels (cards, timeline entries). One step off the ground so a
      card reads as a card, still well below --color-surface. */
-  --color-panel: #0f0f12;
+  --color-panel: #121216;
   /* Behind a video before its poster paints: one step under the ground,
      not pure black. */
   --color-video: #060607;
-  --color-border: #222228;
+  --color-border: #2b2b32;
   /* Section rules: one step brighter than --color-border so the page still
      has structure, without the full-contrast lines of the print layout. */
-  --color-rule: #34343b;
-  --color-text-primary: #ecebe6;
-  /* 8.4:1 and 5.6:1 on --color-bg; tertiary is 5.3:1 on --color-surface. */
-  --color-text-secondary: #a6a59f;
-  --color-text-tertiary: #8a8a93;
+  --color-rule: #42424a;
+  --color-text-primary: #f5f4ef;
+  /* Raised 2026-11-20: the owner found body text too faint on the dark
+     ground. Secondary is 12.5:1 and tertiary 9.0:1 on --color-bg. */
+  --color-text-secondary: #cfcec7;
+  --color-text-tertiary: #aeaeb6;
   /* Eyebrows, categories and section labels: neutral, not accent. */
-  --color-label: #8f8e88;
+  --color-label: #b4b3ac;
 
-  /* Color — accent. 9.1:1 on --color-bg. Links, active state, focus only. */
-  --color-accent: #9bb6d8;
+  /* Color — accent. 11.3:1 on --color-bg. Links, active state, focus only. */
+  --color-accent: #aac6ea;
   --color-accent-soft: #141b24;
   --color-accent-fg: #0a0a0b;
   /* Channels only, so translucent tints derive from the accent instead of
      being retyped as literals. */
-  --color-accent-rgb: 155 182 216;
+  --color-accent-rgb: 170 198 234;
 
   /* Color — status. Used only where something is being checked: the demo
      replays, proof badges and outcome stamps. Desaturated to sit with the
