@@ -79,6 +79,29 @@ export const events: EventEntry[] = [
     ),
   },
   {
+    // Speaker: Teagan Buckley (劉子濰 is the same person). Role kept to "support",
+    // as the owner put it on 2026-11-20.
+    id: "canton-nccu-2026",
+    date: "2026-10-21",
+    kind: "staff",
+    title: l(
+      "Canton Network: Institutional-Grade Blockchain on Wall Street — Talk & Workshop",
+      "接軌華爾街機構級區塊鏈：Canton Network 專題講座與分組工作坊",
+    ),
+    role: l("Event support (NCCU FTL)", "活動支援（政大 FTL）"),
+    place: l("NCCU College of Law · NCCU FTL", "政大法學院富邦法學講堂 · 政大 FTL"),
+    summary: l(
+      "A talk by Teagan Buckley, Head of Institutional Partnerships APAC at the Canton Foundation, followed by a group workshop where students pitched Canton use cases for Taiwan — fund settlement, carbon credit tokenization, SME supply-chain finance and cross-border medical claims.",
+      "由 Canton Foundation 亞太區機構合作負責人 Teagan Buckley 主講，後半段分組工作坊由學生提出 Canton 在臺灣的應用提案：基金申購交割、碳權代幣化、中小企業供應鏈融資與跨境醫療理賠。",
+    ),
+    links: [
+      {
+        href: "https://www.nccu.edu.tw/p/405-1000-24260.php?Lang=zh-tw",
+        label: l("Coverage — NCCU News", "報導 — 政大新聞"),
+      },
+    ],
+  },
+  {
     id: "web3-course-2026",
     date: "2026-10-19",
     end: "2026-11-13",
