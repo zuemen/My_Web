@@ -13,6 +13,7 @@ import styles from "./Navbar.module.css";
 const navLinks = [
   { href: "/research", key: "research" },
   { href: "/experience", key: "experience" },
+  { href: "/teaching", key: "teaching" },
   { href: "/projects", key: "projects" },
   { href: "/cv", key: "cv" },
 ] as const;

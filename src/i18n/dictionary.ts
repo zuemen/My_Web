@@ -8,6 +8,7 @@ export const dict = {
   nav: {
     research: l("Research", "研究"),
     experience: l("Experience", "經歷"),
+    teaching: l("Teaching", "教學"),
     projects: l("Projects", "作品"),
     cv: l("CV", "履歷"),
     contact: l("Contact", "聯絡"),
@@ -45,6 +46,18 @@ export const dict = {
       "Profile photo of Zuemen Chu (朱廷翊)",
       "朱廷翊的個人照片",
     ),
+  },
+
+  teaching: {
+    sessions: l("The four sessions", "四堂課程"),
+    platform: l("Course platform", "課程平臺"),
+    photos: l("In class", "課堂照片"),
+    blurNote: l(
+      "Attendees' faces are blurred to protect their privacy.",
+      "為保護學員隱私，照片中學員的臉部皆已模糊處理。",
+    ),
+    press: l("Coverage", "相關報導"),
+    seePage: l("Course page", "課程介紹"),
   },
 
   sections: {

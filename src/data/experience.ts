@@ -191,7 +191,11 @@ export const experience: ExpEntry[] = [
   {
     id: "nccu-ftl",
     company: l("NCCU FinTech Club", "政大金融科技社"),
-    role: l("Inaugural Officer", "第一屆幹部"),
+    // Title as the NCCU news post of 2026-11-17 gives it (合作企劃部部長).
+    role: l(
+      "Inaugural Officer — Head of Partnerships & Planning",
+      "第一屆幹部・合作企劃部部長",
+    ),
     period: l("Jun 2026 – Present", "2026/06 – 至今"),
     location: l("Taipei", "台北"),
     // As the owner's bio on /research puts it (2026-10-05).
@@ -200,6 +204,41 @@ export const experience: ExpEntry[] = [
         "Founded the club's Web3 Research Group and teach a Blockchain Fundamentals series.",
         "創立社內 Web3 研究小組，並開設「區塊鏈基礎」系列課程。",
       ),
+    ],
+    projects: [
+      {
+        name: l(
+          "Lead Instructor — Web3 Cross-Domain Talent Certification Course (with TABEI)",
+          "主講「Web3 跨域實戰人才認證課程」（與 TABEI 合辦）",
+        ),
+        details: [
+          l(
+            "Taught four public evening sessions (Oct 19 – Nov 13, 2026) on cryptography, stablecoins, digital identity and RWA tokenization, each with a hands-on lab.",
+            "主講四堂對外公益課程（2026/10/19–11/13），涵蓋密碼學、穩定幣、數位身分與 RWA 代幣化，每堂都有上機實作。",
+          ),
+          l(
+            "Built the course platform, course.zuemen.net — the first at NCCU to send registration passes and completion certificates to the Ministry of Digital Affairs' Digital Credential Wallet.",
+            "自建課程平臺 course.zuemen.net，在政大首度以數位發展部「數位憑證皮夾」發送報名憑證與結業證書。",
+          ),
+        ],
+        links: [
+          { href: "/teaching", label: l("Course page", "課程介紹") },
+          {
+            href: "https://www.nccu.edu.tw/p/405-1000-24515.php?Lang=zh-tw",
+            label: l("NCCU News", "政大新聞報導"),
+          },
+        ],
+        photo: {
+          // 4:5 frame crops to the centre, where he sits in this one.
+          src: "/photos/web3-course-class.webp",
+          alt: l(
+            "Zuemen with the class in session 1 of the Web3 course; attendees' faces are blurred",
+            "朱廷翊與 Web3 課程第 1 堂學員合影，學員臉部已模糊處理",
+          ),
+          width: 1600,
+          height: 900,
+        },
+      },
     ],
   },
 ];

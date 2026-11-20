@@ -215,6 +215,15 @@ export const awards: Award[] = [
     date: "2025-11",
     result: l("Merit Award, Student Division", "學生組優選"),
     role: l("Team Leader", "隊長"),
+    photo: {
+      src: "/photos/moda-digital-credential-2025.webp",
+      alt: l(
+        "Zuemen holding the Merit Award banner at the Digital Credential Scenario Innovation Challenge",
+        "朱廷翊於數位憑證場景創新賽手持學生組優選看板",
+      ),
+      width: 221,
+      height: 464,
+    },
   },
 ];
 

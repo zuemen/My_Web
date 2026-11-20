@@ -89,12 +89,14 @@ const Experience = () => {
                                 <a
                                   key={link.href}
                                   href={link.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
+                                  // 站內連結（如 /teaching）在同一分頁開，外部連結另開分頁
+                                  {...(link.href.startsWith("http")
+                                    ? { target: "_blank", rel: "noopener noreferrer" }
+                                    : {})}
                                   className={styles.projectLink}
                                 >
                                   {t(link.label)}
-                                  <ExternalLink size={12} />
+                                  {link.href.startsWith("http") && <ExternalLink size={12} />}
                                 </a>
                               ))}
                             </div>
