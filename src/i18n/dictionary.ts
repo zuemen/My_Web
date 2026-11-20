@@ -8,7 +8,7 @@ export const dict = {
   nav: {
     research: l("Research", "研究"),
     experience: l("Experience", "經歷"),
-    teaching: l("Teaching", "教學"),
+    events: l("Events", "活動"),
     projects: l("Projects", "作品"),
     cv: l("CV", "履歷"),
     contact: l("Contact", "聯絡"),
@@ -48,6 +48,24 @@ export const dict = {
     ),
   },
 
+  events: {
+    subtitle: l(
+      "Talks, teaching, organizing and the conferences I go to.",
+      "演講、授課、籌辦，以及我參加的活動。",
+    ),
+    upcoming: l("Upcoming", "即將舉行"),
+    past: l("Past", "過去活動"),
+    more: l("Full write-up", "完整介紹"),
+    back: l("All events", "所有活動"),
+    kinds: {
+      speaking: l("Speaking", "演講"),
+      teaching: l("Teaching", "授課"),
+      organizing: l("Organizing", "籌辦"),
+      staff: l("Staff", "工作人員"),
+      attending: l("Attended", "參加"),
+    },
+  },
+
   teaching: {
     sessions: l("The four sessions", "四堂課程"),
     platform: l("Course platform", "課程平臺"),
@@ -57,7 +75,6 @@ export const dict = {
       "為保護學員隱私，照片中學員的臉部皆已模糊處理。",
     ),
     press: l("Coverage", "相關報導"),
-    seePage: l("Course page", "課程介紹"),
   },
 
   sections: {

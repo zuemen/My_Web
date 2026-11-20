@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  // The course page moved under /events on 2026-11-20.
+  async redirects() {
+    return [{ source: "/teaching", destination: "/events/web3-course", permanent: true }];
+  },
   async headers() {
     return [
       {

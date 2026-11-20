@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { useLang } from "@/i18n/LanguageProvider";
 import { dict } from "@/i18n/dictionary";
@@ -20,7 +21,11 @@ const Teaching = () => {
   return (
     <section id="teaching" className={styles.teaching}>
       <div className="section-wide">
-        <SectionHeading title={t(dict.nav.teaching)} as="h1" wide />
+        <Link href="/events" className={styles.back}>
+          <ArrowLeft size={14} aria-hidden="true" />
+          {t(dict.events.back)}
+        </Link>
+        <SectionHeading title={t(dict.nav.events)} as="h1" wide />
 
         {courses.map((course) => {
           const [lead, ...rest] = course.photos;

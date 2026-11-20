@@ -1,0 +1,166 @@
+.events {
+  padding: var(--space-16) 0 var(--space-20);
+}
+
+.group {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-label);
+  margin: var(--space-12) 0 var(--space-5);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* One panel per event; with a photo, the photo takes a column on the left. */
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--color-rule);
+}
+
+.card.withPhoto {
+  grid-template-columns: 320px minmax(0, 1fr);
+}
+
+/* The photo fills the card's height instead of setting it, so a tall
+   portrait shot does not stretch the card. */
+.photo {
+  position: relative;
+  margin: 0;
+  min-height: 240px;
+  overflow: hidden;
+}
+
+.photoImg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.body {
+  padding: var(--space-6) var(--space-8);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-3);
+}
+
+.kind {
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--color-rule);
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+}
+
+/* Upcoming events carry the accent so they read first. */
+.kind.soon {
+  border-color: var(--color-accent);
+  color: var(--color-accent-fg);
+  background: var(--color-accent);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.role {
+  font-size: 0.98rem;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.summary {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: var(--measure);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-3);
+}
+
+.primary,
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  font-size: 0.88rem;
+  transition: color 0.2s ease;
+}
+
+.primary {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-text-primary);
+  min-height: 0;
+  padding: var(--space-3) 0 2px;
+}
+
+.primary:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.link {
+  color: var(--color-text-tertiary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .card.withPhoto {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .photo {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .body {
+    padding: var(--space-5);
+  }
+}

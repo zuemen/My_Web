@@ -2,6 +2,19 @@
   padding: var(--space-16) 0 var(--space-20);
 }
 
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-size: 0.88rem;
+  color: var(--color-text-tertiary);
+}
+
+.back:hover {
+  color: var(--color-accent);
+}
+
 .course + .course {
   margin-top: var(--space-20);
   padding-top: var(--space-20);
