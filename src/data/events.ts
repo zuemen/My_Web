@@ -67,16 +67,29 @@ export const events: EventEntry[] = [
     ],
   },
   {
+    // Photo: the other booth staffer's face and passers-by are pixelated.
     id: "meet-taipei-2026",
     date: "2026-11-19",
-    kind: "attending",
-    title: l("Meet Taipei 2026", "2026 Meet Taipei 創新創業嘉年華"),
-    role: l("Attendee", "參加"),
-    place: l("Taipei Expo Park, Yuanshan", "台北圓山花博"),
-    summary: l(
-      "Taipei's innovation and startup festival, held across seven exhibition zones at the Taipei Expo Park.",
-      "臺北市的創新創業展會，於台北圓山花博七大展區舉行。",
+    kind: "staff",
+    title: l("Meet Taipei Startup Festival 2026", "2026 Meet Taipei 創新創業嘉年華"),
+    role: l(
+      "Booth staff — Digital Assets Development Research Center (DADRC)",
+      "數位資產發展研究中心（DADRC）攤位人員",
     ),
+    place: l("Taipei Expo Park · Booth F3-02", "台北圓山花博 · F3-02 攤位"),
+    summary: l(
+      "Staffed the DADRC booth at Taipei's innovation and startup festival, held across seven exhibition zones at the Taipei Expo Park.",
+      "在台北圓山花博七大展區的創新創業展會上顧數位資產發展研究中心的攤位。",
+    ),
+    photo: {
+      src: "/photos/meet-taipei-2026-booth.webp",
+      alt: l(
+        "Zuemen in a cap at the Digital Assets Development Research Center booth, Meet Taipei 2026; other people's faces are pixelated",
+        "朱廷翊（戴帽者）在 Meet Taipei 2026 數位資產發展研究中心攤位，其他人臉部已模糊處理",
+      ),
+      width: 853,
+      height: 1280,
+    },
   },
   {
     // Speaker: Teagan Buckley (劉子濰 is the same person). Role kept to "support",
