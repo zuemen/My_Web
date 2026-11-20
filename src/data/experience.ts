@@ -222,7 +222,7 @@ export const experience: ExpEntry[] = [
           ),
         ],
         links: [
-          { href: "/teaching", label: l("Course page", "課程介紹") },
+          { href: "/events/web3-course", label: l("Course page", "課程介紹") },
           {
             href: "https://www.nccu.edu.tw/p/405-1000-24515.php?Lang=zh-tw",
             label: l("NCCU News", "政大新聞報導"),

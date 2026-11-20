@@ -13,7 +13,7 @@ import styles from "./Navbar.module.css";
 const navLinks = [
   { href: "/research", key: "research" },
   { href: "/experience", key: "experience" },
-  { href: "/teaching", key: "teaching" },
+  { href: "/events", key: "events" },
   { href: "/projects", key: "projects" },
   { href: "/cv", key: "cv" },
 ] as const;
@@ -59,7 +59,8 @@ const Navbar = () => {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
-  const isActive = (href: string) => pathname === href;
+  // 子頁（如 /events/web3-course）也算在所屬分類底下
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     // No entrance animation: it hid the bar (and the logo, the homepage's
